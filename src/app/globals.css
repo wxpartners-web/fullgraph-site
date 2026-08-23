@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FULLGRAPH — "Ink Lab" design tokens
+   Paleta: Carbono / Papel natural / Branco técnico / Cinza
+   metálico / Laranja elétrico. Cyan e magenta APENAS em
+   microefeitos de registro de impressão.
+   ============================================================ */
+
+:root {
+  --carbon: #0b0b0c;
+  --carbon-2: #131315;
+  --carbon-3: #1c1c1f;
+  --paper: #f0ebdd;
+  --paper-2: #e6e0cf;
+  --white-tech: #fafaf7;
+  --steel: #aeb3ba;
+  --steel-2: #878c93; /* ≥4.5:1 sobre carbon/carbon-2 */
+  --ink-orange: #ff4d00;
+  --ink-orange-2: #e64500;
+  --reg-cyan: #00c2ff;
+  --reg-magenta: #ff2d78;
+
+  --background: var(--carbon);
+  --foreground: var(--white-tech);
+
+  /* Motion tokens (espelhados em lib/motion-tokens.ts) */
+  --dur-micro: 190ms;
+  --dur-comp: 400ms;
+  --dur-page: 750ms;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Escala tipográfica expressiva */
+  --text-display: clamp(2.75rem, 1.2rem + 7.4vw, 7.5rem);
+  --text-h1: clamp(2.25rem, 1.1rem + 5vw, 5.25rem);
+  --text-h2: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+  --text-h3: clamp(1.35rem, 1rem + 1.4vw, 2rem);
+  --text-lead: clamp(1.05rem, 0.95rem + 0.5vw, 1.375rem);
+
+  --header-h: 4.5rem;
+}
+
+@theme inline {
+  --color-carbon: var(--carbon);
+  --color-carbon-2: var(--carbon-2);
+  --color-carbon-3: var(--carbon-3);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-white-tech: var(--white-tech);
+  --color-steel: var(--steel);
+  --color-steel-2: var(--steel-2);
+  --color-ink: var(--ink-orange);
+  --color-ink-2: var(--ink-orange-2);
+  --color-reg-cyan: var(--reg-cyan);
+  --color-reg-magenta: var(--reg-magenta);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--ink-orange);
+  color: var(--carbon);
+}
+
+/* Foco visível consistente */
+:focus-visible {
+  outline: 2px solid var(--ink-orange);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.on-paper :focus-visible {
+  outline-color: var(--carbon);
+}
+
+/* ---------- Utilitários tipográficos ---------- */
+.text-display {
+  font-size: var(--text-display);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+.text-h1 {
+  font-size: var(--text-h1);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.text-h2 {
+  font-size: var(--text-h2);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+.text-h3 {
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.text-lead {
+  font-size: var(--text-lead);
+  line-height: 1.5;
+}
+.text-spec {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Materialidade: textura de papel procedural ---------- */
+/* Granulação SVG (feTurbulence) extremamente sutil, sem imagens externas */
+/* Em @layer components para que utilities (fixed/absolute) possam
+   sobrescrever o position padrão */
+@layer components {
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  z-index: 1;
+}
+
+/* Superfície de papel (seções claras) */
+.surface-paper {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.35), transparent 40%),
+    var(--paper);
+  color: var(--carbon);
+}
+
+/* Fio técnico pontilhado, como guia de impressão */
+.rule-dotted {
+  background-image: linear-gradient(
+    90deg,
+    var(--steel-2) 0 4px,
+    transparent 4px 10px
+  );
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+}
+
+/* ---------- Registro de tinta (CMYK) — microinteração ---------- */
+@keyframes ink-register {
+  0% {
+    text-shadow:
+      -3px 0 0 var(--reg-cyan),
+      3px 0 0 var(--reg-magenta);
+    transform: translateX(0.5px);
+  }
+  55% {
+    text-shadow:
+      -1px 0 0 var(--reg-cyan),
+      1px 0 0 var(--reg-magenta);
+  }
+  100% {
+    text-shadow:
+      0 0 0 transparent,
+      0 0 0 transparent;
+    transform: translateX(0);
+  }
+}
+.ink-register-hover:hover > .ink-register-target,
+.ink-register-hover:focus-visible > .ink-register-target {
+  animation: ink-register var(--dur-micro) var(--ease-out-expo) 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-register-hover:hover > .ink-register-target,
+  .ink-register-hover:focus-visible > .ink-register-target {
+    animation: none;
+  }
+}
+
+/* ---------- Marcas de corte (crop marks) ---------- */
+.crop-marks::before,
+.crop-marks::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.crop-marks::before {
+  top: 0;
+  left: 0;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+.crop-marks::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
+/* ---------- Entrada do hero: CSS puro (pinta antes da hidratação,
+   não bloqueia LCP; a BrandIntro cobre a primeira visita) ---------- */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Só anima em desktop: no mobile o texto pinta imediatamente
+   (LCP e conversão primeiro; a intro também é só desktop) */
+@media (min-width: 1024px) {
+  .hero-rise {
+    animation: hero-rise 520ms var(--ease-out-expo) both;
+  }
+  .hero-rise-2 {
+    animation-delay: 90ms;
+  }
+  .hero-rise-3 {
+    animation-delay: 170ms;
+  }
+  .hero-rise-4 {
+    animation-delay: 240ms;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    animation: none !important;
+  }
+}
+
+/* ---------- Transição de rota: folha/corte de guilhotina ---------- */
+@keyframes page-sheet-up {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-101%);
+  }
+}
+.page-sheet {
+  animation: page-sheet-up 460ms cubic-bezier(0.83, 0, 0.17, 1) 60ms forwards;
+  will-change: transform;
+}
+@keyframes page-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-content-in 380ms var(--ease-out-expo) 300ms backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-sheet {
+    display: none;
+  }
+  .page-enter {
+    animation: none;
+  }
+}
+
+/* ---------- Poster do hero: deriva lenta (fallback sem WebGL) ---------- */
+@keyframes hero-drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--drift-rot, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--drift-rot, 0deg));
+  }
+}
+.hero-poster-drift {
+  animation: hero-drift 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-poster-drift {
+    animation: none;
+  }
+}
+
+/* ---------- Scrollbar discreta ---------- */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--carbon);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--carbon-3);
+    border-radius: 5px;
+    border: 2px solid var(--carbon);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--steel-2);
+  }
+}
+
+/* Lenis html hooks */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Não mostrar conteúdo dependente de hover como única via — fallback touch */
+@media (hover: none) {
+  .hover-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
