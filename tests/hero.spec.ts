@@ -1,24 +1,28 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { test, expect, type Page } from "@playwright/test";
+import { heroMedia } from "../src/lib/hero-media";
 
 /**
  * Cobertura do hero atrás de NEXT_PUBLIC_HERO_SCRUB.
  *
  * Flag OFF (padrão do repositório): hero clássico preservado e ZERO
- * requests de mídia do hero em qualquer device.
+ * requests de /media/hero/ em qualquer device.
  *
  * Flag ON: exige o build correspondente e o marcador de ambiente —
  *   NEXT_PUBLIC_HERO_SCRUB=1 npm run build
- *   HERO_SCRUB=1 npx playwright test tests/hero.spec.ts
+ *   HERO_SCRUB=1 npx playwright test tests/hero.spec.ts tests/navigation.spec.ts
  * (routes.spec/whatsapp.spec validam a copy do hero clássico e só
- * valem com a flag off; por isso o comando acima roda só este spec.)
+ * valem com a flag off; navigation.spec vale nos dois modos.)
+ *
+ * Com a flag on, os stills (poster/mobile) são requests legítimas de
+ * /media/hero/ — o que continua proibido fora do desktop elegível é o
+ * VÍDEO, e é isso que os coletores distinguem.
  */
 
 const scrubOn = process.env.HERO_SCRUB === "1";
-const placeholderExists = existsSync(
-  path.join(__dirname, "..", "public", "media", "hero", "hero-scrub-placeholder.webm")
-);
+const mediaDir = path.join(__dirname, "..", "public", "media", "hero");
+const finalVideoExists = existsSync(path.join(mediaDir, "hero-scrub.mp4"));
 
 function collectHeroMediaRequests(page: Page): string[] {
   const urls: string[] = [];
@@ -27,6 +31,53 @@ function collectHeroMediaRequests(page: Page): string[] {
   });
   return urls;
 }
+
+function collectHeroVideoRequests(page: Page): string[] {
+  const urls: string[] = [];
+  page.on("request", (req) => {
+    if (/\/media\/hero\/.*\.(mp4|webm)/.test(req.url())) urls.push(req.url());
+  });
+  return urls;
+}
+
+/** Medidas do palco do scrub, lidas da página real */
+async function scrubGeometry(page: Page) {
+  return page.evaluate(() => {
+    const section = document.querySelector<HTMLElement>("[data-hero-cinema]");
+    if (!section) throw new Error("hero cinema ausente");
+    const rect = section.getBoundingClientRect();
+    return {
+      top: rect.top + window.scrollY,
+      range: Math.max(1, section.offsetHeight - window.innerHeight),
+    };
+  });
+}
+
+test.describe("manifest do hero — consistente com os assets em disco", () => {
+  test("kind final, bytes reais e duração coerente com frames/fps", () => {
+    expect(heroMedia.kind).toBe("final");
+    expect(heroMedia.videoSrc).toBe("/media/hero/hero-scrub.mp4");
+    expect(statSync(path.join(mediaDir, "hero-scrub.mp4")).size).toBe(
+      heroMedia.videoBytes
+    );
+    // 97 frames a 24 fps = 4,0416667 s — o manifest não pode divergir
+    expect(heroMedia.videoDurationSeconds).toBeCloseTo(
+      heroMedia.videoFrames / heroMedia.videoFps,
+      3
+    );
+    expect(heroMedia.videoDurationSeconds).toBeCloseTo(4.041667, 5);
+    for (const src of [
+      heroMedia.posterSrc,
+      heroMedia.endingSrc,
+      heroMedia.mobileStillSrc,
+    ]) {
+      expect(
+        existsSync(path.join(mediaDir, path.basename(src))),
+        `${src} ausente em public/media/hero`
+      ).toBe(true);
+    }
+  });
+});
 
 test.describe("flag OFF — hero clássico preservado", () => {
   test.skip(scrubOn, "build atual está com a flag ligada");
@@ -74,9 +125,28 @@ test.describe("flag ON — hero cinematográfico", () => {
     await ctx.close();
   });
 
-  test("desktop elegível: vídeo monta e o scroll dirige currentTime", async ({ page, isMobile }) => {
+  test("desktop: poster real (frame 000) por baixo do vídeo", async ({ page, isMobile }) => {
     test.skip(Boolean(isMobile), "só desktop");
-    test.skip(!placeholderExists, "placeholder ausente — node scripts/make-hero-placeholder.mjs");
+    await page.goto("/");
+    const img = page.getByTestId("hero-still").locator("img");
+    await expect
+      .poll(() => img.evaluate((el) => (el as HTMLImageElement).complete))
+      .toBe(true);
+    const loaded = await img.evaluate((el) => {
+      const i = el as HTMLImageElement;
+      return { src: i.currentSrc, w: i.naturalWidth, h: i.naturalHeight };
+    });
+    expect(loaded.src).toContain("hero-poster.jpg");
+    expect(loaded.w).toBe(1920);
+    expect(loaded.h).toBe(1080);
+  });
+
+  test("desktop elegível: vídeo monta com a duração real e o scroll dirige currentTime", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "só desktop");
+    test.skip(!finalVideoExists, "hero-scrub.mp4 ausente em public/media/hero");
     const errors: string[] = [];
     page.on("pageerror", (err) => errors.push(err.message));
     page.on("console", (msg) => {
@@ -93,6 +163,10 @@ test.describe("flag ON — hero cinematográfico", () => {
       .poll(() => video.evaluate((v) => (v as HTMLVideoElement).readyState), { timeout: 20_000 })
       .toBeGreaterThanOrEqual(2);
 
+    // duração real do encode aprovado (97 frames / 24 fps)
+    const duration = await video.evaluate((v) => (v as HTMLVideoElement).duration);
+    expect(Math.abs(duration - 4.041667)).toBeLessThanOrEqual(0.06);
+
     const before = await video.evaluate((v) => (v as HTMLVideoElement).currentTime);
     await page.evaluate(() =>
       window.scrollTo({ top: window.innerHeight * 1.6, behavior: "instant" as ScrollBehavior })
@@ -104,34 +178,154 @@ test.describe("flag ON — hero cinematográfico", () => {
     expect(errors).toEqual([]);
   });
 
-  test("mobile: hero estático sem pin e zero requests de mídia", async ({ page, isMobile }) => {
+  test("scrub mapeia início/meio/fim e reverte com o scroll", async ({ page, isMobile }) => {
+    test.skip(Boolean(isMobile), "só desktop");
+    test.skip(!finalVideoExists, "hero-scrub.mp4 ausente em public/media/hero");
+    await page.goto("/");
+    const video = page.getByTestId("hero-scrub-video");
+    await expect(video).toBeAttached({ timeout: 10_000 });
+    await expect
+      .poll(() => video.evaluate((v) => (v as HTMLVideoElement).readyState), { timeout: 20_000 })
+      .toBeGreaterThanOrEqual(2);
+    const t = () => video.evaluate((v) => (v as HTMLVideoElement).currentTime);
+    const geo = await scrubGeometry(page);
+    const dur = heroMedia.videoDurationSeconds;
+    const scrollTo = (y: number) =>
+      page.evaluate((top) => window.scrollTo({ top, behavior: "instant" as ScrollBehavior }), y);
+
+    // início: p = 0 → t ≈ 0
+    await scrollTo(geo.top);
+    await expect.poll(t, { timeout: 10_000 }).toBeLessThanOrEqual(0.15);
+
+    // meio: p = 0,5 → t ≈ dur/2 (lerp assenta; tolerância de 0,35 s)
+    await scrollTo(geo.top + geo.range / 2);
+    await expect
+      .poll(async () => Math.abs((await t()) - dur / 2), { timeout: 10_000 })
+      .toBeLessThanOrEqual(0.35);
+
+    // fim: p = 1 → t ≈ dur, banda 2 visível segurando o repouso
+    await scrollTo(geo.top + geo.range);
+    await expect.poll(t, { timeout: 10_000 }).toBeGreaterThanOrEqual(dur - 0.25);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            getComputedStyle(document.querySelector<HTMLElement>('[data-band="2"]')!)
+              .visibility
+        )
+      )
+      .toBe("visible");
+
+    // reverso: volta para dentro da banda 0 → t cai e banda 2 se esconde
+    await scrollTo(geo.top + geo.range * 0.15);
+    await expect.poll(t, { timeout: 10_000 }).toBeLessThanOrEqual(dur * 0.35);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            getComputedStyle(document.querySelector<HTMLElement>('[data-band="2"]')!)
+              .visibility
+        )
+      )
+      .toBe("hidden");
+  });
+
+  test("reload no meio do scrub retoma sem salto nem tela vazia", async ({ page, isMobile }) => {
+    test.skip(Boolean(isMobile), "só desktop");
+    test.skip(!finalVideoExists, "hero-scrub.mp4 ausente em public/media/hero");
+    await page.goto("/");
+    const geo = await scrubGeometry(page);
+    const mid = geo.top + geo.range / 2;
+    await page.evaluate((top) => window.scrollTo({ top }), mid);
+    await page.reload();
+
+    // o poster SSR segura o hero imediatamente — nunca tela vazia
+    await expect(page.getByTestId("hero-still")).toBeVisible();
+    // alguma banda narrativa está legível na posição restaurada
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          Math.max(
+            ...[...document.querySelectorAll<HTMLElement>("[data-band]")].map((el) =>
+              Number(getComputedStyle(el).opacity)
+            )
+          )
+        )
+      )
+      .toBeGreaterThan(0.3);
+
+    // o vídeo volta a montar e retoma a posição do scroll restaurado
+    const video = page.getByTestId("hero-scrub-video");
+    await expect(video).toBeAttached({ timeout: 10_000 });
+    await expect
+      .poll(() => video.evaluate((v) => (v as HTMLVideoElement).readyState), { timeout: 20_000 })
+      .toBeGreaterThanOrEqual(2);
+    const scrollY = await page.evaluate(() => window.scrollY);
+    const p = Math.min(1, Math.max(0, (scrollY - geo.top) / geo.range));
+    await expect
+      .poll(
+        async () =>
+          Math.abs(
+            (await video.evaluate((v) => (v as HTMLVideoElement).currentTime)) -
+              p * heroMedia.videoDurationSeconds
+          ),
+        { timeout: 10_000 }
+      )
+      .toBeLessThanOrEqual(0.5);
+  });
+
+  test("frame final publicado e íntegro (hero-ending.jpg)", async ({ page, isMobile }) => {
+    test.skip(Boolean(isMobile), "só desktop");
+    await page.goto("/");
+    const dims = await page.evaluate(
+      (src) =>
+        new Promise<{ w: number; h: number }>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+          img.onerror = () => reject(new Error("ending frame falhou"));
+          img.src = src;
+        }),
+      heroMedia.endingSrc
+    );
+    expect(dims).toEqual({ w: 1920, h: 1080 });
+  });
+
+  test("mobile: hero estático com o still 9:16 do repouso e zero requests de vídeo", async ({
+    page,
+    isMobile,
+  }) => {
     test.skip(!isMobile, "só mobile");
-    const media = collectHeroMediaRequests(page);
+    const media = collectHeroVideoRequests(page);
     await page.goto("/");
     await expect(page.getByTestId("hero-cinema")).toBeVisible();
     await expect(page.getByTestId("hero-still")).toBeVisible();
+    const img = page.getByTestId("hero-still").locator("img");
+    await expect
+      .poll(() => img.evaluate((el) => (el as HTMLImageElement).currentSrc))
+      .toContain("hero-still-mobile.jpg");
     await expect(page.getByTestId("hero-cta-orcamento")).toBeVisible();
     await page.waitForTimeout(2000);
     expect(media).toEqual([]);
   });
 
-  test("reduced-motion: hero estático e zero requests de mídia", async ({ browser, isMobile }) => {
+  test("reduced-motion: hero estático e zero requests de vídeo", async ({ browser, isMobile }) => {
     test.skip(Boolean(isMobile), "coberto no projeto desktop");
     const ctx = await browser.newContext({
       reducedMotion: "reduce",
       viewport: { width: 1440, height: 900 },
     });
     const page = await ctx.newPage();
-    const media = collectHeroMediaRequests(page);
+    const media = collectHeroVideoRequests(page);
     await page.goto("/");
     await expect(page.getByTestId("hero-cinema")).toBeVisible();
+    await expect(page.getByTestId("hero-still")).toBeVisible();
     await expect(page.getByTestId("hero-cta-orcamento")).toBeVisible();
     await page.waitForTimeout(2000);
     expect(media).toEqual([]);
     await ctx.close();
   });
 
-  test("save-data: zero requests de mídia", async ({ page, isMobile }) => {
+  test("save-data: zero requests de vídeo", async ({ page, isMobile }) => {
     test.skip(Boolean(isMobile), "gate de touch já cobre o mobile");
     await page.addInitScript(() => {
       Object.defineProperty(navigator, "connection", {
@@ -143,7 +337,7 @@ test.describe("flag ON — hero cinematográfico", () => {
         },
       });
     });
-    const media = collectHeroMediaRequests(page);
+    const media = collectHeroVideoRequests(page);
     await page.goto("/");
     await expect(page.getByTestId("hero-cinema")).toBeVisible();
     await page.waitForTimeout(2000);
@@ -199,7 +393,11 @@ test.describe("scrim do hero cinematográfico", () => {
     return stops[stops.length - 1].alpha;
   };
 
-  test("o platô cobre toda a faixa de texto (H1 chega a 69,4%)", async ({ page }) => {
+  test("desktop: o platô cobre toda a faixa de texto (H1 chega a 69,4%)", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "no mobile o scrim é vertical (teste próprio)");
     await page.goto("/");
     const stops = await stopsFromCss(page);
     expect(stops.length).toBeGreaterThanOrEqual(4);
@@ -209,18 +407,38 @@ test.describe("scrim do hero cinematográfico", () => {
     }
   });
 
-  test("a faixa direita continua viva (luz, verniz e tinta)", async ({ page }) => {
+  test("desktop: a faixa direita continua viva (luz, verniz e tinta)", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "no mobile o scrim é vertical (teste próprio)");
     await page.goto("/");
     const stops = await stopsFromCss(page);
     // a partir de ~84% o scrim quase some: é onde a imagem precisa respirar
     expect(alphaAt(stops, 88)).toBeLessThanOrEqual(0.3);
   });
 
+  test("mobile: scrim vertical cobre as linhas de texto e abre na base", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!isMobile, "só mobile");
+    await page.goto("/");
+    const stops = await stopsFromCss(page);
+    expect(stops.length).toBeGreaterThanOrEqual(4);
+    // no mobile o texto vai até y≈80% (CTA outline); platô até 82%
+    for (const y of [0, 40, 70, 80, 82]) {
+      expect(alphaAt(stops, y), `alpha em y=${y}%`).toBeGreaterThanOrEqual(0.8);
+    }
+    // a base fica aberta: é onde a pilha de papel brilha sem texto
+    expect(alphaAt(stops, 100)).toBeLessThanOrEqual(0.35);
+  });
+
   test("a rampa de saída não desenha borda dura", async ({ page }) => {
     await page.goto("/");
     const stops = await stopsFromCss(page);
     // nenhum salto de alpha maior que 0,35 entre amostras de 2% —
-    // uma queda de 0,82 para 0,10 num intervalo só cria linha vertical visível
+    // uma queda do platô para ~0,1 num intervalo só cria borda visível
     let maiorSalto = 0;
     for (let x = 70; x < 100; x += 2) {
       maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(stops, x) - alphaAt(stops, x + 2)));

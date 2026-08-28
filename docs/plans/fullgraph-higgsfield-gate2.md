@@ -138,7 +138,11 @@ do pixel composto é luminância relativa ≤ 0,17 (≈ valor sRGB 115).
 
 ## 4. Duração recomendada
 
-**6,0 segundos.**
+**6,0 segundos** era a recomendação original. **Executado: 4 s** (Gate 4-R — o teto
+financeiro após a reprovação do primeiro vídeo era 36 créditos = 4 s a 1080p). Duração real
+do asset aprovado: **4,041667 s** (97 frames ÷ 24 fps). Como a página mapeia scroll →
+progresso normalizado, nada na arquitetura mudou; os 4,04 s distribuídos nos 2 700 px de
+range dão ~668 px de scroll por segundo de vídeo, e cada keyframe (GOP 8) cai a cada ~93 px.
 
 - É o padrão comprovado da skill 10K (`prompt-laws.md`: image-to-video, 1080p, 6 s, standard,
   sem áudio) e o ponto exato onde a estimativa de ~54 créditos foi calibrada.
@@ -168,8 +172,8 @@ do pixel composto é luminância relativa ≤ 0,17 (≈ valor sRGB 115).
 
 ## 6. Frame rate recomendado
 
-**24 fps** — o padrão cinematográfico e a saída nativa do modelo. 6,0 s × 24 = **144 frames**
-(000–143).
+**24 fps** — o padrão cinematográfico e a saída nativa do modelo. Executado:
+4,041667 s × 24 = **97 frames** (000–096).
 
 O que importa para o scrub não é o fps e sim a **densidade de keyframes** no re-encode:
 `-g 8 -keyint_min 8` dá um keyframe a cada 8 frames = **a cada 1/3 de segundo**, ou a cada
@@ -180,30 +184,30 @@ scrub gagueja, independentemente do fps.
 
 ## 7. Tabela temporal completa
 
-Intervalos de 0,5 s cobrindo os 6,0 s inteiros. `p` = progresso de scroll (0–1);
-`t = p × 6,0`. Bandas conforme `HERO_BANDS` em `src/lib/hero-media.ts`.
+Atualizada no Gate 5 para o asset real: **4,041667 s, 97 frames** (o vídeo aprovado no
+Gate 4-R). Intervalos de 0,5 s; `p` = progresso de scroll (0–1); `t = p × 4,041667`.
+Bandas conforme `HERO_BANDS` em `src/lib/hero-media.ts` (inalteradas — os ranges são de
+progresso, não de segundos). Beats conforme o vídeo auditado: travelling contínuo sobre a
+fibra → acento de pigmento laranja → planos de folhas sobem → assentamento na pilha refilada.
 
 | # | t (s) | p | frames | Beat | Banda ativa |
 |---|---|---|---|---|---|
-| 01 | 0,0–0,5 | 0,000–0,083 | 000–012 | 1 · fibras | 0 (assentada) |
-| 02 | 0,5–1,0 | 0,083–0,167 | 012–024 | 1 · fibras | 0 |
-| 03 | 1,0–1,5 | 0,167–0,250 | 024–036 | 1→2 · aproximação | 0 |
-| 04 | 1,5–2,0 | 0,250–0,333 | 036–048 | 2 · tinta | 0 |
-| 05 | 2,0–2,5 | 0,333–0,417 | 048–060 | 2 · tinta (pico) | **0→1 em t=2,16** |
-| 06 | 2,5–3,0 | 0,417–0,500 | 060–072 | 3 · camadas | 1 |
-| 07 | 3,0–3,5 | 0,500–0,583 | 072–084 | 3 · paralaxe | 1 |
-| 08 | 3,5–4,0 | 0,583–0,667 | 084–096 | 3→4 · oclusão entra | 1 |
-| 09 | 4,0–4,5 | 0,667–0,750 | 096–108 | 4→5 · oclusão sai, acabamento | **1→2 em t=4,08** |
-| 10 | 4,5–5,0 | 0,750–0,833 | 108–120 | 5 · acabamento | 2 |
-| 11 | 5,0–5,5 | 0,833–0,917 | 120–132 | 6 · assentamento | 2 |
-| 12 | 5,5–6,0 | 0,917–1,000 | 132–144 | 6 · repouso | 2 |
+| 01 | 0,0–0,5 | 0,000–0,124 | 000–012 | 1 · fibras | 0 (assentada) |
+| 02 | 0,5–1,0 | 0,124–0,247 | 012–024 | 1 · fibras / luz rasante | 0 |
+| 03 | 1,0–1,5 | 0,247–0,371 | 024–036 | 2 · pigmento laranja | **0→1 em t=1,455 (p=0,36)** |
+| 04 | 1,5–2,0 | 0,371–0,495 | 036–048 | 2 · pigmento / travelling | 1 |
+| 05 | 2,0–2,5 | 0,495–0,619 | 048–060 | 3 · camadas sobem | 1 |
+| 06 | 2,5–3,0 | 0,619–0,742 | 060–072 | 3 · profundidade | **1→2 em t=2,748 (p=0,68)** |
+| 07 | 3,0–3,5 | 0,742–0,866 | 072–084 | 4 · assentamento | 2 |
+| 08 | 3,5–4,042 | 0,866–1,000 | 084–096 | 4 · repouso na pilha | 2 |
 
-**Os dois handoffs de texto são motivados visualmente, de propósito:**
+**Os dois handoffs de texto continuam motivados visualmente no asset real (auditado no
+Gate 5):**
 
-- **t = 2,16 s** (banda 0 → 1) cai no **pico de espalhamento da tinta** — o acento visual mais
-  forte da primeira metade.
-- **t = 4,08 s** (banda 1 → 2) cai **dentro da oclusão** — a folha desfocada cruzando a lente
-  esconde a troca de frase. É a *seam law* usada a favor do layout, não de uma emenda.
+- **t = 1,455 s** (banda 0 → 1) cai na **zona do pigmento laranja** — o acento visual mais
+  forte da primeira metade do travelling.
+- **t = 2,748 s** (banda 1 → 2) cai na **subida dos planos de folhas** — a mudança de
+  profundidade esconde a troca de frase. É a *seam law* usada a favor do layout.
 
 Nenhum beat depende de um único momento "mágico": cada banda tem 84–102vh de plateau, então
 o leitor lê a frase ao longo de 7 a 15 flicks, não num instante.
@@ -211,6 +215,10 @@ o leitor lê a frase ao longo de 7 a 15 flicks, não num instante.
 ---
 
 ## 8. Descrição visual por intervalo
+
+> **Nota do Gate 5:** os beats abaixo, com tempos sobre 6 s, são a direção criativa enviada à
+> geração. O asset aprovado tem 4,041667 s e comprime o mesmo arco; o mapeamento real
+> beat × banda × frame está na tabela do §7.
 
 **Beat 1 — fibras e textura de papel · t 0,0–1,4 s (frames 000–034)**
 Macro extremo de papel off-white não revestido. Fibras individuais visíveis, relevo do grão
@@ -307,7 +315,7 @@ bordas superior e inferior. Nenhum objeto identificável, nenhum texto, nenhuma 
 
 ---
 
-## 12. Frame intermediário principal (frame 072 · t = 3,0 s · p = 0,50)
+## 12. Frame intermediário principal (frame 048 · t = 2,02 s · p = 0,50)
 
 Meio do beat 3. Três a quatro planos de folhas refiladas em profundidade escalonada, entrando
 por baixo e pela direita. Bordas de corte com especular fina. Um resto do laranja do beat 2
@@ -317,13 +325,17 @@ referência para a auditoria worst-frame da banda 1, o mais crítico dos três.
 
 ---
 
-## 13. Frame final (frame 143 · t = 6,0 s)
+## 13. Frame final (frame 096 · t = 4,042 s)
 
 Composição em repouso feita **só de papel virgem** (reescrito no Gate 4-R — ver §8): pilha de
 folhas off-white refiladas vista de cima e de canto, bordas formadas pelas camadas naturais do
 papel, blocos lisos de papel cortado e superfície fosca de fibra crua. Luz rasante esculpindo
 as camadas; sombras longas e suaves à esquerda. Acento de pigmento laranja amorfo confinado a
 x 78 %–94 %. Centro de massa em **x ≈ 54 %, y ≈ 78 %**.
+
+> **Executado (Gate 4-R):** no asset aprovado o pigmento ocupa x 39,6 %–99,9 % — presença
+> maior que a briefada, aceita na auditoria porque todo o contraste passa sob o scrim e o
+> pigmento lê como tinta intencional na fibra.
 
 **Toda superfície visível é virgem e sem marca.** Nenhum objeto cuja identidade dependa de
 impressão, escrita ou sinalização pode aparecer.
@@ -347,10 +359,10 @@ contra a nav lê como bagunça.
 | Arquivo | Origem | Uso | Formato |
 |---|---|---|---|
 | `hero-poster.jpg` | frame **000** | Poster desktop **por baixo do vídeo**, enquanto o blob carrega | 1920×1080, JPEG q2 |
-| `hero-ending.jpg` | frame **143** | Asset de design reutilizável nas seções abaixo | 1920×1080, JPEG q2 |
-| `hero-still-mobile.jpg` | frame **143**, recortado | Hero estático de mobile / reduced-motion / save-data | 9:16, JPEG q2 |
+| `hero-ending.jpg` | frame **096** | Asset de design reutilizável nas seções abaixo | 1920×1080, JPEG q2 |
+| `hero-still-mobile.jpg` | frame **096**, recortado | Hero estático de mobile / reduced-motion / save-data | 9:16, JPEG q2 |
 
-**Por que o poster desktop é o frame 000 e o still mobile é o 143:** no desktop, o vídeo entra
+**Por que o poster desktop é o frame 000 e o still mobile é o 096:** no desktop, o vídeo entra
 em `t = 0`; qualquer poster diferente do frame 000 produziria um salto visível na troca. No
 mobile o vídeo **nunca** carrega — então o still deve ser a imagem mais bonita e mais
 "chegada" que existe, que é a composição final.
@@ -915,13 +927,22 @@ Extrair frames do arquivo final e olhar. Falha silenciosa de encode pega agora s
 | `hero-scrub.webm` (se existir) | 6 MB | Só se o §25.3 for adiante |
 | **Total em `public/media/hero/`** | **9 MB** | |
 
-Contexto: hoje o repositório carrega **168 648 bytes** de placeholder. O asset final é ~35–50×
+**Executado (Gate 5):** `hero-scrub.mp4` 7 765 279 · `hero-poster.jpg` 223 701 (q3 — q2
+dava 310 KB e estourava o teto) · `hero-ending.jpg` 150 160 · `hero-still-mobile.jpg`
+52 829. Total: **8 191 969 bytes** (teto 9 MB). Placeholder removido.
+
+Contexto: até o Gate 5 o repositório carregava **168 648 bytes** de placeholder. O asset final é ~35–50×
 maior — mas só é baixado por desktop elegível, depois do idle, com prioridade `low`, e nunca
 por mobile, reduced-motion ou save-data (todos verificados com **0 requests**).
 
 ---
 
 ## 27. Integração no manifest atual
+
+**Executado no Gate 5** (commits `f459ea9`, `32b6ba5`, `927ca4e`): manifest `kind: "final"`
+com duração 4,041667 s, 97 frames, 24 fps, bytes reais e os três stills; `HeroStill` com os
+stills reais via `<picture>`; placeholder e script geradores removidos; testes re-apontados
+para `hero-scrub.mp4`. O plano original está abaixo como referência.
 
 Um único arquivo muda: `src/lib/hero-media.ts`.
 
@@ -1121,6 +1142,9 @@ A banda 1, a mais apertada, é a que tem o pior pixel laranja — origem direta 
 
 ### Matriz completa
 
+> Registro histórico do Gate 2, medido com o **placeholder de 6 s**. A matriz equivalente
+> com o asset real de 4,041667 s está no §30 (Gate 5).
+
 | Cenário | Resultado |
 |---|---|
 | Desktop 1440×900 — vídeo monta e decodifica | `readyState=4`, 960 px, 6 s |
@@ -1162,3 +1186,64 @@ Capturas: `%LOCALAPPDATA%\Temp\claude\C--dev-14-site-fullgraph-fullgraph-site\a2
 Este documento é o **Gate 2**. Ele **precisa de aprovação humana** antes de qualquer comando
 Higgsfield. Nenhum crédito foi consumido para produzi-lo, e nenhum será consumido até que a
 aprovação exista e o preflight gratuito do §21 tenha passado.
+
+---
+
+## 30. Gate 5 — encode, integração local e validação (executado em 2026-08-28)
+
+Fonte: vídeo aprovado no Gate 4-R (job `ba030d0d-fd82-4523-95cd-053ac22f2116`, bruto
+17 453 729 bytes / 34,5 Mbps, sha256 `5264a2ab…`, preservado no scratchpad). Zero créditos
+consumidos neste gate; saldo permanece **3**.
+
+### 30.1 Encode de produção
+
+Busca controlada de CRF (preset `veryslow`, `-g 8 -keyint_min 8 -sc_threshold 0`):
+crf 12 = 15,0 MB · 14 = 10,9 MB · 15 = 9,2 MB · **16 = 7 765 279 bytes** ✅ · 18 = 5,6 MB.
+Escolhido **crf 16** — a maior qualidade dentro do teto de 8 000 000 bytes, sem downscale,
+sem corte, sem redução de fps.
+
+| Verificação | Resultado |
+|---|---|
+| Container | H.264 High, yuv420p, 1920×1080, 24 fps CFR, 97 frames, 4,041667 s, sem áudio |
+| faststart | `ftyp → moov → mdat` confirmado por parse dos átomos |
+| GOP | IDR exatamente em 0, 8, 16, …, 96 — **o frame de repouso é keyframe** |
+| Decodificação | completa, zero erros |
+| SSIM vs bruto | **0,9913** média · pior frame 0,9868 (n=7) |
+| PSNR vs bruto | **48,1 dB** média · pior 44,9 dB (n=7) |
+| Inspeção visual | piores frames lado a lado: fibras, grânulos e penumbra preservados; zero banding, zero macroblocking |
+
+### 30.2 Dois defeitos objetivos achados e corrigidos na integração
+
+1. **Seek perdido no `canplay`** (`32b6ba5`): num reload no meio do scrub, o motor converge
+   as bandas antes de o vídeo existir; o `canplay` encontrava o alvo assentado e nenhum seek
+   disparava — vídeo preso no frame 0 com a página em p=0,5. Corrigido com um `requestSeek`
+   imediato para o último progresso entregue. Teste de reload: 3/3 determinístico.
+2. **Scrim recalibrado na página real** (`927ca4e`): a simulação dos Gates 3/4-R não incluía
+   o `.grain::before` (ruído 5 %, acima do scrim), que custa ~0,25 de razão de contraste no
+   pior pixel. Na página real o laranja media 3,27–3,44:1 (piso 3,5). Platô desktop
+   0,82 → **0,85** (pior caso vira 3,59:1). No mobile, o platô horizontal deixava o fim das
+   linhas do eyebrow (2,98:1) e do subtítulo (4,00:1) na faixa clara: scrim vira **vertical**
+   em <1024px (platô até y=82 %, base aberta) — eyebrow 7,62:1, subtítulo 5,77:1, H1 12,2:1,
+   itálico 3,61:1, CTA outline 17,12:1.
+
+### 30.3 Matriz do Gate 5 (asset real, build de produção)
+
+| Cenário | Resultado |
+|---|---|
+| Duração real no elemento | 4,041667 s (asserted ±0,06 no teste) |
+| Manifest × disco | bytes, frames, fps e stills conferidos por teste |
+| Scrub início/meio/fim | p=0 → t≤0,15 · p=0,5 → t=2,02±0,35 · p=1 → t≥3,79; banda 2 visível no fim |
+| Rolagem reversa | t cai com o scroll; banda 2 volta a `visibility:hidden` |
+| Reload no meio do scrub | poster imediato, banda legível, vídeo retoma t=p×4,042±0,5 — 3/3 |
+| Flash poster→vídeo | diff médio 0,66/255 — imperceptível |
+| Worst-frame desktop (scrim+grain reais) | 30/30 medições PASS; pior laranja 3,59:1, brancos 15–17:1 |
+| Worst-frame mobile (linhas reais) | 6/6 zonas PASS (retângulos de linha + cores computadas) |
+| Mobile / reduced-motion / save-data | 0 requests de vídeo (stills são legítimos) |
+| Erro de mídia | poster segura, 0 pageerrors, vídeo `hidden` |
+| Menu mobile + focus trap | passa (navigation.spec, flag on) |
+| Suíte flag off | **69 passed / 29 skipped / 0 failed** |
+| Suíte flag on (hero + navigation) | **26–27 passed / 0 failed / 0 flaky** |
+| `lint` / `typecheck` / `build` (2 modos) / `git diff --check` | limpos |
+
+**A flag continua desligada por padrão.** Ligar por padrão é decisão do Gate 7, após revisão
+humana no localhost (`NEXT_PUBLIC_HERO_SCRUB=1 npm run build && npm run start`).
