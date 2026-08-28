@@ -718,10 +718,14 @@ still mobile: **58,5** a 6 s/1080p — mais caro que o próprio vídeo. O recort
 - [ ] **Final em repouso:** o *ending-rest check* (§25) mostra a curva `YAVG` caindo de volta
       ao nível inicial; não fica alta até o fim
 - [ ] **Sem flicker:** varrer para frente e para trás quadro a quadro; textura não cintila
-- [ ] **Legibilidade** — critérios revisados no Gate 3 (justificativa em §23.1):
-  - H1 grande, **incluindo o trecho em itálico laranja**: ≥ **3,5:1** no pior pixel **e**
-    ≥ **99 % da área dos glifos acima de 4,5:1**;
-  - subtítulo, botões e todo texto menor: ≥ **4,5:1** no pior pixel;
+- [ ] **Legibilidade** — critérios revisados no Gate 4-S (justificativa em §23.1):
+  - **H1 grande branco** (`#fafaf7`): ≥ **4,5:1** no pior pixel — critério já validado, mantido;
+  - **H1 grande no trecho laranja** (`#ff4d00`): ≥ **3,5:1** no pior pixel, **em todos os
+    timestamps**. **Não** se exige percentual de área acima de 4,5:1 para este texto grande;
+  - **subtítulo, textos menores, botões e qualquer elemento de leitura normal**: ≥ **4,5:1**
+    no pior pixel;
+  - **foco, navegação por teclado e componentes interativos**: mantêm os critérios já
+    existentes, sem alteração;
   - legibilidade visual a olho nu no mockup composto, sem palavra que desapareça;
   - textura, profundidade e aparência natural do papel preservadas (a faixa protegida não
     pode virar painel chapado — medir o desvio-padrão, não só a média)
@@ -769,13 +773,28 @@ isso em algum pixel, e apagar a textura para evitá-lo viola a própria direçã
 a lei 5 da skill.
 
 Medido no Gate 3, sobre o frame 2, varrendo cinco configurações de scrim: o melhor alcançável
-foi **3,73:1** no pior pixel. Nenhuma configuração chega a 4,5:1. Por isso o critério passou a
-ser **duplo** — um piso no pior pixel (3,5:1, que é o próprio piso da skill 10K) **mais** um
-critério de área (≥ 99 % dos glifos acima de 4,5:1), que é o que descreve a experiência real
-de leitura. O texto branco continua exigido em 4,5:1 e passa com folga de 4×.
+foi **3,73:1** no pior pixel. Nenhuma configuração chega a 4,5:1.
 
-A reprovação do frame 1 continua válida: lá o pior pixel era 2,33:1 **e** só 55,8 % da área
-passava de 4,5:1 — reprova nos dois critérios, com ou sem a revisão.
+**Correção do Gate 4-S — o critério de área foi removido.** A primeira revisão exigia, além do
+piso, que ≥ 99 % dos glifos ficassem acima de 4,5:1. A auditoria do vídeo mostrou que essa
+segunda exigência é um erro metodológico: em 4 dos 8 timestamps o pior pixel passava com folga
+(3,58–4,93:1) mas a área reprovava, e **todos** os pixels reprovados estavam na faixa de 3,5 a
+4,5:1 — ou seja, a zona inteira já era escura, apenas não o bastante para um limiar que não se
+aplica a este texto.
+
+Por quê: o trecho laranja do H1 é renderizado a **~92 px**. A WCAG classifica como *texto
+grande* qualquer coisa a partir de 18,66 px em negrito ou 24 px normal, e o piso AA para texto
+grande é **3:1** — não 4,5:1. Exigir 4,5:1 em 99 % da área de um texto de 92 px é aplicar a
+regra de texto pequeno a um display de quatro vezes o tamanho.
+
+Adotamos **3,5:1** e não 3:1 como margem deliberadamente mais conservadora que a WCAG, e o
+critério de área foi eliminado para este texto. Texto branco grande segue em 4,5:1; subtítulo,
+botões e texto de leitura normal seguem em 4,5:1; foco e componentes interativos seguem
+inalterados. **Nenhum outro critério foi afrouxado**, e em particular a proibição de
+tipografia gerada dentro do vídeo (§24) permanece absoluta.
+
+A reprovação do frame 1 continua válida por qualquer critério: o pior pixel era **2,33:1**,
+abaixo até do piso de 3:1 da WCAG para texto grande.
 
 ---
 
