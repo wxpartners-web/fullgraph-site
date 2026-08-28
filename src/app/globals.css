@@ -351,35 +351,34 @@ body {
 }
 
 /* ---------- Hero cinematográfico (NEXT_PUBLIC_HERO_SCRUB) ---------- */
-/* ---------- Sistema de legibilidade do hero (4 camadas, skill 10K) ----------
-   O platô global anterior (alpha 0,85 sobre 72% da largura + radial
-   0,5 nas bordas) passava no contraste escurecendo o quadro inteiro —
-   e escondia o livro, as folhas e o movimento. O sistema correto da
-   skill: uma vinheta base quase imperceptível, um véu fino atrás do
-   header, e uma POÇA DE SOMBRA POR BANDA que acompanha a opacidade da
-   própria banda (via as mesmas CSS vars do motor de scrub) e morre
-   antes de alcançar o material em movimento. O texto some, a poça
-   some junto; fora do texto o vídeo respira sem véu. */
+/* ---------- Sistema de legibilidade do hero (manchas orgânicas) ----------
+   Nenhum retângulo, nenhuma faixa, nenhuma máscara com limite: cada
+   banda de texto carrega a própria MANCHA elíptica difusa, com queda
+   longa e contínua até transparência total, acoplada à opacidade da
+   banda (as mesmas CSS vars do motor de scrub — a suavização temporal
+   é o próprio lerp do motor, ~300 ms de assentamento, sem transition
+   CSS que pulsaria por cima). O visitante percebe primeiro o livro em
+   movimento; a sombra não existe como elemento gráfico.
 
-/* Véu do header — a nav é texto branco sobre vídeo e precisa de AA
-   em qualquer frame; o topo do quadro é a zona desfocada da
-   composição, então o custo visual é baixo. (A vinheta global de
-   cantos foi removida: era a maior fonte de perda de luminância fora
-   dos textos — chips e nav têm proteção própria.) */
+   Física do laranja: #ff4d00 sobre papel iluminado exige fundo quase
+   preto para 3,5:1 — por isso o NÚCLEO das manchas chega a ~0,85,
+   mas apenas sob a mancha de texto; a queda começa imediatamente. */
+
+/* Véu do header — a nav é texto branco sobre vídeo. Queda contínua
+   em ~24svh, sem stops perceptíveis; enfraquece no canto direito,
+   onde o CTA autocontido não precisa dele. */
 .hero-veil-top {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 15svh;
+  height: 24svh;
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgb(11 11 12 / 0.72) 0%,
-    rgb(11 11 12 / 0.72) 42%,
-    rgb(11 11 12 / 0.34) 68%,
+    rgb(11 11 12 / 0.66) 0%,
+    rgb(11 11 12 / 0.38) 40%,
+    rgb(11 11 12 / 0.16) 70%,
     rgb(11 11 12 / 0) 100%
   );
-  /* o canto direito do header é o CTA laranja autocontido: o véu
-     enfraquece lá para o vídeo respirar no topo direito */
   -webkit-mask-image: linear-gradient(
     90deg,
     rgb(0 0 0 / 1) 0%,
@@ -394,95 +393,92 @@ body {
   );
 }
 
-/* Camada 2 — poça por banda. Cada uma recebe a opacidade da própria
-   banda inline (var(--hbN-o)) no HeroCinema. O núcleo precisa de
-   ~0,86 porque o itálico #ff4d00 sobre papel iluminado exige fundo
-   quase preto para 3,5:1 — mas agora esse núcleo cobre só a mancha
-   de texto, não o quadro. */
 .hero-pool {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-/* Banda 0 — coluna de abertura (eyebrow→CTAs): rampa horizontal
-   até ~54% + máscara vertical que liberta topo e base. O único texto
-   que avança sobre a luz é a linha do itálico laranja (x até ~76%,
-   y 50–64% — medido na página) e ela leva a própria barra de
-   proteção no ::before, com fade vertical: cantos do retângulo
-   cobertos por construção, e nada além da linha escurece. */
+/* Banda 0 — a coluna de abertura leva duas camadas suaves: a mancha
+   da coluna (eyebrow→CTAs) e, no ::before, a mancha alongada da linha
+   do itálico laranja — o único texto que avança sobre a luz leva a
+   própria sombra até lá, e nada mais escurece. */
 .hero-pool-0 {
-  background: linear-gradient(
-    90deg,
-    rgb(11 11 12 / 0.87) 0%,
-    rgb(11 11 12 / 0.87) 54%,
-    rgb(11 11 12 / 0.5) 63%,
-    rgb(11 11 12 / 0) 71%
-  );
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    rgb(0 0 0 / 0.35) 0%,
-    rgb(0 0 0 / 1) 13%,
-    rgb(0 0 0 / 1) 84%,
-    rgb(0 0 0 / 0.25) 92%,
-    rgb(0 0 0 / 0.15) 100%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    rgb(0 0 0 / 0.35) 0%,
-    rgb(0 0 0 / 1) 13%,
-    rgb(0 0 0 / 1) 84%,
-    rgb(0 0 0 / 0.25) 92%,
-    rgb(0 0 0 / 0.15) 100%
+  background: radial-gradient(
+    ellipse 48% 44% at 22% 50%,
+    rgb(11 11 12 / 0.86) 0%,
+    rgb(11 11 12 / 0.83) 62%,
+    rgb(11 11 12 / 0.5) 82%,
+    rgb(11 11 12 / 0.2) 93%,
+    rgb(11 11 12 / 0) 100%
   );
 }
+/* A mancha do H1: as duas linhas avançam até x≈77% (a linha do
+   itálico laranja exige fundo quase preto), e elipses não cobrem um
+   retângulo largo e raso sem estourar o quadro. Aqui a queda
+   horizontal é longa (27% de tela) e o esmaecimento vertical tem
+   ~16% de feather por lado — não existe borda em nenhum eixo. */
 .hero-pool-0::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgb(11 11 12 / 0.86) 0%,
-    rgb(11 11 12 / 0.86) 77%,
-    rgb(11 11 12 / 0.35) 83%,
-    rgb(11 11 12 / 0) 88%
+    rgb(11 11 12 / 0.85) 0%,
+    rgb(11 11 12 / 0.85) 73%,
+    rgb(11 11 12 / 0.62) 80%,
+    rgb(11 11 12 / 0.3) 87%,
+    rgb(11 11 12 / 0.1) 94%,
+    rgb(11 11 12 / 0) 100%
   );
   -webkit-mask-image: linear-gradient(
     180deg,
-    rgb(0 0 0 / 0) 42%,
-    rgb(0 0 0 / 1) 48%,
-    rgb(0 0 0 / 1) 66%,
-    rgb(0 0 0 / 0) 73%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    rgb(0 0 0 / 0) 42%,
-    rgb(0 0 0 / 1) 48%,
-    rgb(0 0 0 / 1) 66%,
-    rgb(0 0 0 / 0) 73%
-  );
-}
-/* Bandas 1 e 2 — uma frase à esquerda no meio do quadro: poça curta
-   que morre antes da metade direita; topo e base completamente livres */
-.hero-pool-1 {
-  background: linear-gradient(
-    90deg,
-    rgb(11 11 12 / 0.86) 0%,
-    rgb(11 11 12 / 0.86) 48%,
-    rgb(11 11 12 / 0.4) 57%,
-    rgb(11 11 12 / 0) 65%
-  );
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    rgb(0 0 0 / 0) 22%,
+    rgb(0 0 0 / 0) 18%,
+    rgb(0 0 0 / 0.55) 27%,
     rgb(0 0 0 / 1) 34%,
-    rgb(0 0 0 / 1) 64%,
+    rgb(0 0 0 / 1) 59%,
+    rgb(0 0 0 / 0.55) 68%,
     rgb(0 0 0 / 0) 76%
   );
   mask-image: linear-gradient(
     180deg,
-    rgb(0 0 0 / 0) 22%,
+    rgb(0 0 0 / 0) 18%,
+    rgb(0 0 0 / 0.55) 27%,
     rgb(0 0 0 / 1) 34%,
-    rgb(0 0 0 / 1) 64%,
+    rgb(0 0 0 / 1) 59%,
+    rgb(0 0 0 / 0.55) 68%,
+    rgb(0 0 0 / 0) 76%
+  );
+}
+/* Bandas 1 e 2 — a frase vive à esquerda: a sombra ENTRA pela borda
+   esquerda do quadro como vinheta lateral (nenhum contorno fechado —
+   uma elipse solta sobre papel claro leria como objeto), com queda
+   horizontal longa e esmaecimento vertical de ~16% por lado. */
+.hero-pool-1 {
+  background: linear-gradient(
+    90deg,
+    rgb(11 11 12 / 0.86) 0%,
+    rgb(11 11 12 / 0.85) 46%,
+    rgb(11 11 12 / 0.62) 56%,
+    rgb(11 11 12 / 0.3) 65%,
+    rgb(11 11 12 / 0.08) 72%,
+    rgb(11 11 12 / 0) 78%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 24%,
+    rgb(0 0 0 / 0.55) 32%,
+    rgb(0 0 0 / 1) 39%,
+    rgb(0 0 0 / 1) 61%,
+    rgb(0 0 0 / 0.55) 69%,
+    rgb(0 0 0 / 0) 76%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 24%,
+    rgb(0 0 0 / 0.55) 32%,
+    rgb(0 0 0 / 1) 39%,
+    rgb(0 0 0 / 1) 61%,
+    rgb(0 0 0 / 0.55) 69%,
     rgb(0 0 0 / 0) 76%
   );
 }
@@ -490,44 +486,47 @@ body {
   background: linear-gradient(
     90deg,
     rgb(11 11 12 / 0.86) 0%,
-    rgb(11 11 12 / 0.86) 50%,
-    rgb(11 11 12 / 0.4) 58%,
-    rgb(11 11 12 / 0) 66%
+    rgb(11 11 12 / 0.85) 49%,
+    rgb(11 11 12 / 0.6) 58%,
+    rgb(11 11 12 / 0.28) 67%,
+    rgb(11 11 12 / 0.08) 74%,
+    rgb(11 11 12 / 0) 80%
   );
   -webkit-mask-image: linear-gradient(
     180deg,
     rgb(0 0 0 / 0) 20%,
-    rgb(0 0 0 / 1) 32%,
-    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0.55) 28%,
+    rgb(0 0 0 / 1) 35%,
+    rgb(0 0 0 / 1) 63%,
+    rgb(0 0 0 / 0.55) 71%,
     rgb(0 0 0 / 0) 78%
   );
   mask-image: linear-gradient(
     180deg,
     rgb(0 0 0 / 0) 20%,
-    rgb(0 0 0 / 1) 32%,
-    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0.55) 28%,
+    rgb(0 0 0 / 1) 35%,
+    rgb(0 0 0 / 1) 63%,
+    rgb(0 0 0 / 0.55) 71%,
     rgb(0 0 0 / 0) 78%
   );
 }
 
-/* Mobile: o texto atravessa a largura e o still é estático — a poça
-   da banda 0 vira vertical, cobrindo as linhas de texto e abrindo na
-   base onde a pilha de papel brilha sem texto por cima */
+/* Mobile: mancha vertical difusa atrás da coluna de texto — nunca uma
+   placa; a base fica aberta para a pilha de papel respirar. */
 @media (max-width: 1023px) {
   .hero-pool-0::before {
     content: none;
   }
   .hero-pool-0 {
-    background: linear-gradient(
-      180deg,
-      rgb(11 11 12 / 0.55) 0%,
-      rgb(11 11 12 / 0.85) 12%,
-      rgb(11 11 12 / 0.85) 80%,
-      rgb(11 11 12 / 0.35) 90%,
-      rgb(11 11 12 / 0.14) 100%
+    background: radial-gradient(
+      ellipse 130% 48% at 50% 42%,
+      rgb(11 11 12 / 0.87) 0%,
+      rgb(11 11 12 / 0.85) 62%,
+      rgb(11 11 12 / 0.5) 84%,
+      rgb(11 11 12 / 0.2) 94%,
+      rgb(11 11 12 / 0) 100%
     );
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 }
 .hero-band {
