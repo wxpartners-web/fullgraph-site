@@ -45,6 +45,36 @@ test.describe("navegação mobile", () => {
     await expect(menu).toBeHidden();
   });
 
+  test("menu prende o foco e devolve ao botão ao fechar", async ({ page }) => {
+    await page.goto("/");
+    await page.getByTestId("menu-toggle").click();
+    const menu = page.locator("#menu-mobile");
+    await expect(menu).toBeVisible();
+    await expect(menu).toHaveAttribute("aria-modal", "true");
+    // o foco entra no menu ao abrir
+    await expect
+      .poll(() =>
+        page.evaluate(() => document.activeElement?.closest("#menu-mobile") !== null)
+      )
+      .toBe(true);
+    // o ciclo de Tab nunca escapa de header+menu (o X vive no header)
+    for (let i = 0; i < 12; i++) {
+      await page.keyboard.press("Tab");
+      const contained = await page.evaluate(() => {
+        const a = document.activeElement;
+        return Boolean(a && (a.closest("#menu-mobile") || a.closest("header")));
+      });
+      expect(contained, `Tab ${i + 1} escapou do menu`).toBe(true);
+    }
+    await page.keyboard.press("Escape");
+    await expect(menu).toBeHidden();
+    await expect
+      .poll(() =>
+        page.evaluate(() => document.activeElement?.getAttribute("data-testid") ?? null)
+      )
+      .toBe("menu-toggle");
+  });
+
   test("barra inferior de CTA aparece e leva ao orçamento", async ({ page }) => {
     await page.goto("/");
     const bar = page.getByTestId("mobile-cta-bar");
