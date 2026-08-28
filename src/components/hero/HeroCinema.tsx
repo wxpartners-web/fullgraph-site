@@ -1,6 +1,7 @@
 import { InkButton } from "@/components/ui/InkButton";
 import { HeroStill } from "./HeroStill";
 import { HeroScrubController } from "./HeroScrubController";
+import { HeroMobileLoop } from "./HeroMobileLoop";
 import { HERO_SECTION_SVH } from "@/lib/hero-media";
 
 /**
@@ -33,6 +34,8 @@ export function HeroCinema() {
         <HeroStill />
         {/* Vídeo scrub: só monta em desktop elegível */}
         <HeroScrubController />
+        {/* Loop ambiente: só monta em touch/small elegível */}
+        <HeroMobileLoop />
         {/* Legibilidade localizada (skill 10K): véu fino atrás da nav
             e uma poça de sombra POR BANDA que lê as mesmas CSS vars do
             motor — a proteção aparece e some junto com o texto, e fora

@@ -28,6 +28,13 @@ export interface HeroMediaManifest {
   endingSrc: string;
   /** frame 096 recortado 9:16 — hero estático de mobile/touch */
   mobileStillSrc: string;
+  /** loop ambiente 9:16 (palíndromo do trecho final do bruto aprovado,
+      t 2,3→4,04 vai-e-volta, mesmo crop x=733 do still) — toca em
+      touch/small no lugar do still; o still permanece como poster e
+      fallback (save-data, reduced-motion, autoplay bloqueado, erro).
+      null = mobile volta a ser 100% estático */
+  mobileLoopSrc: string | null;
+  mobileLoopBytes: number;
   kind: "dev-placeholder" | "final";
 }
 
@@ -42,6 +49,8 @@ export const heroMedia: HeroMediaManifest = {
   posterSrc: "/media/hero/hero-poster.jpg",
   endingSrc: "/media/hero/hero-ending.jpg",
   mobileStillSrc: "/media/hero/hero-still-mobile.jpg",
+  mobileLoopSrc: "/media/hero/hero-loop-mobile.mp4",
+  mobileLoopBytes: 257_180,
   kind: "final",
 };
 

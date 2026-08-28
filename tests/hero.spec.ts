@@ -155,6 +155,8 @@ test.describe("flag ON — hero cinematográfico", () => {
 
     await page.goto("/");
     await expect(page.getByTestId("hero-cinema")).toBeVisible();
+    // o loop ambiente é exclusivo de touch/small — desktop nunca o monta
+    await expect(page.getByTestId("hero-mobile-loop")).toHaveCount(0);
     const video = page.getByTestId("hero-scrub-video");
     await expect(video).toBeAttached({ timeout: 10_000 });
     // blob + canplay: o vídeo decorativo é muted/playsInline/aria-hidden
@@ -290,7 +292,7 @@ test.describe("flag ON — hero cinematográfico", () => {
     expect(dims).toEqual({ w: 1920, h: 1080 });
   });
 
-  test("mobile: hero estático com o still 9:16 do repouso e zero requests de vídeo", async ({
+  test("mobile: still 9:16 + loop ambiente; o vídeo de scrub nunca é baixado", async ({
     page,
     isMobile,
   }) => {
@@ -304,8 +306,17 @@ test.describe("flag ON — hero cinematográfico", () => {
       .poll(() => img.evaluate((el) => (el as HTMLImageElement).currentSrc))
       .toContain("hero-still-mobile.jpg");
     await expect(page.getByTestId("hero-cta-orcamento")).toBeVisible();
-    await page.waitForTimeout(2000);
-    expect(media).toEqual([]);
+    // o loop ambiente monta e toca (still permanece por baixo como poster)
+    const loop = page.getByTestId("hero-mobile-loop");
+    await expect(loop).toBeAttached({ timeout: 10_000 });
+    await expect
+      .poll(() => loop.evaluate((v) => (v as HTMLVideoElement).currentTime), {
+        timeout: 15_000,
+      })
+      .toBeGreaterThan(0.2);
+    await page.waitForTimeout(1500);
+    // só o loop leve (~250 KB) é permitido; o scrub de 7,7 MB jamais
+    expect(media.filter((u) => u.includes("hero-scrub"))).toEqual([]);
   });
 
   test("reduced-motion: hero estático e zero requests de vídeo", async ({ browser, isMobile }) => {
