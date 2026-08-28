@@ -33,8 +33,26 @@ export function HeroCinema() {
         <HeroStill />
         {/* Vídeo scrub: só monta em desktop elegível */}
         <HeroScrubController />
-        {/* Scrim de contraste — sempre presente, CSS puro */}
-        <div aria-hidden="true" className="hero-scrim absolute inset-0" />
+        {/* Legibilidade localizada (skill 10K): véu fino atrás da nav
+            e uma poça de sombra POR BANDA que lê as mesmas CSS vars do
+            motor — a proteção aparece e some junto com o texto, e fora
+            dele o vídeo respira sem véu */}
+        <div aria-hidden="true" className="hero-veil-top" />
+        <div
+          aria-hidden="true"
+          className="hero-pool hero-pool-0"
+          style={{ opacity: "var(--hb0-o, 1)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="hero-pool hero-pool-1 hidden lg:block"
+          style={{ opacity: "var(--hb1-o, 0)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="hero-pool hero-pool-2 hidden lg:block"
+          style={{ opacity: "var(--hb2-o, 0)" }}
+        />
 
         {/* Banda 0 — H1 + CTA no HTML inicial, abre assentada */}
         <div

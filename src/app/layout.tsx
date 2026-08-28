@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Header } from "@/components/layout/Header";
@@ -9,16 +9,23 @@ import { BrandIntro } from "@/components/motion/BrandIntro";
 import { LenisProvider } from "@/components/motion/LenisProvider";
 import { localBusinessJsonLd } from "@/lib/seo";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* Direção tipográfica editorial (passe visual pós-Gate 5):
+   Newsreader (serif editorial, fonte variável com eixo óptico) para
+   display/H1/títulos; IBM Plex Sans para subtítulos, corpo, nav e
+   CTAs — a Plex é uma família desenhada para sistemas técnicos, irmã
+   do Plex Mono que já marca as specs gráficas do site. Self-hosted
+   via next/font: zero requisição externa no runtime. */
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   style: ["normal", "italic"],
   subsets: ["latin"],
+  axes: ["opsz"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -54,7 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${geistSans.variable} ${instrumentSerif.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${newsreader.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <script

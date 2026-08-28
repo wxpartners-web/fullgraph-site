@@ -358,31 +358,31 @@ test.describe("flag ON — hero cinematográfico", () => {
   });
 });
 
-test.describe("scrim do hero cinematográfico", () => {
+test.describe("sistema de legibilidade do hero (poças por banda)", () => {
   /**
-   * O scrim é a única defesa de legibilidade do texto sobre o vídeo, e o
-   * Gate 3 mostrou que ele estava curto: o platô terminava em 36% enquanto
-   * o H1 real chega a 69,4% do quadro. O itálico laranja media 2,33:1.
-   * Estes testes travam a correção.
+   * O platô global anterior (0,85 sobre 72% da largura) passava no
+   * contraste escondendo o livro e o movimento do vídeo. O sistema
+   * atual segue a skill 10K: poça de sombra POR BANDA, acoplada à
+   * opacidade da própria banda, morrendo antes do material em
+   * movimento. Estes testes travam a geometria de cada poça.
    */
-  const stopsFromCss = async (page: Page) =>
-    page.evaluate(() => {
-      // a regra existe na folha de estilo mesmo com a flag desligada;
-      // um elemento sonda basta para ler o valor computado
+  const gradientStops = async (page: Page, cls: string) =>
+    page.evaluate((c) => {
       const probe = document.createElement("div");
-      probe.className = "hero-scrim";
+      probe.className = c;
       document.body.appendChild(probe);
       const bg = getComputedStyle(probe).backgroundImage;
       probe.remove();
       const linear = bg.slice(bg.indexOf("linear-gradient"));
-      // "rgba(11, 11, 12, 0.82) 72%" → { alpha, pos }
       return [...linear.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
         const parts = m[1].split(",").map((v) => Number(v.trim()));
         return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
       });
-    });
+    }, cls);
 
   const alphaAt = (stops: { alpha: number; pos: number }[], x: number) => {
+    if (!stops.length) return 0;
+    if (x <= stops[0].pos) return stops[0].alpha;
     for (let i = 0; i < stops.length - 1; i++) {
       const a = stops[i];
       const b = stops[i + 1];
@@ -393,63 +393,112 @@ test.describe("scrim do hero cinematográfico", () => {
     return stops[stops.length - 1].alpha;
   };
 
-  test("desktop: o platô cobre toda a faixa de texto (H1 chega a 69,4%)", async ({
+  test("banda 0 desktop: núcleo cobre a coluna de texto e morre antes da faixa direita", async ({
     page,
     isMobile,
   }) => {
-    test.skip(Boolean(isMobile), "no mobile o scrim é vertical (teste próprio)");
+    test.skip(Boolean(isMobile), "no mobile a poça é vertical (teste próprio)");
     await page.goto("/");
-    const stops = await stopsFromCss(page);
-    expect(stops.length).toBeGreaterThanOrEqual(4);
-    // 69,4% é a borda direita real do H1; 72% é o fim do platô com margem
-    for (const x of [0, 25, 50, 69.4, 72]) {
+    const stops = await gradientStops(page, "hero-pool hero-pool-0");
+    // núcleo forte sobre a coluna de abertura…
+    for (const x of [0, 30, 52]) {
       expect(alphaAt(stops, x), `alpha em x=${x}%`).toBeGreaterThanOrEqual(0.8);
+    }
+    // …e zero antes da faixa onde a luz, o verniz e a tinta vivem
+    expect(alphaAt(stops, 85)).toBeLessThanOrEqual(0.02);
+    // a barra do itálico (::before) protege a linha laranja até ~77%
+    // e morre antes do canto direito
+    const barra = await page.evaluate(() => {
+      const probe = document.createElement("div");
+      probe.className = "hero-pool hero-pool-0";
+      document.body.appendChild(probe);
+      const bg = getComputedStyle(probe, "::before").backgroundImage;
+      probe.remove();
+      const linear = bg.slice(bg.indexOf("linear-gradient"));
+      return [...linear.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
+        const parts = m[1].split(",").map((v) => Number(v.trim()));
+        return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
+      });
+    });
+    expect(alphaAt(barra, 76)).toBeGreaterThanOrEqual(0.8);
+    expect(alphaAt(barra, 90)).toBeLessThanOrEqual(0.02);
+  });
+
+  test("bandas 1 e 2: a poça morre antes da metade direita do quadro", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "bandas 1–2 são desktop-only");
+    await page.goto("/");
+    for (const [cls, nucleo, fim] of [
+      ["hero-pool hero-pool-1", 46, 76],
+      ["hero-pool hero-pool-2", 48, 78],
+    ] as const) {
+      const stops = await gradientStops(page, cls);
+      expect(alphaAt(stops, 0), `${cls} x=0`).toBeGreaterThanOrEqual(0.8);
+      expect(alphaAt(stops, nucleo), `${cls} núcleo`).toBeGreaterThanOrEqual(0.8);
+      expect(alphaAt(stops, fim), `${cls} fim`).toBeLessThanOrEqual(0.02);
     }
   });
 
-  test("desktop: a faixa direita continua viva (luz, verniz e tinta)", async ({
-    page,
-    isMobile,
-  }) => {
-    test.skip(Boolean(isMobile), "no mobile o scrim é vertical (teste próprio)");
-    await page.goto("/");
-    const stops = await stopsFromCss(page);
-    // a partir de ~84% o scrim quase some: é onde a imagem precisa respirar
-    expect(alphaAt(stops, 88)).toBeLessThanOrEqual(0.3);
-  });
-
-  test("mobile: scrim vertical cobre as linhas de texto e abre na base", async ({
+  test("mobile: poça vertical da banda 0 cobre as linhas e abre na base", async ({
     page,
     isMobile,
   }) => {
     test.skip(!isMobile, "só mobile");
     await page.goto("/");
-    const stops = await stopsFromCss(page);
-    expect(stops.length).toBeGreaterThanOrEqual(4);
-    // no mobile o texto vai até y≈80% (CTA outline); platô até 82%
-    for (const y of [0, 40, 70, 80, 82]) {
+    const stops = await gradientStops(page, "hero-pool hero-pool-0");
+    // as linhas de texto vivem entre y≈15% e y≈80%
+    for (const y of [15, 40, 70, 80]) {
       expect(alphaAt(stops, y), `alpha em y=${y}%`).toBeGreaterThanOrEqual(0.8);
     }
     // a base fica aberta: é onde a pilha de papel brilha sem texto
-    expect(alphaAt(stops, 100)).toBeLessThanOrEqual(0.35);
+    expect(alphaAt(stops, 100)).toBeLessThanOrEqual(0.2);
   });
 
-  test("a rampa de saída não desenha borda dura", async ({ page }) => {
+  test("nenhuma rampa desenha borda dura", async ({ page, isMobile }) => {
+    test.skip(Boolean(isMobile), "geometria desktop");
     await page.goto("/");
-    const stops = await stopsFromCss(page);
-    // nenhum salto de alpha maior que 0,35 entre amostras de 2% —
-    // uma queda do platô para ~0,1 num intervalo só cria borda visível
-    let maiorSalto = 0;
-    for (let x = 70; x < 100; x += 2) {
-      maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(stops, x) - alphaAt(stops, x + 2)));
+    for (const cls of ["hero-pool hero-pool-0", "hero-pool hero-pool-1", "hero-pool hero-pool-2"]) {
+      const stops = await gradientStops(page, cls);
+      let maiorSalto = 0;
+      for (let x = 0; x < 100; x += 2) {
+        maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(stops, x) - alphaAt(stops, x + 2)));
+      }
+      expect(maiorSalto, cls).toBeLessThan(0.35);
     }
-    expect(maiorSalto).toBeLessThan(0.35);
   });
 
-  test("flag OFF: o scrim não é renderizado (mudança escopada)", async ({ page }) => {
+  test("as poças acompanham a opacidade das bandas durante o scrub", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!scrubOn, "precisa do build com a flag ligada");
+    test.skip(Boolean(isMobile), "scrub é desktop-only");
+    await page.goto("/");
+    const geo = await scrubGeometry(page);
+    const opacityOf = (n: number) =>
+      page.evaluate(
+        (i) => Number(getComputedStyle(document.querySelector(`.hero-pool-${i}`)!).opacity),
+        n
+      );
+    // meio da banda 1: poça 1 acesa, poças 0 e 2 apagadas
+    await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), geo.top + geo.range * 0.52);
+    await expect.poll(() => opacityOf(1), { timeout: 10_000 }).toBeGreaterThan(0.6);
+    await expect.poll(() => opacityOf(0), { timeout: 10_000 }).toBeLessThan(0.1);
+    // repouso: poça 2 acesa, poça 1 apagada
+    await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), geo.top + geo.range);
+    await expect.poll(() => opacityOf(2), { timeout: 10_000 }).toBeGreaterThan(0.6);
+    await expect.poll(() => opacityOf(1), { timeout: 10_000 }).toBeLessThan(0.1);
+  });
+
+  test("flag OFF: nenhuma camada do sistema é renderizada (mudança escopada)", async ({
+    page,
+  }) => {
     test.skip(scrubOn, "build atual está com a flag ligada");
     await page.goto("/");
-    await expect(page.locator(".hero-scrim")).toHaveCount(0);
+    await expect(page.locator(".hero-pool")).toHaveCount(0);
+    await expect(page.locator(".hero-veil-top")).toHaveCount(0);
   });
 });
 

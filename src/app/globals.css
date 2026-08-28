@@ -40,12 +40,14 @@
 
   --header-h: 4.5rem;
 
-  /* Sombra de texto do hero cinematográfico: 3 camadas com base carbon
-     (borda justa, brilho médio, decaimento largo) */
+  /* Sombra de texto do hero cinematográfico: 3 camadas (borda justa,
+     brilho médio, decaimento largo) em versão DISCRETA — reforço de
+     separação, nunca halo. A legibilidade estrutural vem das poças de
+     scrim por banda, não da sombra. */
   --tshadow:
-    0 1px 2px rgb(11 11 12 / 0.95),
-    0 3px 12px rgb(11 11 12 / 0.78),
-    0 10px 44px rgb(11 11 12 / 0.8);
+    0 1px 2px rgb(11 11 12 / 0.7),
+    0 3px 10px rgb(11 11 12 / 0.45),
+    0 10px 36px rgb(11 11 12 / 0.28);
 }
 
 @theme inline {
@@ -65,8 +67,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  /* Display editorial: mesma família serif dos itálicos de assinatura —
+     uma voz só para tudo que é título */
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
@@ -106,21 +111,30 @@ body {
   outline-color: var(--carbon);
 }
 
-/* ---------- Utilitários tipográficos ---------- */
+/* ---------- Utilitários tipográficos ----------
+   Display/H1/H2 em Newsreader (serif editorial): tracking negativo
+   sutil e line-height compacto sem colisão de ascendentes. H3 e tudo
+   abaixo seguem na sans (Plex) — hierarquia por contraste de voz. */
 .text-display {
+  font-family: var(--font-display);
   font-size: var(--text-display);
-  line-height: 0.96;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
 }
 .text-h1 {
+  font-family: var(--font-display);
   font-size: var(--text-h1);
-  line-height: 1;
+  line-height: 1.02;
   letter-spacing: -0.02em;
+  font-optical-sizing: auto;
 }
 .text-h2 {
+  font-family: var(--font-display);
   font-size: var(--text-h2);
-  line-height: 1.04;
+  line-height: 1.08;
   letter-spacing: -0.015em;
+  font-optical-sizing: auto;
 }
 .text-h3 {
   font-size: var(--text-h3);
@@ -322,71 +336,183 @@ body {
 }
 
 /* ---------- Hero cinematográfico (NEXT_PUBLIC_HERO_SCRUB) ---------- */
-/* Scrim base sempre-on: nenhum frame do vídeo fica cru atrás da tipografia.
-   Só o HeroCinema usa esta classe, então tudo aqui vive atrás da flag.
+/* ---------- Sistema de legibilidade do hero (4 camadas, skill 10K) ----------
+   O platô global anterior (alpha 0,85 sobre 72% da largura + radial
+   0,5 nas bordas) passava no contraste escurecendo o quadro inteiro —
+   e escondia o livro, as folhas e o movimento. O sistema correto da
+   skill: uma vinheta base quase imperceptível, um véu fino atrás do
+   header, e uma POÇA DE SOMBRA POR BANDA que acompanha a opacidade da
+   própria banda (via as mesmas CSS vars do motor de scrub) e morre
+   antes de alcançar o material em movimento. O texto some, a poça
+   some junto; fora do texto o vídeo respira sem véu. */
 
-   O platô de 0.85 vai até 72% porque é aí que termina a faixa ocupada
-   pelo texto real: o H1 chega a 69,4% do quadro (medido na página, não
-   estimado). A versão anterior só protegia até 36% e reprovou o start
-   frame do Gate 3 — o itálico laranja da linha 3 media 2,33:1.
-
-   Por que 0.85: `--ink` (#ff4d00) tem luminância 0,264, então contra
-   preto puro o teto de contraste é 6,31:1 e o fundo composto precisa
-   ficar praticamente preto para o itálico laranja passar em 3,5:1. O
-   0.82 calibrado no Gate 3 media 3,73:1 em simulação — mas a simulação
-   não incluía o .grain::before (ruído a 5% de opacidade, z-index 1,
-   ACIMA do scrim), que soma até ~9 níveis sRGB no pior pixel. Na página
-   real de produção (Gate 5), com grain: 0.82 dava 3,27:1 nas bandas
-   2 (reprovado); 0.85 dá 3,59:1 no pior ponto. Sem grain os números
-   batem com a simulação (3,53–3,62), confirmando a causa.
-
-   Os stops 76%/80%/84% são a rampa de saída: sem eles a queda de 0.85
-   para 0.10 num único intervalo cria uma borda vertical visível. A faixa
-   direita (a partir de ~84%) fica quase sem scrim de propósito — é onde
-   a luz, o verniz e a tinta laranja precisam viver. */
-.hero-scrim {
+/* Véu do header — a nav é texto branco sobre vídeo e precisa de AA
+   em qualquer frame; o topo do quadro é a zona desfocada da
+   composição, então o custo visual é baixo. (A vinheta global de
+   cantos foi removida: era a maior fonte de perda de luminância fora
+   dos textos — chips e nav têm proteção própria.) */
+.hero-veil-top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 15svh;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgb(11 11 12 / 0.85) 0%,
-      rgb(11 11 12 / 0.85) 72%,
-      rgb(11 11 12 / 0.533) 76%,
-      rgb(11 11 12 / 0.246) 80%,
-      rgb(11 11 12 / 0.1) 84%,
-      rgb(11 11 12 / 0.28) 100%
-    ),
-    radial-gradient(
-      ellipse 120% 90% at 50% 45%,
-      rgb(11 11 12 / 0) 35%,
-      rgb(11 11 12 / 0.5) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    rgb(11 11 12 / 0.72) 0%,
+    rgb(11 11 12 / 0.72) 42%,
+    rgb(11 11 12 / 0.34) 68%,
+    rgb(11 11 12 / 0) 100%
+  );
+  /* o canto direito do header é o CTA laranja autocontido: o véu
+     enfraquece lá para o vídeo respirar no topo direito */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0.3) 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0.3) 100%
+  );
 }
 
-/* No mobile o texto atravessa a largura inteira e a imagem vive na
-   base: o platô esquerda→direita do desktop deixava o fim das linhas
-   do eyebrow (2,98:1) e do subtítulo (4,00:1) sobre a faixa clara do
-   still, abaixo do AA. O scrim gira para vertical — platô cobrindo
-   todas as linhas de texto (o CTA outline termina em y≈80%), abrindo
-   na base, onde a pilha de papel brilha sem texto por cima. Calibrado
-   na página real de produção (Gate 5): eyebrow → 7,62:1, subtítulo →
-   5,77:1, H1 branco 12,1:1, itálico laranja 3,61:1 (inalterado). */
+/* Camada 2 — poça por banda. Cada uma recebe a opacidade da própria
+   banda inline (var(--hbN-o)) no HeroCinema. O núcleo precisa de
+   ~0,86 porque o itálico #ff4d00 sobre papel iluminado exige fundo
+   quase preto para 3,5:1 — mas agora esse núcleo cobre só a mancha
+   de texto, não o quadro. */
+.hero-pool {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Banda 0 — coluna de abertura (eyebrow→CTAs): rampa horizontal
+   até ~54% + máscara vertical que liberta topo e base. O único texto
+   que avança sobre a luz é a linha do itálico laranja (x até ~76%,
+   y 50–64% — medido na página) e ela leva a própria barra de
+   proteção no ::before, com fade vertical: cantos do retângulo
+   cobertos por construção, e nada além da linha escurece. */
+.hero-pool-0 {
+  background: linear-gradient(
+    90deg,
+    rgb(11 11 12 / 0.87) 0%,
+    rgb(11 11 12 / 0.87) 54%,
+    rgb(11 11 12 / 0.5) 63%,
+    rgb(11 11 12 / 0) 71%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.35) 0%,
+    rgb(0 0 0 / 1) 13%,
+    rgb(0 0 0 / 1) 84%,
+    rgb(0 0 0 / 0.25) 92%,
+    rgb(0 0 0 / 0.15) 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.35) 0%,
+    rgb(0 0 0 / 1) 13%,
+    rgb(0 0 0 / 1) 84%,
+    rgb(0 0 0 / 0.25) 92%,
+    rgb(0 0 0 / 0.15) 100%
+  );
+}
+.hero-pool-0::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(11 11 12 / 0.86) 0%,
+    rgb(11 11 12 / 0.86) 77%,
+    rgb(11 11 12 / 0.35) 83%,
+    rgb(11 11 12 / 0) 88%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 42%,
+    rgb(0 0 0 / 1) 48%,
+    rgb(0 0 0 / 1) 66%,
+    rgb(0 0 0 / 0) 73%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 42%,
+    rgb(0 0 0 / 1) 48%,
+    rgb(0 0 0 / 1) 66%,
+    rgb(0 0 0 / 0) 73%
+  );
+}
+/* Bandas 1 e 2 — uma frase à esquerda no meio do quadro: poça curta
+   que morre antes da metade direita; topo e base completamente livres */
+.hero-pool-1 {
+  background: linear-gradient(
+    90deg,
+    rgb(11 11 12 / 0.86) 0%,
+    rgb(11 11 12 / 0.86) 48%,
+    rgb(11 11 12 / 0.4) 57%,
+    rgb(11 11 12 / 0) 65%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 22%,
+    rgb(0 0 0 / 1) 34%,
+    rgb(0 0 0 / 1) 64%,
+    rgb(0 0 0 / 0) 76%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 22%,
+    rgb(0 0 0 / 1) 34%,
+    rgb(0 0 0 / 1) 64%,
+    rgb(0 0 0 / 0) 76%
+  );
+}
+.hero-pool-2 {
+  background: linear-gradient(
+    90deg,
+    rgb(11 11 12 / 0.86) 0%,
+    rgb(11 11 12 / 0.86) 50%,
+    rgb(11 11 12 / 0.4) 58%,
+    rgb(11 11 12 / 0) 66%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 20%,
+    rgb(0 0 0 / 1) 32%,
+    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0) 78%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0) 20%,
+    rgb(0 0 0 / 1) 32%,
+    rgb(0 0 0 / 1) 68%,
+    rgb(0 0 0 / 0) 78%
+  );
+}
+
+/* Mobile: o texto atravessa a largura e o still é estático — a poça
+   da banda 0 vira vertical, cobrindo as linhas de texto e abrindo na
+   base onde a pilha de papel brilha sem texto por cima */
 @media (max-width: 1023px) {
-  .hero-scrim {
-    background:
-      linear-gradient(
-        180deg,
-        rgb(11 11 12 / 0.85) 0%,
-        rgb(11 11 12 / 0.85) 82%,
-        rgb(11 11 12 / 0.5) 88%,
-        rgb(11 11 12 / 0.24) 94%,
-        rgb(11 11 12 / 0.2) 100%
-      ),
-      radial-gradient(
-        ellipse 120% 90% at 50% 45%,
-        rgb(11 11 12 / 0) 35%,
-        rgb(11 11 12 / 0.5) 100%
-      );
+  .hero-pool-0::before {
+    content: none;
+  }
+  .hero-pool-0 {
+    background: linear-gradient(
+      180deg,
+      rgb(11 11 12 / 0.55) 0%,
+      rgb(11 11 12 / 0.85) 12%,
+      rgb(11 11 12 / 0.85) 80%,
+      rgb(11 11 12 / 0.35) 90%,
+      rgb(11 11 12 / 0.14) 100%
+    );
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 .hero-band {
