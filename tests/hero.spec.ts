@@ -358,30 +358,40 @@ test.describe("flag ON — hero cinematográfico", () => {
   });
 });
 
-test.describe("sistema de legibilidade do hero (poças por banda)", () => {
+test.describe("sistema de legibilidade do hero (manchas orgânicas)", () => {
   /**
-   * O platô global anterior (0,85 sobre 72% da largura) passava no
-   * contraste escondendo o livro e o movimento do vídeo. O sistema
-   * atual segue a skill 10K: poça de sombra POR BANDA, acoplada à
-   * opacidade da própria banda, morrendo antes do material em
-   * movimento. Estes testes travam a geometria de cada poça.
+   * Nenhum retângulo, nenhuma borda: a banda 0 leva uma mancha radial
+   * na coluna + uma faixa difusa atrás do H1 (feathers ≥12% de tela);
+   * as bandas 1–2 levam vinheta lateral entrando pela borda esquerda.
+   * Todos os gradientes terminam em transparência TOTAL e acompanham
+   * a opacidade da própria banda. Estes testes travam os invariantes.
    */
-  const gradientStops = async (page: Page, cls: string) =>
-    page.evaluate((c) => {
-      const probe = document.createElement("div");
-      probe.className = c;
-      document.body.appendChild(probe);
-      const bg = getComputedStyle(probe).backgroundImage;
-      probe.remove();
-      const linear = bg.slice(bg.indexOf("linear-gradient"));
-      return [...linear.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
-        const parts = m[1].split(",").map((v) => Number(v.trim()));
-        return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
-      });
-    }, cls);
+  const stopsOf = async (page: Page, cls: string, pseudo?: string) =>
+    page.evaluate(
+      ([c, ps]) => {
+        const probe = document.createElement("div");
+        probe.className = c;
+        document.body.appendChild(probe);
+        const bg = getComputedStyle(probe, (ps as string) || undefined).backgroundImage;
+        const mask =
+          getComputedStyle(probe, (ps as string) || undefined).maskImage ||
+          (getComputedStyle(probe, (ps as string) || undefined) as CSSStyleDeclaration & {
+            webkitMaskImage?: string;
+          }).webkitMaskImage ||
+          "";
+        probe.remove();
+        const parse = (str: string) =>
+          [...str.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
+            const parts = m[1].split(",").map((v) => Number(v.trim()));
+            return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
+          });
+        return { bg: parse(bg), mask: parse(mask), isRadial: bg.includes("radial-gradient") };
+      },
+      [cls, pseudo ?? ""]
+    );
 
   const alphaAt = (stops: { alpha: number; pos: number }[], x: number) => {
-    if (!stops.length) return 0;
+    if (!stops.length) return -1;
     if (x <= stops[0].pos) return stops[0].alpha;
     for (let i = 0; i < stops.length - 1; i++) {
       const a = stops[i];
@@ -393,83 +403,87 @@ test.describe("sistema de legibilidade do hero (poças por banda)", () => {
     return stops[stops.length - 1].alpha;
   };
 
-  test("banda 0 desktop: núcleo cobre a coluna de texto e morre antes da faixa direita", async ({
+  test("banda 0: mancha radial da coluna com núcleo forte e fim transparente", async ({
     page,
     isMobile,
   }) => {
-    test.skip(Boolean(isMobile), "no mobile a poça é vertical (teste próprio)");
+    test.skip(Boolean(isMobile), "no mobile a mancha é vertical (teste próprio)");
     await page.goto("/");
-    const stops = await gradientStops(page, "hero-pool hero-pool-0");
-    // núcleo forte sobre a coluna de abertura…
-    for (const x of [0, 30, 52]) {
-      expect(alphaAt(stops, x), `alpha em x=${x}%`).toBeGreaterThanOrEqual(0.8);
-    }
-    // …e zero antes da faixa onde a luz, o verniz e a tinta vivem
-    expect(alphaAt(stops, 85)).toBeLessThanOrEqual(0.02);
-    // a barra do itálico (::before) protege a linha laranja até ~77%
-    // e morre antes do canto direito
-    const barra = await page.evaluate(() => {
-      const probe = document.createElement("div");
-      probe.className = "hero-pool hero-pool-0";
-      document.body.appendChild(probe);
-      const bg = getComputedStyle(probe, "::before").backgroundImage;
-      probe.remove();
-      const linear = bg.slice(bg.indexOf("linear-gradient"));
-      return [...linear.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
-        const parts = m[1].split(",").map((v) => Number(v.trim()));
-        return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
-      });
-    });
-    expect(alphaAt(barra, 76)).toBeGreaterThanOrEqual(0.8);
-    expect(alphaAt(barra, 90)).toBeLessThanOrEqual(0.02);
+    const { bg, isRadial } = await stopsOf(page, "hero-pool hero-pool-0");
+    expect(isRadial).toBe(true);
+    expect(alphaAt(bg, 0)).toBeGreaterThanOrEqual(0.8);
+    expect(alphaAt(bg, 60)).toBeGreaterThanOrEqual(0.8);
+    // transparência TOTAL no fim — sem isso a mancha vira véu global
+    expect(bg[bg.length - 1].alpha).toBe(0);
   });
 
-  test("bandas 1 e 2: a poça morre antes da metade direita do quadro", async ({
+  test("banda 0: a faixa do H1 protege até ~73% e esmaece nos dois eixos", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(Boolean(isMobile), "só desktop");
+    await page.goto("/");
+    const { bg, mask } = await stopsOf(page, "hero-pool hero-pool-0", "::before");
+    expect(alphaAt(bg, 72)).toBeGreaterThanOrEqual(0.8);
+    expect(bg[bg.length - 1].alpha).toBe(0);
+    // esmaecimento vertical com feather longo (≥8% por lado) e fim em 0
+    expect(mask.length).toBeGreaterThanOrEqual(4);
+    expect(mask[0].alpha).toBe(0);
+    expect(mask[mask.length - 1].alpha).toBe(0);
+  });
+
+  test("bandas 1–2: vinheta lateral esquerda que morre antes do livro", async ({
     page,
     isMobile,
   }) => {
     test.skip(Boolean(isMobile), "bandas 1–2 são desktop-only");
     await page.goto("/");
-    for (const [cls, nucleo, fim] of [
-      ["hero-pool hero-pool-1", 46, 76],
-      ["hero-pool hero-pool-2", 48, 78],
+    for (const [cls, nucleo] of [
+      ["hero-pool hero-pool-1", 45],
+      ["hero-pool hero-pool-2", 48],
     ] as const) {
-      const stops = await gradientStops(page, cls);
-      expect(alphaAt(stops, 0), `${cls} x=0`).toBeGreaterThanOrEqual(0.8);
-      expect(alphaAt(stops, nucleo), `${cls} núcleo`).toBeGreaterThanOrEqual(0.8);
-      expect(alphaAt(stops, fim), `${cls} fim`).toBeLessThanOrEqual(0.02);
+      const { bg, mask } = await stopsOf(page, cls);
+      expect(alphaAt(bg, 0), `${cls} x=0`).toBeGreaterThanOrEqual(0.8);
+      expect(alphaAt(bg, nucleo), `${cls} núcleo`).toBeGreaterThanOrEqual(0.8);
+      expect(alphaAt(bg, 85), `${cls} x=85`).toBeLessThanOrEqual(0.02);
+      expect(bg[bg.length - 1].alpha, `${cls} fim`).toBe(0);
+      // topo e base do quadro livres: máscara vertical começa e termina em 0
+      expect(mask[0].alpha, `${cls} mask topo`).toBe(0);
+      expect(mask[mask.length - 1].alpha, `${cls} mask base`).toBe(0);
     }
   });
 
-  test("mobile: poça vertical da banda 0 cobre as linhas e abre na base", async ({
+  test("nenhuma rampa desenha borda: saltos ≤0,2 por 2% em todos os gradientes", async ({
     page,
     isMobile,
   }) => {
-    test.skip(!isMobile, "só mobile");
-    await page.goto("/");
-    const stops = await gradientStops(page, "hero-pool hero-pool-0");
-    // as linhas de texto vivem entre y≈15% e y≈80%
-    for (const y of [15, 40, 70, 80]) {
-      expect(alphaAt(stops, y), `alpha em y=${y}%`).toBeGreaterThanOrEqual(0.8);
-    }
-    // a base fica aberta: é onde a pilha de papel brilha sem texto
-    expect(alphaAt(stops, 100)).toBeLessThanOrEqual(0.2);
-  });
-
-  test("nenhuma rampa desenha borda dura", async ({ page, isMobile }) => {
     test.skip(Boolean(isMobile), "geometria desktop");
     await page.goto("/");
-    for (const cls of ["hero-pool hero-pool-0", "hero-pool hero-pool-1", "hero-pool hero-pool-2"]) {
-      const stops = await gradientStops(page, cls);
+    for (const [cls, pseudo] of [
+      ["hero-pool hero-pool-0", undefined],
+      ["hero-pool hero-pool-0", "::before"],
+      ["hero-pool hero-pool-1", undefined],
+      ["hero-pool hero-pool-2", undefined],
+    ] as const) {
+      const { bg } = await stopsOf(page, cls, pseudo);
       let maiorSalto = 0;
       for (let x = 0; x < 100; x += 2) {
-        maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(stops, x) - alphaAt(stops, x + 2)));
+        maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(bg, x) - alphaAt(bg, x + 2)));
       }
-      expect(maiorSalto, cls).toBeLessThan(0.35);
+      expect(maiorSalto, `${cls}${pseudo ?? ""}`).toBeLessThanOrEqual(0.2);
     }
   });
 
-  test("as poças acompanham a opacidade das bandas durante o scrub", async ({
+  test("mobile: mancha vertical difusa com base aberta", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "só mobile");
+    await page.goto("/");
+    const { bg, isRadial } = await stopsOf(page, "hero-pool hero-pool-0");
+    expect(isRadial).toBe(true);
+    expect(alphaAt(bg, 0)).toBeGreaterThanOrEqual(0.8);
+    expect(bg[bg.length - 1].alpha).toBe(0);
+  });
+
+  test("as manchas acompanham a opacidade das bandas durante o scrub", async ({
     page,
     isMobile,
   }) => {
@@ -482,11 +496,9 @@ test.describe("sistema de legibilidade do hero (poças por banda)", () => {
         (i) => Number(getComputedStyle(document.querySelector(`.hero-pool-${i}`)!).opacity),
         n
       );
-    // meio da banda 1: poça 1 acesa, poças 0 e 2 apagadas
     await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), geo.top + geo.range * 0.52);
     await expect.poll(() => opacityOf(1), { timeout: 10_000 }).toBeGreaterThan(0.6);
     await expect.poll(() => opacityOf(0), { timeout: 10_000 }).toBeLessThan(0.1);
-    // repouso: poça 2 acesa, poça 1 apagada
     await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), geo.top + geo.range);
     await expect.poll(() => opacityOf(2), { timeout: 10_000 }).toBeGreaterThan(0.6);
     await expect.poll(() => opacityOf(1), { timeout: 10_000 }).toBeLessThan(0.1);
