@@ -239,11 +239,24 @@ Detalhes abstratos de acabamento em macro: um vinco marcado pegando luz na quina
 projetando micro-sombra, verniz localizado devolvendo um reflexo alongado. **Sem faca, sem
 guilhotina, sem vinco mecânico visível — só o resultado no material.**
 
-**Beat 6 — composição final · t 5,2–6,0 s (frames 125–143)**
-A câmera desacelera e assenta num still-life: um livro fechado, uma caixa de embalagem rígida
-e um impresso corporativo empilhados em repouso sobre superfície escura. **Todos sem marca,
-sem texto, sem logo.** Luz lateral esculpindo os três volumes. Centro de massa em
-**x ≈ 54 %, y ≈ 78 %**. Terço esquerdo e faixa superior em penumbra calma.
+**Beat 6 — composição final**
+
+> ⚠️ **REESCRITO NO GATE 4-R.** A versão anterior pedia "livro fechado, caixa de embalagem
+> rígida e impresso corporativo". Foi essa descrição que reprovou o vídeo do Gate 4: são
+> objetos cuja identidade **depende de impressão**, e o modelo os completou com
+> pseudo-tipografia (~32 % de densidade de marcas no assentamento). Proibir texto enquanto se
+> pede um impresso corporativo é autocontraditório. O desfecho agora contém **apenas matéria
+> virgem**.
+
+A câmera desacelera e assenta sobre **papel cru, e nada além disso**: uma pilha de folhas
+off-white refiladas vista de cima e de canto, com as bordas e a "lombada" formadas apenas
+pelas camadas naturais do papel empilhado; blocos lisos de papel cortado; superfície fosca de
+fibra crua. Um pequeno acento de pigmento laranja **amorfo** — mancha, não forma — restrito ao
+extremo direito (x 78 %–94 %). Luz rasante esculpindo as camadas; sombras longas à esquerda.
+
+**Nenhum outro objeto entra em cena.** Nada de livro, capa, lombada impressa, cartão, cartaz,
+embalagem, rótulo, etiqueta, folheto ou qualquer superfície que exista para ser impressa.
+Toda superfície visível é virgem, sem marca, apenas textura.
 
 ---
 
@@ -306,9 +319,14 @@ referência para a auditoria worst-frame da banda 1, o mais crítico dos três.
 
 ## 13. Frame final (frame 143 · t = 6,0 s)
 
-Still-life em repouso: livro fechado, caixa rígida e impresso corporativo empilhados sobre
-superfície escura. Luz lateral esculpindo os três volumes; sombras longas e suaves à esquerda.
-Centro de massa em **x ≈ 54 %, y ≈ 78 %**.
+Composição em repouso feita **só de papel virgem** (reescrito no Gate 4-R — ver §8): pilha de
+folhas off-white refiladas vista de cima e de canto, bordas formadas pelas camadas naturais do
+papel, blocos lisos de papel cortado e superfície fosca de fibra crua. Luz rasante esculpindo
+as camadas; sombras longas e suaves à esquerda. Acento de pigmento laranja amorfo confinado a
+x 78 %–94 %. Centro de massa em **x ≈ 54 %, y ≈ 78 %**.
+
+**Toda superfície visível é virgem e sem marca.** Nenhum objeto cuja identidade dependa de
+impressão, escrita ou sinalização pode aparecer.
 
 **Margens obrigatórias** (lei 4 — o header do site fica por cima do topo, e o `object-cover`
 come as bordas):
@@ -414,38 +432,44 @@ Escrito em inglês, ≤ ~200 tokens conforme `references/prompt-engineering.md` 
 passado em `--start-image`, o prompt **descreve o movimento**, não redescreve o quadro parado
 — também instrução explícita da skill.
 
+> ⚠️ **REESCRITO NO GATE 4-R.** O desfecho anterior pedia objetos impressos e foi a causa
+> direta da reprovação do vídeo do Gate 4. Toda menção a livro, capa, cartão, cartaz,
+> embalagem, rótulo ou impresso corporativo foi eliminada. O modelo **não** expõe
+> `negative_prompt` (§18), então todas as exclusões vivem dentro do prompt principal.
+
 ```text
-One continuous macro shot, no cuts. The camera trucks slowly right and drifts
-diagonally down across a dark studio bench of printing materials, then pushes in
-and comes to rest. Premium cinematic macro product photography. Soft directional
-studio light rakes across the surface from the right at a low angle.
+Single continuous extreme-macro cinematic camera move across raw warm off-white
+uncoated paper fibers on a dark premium studio bench.
 
-It travels over raw off-white paper fibers, then reaches controlled orange
-printing ink spreading and settling into the fiber with visible surface tension
-and absorption, physically plausible. Layered trimmed printed sheets rise into
-frame in three depth planes and reveal parallax and natural occlusion. At four
-seconds a single out-of-focus underexposed sheet sweeps close past the lens from
-the right and exits upper left. Beyond it, embossing, a creased fold catching
-light, and localized spot varnish returning a long soft reflection.
+The camera travels slowly to the right with a subtle descending diagonal drift,
+then performs a restrained push-in and settles naturally into a quiet still-life
+composition.
 
-The shot ends at rest: a closed book, a rigid box and a printed corporate piece
-settled together on the dark surface, low and toward the right, sculpted by side
-light, long soft shadows falling left. Fine paper dust drifts throughout. Shallow
-depth of field, editorial composition, stable temporal consistency.
+Fine individual paper fibers, shallow depth of field, suspended paper dust, soft
+grazing light from the right, deep carbon shadow and physically realistic matte
+materials.
 
-The left seventy-two percent of the frame remains in deep, calm and continuous
-shadow, preserving the same visible paper surface, unlit, uncluttered and free of
-bright diagonal bands, specular highlights or high-contrast details. The sharp
-focal light band is confined to the lower-right quadrant and never crosses the
-protected text-safe region. All brightest illumination, localized varnish
-highlights and orange ink accents remain confined to the far-right twenty-two
-percent of the frame. The complete region occupied by the real eyebrow, all H1
-lines, subtitle and CTAs must retain a dark, calm and visually continuous paper
-surface throughout.
+The left seventy-two percent of every frame remains in continuous calm deep
+shadow, preserving visible paper texture but containing no bright diagonal bands,
+highlights, reflections or illuminated objects.
 
-No text, no lettering, no logos, no brand marks, no machines, no equipment, no
-factory, no hands, no people, no morphing, no melting, no cuts, no flicker, no
-warped geometry.
+The brightest focal light remains confined to the lower-right quadrant. A small
+amorphous orange printing-ink pigment accent remains exclusively inside the
+far-right region, approximately x seventy-eight to ninety-four percent.
+
+During the final movement the camera settles only on a top-and-edge view of
+neatly stacked virgin trimmed sheets, natural folded paper edges, smooth unmarked
+paper blocks and raw fiber surfaces. Every visible surface remains completely
+blank, virgin, unmarked and texture-only. No additional objects enter the scene.
+
+Single take, coherent geometry, continuous lighting, gradual natural deceleration
+and a composed premium resting frame.
+
+No alphanumeric or symbol-like markings anywhere. No communicative graphics,
+recognizable glyphs, artificial line arrangements, emblems or interface-like
+shapes. No people, hands, machinery, screens or manufactured branding objects. No
+morphing, melting, warping, cuts, flicker, camera jump, plastic appearance, CGI
+look or stock-photo look.
 ```
 
 **Nota sobre a armadilha de negative space** (`prompt-laws.md`): a última cláusula descreve a
