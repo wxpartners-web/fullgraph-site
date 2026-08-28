@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -6,21 +7,24 @@ type Variant = "primary" | "outline" | "ghost" | "paper";
 type Size = "md" | "lg";
 
 const base =
-  "ink-register-hover group relative inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-[background-color,border-color,color,transform] duration-[var(--dur-micro)] ease-[var(--ease-out-expo)] active:translate-y-px select-none";
+  "ink-register-hover group relative inline-flex items-center justify-center gap-2 rounded-[3px] font-medium tracking-[0.015em] transition-[background-color,border-color,color,transform,box-shadow] duration-[var(--dur-micro)] ease-[var(--ease-out-expo)] hover:-translate-y-px active:translate-y-0 select-none";
 
+/* Hover por alteração tonal curta + sombra baixa — nunca glow nem
+   inversão dramática. O primário leva um fio interno de 1px quase
+   invisível que separa o laranja do vídeo sem virar moldura. */
 const variants: Record<Variant, string> = {
   primary:
-    "bg-ink text-carbon hover:bg-[color:var(--white-tech)]",
+    "bg-ink text-carbon shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16)] hover:bg-ink-2 hover:shadow-[inset_0_0_0_1px_rgb(255_255_255/0.24),0_2px_10px_rgb(0_0_0/0.28)]",
   outline:
-    "border border-steel-2 text-white-tech hover:border-white-tech hover:text-white-tech",
+    "border border-white-tech/25 bg-white/[0.02] text-white-tech hover:border-white-tech/60 hover:bg-white/[0.05] hover:shadow-[0_2px_10px_rgb(0_0_0/0.22)]",
   ghost: "text-steel hover:text-white-tech",
   paper:
-    "bg-carbon text-white-tech hover:bg-ink hover:text-carbon",
+    "bg-carbon text-white-tech shadow-[inset_0_0_0_1px_rgb(255_255_255/0.08)] hover:bg-ink hover:text-carbon",
 };
 
 const sizes: Record<Size, string> = {
-  md: "h-11 px-5 text-sm",
-  lg: "h-13 px-7 text-base",
+  md: "h-11 px-[18px] text-[13px]",
+  lg: "h-[46px] px-[22px] text-sm",
 };
 
 interface InkButtonProps {
@@ -28,6 +32,8 @@ interface InkButtonProps {
   size?: Size;
   href?: string;
   external?: boolean;
+  /** Seta fina à direita — só nos CTAs de avanço, nunca em "voltar" */
+  withArrow?: boolean;
   className?: string;
   children: ReactNode;
   "data-testid"?: string;
@@ -43,12 +49,24 @@ export function InkButton({
   size = "md",
   href,
   external,
+  withArrow,
   className,
   children,
   ...rest
 }: InkButtonProps & Omit<ComponentProps<"button">, keyof InkButtonProps>) {
   const cls = cn(base, variants[variant], sizes[size], className);
-  const inner = <span className="ink-register-target">{children}</span>;
+  const inner = (
+    <>
+      <span className="ink-register-target">{children}</span>
+      {withArrow && (
+        <ArrowRight
+          aria-hidden="true"
+          strokeWidth={1.75}
+          className="-mr-0.5 size-3.5 transition-transform duration-[var(--dur-micro)] ease-[var(--ease-out-expo)] group-hover:translate-x-px"
+        />
+      )}
+    </>
+  );
   const testId = rest["data-testid"];
   const isInternal = href?.startsWith("/") || href?.startsWith("#");
 

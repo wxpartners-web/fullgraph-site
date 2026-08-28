@@ -242,7 +242,7 @@ export function Header() {
             )}
             <Link
               href="/orcamento"
-              className="ink-register-hover hidden md:inline-flex h-10 items-center bg-ink px-5 text-sm font-medium text-carbon transition-colors duration-[var(--dur-micro)] hover:bg-white-tech"
+              className="ink-register-hover hidden md:inline-flex h-9 items-center rounded-[3px] bg-ink px-4 text-[13px] font-medium tracking-[0.015em] text-carbon shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16)] transition-[background-color,box-shadow] duration-[var(--dur-micro)] hover:bg-ink-2 hover:shadow-[inset_0_0_0_1px_rgb(255_255_255/0.24),0_2px_8px_rgb(0_0_0/0.25)]"
               data-testid="header-orcamento"
             >
               <span className="ink-register-target">Solicitar orçamento</span>

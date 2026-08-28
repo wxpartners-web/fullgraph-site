@@ -81,7 +81,7 @@ export function HeroCinema() {
           </p>
 
           <div className="hero-rise hero-rise-4 mt-10 flex flex-wrap items-center gap-4">
-            <InkButton href="/orcamento" size="lg" data-testid="hero-cta-orcamento">
+            <InkButton href="/orcamento" size="lg" withArrow data-testid="hero-cta-orcamento">
               Solicitar orçamento
             </InkButton>
             <InkButton href="#solucoes" variant="outline" size="lg">
@@ -123,7 +123,7 @@ export function HeroCinema() {
               </em>
             </p>
             <div className="mt-9">
-              <InkButton href="/orcamento" size="lg">
+              <InkButton href="/orcamento" size="lg" withArrow>
                 Solicitar orçamento
               </InkButton>
             </div>
