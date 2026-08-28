@@ -31,8 +31,9 @@
   --dur-page: 750ms;
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Escala tipográfica expressiva */
-  --text-display: clamp(2.75rem, 1.2rem + 7.4vw, 7.5rem);
+  /* Escala tipográfica expressiva (display reduzido no refino
+     editorial: impacto com respiro, não manchete de panfleto) */
+  --text-display: clamp(2.6rem, 1.2rem + 6.6vw, 6.75rem);
   --text-h1: clamp(2.25rem, 1.1rem + 5vw, 5.25rem);
   --text-h2: clamp(1.75rem, 1rem + 3vw, 3.5rem);
   --text-h3: clamp(1.35rem, 1rem + 1.4vw, 2rem);
@@ -40,14 +41,13 @@
 
   --header-h: 4.5rem;
 
-  /* Sombra de texto do hero cinematográfico: 3 camadas (borda justa,
-     brilho médio, decaimento largo) em versão DISCRETA — reforço de
-     separação, nunca halo. A legibilidade estrutural vem das poças de
-     scrim por banda, não da sombra. */
+  /* Sombra de texto do hero: difusão grande e baixa opacidade —
+     reforço de separação, nunca contorno ou halo. A legibilidade
+     estrutural vem das manchas de luz por banda, não da sombra. */
   --tshadow:
-    0 1px 2px rgb(11 11 12 / 0.7),
-    0 3px 10px rgb(11 11 12 / 0.45),
-    0 10px 36px rgb(11 11 12 / 0.28);
+    0 1px 3px rgb(11 11 12 / 0.45),
+    0 6px 24px rgb(11 11 12 / 0.35),
+    0 16px 56px rgb(11 11 12 / 0.25);
 }
 
 @theme inline {
@@ -68,10 +68,10 @@
   --color-foreground: var(--foreground);
 
   --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-bodoni), Didot, "Bodoni MT", Georgia, serif;
   /* Display editorial: mesma família serif dos itálicos de assinatura —
      uma voz só para tudo que é título */
-  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-bodoni), Didot, "Bodoni MT", Georgia, serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
@@ -112,27 +112,33 @@ body {
 }
 
 /* ---------- Utilitários tipográficos ----------
-   Display/H1/H2 em Newsreader (serif editorial): tracking negativo
-   sutil e line-height compacto sem colisão de ascendentes. H3 e tudo
+   Display/H1/H2 em Bodoni Moda (didone editorial): peso 500 FIXO —
+   nunca semibold/bold, que empastam o traço fino da didone — tracking
+   negativo sutil e line-height compacto sem colisão de ascendentes.
+   (Estas regras vivem fora de @layer e por isso vencem utilities de
+   peso do Tailwind: o peso editorial é decisão do sistema.) H3 e tudo
    abaixo seguem na sans (Plex) — hierarquia por contraste de voz. */
 .text-display {
   font-family: var(--font-display);
   font-size: var(--text-display);
-  line-height: 1;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   font-optical-sizing: auto;
 }
 .text-h1 {
   font-family: var(--font-display);
   font-size: var(--text-h1);
-  line-height: 1.02;
+  font-weight: 500;
+  line-height: 0.97;
   letter-spacing: -0.02em;
   font-optical-sizing: auto;
 }
 .text-h2 {
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  line-height: 1.08;
+  font-weight: 500;
+  line-height: 1.04;
   letter-spacing: -0.015em;
   font-optical-sizing: auto;
 }
@@ -149,6 +155,15 @@ body {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* Eyebrow do hero: sans 500, tracking controlado — voz de interface,
+   não de spec técnica (o mono fica para chips e réguas) */
+.text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 

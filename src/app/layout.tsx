@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+import { Bodoni_Moda, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Header } from "@/components/layout/Header";
@@ -9,20 +9,21 @@ import { BrandIntro } from "@/components/motion/BrandIntro";
 import { LenisProvider } from "@/components/motion/LenisProvider";
 import { localBusinessJsonLd } from "@/lib/seo";
 
-/* Direção tipográfica editorial (passe visual pós-Gate 5):
-   Newsreader (serif editorial, fonte variável com eixo óptico) para
-   display/H1/títulos; IBM Plex Sans para subtítulos, corpo, nav e
-   CTAs — a Plex é uma família desenhada para sistemas técnicos, irmã
-   do Plex Mono que já marca as specs gráficas do site. Self-hosted
-   via next/font: zero requisição externa no runtime. */
+/* Direção tipográfica editorial (refino pós-Gate 5):
+   Bodoni Moda (didone de alto contraste, fonte variável com eixo
+   óptico) para display/H1/títulos — traço fino e serifado que remete
+   a impressão de luxo, usada nos pesos 400/500, nunca bold; IBM Plex
+   Sans para subtítulos, corpo, nav e CTAs — família desenhada para
+   sistemas técnicos, irmã do Plex Mono que já marca as specs
+   gráficas. Self-hosted via next/font: zero requisição no runtime. */
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
   weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   style: ["normal", "italic"],
   subsets: ["latin"],
   axes: ["opsz"],
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${plexSans.variable} ${newsreader.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${bodoni.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <script

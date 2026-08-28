@@ -60,12 +60,12 @@ export function HeroCinema() {
           className="hero-band relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-32 md:px-8"
           style={{ opacity: "var(--hb0-o, 1)" }}
         >
-          <p className="text-spec hero-rise mb-6 flex items-center gap-3 text-steel">
+          <p className="text-eyebrow hero-rise mb-6 flex items-center gap-3 text-steel">
             <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
             Gráfica · Brasília → todo o Brasil
           </p>
 
-          <h1 className="text-display max-w-5xl font-semibold text-white-tech">
+          <h1 className="text-display max-w-5xl text-white-tech">
             <span className="hero-rise hero-rise-2 block">A sua ideia, impressa</span>
             <span className="hero-rise hero-rise-3 block">
               com{" "}
@@ -75,7 +75,7 @@ export function HeroCinema() {
             </span>
           </h1>
 
-          <p className="text-lead hero-rise hero-rise-3 mt-8 max-w-xl text-steel">
+          <p className="text-lead hero-rise hero-rise-3 mt-8 max-w-lg text-steel">
             Livros, embalagens e grandes tiragens para empresas, editoras e
             restaurantes.
           </p>
@@ -100,7 +100,7 @@ export function HeroCinema() {
           }}
         >
           <div className="mx-auto w-full max-w-7xl px-8">
-            <p className="text-h2 max-w-2xl font-semibold text-white-tech">
+            <p className="text-h2 max-w-2xl text-white-tech">
               Tinta, papel e acabamento tratados como{" "}
               <em className="font-serif font-normal italic text-ink">projeto.</em>
             </p>
@@ -116,7 +116,7 @@ export function HeroCinema() {
           }}
         >
           <div className="mx-auto w-full max-w-7xl px-8">
-            <p className="text-h2 max-w-2xl font-semibold text-white-tech">
+            <p className="text-h2 max-w-2xl text-white-tech">
               Do arquivo aprovado à{" "}
               <em className="font-serif font-normal italic text-ink">
                 entrega em todo o Brasil.
