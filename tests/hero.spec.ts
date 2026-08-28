@@ -164,6 +164,77 @@ test.describe("flag ON — hero cinematográfico", () => {
   });
 });
 
+test.describe("scrim do hero cinematográfico", () => {
+  /**
+   * O scrim é a única defesa de legibilidade do texto sobre o vídeo, e o
+   * Gate 3 mostrou que ele estava curto: o platô terminava em 36% enquanto
+   * o H1 real chega a 69,4% do quadro. O itálico laranja media 2,33:1.
+   * Estes testes travam a correção.
+   */
+  const stopsFromCss = async (page: Page) =>
+    page.evaluate(() => {
+      // a regra existe na folha de estilo mesmo com a flag desligada;
+      // um elemento sonda basta para ler o valor computado
+      const probe = document.createElement("div");
+      probe.className = "hero-scrim";
+      document.body.appendChild(probe);
+      const bg = getComputedStyle(probe).backgroundImage;
+      probe.remove();
+      const linear = bg.slice(bg.indexOf("linear-gradient"));
+      // "rgba(11, 11, 12, 0.82) 72%" → { alpha, pos }
+      return [...linear.matchAll(/rgba?\(([^)]*)\)\s+([\d.]+)%/g)].map((m) => {
+        const parts = m[1].split(",").map((v) => Number(v.trim()));
+        return { alpha: parts.length > 3 ? parts[3] : 1, pos: Number(m[2]) };
+      });
+    });
+
+  const alphaAt = (stops: { alpha: number; pos: number }[], x: number) => {
+    for (let i = 0; i < stops.length - 1; i++) {
+      const a = stops[i];
+      const b = stops[i + 1];
+      if (x >= a.pos && x <= b.pos) {
+        return a.alpha + ((b.alpha - a.alpha) * (x - a.pos)) / (b.pos - a.pos);
+      }
+    }
+    return stops[stops.length - 1].alpha;
+  };
+
+  test("o platô cobre toda a faixa de texto (H1 chega a 69,4%)", async ({ page }) => {
+    await page.goto("/");
+    const stops = await stopsFromCss(page);
+    expect(stops.length).toBeGreaterThanOrEqual(4);
+    // 69,4% é a borda direita real do H1; 72% é o fim do platô com margem
+    for (const x of [0, 25, 50, 69.4, 72]) {
+      expect(alphaAt(stops, x), `alpha em x=${x}%`).toBeGreaterThanOrEqual(0.8);
+    }
+  });
+
+  test("a faixa direita continua viva (luz, verniz e tinta)", async ({ page }) => {
+    await page.goto("/");
+    const stops = await stopsFromCss(page);
+    // a partir de ~84% o scrim quase some: é onde a imagem precisa respirar
+    expect(alphaAt(stops, 88)).toBeLessThanOrEqual(0.3);
+  });
+
+  test("a rampa de saída não desenha borda dura", async ({ page }) => {
+    await page.goto("/");
+    const stops = await stopsFromCss(page);
+    // nenhum salto de alpha maior que 0,35 entre amostras de 2% —
+    // uma queda de 0,82 para 0,10 num intervalo só cria linha vertical visível
+    let maiorSalto = 0;
+    for (let x = 70; x < 100; x += 2) {
+      maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(stops, x) - alphaAt(stops, x + 2)));
+    }
+    expect(maiorSalto).toBeLessThan(0.35);
+  });
+
+  test("flag OFF: o scrim não é renderizado (mudança escopada)", async ({ page }) => {
+    test.skip(scrubOn, "build atual está com a flag ligada");
+    await page.goto("/");
+    await expect(page.locator(".hero-scrim")).toHaveCount(0);
+  });
+});
+
 test.describe("tokens de contraste", () => {
   test("--ink-on-paper cumpre AA (≥4.5:1) sobre --paper", async ({ page }) => {
     await page.goto("/");

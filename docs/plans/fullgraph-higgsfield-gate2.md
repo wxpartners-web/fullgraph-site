@@ -89,12 +89,20 @@ de y ∈ [12,5 %, 87,5 %] — a faixa que sobrevive ao recorte ultrawide 21:9.
 
 O scrim base do site (`globals.css`, `.hero-scrim`) é um gradiente 90° sobre `#0b0b0c`:
 
+> **Atualizado no Gate 3.** O scrim antigo (platô até 36 %) foi o que deixou o itálico laranja
+> em 2,33:1. O novo platô cobre toda a faixa de texto real.
+
 | x do quadro | alpha do scrim |
 |---|---|
-| 0 % | 0,80 |
-| 36 % | 0,50 |
-| 68 % | 0,08 |
+| 0 % | 0,82 |
+| **72 %** | **0,82** ← fim da faixa de texto (H1 chega a 69,4 %) |
+| 76 % | 0,533 |
+| 80 % | 0,246 |
+| 84 % | 0,10 |
 | 100 % | 0,28 |
+
+Os stops de 76 %/80 %/84 % são a rampa de saída: sem eles a queda de 0,82 para 0,10 num único
+intervalo desenha uma borda vertical visível no meio do hero.
 
 Somado a um radial `0 → 0,50`. Com texto `#fafaf7` e piso de contraste **3,5:1**, o limite
 do pixel composto é luminância relativa ≤ 0,17 (≈ valor sRGB 115).
@@ -710,7 +718,13 @@ still mobile: **58,5** a 6 s/1080p — mais caro que o próprio vídeo. O recort
 - [ ] **Final em repouso:** o *ending-rest check* (§25) mostra a curva `YAVG` caindo de volta
       ao nível inicial; não fica alta até o fim
 - [ ] **Sem flicker:** varrer para frente e para trás quadro a quadro; textura não cintila
-- [ ] **Legibilidade:** auditoria worst-frame de cada banda ≥ **3,5:1** (método do §25)
+- [ ] **Legibilidade** — critérios revisados no Gate 3 (justificativa em §23.1):
+  - H1 grande, **incluindo o trecho em itálico laranja**: ≥ **3,5:1** no pior pixel **e**
+    ≥ **99 % da área dos glifos acima de 4,5:1**;
+  - subtítulo, botões e todo texto menor: ≥ **4,5:1** no pior pixel;
+  - legibilidade visual a olho nu no mockup composto, sem palavra que desapareça;
+  - textura, profundidade e aparência natural do papel preservadas (a faixa protegida não
+    pode virar painel chapado — medir o desvio-padrão, não só a média)
 - [ ] **Margens do frame final:** verificado com o header mockado, em janela larga e curta
 - [ ] **Recorte:** o interesse sobrevive ao corte retrato (26 % centrais) e ao 21:9
 - [ ] **Tamanho:** o re-encode fecha em ≤ 8 MB sem sacrificar `-g 8`
@@ -737,6 +751,31 @@ Qualquer item abaixo **reprova**, sem discussão:
 de conceito, não de prompt — parar de iterar o prompt e mudar o conceito. Com o orçamento
 desta etapa (uma tentativa), a reprovação leva o assunto de volta ao humano, não a um re-roll
 automático.
+
+### 23.1 Por que o piso do H1 laranja é 3,5:1 e não 4,5:1
+
+Não é uma concessão: **4,5:1 no pior pixel é matematicamente inalcançável** para o itálico
+laranja sobre qualquer vídeo com textura visível.
+
+`--ink` (`#ff4d00`) tem luminância relativa **0,2643**. Contra **preto puro** o contraste é
+
+```
+(0,2643 + 0,05) / (0 + 0,05) = 6,31:1   ← o teto absoluto
+```
+
+Para chegar a 4,5:1 o pixel de fundo composto precisa ficar em luminância ≤ **0,0198**, ou
+seja, valor sRGB ≤ **40** — praticamente preto. Qualquer fibra de papel visível ultrapassa
+isso em algum pixel, e apagar a textura para evitá-lo viola a própria direção criativa (§2) e
+a lei 5 da skill.
+
+Medido no Gate 3, sobre o frame 2, varrendo cinco configurações de scrim: o melhor alcançável
+foi **3,73:1** no pior pixel. Nenhuma configuração chega a 4,5:1. Por isso o critério passou a
+ser **duplo** — um piso no pior pixel (3,5:1, que é o próprio piso da skill 10K) **mais** um
+critério de área (≥ 99 % dos glifos acima de 4,5:1), que é o que descreve a experiência real
+de leitura. O texto branco continua exigido em 4,5:1 e passa com folga de 4×.
+
+A reprovação do frame 1 continua válida: lá o pior pixel era 2,33:1 **e** só 55,8 % da área
+passava de 4,5:1 — reprova nos dois critérios, com ou sem a revisão.
 
 ---
 
@@ -916,6 +955,43 @@ estabilização.
 | 8 | **`NEXT_PUBLIC_WHATSAPP_NUMBER` vazio** | CTAs de WhatsApp degradam para `tel:` | Pendência de negócio, sem relação com este gate |
 | 9 | ~~Números de crédito vêm da skill~~ — **resolvido**: preflight executado em 2026-08-28 | — | Vídeo bateu em 54; **frame divergiu: 8,5 e não ~2** (§22). Saldo 110, sem margem para re-roll de 6 s depois do cenário A |
 | 10 | **Cintilação por compressão em gradiente** na penumbra esquerda | Banding visível justamente sob o texto | Calibração de crf uma variável por vez, inspecionando os frames lisos e escuros (§25.2) |
+
+---
+
+## Gate 3 — frame 2 APROVADO como start frame definitivo
+
+**Job `b34bb8a6-e060-47e4-9cba-2d2b5a604b24` · 8,5 créditos · 2688×1520 · aprovado.**
+
+Gerado com o prompt corrigido (§19), depois de reescrever a zona protegida de 33 % para 72 %.
+O ganho foi imediato e generalizado no texto branco.
+
+| Zona | Frame 1 | Frame 2 (scrim antigo) | **Frame 2 + scrim novo** |
+|---|---|---|---|
+| Eyebrow | 16,96:1 | 17,19:1 | **18,27:1** |
+| H1 L1 "A sua ideia," | 7,40:1 | 13,82:1 | **17,72:1** |
+| H1 L2 "impressa" | 9,39:1 | 14,81:1 | **17,72:1** |
+| H1 L3 "com" | 15,40:1 | 17,04:1 | **18,05:1** |
+| **H1 L3 "*peso e presença.*" (laranja)** | 2,43:1 | 2,33:1 | **3,73:1** ✅ |
+| Subtítulo | 4,58:1 | 14,54:1 | **17,76:1** |
+| CTAs | 12,75:1 | 16,56:1 | **18,04:1** |
+| Banda 1 | 1,11:1 | 4,31:1 | **5,56:1** |
+| Banda 2 | 2,11:1 | 4,30:1 | **5,57:1** |
+
+Contra os critérios revisados do §23: itálico laranja **3,73:1 no pior pixel** (piso 3,5) com
+**99,50 % da área acima de 4,5:1** (piso 99 %); todo o resto ≥ 17:1, com 100 % de área. A frase
+assinatura fica legível de ponta a ponta no mockup composto.
+
+Textura preservada na faixa protegida: média 17,0 com **desvio-padrão 2,61** — escuro, mas com
+grão mensurável. Não é painel chapado.
+
+Ressalva registrada: o acento de tinta laranja ocupa x de **74,6 % a 99,9 %**, contra o alvo de
+78 %–94 %. Entra ~3 pontos cedo e a borda direita é parcialmente comida pelo `object-cover` em
+viewports 16:10. Não reprova — o acento continua visível e forte — mas o prompt do vídeo (§17)
+mantém o alvo de 78 %–94 % para o asset final.
+
+O frame 2 é o **`start_image` do Seedance 2.0** e a referência de continuidade espacial do
+beat 1. Vive no scratchpad; entra no repositório apenas quando o vídeo for aprovado e
+integrado (§27).
 
 ---
 

@@ -322,16 +322,34 @@ body {
 }
 
 /* ---------- Hero cinematográfico (NEXT_PUBLIC_HERO_SCRUB) ---------- */
-/* Scrim base sempre-on: faixa esquerda escurecida (lado do texto) +
-   radial suave — nenhum frame do vídeo fica cru atrás da tipografia */
+/* Scrim base sempre-on: nenhum frame do vídeo fica cru atrás da tipografia.
+   Só o HeroCinema usa esta classe, então tudo aqui vive atrás da flag.
+
+   O platô de 0.82 vai até 72% porque é aí que termina a faixa ocupada
+   pelo texto real: o H1 chega a 69,4% do quadro (medido na página, não
+   estimado). A versão anterior só protegia até 36% e reprovou o start
+   frame do Gate 3 — o itálico laranja da linha 3 media 2,33:1.
+
+   Por que 0.82 e não menos: `--ink` (#ff4d00) tem luminância 0,264, então
+   contra preto puro o teto de contraste é 6,31:1. Para o itálico laranja
+   passar em 3,5:1 o fundo composto precisa ficar praticamente preto. A
+   0.80 o pior pixel dava 3,46:1 (abaixo do piso); a 0.82 dá 3,73:1 com
+   99,5% da área acima de 4,5:1.
+
+   Os stops 76%/80%/84% são a rampa de saída: sem eles a queda de 0.82
+   para 0.10 num único intervalo cria uma borda vertical visível. A faixa
+   direita (a partir de ~84%) fica quase sem scrim de propósito — é onde
+   a luz, o verniz e a tinta laranja precisam viver. */
 .hero-scrim {
   pointer-events: none;
   background:
     linear-gradient(
       90deg,
-      rgb(11 11 12 / 0.8) 0%,
-      rgb(11 11 12 / 0.5) 36%,
-      rgb(11 11 12 / 0.08) 68%,
+      rgb(11 11 12 / 0.82) 0%,
+      rgb(11 11 12 / 0.82) 72%,
+      rgb(11 11 12 / 0.533) 76%,
+      rgb(11 11 12 / 0.246) 80%,
+      rgb(11 11 12 / 0.1) 84%,
       rgb(11 11 12 / 0.28) 100%
     ),
     radial-gradient(
