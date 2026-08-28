@@ -352,9 +352,12 @@ ffmpeg -i review/hero-ending.jpg -vf "crop=608:1080:733:0" -q:v 2 review/hero-st
 ```
 
 **Tradeoff honesto:** 608 px de largura exibidos num telefone 3× DPR ficam macios. Como o
-still vive atrás de scrim pesado e de texto, é aceitável. Se ler mal na revisão humana, a
-alternativa custa ~2 créditos: gerar um still 9:16 dedicado no mesmo mundo (GPT Image 2), ou
-usar `reframe` sobre o vídeo aprovado. **Nenhuma das duas está no orçamento desta etapa.**
+still vive atrás de scrim pesado e de texto, é aceitável. Se ler mal na revisão humana, as
+alternativas foram precificadas no preflight (§22) e **nenhuma está no orçamento desta etapa**:
+
+- still 9:16 dedicado com GPT Image 2 — **2,5** em `quality medium`, **8,5** em `high`;
+- workflow `reframe` sobre o vídeo aprovado — **58,5** a 6 s/1080p, ou seja, **mais caro que
+  gerar o vídeo inteiro**. Descartado.
 
 ---
 
@@ -426,12 +429,13 @@ custa um re-roll.
 
 ## 18. Negative prompt
 
-⚠️ **Verificar primeiro, de graça:** `higgsfield model get seedance_2_0 --json` diz se o modelo
-declara `negative_prompt`. A skill oficial avisa que *"most models don't expose a
-negative_prompt"*. **Se não expuser, não passe o parâmetro** — o CLI devolve erro de validação
-em parâmetro declarado desconhecido. As exclusões já estão embutidas positivamente no §17.
+🚫 **VERIFICADO NO PREFLIGHT (2026-08-28): `seedance_2_0` NÃO expõe `negative_prompt`.**
+O schema real declara apenas `prompt`, `aspect_ratio`, `duration`, `resolution`, `mode`,
+`bitrate_mode`, `genre`, `generate_audio` e os slots de mídia. **Não passe `negative_prompt`** —
+o CLI rejeita parâmetro declarado desconhecido (`Error: Unknown params: ...`) e o job nem é
+submetido. As exclusões já estão embutidas positivamente no §17, e é assim que devem ficar.
 
-Se o schema aceitar:
+O bloco abaixo permanece apenas como registro da intenção de exclusão (não é executável):
 
 ```text
 text, lettering, typography, watermark, subtitles, logo, brand mark, signage,
@@ -492,31 +496,63 @@ motion-heavy, image-to-video, 4–15s requests) → Seedance 2.0. SOTA."*
 Não confundir com `seedance_2_5`: a skill é explícita — **não é uma versão mais nova**, é outra
 ferramenta (reference/edit/extension) e **limita em 720p**. Trabalho em 1080p fica no 2.0.
 
-### Enums declarados (`references/model-catalog.md`)
+### Enums reais — lidos de `higgsfield model get seedance_2_0` (preflight de 2026-08-28)
 
-| Parâmetro | Valores aceitos | Escolha |
-|---|---|---|
-| `aspect_ratio` | `auto`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16` | **`16:9`** |
-| `duration` | 4–15 s | **`6`** |
-| `resolution` | `480p`, `720p`, `1080p`, `4k` | **`1080p`** |
-| `bitrate_mode` | `standard`, `high` (padrão `standard`) | **`standard`** |
-| Media roles | `image`, `start_image`, `end_image`, `video`, `audio` | **`start_image`** |
+⚠️ **O schema real diverge da documentação da skill em três pontos que importam.** Os padrões
+do modelo **não** são os que este projeto quer: `duration` nasce em 5, `resolution` em 720p e
+`generate_audio` em **`true`**. Todos os três precisam ser passados explicitamente.
+
+| Parâmetro | Valores aceitos | Padrão do modelo | Escolha |
+|---|---|---|---|
+| `prompt` | string (**obrigatório**) | — | §17 |
+| `aspect_ratio` | `auto`, `16:9`, `9:16`, `4:3`, `3:4`, `1:1`, `21:9` | `16:9` | **`16:9`** |
+| `duration` | inteiro (4–15; validado no custo: 5, 6, 8 aceitos) | **`5`** | **`6`** ← passar |
+| `resolution` | `480p`, `720p`, `1080p`, `4k` | **`720p`** | **`1080p`** ← passar |
+| `mode` | `std`, `fast` | `std` | **`std`** (obrigatório para 1080p/4k) |
+| `bitrate_mode` | `standard`, `high` | `standard` | **`standard`** (custo idêntico; ver §22) |
+| `genre` | `auto`, `action`, `horror`, `comedy`, `noir`, `drama`, `epic` | `auto` | **`auto`** |
+| `generate_audio` | boolean | **`true`** | **`false`** ← passar |
+| `negative_prompt` | **não existe** | — | não passar (§18) |
+| Slots de mídia | `start_image`, `end_image`, `image_references`, `video_references`, `audio_references` | — | **`start_image`** |
+
+Restrições declaradas pelo modelo: no máximo 9 referências de imagem (contando `start_image` e
+`end_image`), 3 de vídeo, 3 de áudio, 12 no total; `mode fast` só aceita 480p/720p.
+
+**Sobre `generate_audio`:** a skill afirma que `seedance_2_0` não suporta o flag. **Suporta, e
+vem ligado.** O custo não muda (54 com ou sem), mas um scrub é mudo por definição e o áudio
+seria descartado no `-an` do re-encode. Passar `false` explicitamente.
+
+### Enums reais — `gpt_image_2`
+
+| Parâmetro | Valores aceitos | Padrão | Escolha |
+|---|---|---|---|
+| `prompt` | string (**obrigatório**) | — | §19 |
+| `aspect_ratio` | `auto`, `1:1`, `4:3`, `3:4`, `16:9`, `21:9`, `9:16`, `3:2`, `2:3` | `1:1` | **`16:9`** ← passar |
+| `resolution` | `1k`, `2k`, `4k` | `2k` | **`2k`** |
+| `quality` | `low`, `medium`, `high` | `high` | **decisão de custo — ver §22** |
+| `is_inpaint` / `mask` / `image_references` | — | — | não usar |
 
 ### Comandos (a executar **somente depois** da aprovação humana)
 
 ```bash
-# 1) Start frame — GPT Image 2, ~2 créditos
+# 1) Start frame — GPT Image 2, 8.5 créditos em 2k/high (2.5 em 2k/medium)
 higgsfield generate create gpt_image_2 \
   --prompt "<prompt do §19>" \
-  --aspect_ratio 16:9 --resolution 2k --wait
+  --aspect_ratio 16:9 --resolution 2k --quality high --wait
 
-# 2) Vídeo — Seedance 2.0, ~54 créditos, UMA tentativa
+# 2) Vídeo — Seedance 2.0, 54 créditos verificados, UMA tentativa
 higgsfield generate create seedance_2_0 \
   --prompt "<prompt do §17>" \
   --start-image <caminho-ou-id-do-frame-aprovado> \
   --aspect_ratio 16:9 --duration 6 --resolution 1080p \
+  --mode std --bitrate_mode standard --generate_audio=false \
   --wait --wait-timeout 20m
 ```
+
+**Cuidado com o auto-upload:** o `generate cost` e o `generate create` fazem upload automático
+de caminhos locais passados em flags de mídia. Não passe `--start-image` num preflight de custo
+a menos que queira mesmo enviar o arquivo — o preço aqui é dirigido por duração e resolução
+(9 créditos por segundo em 1080p, verificado em 5 s/6 s/8 s), não pela presença do frame.
 
 Regras da skill oficial embutidas acima: `--wait` sempre (nunca o padrão de dois passos
 `create` → `wait`); flags de mídia aceitam caminho local **ou** UUID, com upload automático —
@@ -528,51 +564,103 @@ Equivalente via conector MCP: `mcp__higgsfield__generate_image` e
 
 ---
 
-## 21. Checklist de preflight gratuito
+## 21. Checklist de preflight gratuito — ✅ EXECUTADO EM 2026-08-28
 
-Nenhum destes passos gasta crédito. Todos devem passar **antes** de qualquer geração.
+Nenhum destes passos gastou crédito. Saldo **110 antes e 110 depois**; `higgsfield generate list`
+retornou **zero jobs**.
 
-- [ ] `higgsfield account status` — sessão válida (se falhar: `higgsfield auth login`, interativo)
-- [ ] `higgsfield workspace list` / `select_workspace` — workspace correto selecionado
-- [ ] `higgsfield model list --json` — confirmar o id real de `seedance_2_0` e `gpt_image_2`
-      (a skill avisa: não confiar em busca semântica nem em `--help`; listar sem filtro)
-- [ ] `higgsfield model get seedance_2_0 --json` — confirmar enums de `duration`, `resolution`,
-      `aspect_ratio`, `bitrate_mode` e **se `negative_prompt` existe** (§18)
-- [ ] `higgsfield model get gpt_image_2 --json` — confirmar `aspect_ratio` / `resolution`
-- [ ] Custo do frame: preflight de custo do comando exato do §20.1
-- [ ] Custo do vídeo: preflight de custo do comando exato do §20.2
-- [ ] Custo do **mesmo** shot em `kling3_0` e `seedance_1_5_pro`, para dar ao humano o número
-      real da alternativa barata antes de decidir (`prompt-laws.md`: a escolha do modelo é do
-      usuário, feita com números na mão)
-- [ ] Saldo de créditos (`balance` / `show_plans_and_credits`) — confirmar que cobre o total
-      **e** que sobra margem, ou registrar explicitamente que não sobra
-- [ ] Confirmar que o prompt não dispara `nsfw` / `ip_detected` (sem figuras públicas, sem
-      marcas registradas)
-- [ ] ffmpeg completo disponível (`ffmpeg -encoders | grep libx264`). **Hoje não está** — ver §29
+- [x] `higgsfield --version` → CLI **1.1.23** presente (não foi instalado nada)
+- [x] `higgsfield account status` → **`wxpartners@gmail.com` — plano `plus`, 110 créditos**.
+      Sessão válida; não foi preciso `auth login`
+- [x] `higgsfield workspace set 8581e6d5-…` → workspace privado único, papel `owner`.
+      Estava sem seleção, o que bloqueava todo o CLI; selecionado (operação gratuita)
+- [x] `higgsfield model list --json` → **85 modelos**. Ids reais confirmados:
+      `gpt_image_2`, `seedance_2_0`, e também `seedance_2_0_mini`, `seedance_2_5`,
+      **`seedance1_5`** (o id correto — não `seedance_1_5_pro`, como este documento dizia antes)
+- [x] `higgsfield model get seedance_2_0` → enums no §20. **`negative_prompt` NÃO existe**;
+      `duration` nasce em 5, `resolution` em 720p, `generate_audio` em `true`
+- [x] `higgsfield model get gpt_image_2` → enums no §20; existe um `quality` (low/medium/high)
+      que a skill não menciona e que **dobra ou triplica o custo**
+- [x] Custo do frame e do vídeo, e sensibilidade a duração/resolução/bitrate → §22
+- [x] Custo do mesmo shot nas alternativas baratas → §22
+- [x] Sintaxe confirmada por `--help`: `higgsfield generate cost <job_type> [--param value]…`
+      para modelos e `higgsfield generate cost workflow <nome> …` para workflows.
+      `higgsfield workflow list` → 19 workflows; `reframe` existe e custa **58,5** a 6 s/1080p
+- [x] Prompts não dispararam `nsfw` nem `ip_detected` no preflight (sem figuras públicas,
+      sem marcas registradas)
+- [ ] ffmpeg completo (`ffmpeg -encoders | grep libx264`). **Continua ausente** — ver §29.
+      Não foi instalado (proibido nesta etapa)
 
 ---
 
-## 22. Estimativa de créditos (nada foi executado, nada foi consumido)
+## 22. Custos — ✅ MEDIDOS NO PREFLIGHT (nada gerado, nada consumido)
 
-| Item | Modelo | Parâmetros | Estimativa |
-|---|---|---|---|
-| Start frame | GPT Image 2 | 16:9, 2k | **~2 créditos** |
-| Vídeo do hero | Seedance 2.0 | i2v, 16:9, 6 s, 1080p, standard, sem áudio | **~54 créditos** |
-| **Total do caminho recomendado** | | | **~56 créditos** |
+**Saldo disponível: 110 créditos** (plano `plus`). Todos os números abaixo saíram de
+`higgsfield generate cost`, que estima sem criar job.
 
-**Sinalização honesta:** o teto informado para esta etapa é de **54 créditos, uma tentativa
-planejada** — e isso cobre exatamente o vídeo. O start frame de ~2 créditos fica **por cima**
-desse teto. A recomendação é gastá-lo mesmo assim: 2 créditos compram a inspeção que protege
-os 54 (a skill chama de "cheap insurance"), e é o que permite recusar o shot **antes** da
-geração cara. A decisão é do humano; a alternativa é text-to-video sem start frame, a
-~54 créditos e com muito mais risco de re-roll.
+### Vídeo — Seedance 2.0
 
-**Fora do orçamento e não planejados:** re-roll do vídeo (~54), still 9:16 dedicado (~2),
-imagens de apoio das seções inferiores (2–4 × ~2), OG image (~2).
+| Configuração | Custo |
+|---|---|
+| 16:9, **6 s, 1080p**, `mode std`, sem áudio | **54** ✅ (a estimativa da skill bateu exatamente) |
+| idem, **com** áudio | 54 — áudio **não** altera o preço |
+| idem, `bitrate_mode high` | 54 — **`high` sai de graça** |
+| 5 s, 1080p | 45 |
+| 8 s, 1080p | 72 |
+| 6 s, 720p | 27 |
 
-Todos os números acima vêm da skill 10K (*"a hero image costs about 2 credits and a hero video
-about 54"*) e **precisam ser confirmados pelo preflight gratuito do §21** antes de qualquer
-gasto. Se o preflight divergir, o preflight manda.
+→ **1080p custa 9 créditos por segundo; 720p, 4,5.** O preço é linear na duração e não depende
+do prompt nem do start frame.
+
+### Frame inicial — GPT Image 2 · a estimativa da skill estava errada
+
+| Configuração | Custo |
+|---|---|
+| 16:9, **2k, `quality high`** (padrão) | **8,5** |
+| 16:9, 1k, `quality high` | 4,5 |
+| 16:9, **2k, `quality medium`** | **2,5** |
+
+A skill diz *"about 2 credits"*. Só o `quality medium` chega perto. **O padrão do modelo é
+`high`, a 8,5 — mais de 4× a estimativa.** Quem não passar `--quality` paga 8,5 sem saber.
+
+### Alternativas de vídeo (mesmo shot, para a decisão ser feita com números na mão)
+
+| Modelo | Configuração | Custo |
+|---|---|---|
+| **Seedance 2.0** | 6 s, 1080p | **54** |
+| Seedance 2.0 Mini | 6 s, 720p (teto do modelo) | 15 |
+| Kling 3.0 | 6 s (não tem param `resolution`) | 12 |
+| Seedance 1.5 (`seedance1_5`) | 8 s, 1080p (enum: 4/8/12) | 24 |
+| Seedance 1.5 | 4 s, 1080p | 12 |
+
+Spread real entre o topo e a alternativa média: **4,5:1** (54 contra 12). A skill falava em
+~5:1 — coerente.
+
+### Cenários de orçamento sobre os 110 créditos
+
+| Cenário | Frame | Vídeo | Total | Sobra | Cobre um re-roll? |
+|---|---|---|---|---|---|
+| **A — recomendado** | 2k high (8,5) | 6 s 1080p (54) | **62,5** | 47,5 | Só um re-roll de **5 s** (45) |
+| B — frame econômico | 2k medium (2,5) | 6 s 1080p (54) | 56,5 | 53,5 | Não (falta 0,5 para os 54) |
+| C — re-roll folgado | 2k high (8,5) | **5 s** 1080p (45) | 53,5 | 56,5 | Sim, outro 5 s (45), com folga |
+| D — barato | 2k medium (2,5) | Seedance 1.5, 8 s (24) | 26,5 | 83,5 | Sim, várias vezes |
+
+**Recomendação: cenário A.** Os 8,5 do frame em qualidade máxima são o seguro mais barato que
+existe para os 54 — é o passo que permite recusar o shot **antes** da geração cara. E os 47,5
+restantes ainda pagam um re-roll de 5 s, se necessário.
+
+**Sinalização honesta:** o teto autorizado foi de **54 créditos numa tentativa planejada**, e
+isso cobre exatamente o vídeo. O cenário A gasta **62,5** — **8,5 acima do teto**. Precisa de
+autorização explícita. O cenário C fica em 53,5, **dentro do teto**, ao custo de encurtar o
+shot para 5 s (o que a página absorve sem mudança alguma: o mapeamento é scroll→progresso, não
+scroll→segundos; só a tabela do §7 seria reescalada por 5/6).
+
+### Fora do orçamento
+
+Re-roll de 6 s (54) · still 9:16 dedicado (2,5–8,5) · imagens de apoio das seções inferiores
+(2,5–8,5 cada) · OG image (2,5–8,5). O workflow `reframe` **não** é uma opção barata para o
+still mobile: **58,5** a 6 s/1080p — mais caro que o próprio vídeo. O recorte por ffmpeg do
+§15 continua sendo o caminho certo, e é gratuito.
 
 ---
 
@@ -799,7 +887,7 @@ estabilização.
 | 6 | **Still mobile recortado fica macio** (608 px de largura em tela 3× DPR) | Cosmético | Aceitável atrás de scrim; alternativa de ~2 créditos documentada no §15 |
 | 7 | **Hero cresceu de 300svh para 400svh** | ~1 viewport a mais de scroll antes de `#solucoes`, só em lg+ | Foi o que devolveu às bandas o plateau exigido (§22). CTA primário permanece visível no topo, no header e na barra mobile |
 | 8 | **`NEXT_PUBLIC_WHATSAPP_NUMBER` vazio** | CTAs de WhatsApp degradam para `tel:` | Pendência de negócio, sem relação com este gate |
-| 9 | **Números de crédito vêm da skill, não da conta** | Custo real pode divergir | O preflight do §21 é gratuito e manda sobre qualquer estimativa deste documento |
+| 9 | ~~Números de crédito vêm da skill~~ — **resolvido**: preflight executado em 2026-08-28 | — | Vídeo bateu em 54; **frame divergiu: 8,5 e não ~2** (§22). Saldo 110, sem margem para re-roll de 6 s depois do cenário A |
 | 10 | **Cintilação por compressão em gradiente** na penumbra esquerda | Banding visível justamente sob o texto | Calibração de crf uma variável por vez, inspecionando os frames lisos e escuros (§25.2) |
 
 ---
