@@ -26,28 +26,25 @@ export function HeroScrubController() {
   const isSmall = useIsSmallScreen();
   const reduced = usePrefersReducedMotion();
   const saveData = useSaveData();
-  const [ready, setReady] = useState(false);
-  const [multiTouch, setMultiTouch] = useState(false);
-
-  useEffect(() => {
-    setMultiTouch(navigator.maxTouchPoints > 1);
-  }, []);
+  // armed = pós-idle E sem multi-touch (checado no mesmo callback:
+  // maxTouchPoints é estável na sessão)
+  const [armed, setArmed] = useState(false);
 
   // Adia a montagem do vídeo para depois da primeira pintura
   // (mesmo padrão do HeroVisual clássico)
   useEffect(() => {
+    const arm = () => setArmed(navigator.maxTouchPoints <= 1);
     const hasIdle = typeof window.requestIdleCallback === "function";
     const id = hasIdle
-      ? window.requestIdleCallback(() => setReady(true), { timeout: 1200 })
-      : window.setTimeout(() => setReady(true), 350);
+      ? window.requestIdleCallback(arm, { timeout: 1200 })
+      : window.setTimeout(arm, 350);
     return () => {
       if (hasIdle) window.cancelIdleCallback(id as number);
       else window.clearTimeout(id as number);
     };
   }, []);
 
-  const eligible =
-    ready && !isTouch && !isSmall && !reduced && !saveData && !multiTouch;
+  const eligible = armed && !isTouch && !isSmall && !reduced && !saveData;
 
   if (!eligible) return null;
   return <HeroScrubVideo />;
