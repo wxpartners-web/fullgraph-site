@@ -105,7 +105,7 @@ export function QuoteMockup({
               <div className="absolute inset-0 rounded-r-sm" style={{ background: sheen }} />
             </div>
           </div>
-          <p className="text-spec mt-3 text-center text-carbon/50">{thickness * 4} páginas aprox.</p>
+          <p className="text-spec mt-3 text-center text-carbon/60">{thickness * 4} páginas aprox.</p>
         </div>
       )}
 
@@ -131,7 +131,7 @@ export function QuoteMockup({
               <div className="absolute inset-0 rounded-sm" style={{ background: sheen }} />
             </div>
           </div>
-          <p className="text-spec mt-3 text-center text-carbon/50">
+          <p className="text-spec mt-3 text-center text-carbon/60">
             {formato === "wrap" ? "envoltório" : "caixa com encaixe"}
           </p>
         </div>
@@ -157,7 +157,7 @@ export function QuoteMockup({
               </div>
             ))}
           </div>
-          <p className="text-spec mt-3 text-center text-carbon/50">{folds} dobras</p>
+          <p className="text-spec mt-3 text-center text-carbon/60">{folds} dobras</p>
         </div>
       )}
 
@@ -169,7 +169,7 @@ export function QuoteMockup({
             <div className="absolute inset-[40%] rounded-full bg-carbon-2" />
             <div className="absolute inset-0 rounded-full" style={{ background: sheen }} />
           </div>
-          <p className="text-spec mt-3 text-center text-carbon/50">rolo de rótulos</p>
+          <p className="text-spec mt-3 text-center text-carbon/60">rolo de rótulos</p>
         </div>
       )}
 
@@ -183,7 +183,7 @@ export function QuoteMockup({
               <div className="mx-3 mt-2 h-2 w-3/4 bg-carbon/25" />
             </div>
           </div>
-          <p className="text-spec mt-3 text-center text-carbon/50">banner com bastão</p>
+          <p className="text-spec mt-3 text-center text-carbon/60">banner com bastão</p>
         </div>
       )}
 
@@ -216,7 +216,7 @@ export function QuoteMockup({
               );
             })}
           </div>
-          <p className="text-spec mt-1 text-center text-carbon/50">
+          <p className="text-spec mt-1 text-center text-carbon/60">
             {produto ? "pilha da tiragem" : "seu material aparece aqui"}
           </p>
         </div>

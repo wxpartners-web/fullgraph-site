@@ -51,7 +51,7 @@ export default function SobrePage() {
           <RevealGroup className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
             {trueHighlights.map((h, i) => (
               <RevealItem key={h.title} className="border-t-2 border-carbon/15 pt-5">
-                <p className="text-spec text-carbon/50">{String(i + 1).padStart(2, "0")}</p>
+                <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
                 <h2 className="mt-2 font-semibold">{h.title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-carbon/70">{h.text}</p>
               </RevealItem>

@@ -18,6 +18,7 @@
   --steel-2: #878c93; /* ≥4.5:1 sobre carbon/carbon-2 */
   --ink-orange: #ff4d00;
   --ink-orange-2: #e64500;
+  --ink-on-paper: #b83700; /* 4.92:1 sobre --paper — único laranja aprovado para texto pequeno em seções claras */
   --reg-cyan: #00c2ff;
   --reg-magenta: #ff2d78;
 
@@ -51,6 +52,7 @@
   --color-steel-2: var(--steel-2);
   --color-ink: var(--ink-orange);
   --color-ink-2: var(--ink-orange-2);
+  --color-ink-paper: var(--ink-on-paper);
   --color-reg-cyan: var(--reg-cyan);
   --color-reg-magenta: var(--reg-magenta);
   --color-background: var(--background);

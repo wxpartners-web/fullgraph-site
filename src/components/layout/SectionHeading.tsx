@@ -46,7 +46,9 @@ export function SectionHeading({
           {parts[0]}
           {serifWord && (
             <>
-              <em className="font-serif font-normal italic text-ink">{serifWord}</em>
+              <em className={cn("font-serif font-normal italic", onPaper ? "text-ink-2" : "text-ink")}>
+                {serifWord}
+              </em>
               {parts[1]}
             </>
           )}

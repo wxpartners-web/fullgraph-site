@@ -156,7 +156,7 @@ function TextField({
     <div>
       <label htmlFor={id} className="block text-sm font-medium">
         {label}
-        {optional && <span className="ml-1.5 text-xs font-normal text-carbon/50">(opcional)</span>}
+        {optional && <span className="ml-1.5 text-xs font-normal text-carbon/60">(opcional)</span>}
       </label>
       <input
         id={id}
@@ -263,7 +263,7 @@ export function QuoteWizard() {
                 ? "Resumo do pedido"
                 : `Etapa ${stepIndex + 1} de ${steps.length}`}
             </p>
-            <p className="text-spec text-carbon/40">sem compromisso</p>
+            <p className="text-spec text-carbon/60">sem compromisso</p>
           </div>
           <div
             className="mt-3 h-1 w-full bg-carbon/10"
@@ -386,7 +386,7 @@ export function QuoteWizard() {
                         />
                         <div className="sm:col-span-2">
                           <label htmlFor="field-observacoes" className="block text-sm font-medium">
-                            Observações <span className="ml-1.5 text-xs font-normal text-carbon/50">(opcional)</span>
+                            Observações <span className="ml-1.5 text-xs font-normal text-carbon/60">(opcional)</span>
                           </label>
                           <textarea
                             id="field-observacoes"
@@ -415,7 +415,7 @@ export function QuoteWizard() {
                           <span className="mt-3 block text-sm font-medium">
                             Selecionar arquivos do projeto
                           </span>
-                          <span className="mt-1 block text-xs text-carbon/55">
+                          <span className="mt-1 block text-xs text-carbon/65">
                             PDF, AI, EPS, imagens ou ZIP
                           </span>
                         </label>
@@ -429,7 +429,7 @@ export function QuoteWizard() {
                             ))}
                           </ul>
                         )}
-                        <p className="mt-4 text-xs leading-relaxed text-carbon/55">
+                        <p className="mt-4 text-xs leading-relaxed text-carbon/65">
                           Os nomes dos arquivos entram no resumo do pedido; o envio
                           em si acontece na conversa de WhatsApp ou por e-mail —
                           o upload direto pelo site chega com a próxima versão.
@@ -450,13 +450,13 @@ export function QuoteWizard() {
                   <dl className="mt-7 divide-y divide-carbon/10 border-y border-carbon/15" data-testid="quote-summary">
                     {summaryLines.map((line) => (
                       <div key={line.label} className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-spec flex-none text-carbon/55">{line.label}</dt>
+                        <dt className="text-spec flex-none text-carbon/65">{line.label}</dt>
                         <dd className="flex min-w-0 items-center gap-3 text-right text-sm font-medium">
                           <span className="truncate">{line.value}</span>
                           <button
                             type="button"
                             onClick={() => jumpTo(labelToStep(line.label))}
-                            className="text-carbon/45 transition-colors hover:text-ink"
+                            className="text-carbon/65 transition-colors hover:text-ink-paper"
                             aria-label={`Editar ${line.label}`}
                           >
                             <Pencil aria-hidden="true" className="size-3.5" />
@@ -465,7 +465,7 @@ export function QuoteWizard() {
                       </div>
                     ))}
                     <div className="flex items-center justify-between gap-4 py-3">
-                      <dt className="text-spec flex-none text-carbon/55">Contato</dt>
+                      <dt className="text-spec flex-none text-carbon/65">Contato</dt>
                       <dd className="text-right text-sm font-medium">
                         {values.nome} · {values.telefone}
                       </dd>
@@ -503,7 +503,7 @@ export function QuoteWizard() {
                       <Mail aria-hidden="true" className="size-4" />
                       Prefiro e-mail ({site.email})
                     </a>
-                    <p className="text-center text-xs text-carbon/55">
+                    <p className="text-center text-xs text-carbon/65">
                       A mensagem já vai com o resumo acima. Sem spam, sem compromisso.
                     </p>
                   </div>
@@ -556,8 +556,8 @@ export function QuoteWizard() {
       {/* Coluna do mockup reativo */}
       <aside className="order-first lg:order-none" aria-label="Prévia do seu material">
         <div className="lg:sticky lg:top-28">
-          <div className="crop-marks relative border border-carbon/15 bg-paper-2/60 p-6 text-carbon/50">
-            <p className="text-spec text-carbon/55">Prévia · ilustrativa</p>
+          <div className="crop-marks relative border border-carbon/15 bg-paper-2/60 p-6 text-carbon/60">
+            <p className="text-spec text-carbon/65">Prévia · ilustrativa</p>
             <QuoteMockup
               produto={values.produto}
               formato={values.formato}

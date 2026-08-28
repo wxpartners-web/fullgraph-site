@@ -27,7 +27,7 @@ export function NationalReach() {
         <RevealGroup className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
           {trueHighlights.map((highlight, i) => (
             <RevealItem key={highlight.title} className="border-t-2 border-carbon/15 pt-5">
-              <p className="text-spec text-carbon/50">{String(i + 1).padStart(2, "0")}</p>
+              <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
               <h3 className="mt-2 font-semibold">{highlight.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-carbon/70">{highlight.text}</p>
             </RevealItem>

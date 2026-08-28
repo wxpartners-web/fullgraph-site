@@ -187,12 +187,12 @@ export function NarrativeScroll() {
         <div className="mx-auto max-w-4xl px-5 md:px-8">
           <p className="text-spec mb-4 text-carbon/60">02 — Como produzimos</p>
           <h2 className="text-h2 font-semibold">
-            Da ideia à <em className="font-serif italic text-ink">matéria</em>
+            Da ideia à <em className="font-serif italic text-ink-2">matéria</em>
           </h2>
           <ol className="mt-12 space-y-10">
             {steps.map((s, i) => (
               <li key={s.id} className="border-l-2 border-carbon/15 pl-6">
-                <p className="text-spec text-carbon/50">{String(i + 1).padStart(2, "0")}</p>
+                <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="text-h3 mt-1 font-semibold">{s.title}</h3>
                 <p className="mt-2 max-w-xl text-carbon/75">{s.text}</p>
               </li>
@@ -222,7 +222,7 @@ export function NarrativeScroll() {
               02 — Como produzimos
             </p>
             <h2 className="text-h2 font-semibold">
-              Da ideia à <em className="font-serif italic text-ink">matéria</em>
+              Da ideia à <em className="font-serif italic text-ink-2">matéria</em>
             </h2>
 
             <div className="mt-10 min-h-44" aria-live="polite">
@@ -234,12 +234,12 @@ export function NarrativeScroll() {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3, ease: easeOutExpo }}
                 >
-                  <p className="text-spec text-carbon/50">
+                  <p className="text-spec text-carbon/60">
                     {String(step + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
                   </p>
                   <h3 className="text-h3 mt-2 font-semibold">{current.title}</h3>
                   <p className="mt-3 max-w-md leading-relaxed text-carbon/75">{current.text}</p>
-                  <p className="text-spec mt-4 text-ink">{current.spec}</p>
+                  <p className="text-spec mt-4 text-ink-paper">{current.spec}</p>
                 </motion.div>
               </AnimatePresence>
             </div>

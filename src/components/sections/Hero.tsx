@@ -33,7 +33,7 @@ export function Hero() {
 
         <div className="hero-rise hero-rise-4 mt-10 flex flex-wrap items-center gap-4">
           <InkButton href="/orcamento" size="lg" data-testid="hero-cta-orcamento">
-            Transforme seu projeto em matéria
+            Solicitar orçamento
           </InkButton>
           <InkButton href="#solucoes" variant="outline" size="lg">
             Explorar soluções

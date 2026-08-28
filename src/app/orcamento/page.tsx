@@ -22,7 +22,7 @@ export default function OrcamentoPage() {
           </Reveal>
           <Reveal kind="clip">
             <h1 className="text-h1 max-w-3xl font-semibold text-balance">
-              Monte seu pedido, <em className="font-serif font-normal italic text-ink">sem mistério</em>
+              Monte seu pedido, <em className="font-serif font-normal italic text-ink-2">sem mistério</em>
             </h1>
           </Reveal>
           <Reveal delay={0.1}>

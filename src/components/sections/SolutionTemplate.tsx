@@ -72,7 +72,7 @@ export function SolutionTemplate({ config }: { config: SolutionConfig }) {
           <RevealGroup className="grid grid-cols-1 gap-10 md:grid-cols-3" stagger={0.08}>
             {config.arguments.map((arg, i) => (
               <RevealItem key={arg.title} className="border-t-2 border-carbon/15 pt-5">
-                <p className="text-spec text-carbon/50">{String(i + 1).padStart(2, "0")}</p>
+                <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
                 <h2 className="text-h3 mt-2 font-semibold">{arg.title}</h2>
                 <p className="mt-3 leading-relaxed text-carbon/75">{arg.text}</p>
               </RevealItem>

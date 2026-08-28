@@ -49,7 +49,7 @@ test.describe("navegação mobile", () => {
     await page.goto("/");
     const bar = page.getByTestId("mobile-cta-bar");
     await expect(bar).toBeVisible();
-    await bar.getByRole("link", { name: /Orçamento/ }).click();
+    await bar.getByRole("link", { name: /orçamento/i }).click();
     await expect(page).toHaveURL(/\/orcamento$/);
     // na página de orçamento a barra some (wizard tem os próprios CTAs)
     await expect(page.getByTestId("mobile-cta-bar")).toHaveCount(0);

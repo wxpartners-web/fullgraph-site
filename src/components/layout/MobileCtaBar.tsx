@@ -16,7 +16,7 @@ export function MobileCtaBar() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[60] grid grid-cols-2 border-t border-white-tech/10 bg-carbon/92 backdrop-blur-md md:hidden"
+      className="fixed inset-x-0 bottom-0 z-[60] grid grid-cols-2 border-t border-white-tech/10 bg-carbon/92 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
       data-testid="mobile-cta-bar"
     >
       <a
@@ -34,7 +34,7 @@ export function MobileCtaBar() {
         className="flex h-14 items-center justify-center gap-2 bg-ink text-sm font-medium text-carbon active:bg-ink-2"
       >
         <FileText aria-hidden="true" className="size-4" />
-        Orçamento
+        Solicitar orçamento
       </Link>
     </div>
   );

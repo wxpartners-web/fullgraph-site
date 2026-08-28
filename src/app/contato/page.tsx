@@ -38,7 +38,7 @@ export default function ContatoPage() {
           <Reveal delay={0.16}>
             <div className="mt-9 flex flex-wrap gap-4">
               <InkButton href="/orcamento" size="lg">
-                Montar orçamento guiado
+                Solicitar orçamento
               </InkButton>
               <InkButton
                 href={hasWhatsApp() ? whatsappUrl() : `tel:${site.phone.e164}`}
@@ -61,7 +61,7 @@ export default function ContatoPage() {
               <p className="text-spec flex items-center gap-2 text-carbon/60">
                 <Phone aria-hidden="true" className="size-4" /> Telefone
               </p>
-              <a href={`tel:${site.phone.e164}`} className="mt-3 block text-xl font-semibold hover:text-ink">
+              <a href={`tel:${site.phone.e164}`} className="mt-3 block text-xl font-semibold hover:text-ink-paper">
                 {site.phone.display}
               </a>
             </div>
@@ -69,7 +69,7 @@ export default function ContatoPage() {
               <p className="text-spec flex items-center gap-2 text-carbon/60">
                 <Mail aria-hidden="true" className="size-4" /> E-mail
               </p>
-              <a href={`mailto:${site.email}`} className="mt-3 block break-all text-lg font-semibold hover:text-ink">
+              <a href={`mailto:${site.email}`} className="mt-3 block break-all text-lg font-semibold hover:text-ink-paper">
                 {site.email}
               </a>
             </div>

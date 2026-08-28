@@ -181,7 +181,7 @@ export function Header() {
               className="ink-register-hover hidden md:inline-flex h-10 items-center bg-ink px-5 text-sm font-medium text-carbon transition-colors duration-[var(--dur-micro)] hover:bg-white-tech"
               data-testid="header-orcamento"
             >
-              <span className="ink-register-target">Orçamento</span>
+              <span className="ink-register-target">Solicitar orçamento</span>
             </Link>
             <button
               className={cn(
