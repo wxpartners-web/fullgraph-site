@@ -101,15 +101,29 @@ do pixel composto é luminância relativa ≤ 0,17 (≈ valor sRGB 115).
 
 **Regra operacional para o gerador:**
 
-- Sob a faixa de texto (x de 0 % a 47 %): o vídeo pode chegar a **valor sRGB ≤ 190** (75 %) e
-  ainda passar, porque o scrim ali vale 0,80→0,43. Alvo confortável: **manter x < 40 % em
-  penumbra, valor médio 25–90**.
-- Faixa neutra (x 47 %–68 %): o scrim cai rápido. Alvo **valor médio 60–150**.
-- Faixa clara (x 68 %–100 %): quase sem scrim. É onde a luz, o brilho do verniz e a tinta
-  podem viver. Alvo **valor médio 90–200**, com especulares pontuais mais altos.
+> ⚠️ **CORRIGIDO APÓS A REPROVAÇÃO DO FRAME 1 (Gate 3).** A versão anterior desta regra
+> protegia apenas `x ≤ 47 %`, enquanto o §3 deste mesmo documento já media o H1 chegando a
+> **69,4 %**. Essa contradição interna — e não uma limitação do modelo — foi a causa raiz da
+> reprovação. A zona protegida agora é **72 %**, com margem sobre os 69,4 % reais.
+
+- **Zona protegida (x de 0 % a 72 %) — todo o conteúdo real do hero.** O scrim ali vai de
+  0,80 a apenas ~0,06, então quase toda a proteção precisa vir do próprio vídeo.
+  Dois limites, porque o hero tem texto branco **e** texto laranja:
+  - sob texto branco `#fafaf7` (eyebrow, H1 "A sua ideia, impressa com", subtítulo, CTAs),
+    para **4,5:1** o pixel composto precisa ficar em luminância ≤ 0,172 → **valor sRGB ≤ 115**;
+  - sob texto laranja `#ff4d00` (o `<em>` de cada banda: "peso e presença.", "projeto.",
+    "entrega em todo o Brasil."), para **4,5:1** o composto precisa ficar em luminância
+    ≤ 0,020 → **valor sRGB ≤ 40**. É **três vezes mais exigente**, e é o número que manda.
+  - Alvo prático para o vídeo nesta faixa: **valor médio 20–60, sem especulares**.
+- **Faixa de transição (x 72 %–78 %):** rampa. Alvo **valor médio 60–130**.
+- **Faixa clara (x 78 %–100 %):** onde a luz, o verniz e a tinta vivem. Alvo **valor médio
+  90–200**, com especulares pontuais mais altos.
+- **Acentos de tinta laranja: x entre 78 % e 94 %.** O limite de 94 % não é estético — é o
+  recorte: em viewport 16:10 o `object-cover` come 4,8 % de cada lado, e o acento do frame 1
+  ficou em x ≈ 96 % e **desapareceu**.
 - **Alerta específico:** laranja `#ff4d00` puro contra `#fafaf7` dá **3,17:1 — abaixo do
   piso**. Cru, ele não pode ocupar a faixa de texto. Com scrim ≥ 0,43 ele compõe em 8,45:1 e
-  fica seguro. Portanto: **massas de tinta laranja saturada só à direita de x = 50 %**, e à
+  fica seguro. Portanto: **massas de tinta laranja saturada só à direita de x = 78 %**, e à
   esquerda apenas como fio, respingo fino ou reflexo — nunca como área.
 
 ---
@@ -400,20 +414,26 @@ studio light rakes across the surface from the right at a low angle.
 
 It travels over raw off-white paper fibers, then reaches controlled orange
 printing ink spreading and settling into the fiber with visible surface tension
-and absorption, physically plausible, confined to the right third. Layered
-trimmed printed sheets rise into frame in three depth planes and reveal parallax
-and natural occlusion. At four seconds a single out-of-focus underexposed sheet
-sweeps close past the lens from the right and exits upper left. Beyond it,
-embossing, a creased fold catching light, and localized spot varnish returning a
-long soft reflection.
+and absorption, physically plausible. Layered trimmed printed sheets rise into
+frame in three depth planes and reveal parallax and natural occlusion. At four
+seconds a single out-of-focus underexposed sheet sweeps close past the lens from
+the right and exits upper left. Beyond it, embossing, a creased fold catching
+light, and localized spot varnish returning a long soft reflection.
 
 The shot ends at rest: a closed book, a rigid box and a printed corporate piece
-settled together on the dark surface, centered slightly right and low, sculpted
-by side light, long soft shadows falling left. Fine paper dust drifts throughout.
-Shallow depth of field, editorial composition, stable temporal consistency.
+settled together on the dark surface, low and toward the right, sculpted by side
+light, long soft shadows falling left. Fine paper dust drifts throughout. Shallow
+depth of field, editorial composition, stable temporal consistency.
 
-The left third of the frame stays in calm shadow, unlit and uncluttered,
-continuous with the scene, reserved as negative space.
+The left seventy-two percent of the frame remains in deep, calm and continuous
+shadow, preserving the same visible paper surface, unlit, uncluttered and free of
+bright diagonal bands, specular highlights or high-contrast details. The sharp
+focal light band is confined to the lower-right quadrant and never crosses the
+protected text-safe region. All brightest illumination, localized varnish
+highlights and orange ink accents remain confined to the far-right twenty-two
+percent of the frame. The complete region occupied by the real eyebrow, all H1
+lines, subtitle and CTAs must retain a dark, calm and visually continuous paper
+surface throughout.
 
 No text, no lettering, no logos, no brand marks, no machines, no equipment, no
 factory, no hands, no people, no morphing, no melting, no cuts, no flicker, no
@@ -466,15 +486,22 @@ edge to edge, composed as the first moment of a slow camera move that will trave
 right and down across a dark studio bench of printing materials.
 
 Soft directional studio light rakes the surface from the right at a low angle,
-raising individual fibers and grain into relief like a landscape. The left third
-of the frame recedes into calm continuous shadow, part of the same surface, plain
-and uncluttered. The right side is the brightest, warm and dimensional. Fine
-paper dust hangs in the air. Shallow depth of field: a sharp diagonal band across
-the middle, softly out of focus at the top and bottom edges.
+raising individual fibers and grain into relief like a landscape. Fine paper dust
+hangs in the air.
 
-Palette: warm off-white paper, deep carbon shadow, a single distant hint of
-orange ink far to the right. Premium cinematic macro product photography,
-editorial composition, photorealistic, 16:9.
+The left seventy-two percent of the frame remains in deep, calm and continuous
+shadow, preserving the same visible paper surface, unlit, uncluttered and free of
+bright diagonal bands, specular highlights or high-contrast details. The sharp
+focal light band is confined to the lower-right quadrant and never crosses the
+protected text-safe region. All brightest illumination, localized varnish
+highlights and orange ink accents remain confined to the far-right twenty-two
+percent of the frame. The complete region occupied by the real eyebrow, all H1
+lines, subtitle and CTAs must retain a dark, calm and visually continuous paper
+surface throughout.
+
+Palette: warm off-white paper, deep carbon shadow, a small orange printing ink
+accent in the far-right band. Premium cinematic macro product photography,
+editorial composition, real matte uncoated paper, photorealistic, 16:9.
 
 No text, no logos, no lettering anywhere. No machines, no hands, no people.
 ```
@@ -889,6 +916,42 @@ estabilização.
 | 8 | **`NEXT_PUBLIC_WHATSAPP_NUMBER` vazio** | CTAs de WhatsApp degradam para `tel:` | Pendência de negócio, sem relação com este gate |
 | 9 | ~~Números de crédito vêm da skill~~ — **resolvido**: preflight executado em 2026-08-28 | — | Vídeo bateu em 54; **frame divergiu: 8,5 e não ~2** (§22). Saldo 110, sem margem para re-roll de 6 s depois do cenário A |
 | 10 | **Cintilação por compressão em gradiente** na penumbra esquerda | Banding visível justamente sob o texto | Calibração de crf uma variável por vez, inspecionando os frames lisos e escuros (§25.2) |
+
+---
+
+## Histórico do Gate 3 — frame 1 reprovado
+
+**Job `4284cf4b-72f8-4e21-aea4-0132e568850c` · 8,5 créditos · reprovado como frame 000.**
+
+O frame entregue era tecnicamente excelente: fibra de papel fotorrealista, poeira em suspensão,
+luz rasante, profundidade curta, paleta exata da marca, e **zero** texto, logo, mão, máquina ou
+artefato de geometria. Reprovou num único critério, o da área negativa:
+
+| Elemento da banda 0 | Contraste do pior pixel |
+|---|---|
+| Eyebrow | 16,96:1 ✅ |
+| H1 linha 1 — "A sua ideia," | 7,40:1 ✅ |
+| H1 linha 2 — "impressa" | 9,39:1 ✅ |
+| **H1 linha 3 — "com …" (branco)** | **1,31:1** ❌ |
+| **H1 linha 3 — "*peso e presença.*" (laranja)** | **2,43:1** ❌ |
+| Subtítulo | 4,58:1 ✅ |
+| CTAs | 12,75:1 ✅ |
+
+**A reprovação foi por erro de direção neste storyboard, não por incapacidade do modelo.** O
+§19 pedia sombra apenas no "left third" (33 %) e uma "sharp diagonal band across the middle",
+enquanto o §3 deste mesmo documento já media o H1 chegando a 69,4 %. O modelo executou o prompt
+com fidelidade; o prompt é que protegia menos da metade da área necessária e ainda puxava luz
+para a linha do H1. O §3.2 carregava a mesma contradição (protegia até 47 %).
+
+Quatro recortes 16:9 ancorados à esquerda (86 %, 80 %, 74 %, 68 %) foram testados e **nenhum
+salva o frame**: a linha 3 sobe no máximo para 2,76:1 no branco e o laranja piora. Ajuste de
+scrim também não resolve — para o laranja passar em 3,5:1 seria preciso alpha ≈ 0,79 naquela
+região, apagando justamente a luz que dá valor à imagem.
+
+Correções aplicadas em consequência: §3.2 (zona protegida 47 % → **72 %**, com o limite
+separado de sRGB ≤ 40 sob texto laranja), §17 e §19 (cláusula de 72 %, banda focal restrita ao
+quadrante inferior direito, acentos laranja entre 78 % e 94 %). O frame 1 fica preservado no
+scratchpad apenas como evidência comparativa; **não entra no repositório**.
 
 ---
 
