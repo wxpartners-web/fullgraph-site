@@ -103,13 +103,22 @@ export function HeroScrubVideo() {
     const lastVars = new Map<string, number>();
     const lastVisible = new Map<HTMLElement, boolean>();
 
+    const durationOf = () =>
+      Number.isFinite(video.duration) && video.duration > 0
+        ? video.duration
+        : heroMedia.videoDurationSeconds;
+
+    // Último progresso entregue pelo motor. Necessário porque o motor
+    // dorme quando converge: num reload no meio do scrub as bandas
+    // assentam ANTES do canplay, e setTarget(alvo já assentado) não
+    // dispara applyFrame — sem isto o vídeo ficaria preso no frame 0
+    // até o próximo scroll real.
+    let lastShown = 0;
+
     const applyFrame = (shown: number) => {
+      lastShown = shown;
       if (gate) {
-        const duration =
-          Number.isFinite(video.duration) && video.duration > 0
-            ? video.duration
-            : heroMedia.videoDurationSeconds;
-        gate.requestSeek(shown * duration);
+        gate.requestSeek(shown * durationOf());
       }
       HERO_BANDS.forEach((band, i) => {
         const o = bandOpacity(shown, band, i === 0, i === HERO_BANDS.length - 1);
@@ -166,6 +175,9 @@ export function HeroScrubVideo() {
             () => {
               if (disposed) return;
               gate = createSeekGate(video);
+              // Sincroniza já com a posição atual do scroll — cobre o
+              // caso em que o motor convergiu antes de o vídeo existir
+              gate.requestSeek(lastShown * durationOf());
               setVideoReady(true);
               engine.setTarget(progress());
             },
