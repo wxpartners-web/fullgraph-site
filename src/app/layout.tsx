@@ -64,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <BrandIntro />
         <LenisProvider>
           <Header />
-          <main id="conteudo" className="flex-1">
+          <main id="conteudo" className="flex-1 scroll-mt-[var(--header-h)]">
             {children}
           </main>
           <Footer />

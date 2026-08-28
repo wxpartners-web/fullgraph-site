@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronDown, MessageCircle, Menu, X } from "lucide-react";
 import { mainNav } from "@/data/navigation";
@@ -12,12 +12,18 @@ import { hasWhatsApp, whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { duration, easeOutExpo, staggerContainer } from "@/lib/motion-tokens";
 
+const FOCUSABLE = "a[href], button:not([disabled])";
+
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const reduced = useReducedMotion();
+  const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuWasOpen = useRef(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -44,9 +50,48 @@ export function Header() {
   }, [menuOpen]);
   useEffect(() => {
     if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      // O trap cobre header + menu: o botão de fechar (X) vive no header,
+      // acima do overlay, e precisa continuar alcançável no ciclo de Tab
+      const focusables = [
+        ...Array.from(headerRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []),
+        ...Array.from(menuRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []),
+      ].filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      const inside = active instanceof HTMLElement && focusables.includes(active);
+      if (e.shiftKey && (!inside || active === first)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (!inside || active === last)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  // Foco entra no menu ao abrir e volta para o botão ao fechar
+  useEffect(() => {
+    if (menuOpen) {
+      menuWasOpen.current = true;
+      const id = requestAnimationFrame(() => {
+        menuRef.current?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+      });
+      return () => cancelAnimationFrame(id);
+    }
+    if (menuWasOpen.current) {
+      menuWasOpen.current = false;
+      toggleRef.current?.focus();
+    }
   }, [menuOpen]);
 
   const isActive = (href: string) =>
@@ -66,6 +111,7 @@ export function Header() {
         Pular para o conteúdo
       </a>
       <header
+        ref={headerRef}
         className={cn(
           "fixed inset-x-0 top-0 z-[70] transition-[background-color,border-color,backdrop-filter] duration-[var(--dur-comp)]",
           scrolled || menuOpen
@@ -93,7 +139,21 @@ export function Header() {
             <ul className="flex items-center gap-1">
               {mainNav.map((item) =>
                 item.children ? (
-                  <li key={item.label} className="group relative">
+                  <li
+                    key={item.label}
+                    className="group relative"
+                    // hover/foco alimentam o MESMO estado do clique: aria-expanded
+                    // nunca diverge do que está visível na tela
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
+                    onFocus={() => setDropdownOpen(true)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                        setDropdownOpen(false);
+                      }
+                    }}
+                    onKeyDown={(e) => e.key === "Escape" && setDropdownOpen(false)}
+                  >
                     <button
                       className={cn(
                         "flex items-center gap-1 px-4 py-2 text-sm transition-colors duration-[var(--dur-micro)]",
@@ -102,19 +162,23 @@ export function Header() {
                       aria-expanded={dropdownOpen}
                       aria-haspopup="true"
                       onClick={() => setDropdownOpen((v) => !v)}
-                      onKeyDown={(e) => e.key === "Escape" && setDropdownOpen(false)}
                     >
                       {item.label}
-                      <ChevronDown aria-hidden="true" className="size-3.5 transition-transform duration-[var(--dur-micro)] group-hover:rotate-180 group-focus-within:rotate-180" />
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={cn(
+                          "size-3.5 transition-transform duration-[var(--dur-micro)]",
+                          dropdownOpen && "rotate-180"
+                        )}
+                      />
                     </button>
                     <div
                       className={cn(
                         "absolute left-0 top-full pt-2 transition-opacity duration-[var(--dur-micro)]",
-                        // opacity (e não visibility) mantém os links focáveis
-                        // por teclado; o menu revela no hover, no foco ou no clique
+                        // opacity (e não visibility) mantém os links focáveis por teclado
                         dropdownOpen
                           ? "pointer-events-auto opacity-100"
-                          : "pointer-events-none opacity-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100"
+                          : "pointer-events-none opacity-0"
                       )}
                     >
                       <ul
@@ -184,13 +248,14 @@ export function Header() {
               <span className="ink-register-target">Solicitar orçamento</span>
             </Link>
             <button
+              ref={toggleRef}
               className={cn(
                 "inline-flex size-11 items-center justify-center lg:hidden",
                 onLight ? "text-carbon" : "text-white-tech"
               )}
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
-              aria-controls="menu-mobile"
+              aria-controls={menuOpen ? "menu-mobile" : undefined}
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               data-testid="menu-toggle"
             >
@@ -205,6 +270,10 @@ export function Header() {
         {menuOpen && (
           <motion.div
             id="menu-mobile"
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
             className="grain fixed inset-0 z-[65] flex flex-col bg-carbon pt-[var(--header-h)] lg:hidden"
             initial={reduced ? { opacity: 1 } : { clipPath: "inset(0 0 100% 0)" }}
             animate={reduced ? { opacity: 1 } : { clipPath: "inset(0 0 0% 0)" }}

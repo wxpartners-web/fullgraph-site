@@ -36,7 +36,7 @@ const portals = [
  */
 export function SolutionPortals() {
   return (
-    <section id="solucoes" className="grain relative bg-carbon py-24 md:py-32 scroll-mt-16">
+    <section id="solucoes" className="grain relative bg-carbon py-24 md:py-32 scroll-mt-[calc(var(--header-h)+0.5rem)]">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="01"

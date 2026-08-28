@@ -166,10 +166,34 @@ function SheetStage({ step }: { step: number }) {
   );
 }
 
+/** Versão lista — serve reduced-motion e telas <md (onde a folha nem renderiza) */
+function NarrativeStatic() {
+  return (
+    <section className="surface-paper grain on-paper py-24" aria-label="Como produzimos" data-testid="narrative-static">
+      <div className="mx-auto max-w-4xl px-5 md:px-8">
+        <p className="text-spec mb-4 text-carbon/60">02 — Como produzimos</p>
+        <h2 className="text-h2 font-semibold">
+          Da ideia à <em className="font-serif italic text-ink-2">matéria</em>
+        </h2>
+        <ol className="mt-12 space-y-10">
+          {steps.map((s, i) => (
+            <li key={s.id} className="border-l-2 border-carbon/15 pl-6">
+              <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="text-h3 mt-1 font-semibold">{s.title}</h3>
+              <p className="mt-2 max-w-xl text-carbon/75">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 /**
  * Narrativa de produção — scroll pino (sticky), sem sequestro:
  * a página continua rolando normalmente; a folha central se
- * transforma em 6 etapas. Reduced-motion: lista estática.
+ * transforma em 6 etapas. Reduced-motion e mobile: lista estática
+ * (no mobile o visual era `hidden md:block` e sobravam ~420vh só de texto).
  */
 export function NarrativeScroll() {
   const ref = useRef<HTMLElement>(null);
@@ -181,38 +205,22 @@ export function NarrativeScroll() {
     setStep(Math.min(steps.length - 1, Math.floor(v * steps.length)));
   });
 
-  if (reduced) {
-    return (
-      <section className="surface-paper grain on-paper py-24" aria-label="Como produzimos">
-        <div className="mx-auto max-w-4xl px-5 md:px-8">
-          <p className="text-spec mb-4 text-carbon/60">02 — Como produzimos</p>
-          <h2 className="text-h2 font-semibold">
-            Da ideia à <em className="font-serif italic text-ink-2">matéria</em>
-          </h2>
-          <ol className="mt-12 space-y-10">
-            {steps.map((s, i) => (
-              <li key={s.id} className="border-l-2 border-carbon/15 pl-6">
-                <p className="text-spec text-carbon/60">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="text-h3 mt-1 font-semibold">{s.title}</h3>
-                <p className="mt-2 max-w-xl text-carbon/75">{s.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-    );
-  }
+  if (reduced) return <NarrativeStatic />;
 
   const current = steps[step];
 
   return (
-    <section
-      ref={ref}
-      className="surface-paper grain on-paper relative"
-      style={{ height: `${steps.length * 70}vh` }}
-      aria-label="Como produzimos"
-      data-testid="narrative"
-    >
+    <>
+      <div className="md:hidden">
+        <NarrativeStatic />
+      </div>
+      <section
+        ref={ref}
+        className="surface-paper grain on-paper relative hidden md:block"
+        style={{ height: `${steps.length * 70}svh` }}
+        aria-label="Como produzimos"
+        data-testid="narrative"
+      >
       <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 md:grid-cols-2 md:px-8">
           {/* Texto da etapa */}
@@ -264,6 +272,7 @@ export function NarrativeScroll() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
