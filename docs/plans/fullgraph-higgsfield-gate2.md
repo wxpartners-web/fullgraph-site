@@ -1247,3 +1247,55 @@ sem corte, sem redução de fps.
 
 **A flag continua desligada por padrão.** Ligar por padrão é decisão do Gate 7, após revisão
 humana no localhost (`NEXT_PUBLIC_HERO_SCRUB=1 npm run build && npm run start`).
+
+---
+
+## 31. Aprovação final do visual e preflight de publicação (2026-08-28)
+
+**O usuário revisou as capturas desktop e mobile e APROVOU o resultado
+sem ressalvas. O visual abaixo é a baseline congelada** — qualquer
+mudança futura de tipografia, scrim, botões, posicionamento, copy,
+vídeo, scrub ou responsividade exige nova decisão explícita.
+
+### 31.1 Baseline aprovada
+
+| Elemento | Estado congelado |
+|---|---|
+| Display/H1/H2 | **Bodoni Moda** variável (eixo óptico), peso 500 fixo, itálicos 400; escala display máx 6,75rem; H1 do hero em 2 linhas |
+| Interface | IBM Plex Sans (400/500/600); eyebrow `.text-eyebrow` sans 500; mono Plex nos chips/specs |
+| Scrim | Sistema de manchas orgânicas por banda (`35ee4e3`): mancha radial da coluna + faixa difusa do H1 (banda 0), vinheta lateral esquerda (bandas 1–2), véu do header 24svh, mancha vertical mobile — todos terminando em transparência total, feathers ≥12% |
+| Botões | InkButton refinado (`ec9a1bc`): radius 3px, 44/46px, fio interno 1px, hover tonal, seta fina opt-in; CTA header compacto 36px |
+| Contraste medido | laranja 3,59–4,46:1 (piso 3,5) · brancos display 5,2–17,6 (alvo 4,5) · nav/normais ≥5,3 · mobile itálico 3,79 · perda fora dos textos 5,5–7,1% (<8%) |
+| Mídia | intacta do Gate 5 — `hero-scrub.mp4` 7 765 279 B, stills 000/096; **zero geração nova, zero créditos nesta rodada** (saldo segue 3) |
+
+Commits do passe visual aprovado: `5b31c2d` · `d8023f7` · `ec9a1bc` ·
+`35ee4e3` · `db2d8f8`. Capturas de evidência: `scratchpad/gate7-visual/`
+(antes/, depois/, comparativos).
+
+### 31.2 Preflight de publicação (nenhum comando externo executado)
+
+- **Mecanismo de deploy: ainda não existe no repositório** — sem
+  `vercel.json`, Dockerfile, workflow ou `output: "export"`. O destino
+  planejado é **Hostinger (G8)**. Todas as rotas do build são
+  estáticas (○/●), então as duas rotas viáveis são: app Node
+  (`next build && next start`) num VPS, ou adotar `output: "export"`
+  para hospedagem estática — decisão do G8.
+- **Variáveis de ambiente necessárias (só nomes)**:
+  - `NEXT_PUBLIC_SITE_URL` — tem fallback no código; definir para o
+    domínio final (canonical/sitemap/OG).
+  - `NEXT_PUBLIC_WHATSAPP_NUMBER` — **ainda sem definição** (pendência
+    conhecida); sem ela os CTAs degradam para telefone fixo e e-mail.
+  - `NEXT_PUBLIC_HERO_SCRUB=1` — **obrigatória no build de publicação**
+    para servir o hero aprovado (a flag segue desligada por padrão no
+    repositório).
+- Fontes 100% self-hosted via next/font (zero referências a
+  fonts.googleapis no HTML servido).
+- `public/media/hero/`: 8 191 969 bytes totais, sem mídia bruta.
+
+### 31.3 Fechamento técnico
+
+Resultados registrados no relatório do gate de fechamento (lint,
+typecheck, builds nos dois modos, suíte flag off, suíte hero flag on,
+whatsapp.spec isolado 3× serial). O flake observado na suíte completa
+foi atribuído a contenção de CPU com workers de outro projeto na
+máquina; isolado, o spec passa verde.
