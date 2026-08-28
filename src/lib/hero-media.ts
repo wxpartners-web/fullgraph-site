@@ -3,11 +3,12 @@ import type { Band } from "./scrub";
 /**
  * Manifest da mídia do hero cinematográfico.
  *
- * ESTADO ATUAL: dev-placeholder — um WebM técnico determinístico gerado
- * localmente (scripts/make-hero-placeholder.mjs) só para validar o motor
- * de scrub. NÃO representa o asset aprovado. O vídeo definitivo
- * (Seedance 2.0 → MP4 H.264 GOP 8, ≤8 MB) depende dos Gates 2–6 e
- * substituirá este arquivo trocando apenas os campos abaixo.
+ * ESTADO ATUAL: final — vídeo aprovado no Gate 4-R (Seedance 2.0, job
+ * ba030d0d-fd82-4523-95cd-053ac22f2116, start frame job b34bb8a6),
+ * re-encodado no Gate 5 para scrub: H.264 High, CRF 16, GOP 8 exato
+ * (todo o vídeo seeka limpo), faststart, sem áudio. Poster = frame 000
+ * do próprio encode (zero salto na troca poster→vídeo); ending e still
+ * mobile = frame 096, a composição em que a página descansa.
  */
 export interface HeroMediaManifest {
   /** null = sem asset local: o motor não arma e o poster segura o hero */
@@ -16,14 +17,32 @@ export interface HeroMediaManifest {
   videoBytes: number;
   /** fallback até o loadedmetadata informar a duração real */
   videoDurationSeconds: number;
+  /** metadados de auditoria do encode aprovado (24 fps CFR) */
+  videoFrames: number;
+  videoFps: number;
+  videoWidth: number;
+  videoHeight: number;
+  /** frame 000 — por baixo do vídeo enquanto o blob carrega (desktop) */
+  posterSrc: string;
+  /** frame 096 — repouso; asset de design reutilizável nas seções */
+  endingSrc: string;
+  /** frame 096 recortado 9:16 — hero estático de mobile/touch */
+  mobileStillSrc: string;
   kind: "dev-placeholder" | "final";
 }
 
 export const heroMedia: HeroMediaManifest = {
-  videoSrc: "/media/hero/hero-scrub-placeholder.webm",
-  videoBytes: 168_648,
-  videoDurationSeconds: 6,
-  kind: "dev-placeholder",
+  videoSrc: "/media/hero/hero-scrub.mp4",
+  videoBytes: 7_765_279,
+  videoDurationSeconds: 4.041667,
+  videoFrames: 97,
+  videoFps: 24,
+  videoWidth: 1920,
+  videoHeight: 1080,
+  posterSrc: "/media/hero/hero-poster.jpg",
+  endingSrc: "/media/hero/hero-ending.jpg",
+  mobileStillSrc: "/media/hero/hero-still-mobile.jpg",
+  kind: "final",
 };
 
 /**
