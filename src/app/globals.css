@@ -325,18 +325,22 @@ body {
 /* Scrim base sempre-on: nenhum frame do vídeo fica cru atrás da tipografia.
    Só o HeroCinema usa esta classe, então tudo aqui vive atrás da flag.
 
-   O platô de 0.82 vai até 72% porque é aí que termina a faixa ocupada
+   O platô de 0.85 vai até 72% porque é aí que termina a faixa ocupada
    pelo texto real: o H1 chega a 69,4% do quadro (medido na página, não
    estimado). A versão anterior só protegia até 36% e reprovou o start
    frame do Gate 3 — o itálico laranja da linha 3 media 2,33:1.
 
-   Por que 0.82 e não menos: `--ink` (#ff4d00) tem luminância 0,264, então
-   contra preto puro o teto de contraste é 6,31:1. Para o itálico laranja
-   passar em 3,5:1 o fundo composto precisa ficar praticamente preto. A
-   0.80 o pior pixel dava 3,46:1 (abaixo do piso); a 0.82 dá 3,73:1 com
-   99,5% da área acima de 4,5:1.
+   Por que 0.85: `--ink` (#ff4d00) tem luminância 0,264, então contra
+   preto puro o teto de contraste é 6,31:1 e o fundo composto precisa
+   ficar praticamente preto para o itálico laranja passar em 3,5:1. O
+   0.82 calibrado no Gate 3 media 3,73:1 em simulação — mas a simulação
+   não incluía o .grain::before (ruído a 5% de opacidade, z-index 1,
+   ACIMA do scrim), que soma até ~9 níveis sRGB no pior pixel. Na página
+   real de produção (Gate 5), com grain: 0.82 dava 3,27:1 nas bandas
+   2 (reprovado); 0.85 dá 3,59:1 no pior ponto. Sem grain os números
+   batem com a simulação (3,53–3,62), confirmando a causa.
 
-   Os stops 76%/80%/84% são a rampa de saída: sem eles a queda de 0.82
+   Os stops 76%/80%/84% são a rampa de saída: sem eles a queda de 0.85
    para 0.10 num único intervalo cria uma borda vertical visível. A faixa
    direita (a partir de ~84%) fica quase sem scrim de propósito — é onde
    a luz, o verniz e a tinta laranja precisam viver. */
@@ -345,8 +349,8 @@ body {
   background:
     linear-gradient(
       90deg,
-      rgb(11 11 12 / 0.82) 0%,
-      rgb(11 11 12 / 0.82) 72%,
+      rgb(11 11 12 / 0.85) 0%,
+      rgb(11 11 12 / 0.85) 72%,
       rgb(11 11 12 / 0.533) 76%,
       rgb(11 11 12 / 0.246) 80%,
       rgb(11 11 12 / 0.1) 84%,
@@ -357,6 +361,33 @@ body {
       rgb(11 11 12 / 0) 35%,
       rgb(11 11 12 / 0.5) 100%
     );
+}
+
+/* No mobile o texto atravessa a largura inteira e a imagem vive na
+   base: o platô esquerda→direita do desktop deixava o fim das linhas
+   do eyebrow (2,98:1) e do subtítulo (4,00:1) sobre a faixa clara do
+   still, abaixo do AA. O scrim gira para vertical — platô cobrindo
+   todas as linhas de texto (o CTA outline termina em y≈80%), abrindo
+   na base, onde a pilha de papel brilha sem texto por cima. Calibrado
+   na página real de produção (Gate 5): eyebrow → 7,62:1, subtítulo →
+   5,77:1, H1 branco 12,1:1, itálico laranja 3,61:1 (inalterado). */
+@media (max-width: 1023px) {
+  .hero-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(11 11 12 / 0.85) 0%,
+        rgb(11 11 12 / 0.85) 82%,
+        rgb(11 11 12 / 0.5) 88%,
+        rgb(11 11 12 / 0.24) 94%,
+        rgb(11 11 12 / 0.2) 100%
+      ),
+      radial-gradient(
+        ellipse 120% 90% at 50% 45%,
+        rgb(11 11 12 / 0) 35%,
+        rgb(11 11 12 / 0.5) 100%
+      );
+  }
 }
 .hero-band {
   text-shadow: var(--tshadow);
