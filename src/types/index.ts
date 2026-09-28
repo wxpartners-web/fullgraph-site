@@ -28,6 +28,14 @@ export interface Category {
 
 export type MockupKind = "book" | "box" | "sheet" | "stack" | "roll" | "sign";
 
+/** Foto de produto servida de /public — gerada por IA (conceitual) ou real */
+export interface ProductImage {
+  /** Caminho absoluto em /public, ex. "/images/products/impressao-de-livros.webp" */
+  src: string;
+  /** Texto alternativo objetivo, em pt-BR */
+  alt: string;
+}
+
 export interface ProductSpec {
   label: string;
   value: string;
@@ -56,6 +64,8 @@ export interface Product {
   faq: FaqItem[];
   related: string[];
   mockup: MockupKind;
+  /** Foto do produto — quando ausente, o ProductMockup procedural é o fallback */
+  image?: ProductImage;
   featured?: boolean;
   /** Cor de destaque do mockup procedural (token CSS) */
   accent?: string;
@@ -66,9 +76,11 @@ export interface PortfolioItem {
   title: string;
   segment: string;
   productType: string;
-  /** Composição procedural do card (sem fotos de banco) */
+  /** Composição procedural do card — fallback quando não há imagem */
   mockup: MockupKind;
   palette: [string, string];
+  /** Peça conceitual gerada por IA, exibida como "exemplo ilustrativo" */
+  image?: ProductImage;
   /** Dados provisórios — substituir por cases reais (BACKEND-HANDOFF) */
   placeholder: true;
 }

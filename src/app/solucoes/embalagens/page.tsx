@@ -17,6 +17,10 @@ const config: SolutionConfig = {
   intro:
     "Embalagens, bandejas e rótulos para restaurantes, hamburguerias e redes — do balcão ao delivery, com material apto para alimentos e reposição programada.",
   heroMockup: "box",
+  heroImage: {
+    src: "/images/solutions/solucao-embalagens.webp",
+    alt: "Família de embalagens impressas para alimentação: caixa de hambúrguer, saco kraft, papel de bandeja e rótulos",
+  },
   arguments: [
     {
       title: "Apto para alimentos",

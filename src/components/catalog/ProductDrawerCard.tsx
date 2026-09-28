@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Product } from "@/types";
@@ -36,14 +37,34 @@ export function ProductDrawerCard({
           )}
           style={{ perspective: "900px" }}
         >
-          {/* camadas de papel que se separam no hover */}
-          <div className="absolute inset-[10%] translate-x-0 translate-y-0 rotate-0 bg-white-tech/5 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:-translate-x-2 group-hover:translate-y-2 group-hover:-rotate-2" />
-          <div className="absolute inset-[10%] bg-white-tech/8 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:rotate-1" />
+          {product.image ? (
+            <>
+              {/* foto do produto — decorativa aqui: o nome está na ficha logo abaixo */}
+              <Image
+                src={product.image.src}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+              />
+              {/* proteção da spec técnica que revela sobre a foto */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-carbon/85 via-carbon/35 to-transparent opacity-0 transition-opacity duration-[var(--dur-comp)] group-hover:opacity-100"
+              />
+            </>
+          ) : (
+            <>
+              {/* camadas de papel que se separam no hover */}
+              <div className="absolute inset-[10%] translate-x-0 translate-y-0 rotate-0 bg-white-tech/5 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:-translate-x-2 group-hover:translate-y-2 group-hover:-rotate-2" />
+              <div className="absolute inset-[10%] bg-white-tech/8 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:translate-x-2 group-hover:-translate-y-1 group-hover:rotate-1" />
 
-          {/* produto: inclinação máxima controlada (~4°) */}
-          <div className="absolute inset-0 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] [transform:rotateX(0)_translateY(0)] group-hover:[transform:rotateX(4deg)_translateY(-6px)_scale(1.02)]">
-            <ProductMockup kind={product.mockup} accent={product.accent} />
-          </div>
+              {/* produto: inclinação máxima controlada (~4°) */}
+              <div className="absolute inset-0 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] [transform:rotateX(0)_translateY(0)] group-hover:[transform:rotateX(4deg)_translateY(-6px)_scale(1.02)]">
+                <ProductMockup kind={product.mockup} accent={product.accent} />
+              </div>
+            </>
+          )}
 
           {/* especificação técnica revela no hover (sem layout shift) */}
           {spec && (

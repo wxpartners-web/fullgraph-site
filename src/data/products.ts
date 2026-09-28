@@ -143,6 +143,10 @@ export const products: Product[] = [
     ],
     related: ["impressao-de-revistas", "impressao-de-catalogos", "apostilas-e-espirais"],
     mockup: "book",
+    image: {
+      src: "/images/products/impressao-de-livros.webp",
+      alt: "Pilha de livros brochura com capas em papel cru e laranja, lombadas quadradas alinhadas",
+    },
     featured: true,
   },
   {
@@ -171,6 +175,10 @@ export const products: Product[] = [
     ],
     related: ["impressao-de-livros", "impressao-de-catalogos"],
     mockup: "book",
+    image: {
+      src: "/images/products/apostilas-e-espirais.webp",
+      alt: "Apostilas com encadernação wire-o empilhadas, a de cima aberta mostrando o miolo pautado",
+    },
   },
 
   /* ---------- Catálogos e revistas ---------- */
@@ -200,6 +208,10 @@ export const products: Product[] = [
     ],
     related: ["impressao-de-revistas", "folders-e-dobrados", "impressao-de-livros"],
     mockup: "stack",
+    image: {
+      src: "/images/products/impressao-de-catalogos.webp",
+      alt: "Catálogo aberto sobre pilha de exemplares, com spread de blocos gráficos laranja e grafite",
+    },
     featured: true,
   },
   {
@@ -228,6 +240,10 @@ export const products: Product[] = [
     ],
     related: ["impressao-de-catalogos", "jornais-e-tabloides"],
     mockup: "stack",
+    image: {
+      src: "/images/products/impressao-de-revistas.webp",
+      alt: "Revistas grampeadas em leque, uma aberta mostrando o grampo canoa da lombada",
+    },
   },
   {
     slug: "jornais-e-tabloides",
@@ -255,6 +271,10 @@ export const products: Product[] = [
     ],
     related: ["flyers-e-panfletos", "impressao-de-revistas"],
     mockup: "sheet",
+    image: {
+      src: "/images/products/jornais-e-tabloides.webp",
+      alt: "Pilha de tabloides dobrados em papel jornal com layout de blocos laranja e preto",
+    },
   },
 
   /* ---------- Materiais corporativos ---------- */
@@ -284,6 +304,10 @@ export const products: Product[] = [
     ],
     related: ["flyers-e-panfletos", "cadernos-personalizados"],
     mockup: "sheet",
+    image: {
+      src: "/images/products/papelaria-institucional.webp",
+      alt: "Kit de papelaria corporativa visto de cima: timbrado, envelopes, pasta e cartões de visita",
+    },
   },
 
   /* ---------- Flyers, folders e tabloides ---------- */
@@ -313,6 +337,10 @@ export const products: Product[] = [
     ],
     related: ["folders-e-dobrados", "jornais-e-tabloides"],
     mockup: "stack",
+    image: {
+      src: "/images/products/flyers-e-panfletos.webp",
+      alt: "Leque de flyers em papel couché com composição geométrica laranja e creme",
+    },
     featured: true,
   },
   {
@@ -341,6 +369,10 @@ export const products: Product[] = [
     ],
     related: ["flyers-e-panfletos", "impressao-de-catalogos"],
     mockup: "sheet",
+    image: {
+      src: "/images/products/folders-e-dobrados.webp",
+      alt: "Folders de três dobras em pé, em sanfona, com vincos precisos e grafismo laranja",
+    },
   },
 
   /* ---------- Embalagens ---------- */
@@ -375,6 +407,10 @@ export const products: Product[] = [
     ],
     related: ["papeis-de-bandeja-personalizados", "rotulos-e-etiquetas", "sacos-e-embalagens-delivery"],
     mockup: "box",
+    image: {
+      src: "/images/products/embalagens-para-hamburguer.webp",
+      alt: "Caixas de hambúrguer em papel-cartão kraft com faixa impressa laranja, uma fechada e outra aberta",
+    },
     featured: true,
   },
   {
@@ -402,6 +438,10 @@ export const products: Product[] = [
     ],
     related: ["embalagens-para-hamburguer", "papeis-de-bandeja-personalizados"],
     mockup: "box",
+    image: {
+      src: "/images/products/sacos-e-embalagens-delivery.webp",
+      alt: "Sacos SOS de papel kraft com arco laranja impresso e sacola branca menor ao lado",
+    },
   },
   {
     slug: "papeis-de-bandeja-personalizados",
@@ -429,6 +469,10 @@ export const products: Product[] = [
     ],
     related: ["embalagens-para-hamburguer", "sacos-e-embalagens-delivery"],
     mockup: "sheet",
+    image: {
+      src: "/images/products/papeis-de-bandeja-personalizados.webp",
+      alt: "Bandeja forrada com papel impresso em padrão geométrico laranja e pilha de forros ao lado",
+    },
     featured: true,
   },
   {
@@ -457,6 +501,10 @@ export const products: Product[] = [
     ],
     related: ["embalagens-para-hamburguer", "papelaria-institucional"],
     mockup: "roll",
+    image: {
+      src: "/images/products/rotulos-e-etiquetas.webp",
+      alt: "Rolo de rótulos adesivos parcialmente desenrolado com etiquetas laranja de corte arredondado",
+    },
   },
 
   /* ---------- Cadernos e agendas ---------- */
@@ -486,6 +534,10 @@ export const products: Product[] = [
     ],
     related: ["papelaria-institucional", "impressao-de-catalogos"],
     mockup: "book",
+    image: {
+      src: "/images/products/cadernos-personalizados.webp",
+      alt: "Cadernos personalizados: capa dura grafite com emblema laranja e wire-o aberto em miolo pontilhado",
+    },
   },
 
   /* ---------- Comunicação visual ---------- */
@@ -515,6 +567,10 @@ export const products: Product[] = [
     ],
     related: ["flyers-e-panfletos", "rotulos-e-etiquetas"],
     mockup: "sign",
+    image: {
+      src: "/images/products/banners-e-grandes-formatos.webp",
+      alt: "Banner de lona parcialmente desenrolado com ilhoses metálicos e grafismo laranja, rolos ao fundo",
+    },
   },
 ];
 

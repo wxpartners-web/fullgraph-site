@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/layout/SectionHeading";
@@ -59,13 +60,26 @@ export function PortfolioGrid({
                   style={{ background: `color-mix(in srgb, ${item.palette[0]} 14%, var(--carbon-2))` }}
                 >
                   <div className="absolute inset-0 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:scale-[1.03]">
-                    <ProductMockup kind={item.mockup} accent={item.palette[0]} base={item.palette[1]} />
+                    {item.image ? (
+                      <Image
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        fill
+                        sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <ProductMockup kind={item.mockup} accent={item.palette[0]} base={item.palette[1]} />
+                    )}
                   </div>
                   <span className="text-spec absolute left-3 top-3 text-steel">{item.segment}</span>
                 </div>
                 <figcaption className="mt-3">
                   <p className="text-sm font-medium text-white-tech">{item.title}</p>
-                  <p className="text-spec mt-1 text-steel-2">{item.productType}</p>
+                  <p className="text-spec mt-1 text-steel-2">
+                    {item.productType}
+                    {item.placeholder && " · exemplo ilustrativo"}
+                  </p>
                 </figcaption>
               </figure>
             </RevealItem>

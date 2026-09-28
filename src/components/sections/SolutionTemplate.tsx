@@ -1,4 +1,5 @@
-import type { Audience } from "@/types";
+import Image from "next/image";
+import type { Audience, ProductImage } from "@/types";
 import { getProductsByAudience } from "@/data/products";
 import { InkButton } from "@/components/ui/InkButton";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -16,6 +17,8 @@ export interface SolutionConfig {
   serifWord: string;
   intro: string;
   heroMockup: MockupKind;
+  /** Foto do hero — quando ausente, o mockup procedural é o fallback */
+  heroImage?: ProductImage;
   accent?: string;
   arguments: { title: string; text: string }[];
   ctaTitle: string;
@@ -60,8 +63,22 @@ export function SolutionTemplate({ config }: { config: SolutionConfig }) {
             </Reveal>
           </div>
 
-          <div className="crop-marks relative mx-auto aspect-[4/5] w-full max-w-sm text-steel-2" aria-hidden="true">
-            <ProductMockup kind={config.heroMockup} accent={config.accent} />
+          <div
+            className="crop-marks relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden text-steel-2"
+            aria-hidden={config.heroImage ? undefined : true}
+          >
+            {config.heroImage ? (
+              <Image
+                src={config.heroImage.src}
+                alt={config.heroImage.alt}
+                fill
+                priority
+                sizes="(min-width: 768px) 384px, 90vw"
+                className="object-cover"
+              />
+            ) : (
+              <ProductMockup kind={config.heroMockup} accent={config.accent} />
+            )}
           </div>
         </div>
       </section>

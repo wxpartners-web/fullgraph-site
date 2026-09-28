@@ -17,6 +17,10 @@ const config: SolutionConfig = {
   intro:
     "Para autores independentes, editoras e projetos especiais: acompanhamos o arquivo da prova ao acabamento, em tiragens que cabem no seu plano.",
   heroMockup: "book",
+  heroImage: {
+    src: "/images/solutions/solucao-livros-editorial.webp",
+    alt: "Livro brochura entreaberto em leque sobre pilha de livros com capas creme e laranja",
+  },
   arguments: [
     {
       title: "Tiragem que cabe no projeto",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
@@ -138,11 +139,22 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
             </div>
 
             <div
-              className="crop-marks relative mx-auto aspect-[4/5] w-full max-w-sm text-steel-2"
+              className="crop-marks relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden text-steel-2"
               data-testid="product-hero-mockup"
-              aria-hidden="true"
+              aria-hidden={product.image ? undefined : true}
             >
-              <ProductMockup kind={product.mockup} accent={product.accent} />
+              {product.image ? (
+                <Image
+                  src={product.image.src}
+                  alt={product.image.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 384px, 90vw"
+                  className="object-cover"
+                />
+              ) : (
+                <ProductMockup kind={product.mockup} accent={product.accent} />
+              )}
             </div>
           </div>
         </div>

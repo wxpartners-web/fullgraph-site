@@ -17,6 +17,10 @@ const config: SolutionConfig = {
   intro:
     "Campanhas, catálogos e papelaria produzidos em escala — com a mesma cor da primeira à última folha e um interlocutor que entende do seu material.",
   heroMockup: "stack",
+  heroImage: {
+    src: "/images/solutions/solucao-empresas.webp",
+    alt: "Pilhas altas de catálogos e flyers recém-impressos com capas em laranja e grafite",
+  },
   arguments: [
     {
       title: "Cor que se repete",
