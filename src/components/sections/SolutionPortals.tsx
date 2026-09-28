@@ -50,21 +50,23 @@ export function SolutionPortals() {
             <RevealItem key={portal.href}>
               <Link
                 href={portal.href}
-                className="group relative flex flex-col gap-4 border-b border-white-tech/10 py-8 transition-colors duration-[var(--dur-comp)] hover:bg-white-tech/[0.03] md:flex-row md:items-center md:gap-8 md:py-10"
+                className="group relative flex flex-col gap-2 border-b border-white-tech/10 py-5 pr-8 transition-colors duration-[var(--dur-comp)] hover:bg-white-tech/[0.03] md:flex-row md:items-center md:gap-8 md:py-10 md:pr-0"
                 data-testid={`portal-${portal.index}`}
               >
-                <span aria-hidden="true" className="text-spec w-10 flex-none text-steel-2">
-                  {portal.index}
-                </span>
+                <div className="flex items-baseline gap-3 md:contents">
+                  <span aria-hidden="true" className="text-spec flex-none text-steel-2 md:w-10">
+                    {portal.index}
+                  </span>
 
-                <h3 className="text-h3 flex-1 font-semibold text-white-tech">
-                  {portal.title.split(portal.serif)[0]}
-                  <em className="font-serif font-normal italic text-steel transition-colors duration-[var(--dur-micro)] group-hover:text-ink">
-                    {portal.serif}
-                  </em>
-                </h3>
+                  <h3 className="text-h3 flex-1 font-semibold text-white-tech">
+                    {portal.title.split(portal.serif)[0]}
+                    <em className="font-serif font-normal italic text-steel transition-colors duration-[var(--dur-micro)] group-hover:text-ink">
+                      {portal.serif}
+                    </em>
+                  </h3>
+                </div>
 
-                <p className="max-w-sm flex-1 text-sm leading-relaxed text-steel">
+                <p className="max-w-sm flex-1 pl-6 text-sm leading-relaxed text-steel md:pl-0">
                   {portal.text}
                 </p>
 
@@ -79,7 +81,7 @@ export function SolutionPortals() {
 
                 <ArrowRight
                   aria-hidden="true"
-                  className="size-5 flex-none text-steel-2 transition-[transform,color] duration-[var(--dur-micro)] group-hover:translate-x-1.5 group-hover:text-ink"
+                  className="absolute right-0 top-6 size-5 flex-none text-steel-2 transition-[transform,color] md:static duration-[var(--dur-micro)] group-hover:translate-x-1.5 group-hover:text-ink"
                 />
               </Link>
             </RevealItem>
