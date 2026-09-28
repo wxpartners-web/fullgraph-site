@@ -12,7 +12,7 @@ export const site: SiteConfig = {
   tagline: "Muito mais que impressão",
   description:
     "Impressão, livros, embalagens e grandes tiragens entregues em todo o Brasil. Orçamento personalizado para empresas, editoras e restaurantes.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://grafica.fullgraph.com.br",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fullgraph.com.br",
   phone: { display: "(61) 3022-0027", e164: "+556130220027" },
   whatsapp: {
     number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? null,
