@@ -1,0 +1,11 @@
+# Artefatos locais que nunca devem subir no upload da CLI
+.agents
+.claude
+10k-websites
+skills-lock.json
+test-results
+playwright-report
+.env
+.env.*
+.next
+.vercel
