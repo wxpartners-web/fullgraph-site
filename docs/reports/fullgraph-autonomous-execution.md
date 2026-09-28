@@ -179,3 +179,15 @@ node scripts/make-hero-placeholder.mjs                     # regenera o placehol
 - Domínios `fullgraph.com.br` e `www.fullgraph.com.br` anexados ao projeto; **pendente**: registros `A → 76.76.21.21` (apex e www) na zona do registro.br (mantendo os NS do próprio registro.br) — passo manual do usuário; certificado emite sozinho após o DNS resolver.
 - **Nota operacional**: o primeiro deploy foi BLOQUEADO ("commit author doesn't have permission") porque a CLI anexa metadados do git e o autor (`digital8now`) não é membro da conta Vercel. Workaround aplicado: deploy de cópia limpa sem `.git` (scratchpad). Correção permanente: vincular o GitHub `digital8now` em Account Settings → Login Connections da conta Vercel, ou desativar a checagem de autor nas configurações do projeto.
 - Pendências: plano Hobby (uso comercial pede Pro), redirect www→apex (1 clique no dashboard, opcional), validação em Safari real.
+
+### Go-live confirmado — 2026-09-28
+
+Usuário criou os registros A no registro.br e o domínio resolveu:
+`https://fullgraph.com.br` → 200 em 0,33 s com TLS válido; `www` → 200;
+H1 do hero aprovado presente no HTML servido; `hero-scrub.mp4` 200
+(7.765.279 B); `sitemap.xml` 200. **O site está oficialmente no ar no
+domínio definitivo.** Pendências que seguem abertas: upgrade Hobby→Pro
+(uso comercial), redirect www→apex (opcional, dashboard), validação em
+Safari real, correção permanente do bloqueio de autor no deploy
+(vincular GitHub `digital8now` à conta Vercel ou desligar a checagem no
+projeto), e a retirada futura de HeroClassic+Three.js após estabilização.
