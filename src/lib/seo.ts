@@ -5,10 +5,22 @@ interface PageMeta {
   title: string;
   description: string;
   path: string;
+  /** Imagem de compartilhamento (JPEG 1200×630 em /public/og); padrão do site se omitida */
+  image?: string;
 }
 
-export function pageMetadata({ title, description, path }: PageMeta): Metadata {
+/** Prévia padrão de links (WhatsApp, redes sociais) — gerada por scripts/make-og-images.mjs */
+export const DEFAULT_OG_IMAGE = {
+  url: "/og/fullgraph.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Fullgraph — A sua ideia, impressa com peso e presença",
+  type: "image/jpeg",
+};
+
+export function pageMetadata({ title, description, path, image }: PageMeta): Metadata {
   const url = `${site.url}${path}`;
+  const ogImage = image ? { ...DEFAULT_OG_IMAGE, url: image, alt: `${title} — ${site.name}` } : DEFAULT_OG_IMAGE;
   return {
     title,
     description,
@@ -20,11 +32,13 @@ export function pageMetadata({ title, description, path }: PageMeta): Metadata {
       siteName: site.name,
       locale: "pt_BR",
       type: "website",
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} — ${site.name}`,
       description,
+      images: [ogImage.url],
     },
   };
 }

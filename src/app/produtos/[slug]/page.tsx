@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: ProdutoPageProps): Promise<Me
     title: product.name,
     description: `${product.tagline} ${product.description.slice(0, 120)}…`,
     path: `/produtos/${product.slug}`,
+    image: `/og/produtos/${product.slug}.jpg`,
   });
 }
 

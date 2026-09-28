@@ -99,3 +99,17 @@ test("com movimento reduzido, títulos e grades aparecem (sem style oculto do SS
       .toBeGreaterThan(0.9);
   }
 });
+
+test("todas as rotas têm prévia de link (og:image JPEG absoluta e acessível)", async ({ page, request, isMobile }) => {
+  test.skip(isMobile, "metadados não dependem do viewport");
+  for (const path of ["/", "/portfolio", "/produtos", "/produtos/impressao-de-livros", "/sobre", "/contato", "/orcamento", "/solucoes/embalagens"]) {
+    await page.goto(path);
+    const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+    expect(image, path).toMatch(/^https:\/\/fullgraph\.com\.br\/og\/.+\.jpg$/);
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", /^https:\/\/fullgraph\.com\.br/);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+    const local = await request.get(new URL(image!).pathname);
+    expect(local.status(), image!).toBe(200);
+    expect(local.headers()["content-type"]).toContain("image/jpeg");
+  }
+});

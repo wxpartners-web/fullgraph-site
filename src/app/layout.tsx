@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { BrandIntro } from "@/components/motion/BrandIntro";
 import { LenisProvider } from "@/components/motion/LenisProvider";
-import { localBusinessJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, localBusinessJsonLd } from "@/lib/seo";
 
 /* Direção tipográfica editorial (refino pós-Gate 5):
    Bodoni Moda (didone de alto contraste, fonte variável com eixo
@@ -54,6 +54,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "pt_BR",
     type: "website",
+    url: site.url,
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
 };
