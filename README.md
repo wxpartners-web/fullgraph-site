@@ -45,7 +45,7 @@ npm run logo:variant          # regenera a variante clara do logotipo
 | Variável | O que é |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | URL pública (canonical/sitemap/OG) |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **IMPORTANTE**: número comercial de WhatsApp, só dígitos com DDI (ex. `5561999999999`). O site antigo não publicava esse número — confirme com a Fullgraph. Sem ele, todos os CTAs de WhatsApp degradam automaticamente para telefone fixo `(61) 3022-0027` e e-mail. |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | **IMPORTANTE**: número comercial de WhatsApp, só dígitos com DDI (ex. `5561999999999`). O site antigo não publicava esse número — confirme com a Fullgraph. Sem ele, todos os CTAs de WhatsApp degradam automaticamente para o telefone `(61) 99619-4141` e o e-mail. |
 
 ## Dados que precisam de substituição/confirmação
 

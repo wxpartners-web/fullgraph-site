@@ -13,13 +13,13 @@ export const site: SiteConfig = {
   description:
     "Impressão, livros, embalagens e grandes tiragens entregues em todo o Brasil. Orçamento personalizado para empresas, editoras e restaurantes.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fullgraph.com.br",
-  phone: { display: "(61) 3022-0027", e164: "+556130220027" },
+  phone: { display: "(61) 99619-4141", e164: "+5561996194141" },
   whatsapp: {
     number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? null,
     defaultMessage:
       "Olá! Vim pelo site da Fullgraph e gostaria de solicitar um orçamento.",
   },
-  email: "fullgraph109@gmail.com",
+  email: "leonardo@fullgraph.com.br",
   address: {
     street: "SIBS Qd. 03, conj. A lote 19/21, Térreo",
     neighborhood: "Núcleo Bandeirante",
