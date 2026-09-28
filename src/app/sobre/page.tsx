@@ -4,7 +4,7 @@ import { site, trueHighlights } from "@/data/site";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CtaFinal } from "@/components/sections/CtaFinal";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 export const metadata = pageMetadata({
   title: "Sobre a Fullgraph",
@@ -32,8 +32,7 @@ export default function SobrePage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lead mt-6 max-w-2xl text-steel">
-              A Fullgraph é uma gráfica instalada no Núcleo Bandeirante, em
-              Brasília-DF, que atende clientes em todo o Brasil — de autores
+              A Fullgraph é uma gráfica de Brasília-DF que atende clientes em todo o Brasil — de autores
               independentes a redes de alimentação e empresas com grandes
               tiragens.
             </p>
@@ -84,14 +83,7 @@ export default function SobrePage() {
       <section className="grain relative bg-carbon py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHeading eyebrow="Onde estamos" title="Base em Brasília, alcance nacional" />
-          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div className="flex gap-3 border-t border-white-tech/10 pt-5">
-              <MapPin aria-hidden="true" className="mt-0.5 size-5 flex-none text-ink" />
-              <div>
-                <h2 className="text-sm font-semibold text-white-tech">Endereço</h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-steel">{site.address.full}</p>
-              </div>
-            </div>
+          <div className="mt-10 grid max-w-3xl grid-cols-1 gap-8 md:grid-cols-2">
             <div className="flex gap-3 border-t border-white-tech/10 pt-5">
               <Phone aria-hidden="true" className="mt-0.5 size-5 flex-none text-ink" />
               <div>

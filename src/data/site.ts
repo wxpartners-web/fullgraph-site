@@ -21,12 +21,8 @@ export const site: SiteConfig = {
   },
   email: "leonardo@fullgraph.com.br",
   address: {
-    street: "SIBS Qd. 03, conj. A lote 19/21, Térreo",
-    neighborhood: "Núcleo Bandeirante",
     city: "Brasília",
     state: "DF",
-    zip: "71736-301",
-    full: "SIBS Qd. 03, conj. A lote 19/21, Térreo — Núcleo Bandeirante, Brasília-DF, CEP 71736-301",
   },
 };
 

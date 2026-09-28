@@ -56,10 +56,8 @@ export function localBusinessJsonLd() {
     slogan: site.tagline,
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${site.address.street}, ${site.address.neighborhood}`,
       addressLocality: site.address.city,
       addressRegion: site.address.state,
-      postalCode: site.address.zip,
       addressCountry: "BR",
     },
     areaServed: { "@type": "Country", name: "Brasil" },

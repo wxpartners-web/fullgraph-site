@@ -4,12 +4,12 @@ import { Reveal } from "@/components/motion/Reveal";
 import { InkButton } from "@/components/ui/InkButton";
 import { CtaFinal } from "@/components/sections/CtaFinal";
 import { hasWhatsApp, whatsappUrl, whatsappCtaLabel } from "@/lib/whatsapp";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock } from "lucide-react";
 
 export const metadata = pageMetadata({
   title: "Contato",
   description:
-    "Fale com a Fullgraph: telefone (61) 99619-4141, e-mail e endereço no Núcleo Bandeirante, Brasília-DF. Atendimento em todo o Brasil.",
+    "Fale com a Fullgraph: telefone (61) 99619-4141, e-mail e WhatsApp. Gráfica em Brasília-DF com atendimento em todo o Brasil.",
   path: "/contato",
 });
 
@@ -72,12 +72,6 @@ export default function ContatoPage() {
               <a href={`mailto:${site.email}`} className="mt-3 block break-all text-lg font-semibold hover:text-ink-paper">
                 {site.email}
               </a>
-            </div>
-            <div className="border-t-2 border-carbon/15 pt-5">
-              <p className="text-spec flex items-center gap-2 text-carbon/60">
-                <MapPin aria-hidden="true" className="size-4" /> Endereço
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-carbon/85">{site.address.full}</p>
             </div>
             <div className="border-t-2 border-carbon/15 pt-5">
               <p className="text-spec flex items-center gap-2 text-carbon/60">

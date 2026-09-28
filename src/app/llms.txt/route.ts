@@ -113,7 +113,6 @@ Canais diretos publicados na página de contato:
 
 - Telefone: ${site.phone.display}
 - E-mail: ${site.email}
-- Endereço: ${site.address.full}
 
 O atendimento é comercial, em horário de expediente de Brasília.
 

@@ -111,13 +111,10 @@ export interface SiteConfig {
     defaultMessage: string;
   };
   email: string;
+  /** Só cidade/UF — o endereço completo não é publicado no site */
   address: {
-    street: string;
-    neighborhood: string;
     city: string;
     state: string;
-    zip: string;
-    full: string;
   };
 }
 
