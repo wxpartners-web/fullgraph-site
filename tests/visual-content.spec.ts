@@ -74,3 +74,28 @@ test("narrativa animada passa pelas seis etapas no desktop", async ({ page, isMo
   }
   expect(seen).toEqual(["arquivo", "cores", "impressao", "acabamento", "produto", "entrega"]);
 });
+
+test("com movimento reduzido, títulos e grades aparecem (sem style oculto do SSR)", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/portfolio");
+  const h1 = page.getByRole("heading", { level: 1 });
+  await expect(h1).toBeVisible();
+  await expect
+    .poll(() => h1.evaluate((el) => getComputedStyle(el.parentElement as HTMLElement).clipPath))
+    .not.toContain("100%");
+  const figures = page.locator("main figure");
+  await expect(figures).toHaveCount(8);
+  for (let i = 0; i < 8; i++) {
+    await expect
+      .poll(() =>
+        figures.nth(i).evaluate((el) => {
+          let opacity = 1;
+          for (let node: HTMLElement | null = el as HTMLElement; node; node = node.parentElement) {
+            opacity *= Number(getComputedStyle(node).opacity);
+          }
+          return opacity;
+        }),
+      )
+      .toBeGreaterThan(0.9);
+  }
+});
