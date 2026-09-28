@@ -512,21 +512,32 @@ body {
   );
 }
 
-/* Mobile: mancha vertical difusa atrás da coluna de texto — nunca uma
-   placa; a base fica aberta para a pilha de papel respirar. */
+/* Mobile: o texto ancora na metade de baixo (HeroCinema) e a proteção
+   vira um gradiente vertical — o terço superior do quadro mostra a
+   pilha de papel e o respingo de pigmento sem véu nenhum. O ::before
+   deixa de ser a faixa horizontal do desktop e vira o reforço local
+   das linhas do itálico laranja (#ff4d00 exige fundo quase preto),
+   esmaecendo antes da borda direita para o pigmento respirar. */
 @media (max-width: 1023px) {
-  .hero-pool-0::before {
-    content: none;
-  }
   .hero-pool-0 {
+    background: linear-gradient(
+      180deg,
+      rgb(11 11 12 / 0) 22%,
+      rgb(11 11 12 / 0.3) 34%,
+      rgb(11 11 12 / 0.66) 44%,
+      rgb(11 11 12 / 0.8) 54%,
+      rgb(11 11 12 / 0.84) 100%
+    );
+  }
+  .hero-pool-0::before {
     background: radial-gradient(
-      ellipse 130% 48% at 50% 42%,
-      rgb(11 11 12 / 0.87) 0%,
-      rgb(11 11 12 / 0.85) 62%,
-      rgb(11 11 12 / 0.5) 84%,
-      rgb(11 11 12 / 0.2) 94%,
+      ellipse 90% 28% at 34% 44%,
+      rgb(11 11 12 / 0.6) 0%,
+      rgb(11 11 12 / 0.35) 55%,
       rgb(11 11 12 / 0) 100%
     );
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 .hero-band {

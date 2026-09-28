@@ -485,13 +485,30 @@ test.describe("sistema de legibilidade do hero (manchas orgânicas)", () => {
     }
   });
 
-  test("mobile: mancha vertical difusa com base aberta", async ({ page, isMobile }) => {
+  test("mobile: véu ancorado na base com topo aberto + reforço radial do itálico", async ({
+    page,
+    isMobile,
+  }) => {
     test.skip(!isMobile, "só mobile");
     await page.goto("/");
+    // Véu principal (texto ancora na metade de baixo desde o trial do
+    // loop): linear, topo 100% transparente — a pilha de papel respira
+    // sem véu — e base ≥0.8 sob o texto, com feather sem borda visível
     const { bg, isRadial } = await stopsOf(page, "hero-pool hero-pool-0");
-    expect(isRadial).toBe(true);
-    expect(alphaAt(bg, 0)).toBeGreaterThanOrEqual(0.8);
-    expect(bg[bg.length - 1].alpha).toBe(0);
+    expect(isRadial).toBe(false);
+    expect(alphaAt(bg, 0)).toBe(0);
+    expect(alphaAt(bg, 100)).toBeGreaterThanOrEqual(0.8);
+    let maiorSalto = 0;
+    for (let x = 0; x < 100; x += 2) {
+      maiorSalto = Math.max(maiorSalto, Math.abs(alphaAt(bg, x) - alphaAt(bg, x + 2)));
+    }
+    expect(maiorSalto).toBeLessThanOrEqual(0.2);
+    // Reforço local das linhas do itálico laranja: radial que morre em
+    // transparência total — nunca um segundo véu
+    const before = await stopsOf(page, "hero-pool hero-pool-0", "::before");
+    expect(before.isRadial).toBe(true);
+    expect(alphaAt(before.bg, 0)).toBeGreaterThanOrEqual(0.5);
+    expect(before.bg[before.bg.length - 1].alpha).toBe(0);
   });
 
   test("as manchas acompanham a opacidade das bandas durante o scrub", async ({

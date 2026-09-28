@@ -29,7 +29,7 @@ export function HeroCinema() {
       className="grain relative min-h-svh bg-carbon lg:h-[var(--hero-cinema-h)]"
       style={{ "--hero-cinema-h": `${HERO_SECTION_SVH}svh` } as React.CSSProperties}
     >
-      <div className="relative flex min-h-svh flex-col justify-center overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-0">
+      <div className="relative flex min-h-svh flex-col justify-end overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-0 lg:justify-center">
         {/* Poster SSR — o hero é completo mesmo se o vídeo nunca chegar */}
         <HeroStill />
         {/* Vídeo scrub: só monta em desktop elegível */}
@@ -60,7 +60,7 @@ export function HeroCinema() {
         {/* Banda 0 — H1 + CTA no HTML inicial, abre assentada */}
         <div
           data-band="0"
-          className="hero-band relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-32 md:px-8"
+          className="hero-band relative z-10 mx-auto w-full max-w-7xl px-5 pb-32 pt-24 md:px-8 lg:pb-24 lg:pt-32"
           style={{ opacity: "var(--hb0-o, 1)" }}
         >
           <p className="text-eyebrow hero-rise mb-6 flex items-center gap-3 text-steel">
