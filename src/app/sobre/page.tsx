@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { pageMetadata } from "@/lib/seo";
 import { site, trueHighlights } from "@/data/site";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -16,7 +17,8 @@ export default function SobrePage() {
   return (
     <>
       <section className="grain relative bg-carbon pb-20 pt-40 md:pb-28 md:pt-48">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-5 md:grid-cols-[1.4fr_1fr] md:px-8">
+          <div>
           <Reveal>
             <p className="text-spec mb-6 flex items-center gap-3 text-steel">
               <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
@@ -35,6 +37,25 @@ export default function SobrePage() {
               independentes a redes de alimentação e empresas com grandes
               tiragens.
             </p>
+          </Reveal>
+          </div>
+
+          <Reveal delay={0.15}>
+            <figure>
+              <div className="crop-marks relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden text-steel-2">
+                <Image
+                  src="/images/institutional/papeis-e-acabamentos.webp"
+                  alt="Mostruário de papéis e acabamentos aberto em leque: papel sem revestimento, couché, kraft, hot stamping dourado, relevo seco, verniz localizado e laminação soft touch"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 384px, 90vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="text-spec mx-auto mt-3 max-w-sm text-steel-2">
+                Papel, cor e acabamento definidos junto com você. Imagem ilustrativa.
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>

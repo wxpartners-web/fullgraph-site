@@ -19,7 +19,7 @@ const config: SolutionConfig = {
   heroMockup: "box",
   heroImage: {
     src: "/images/solutions/solucao-embalagens.webp",
-    alt: "Família de embalagens impressas para alimentação: caixa de hambúrguer, saco kraft, papel de bandeja e rótulos",
+    alt: "Família de embalagens da hamburgueria fictícia Brasa Bruta em kraft impresso preto e vermelho: caixa de hambúrguer, saco de delivery, porta-fritas, adesivos e papel de bandeja",
   },
   arguments: [
     {

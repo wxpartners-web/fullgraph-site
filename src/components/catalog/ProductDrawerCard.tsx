@@ -44,7 +44,7 @@ export function ProductDrawerCard({
                 src={product.image.src}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
               />
               {/* proteção da spec técnica que revela sobre a foto */}
@@ -76,7 +76,7 @@ export function ProductDrawerCard({
 
           {/* índice de categoria */}
           {category && (
-            <span className="text-spec absolute left-3 top-3 text-steel-2" aria-hidden="true">
+            <span className="text-spec absolute left-3 top-3 bg-carbon/75 px-2 py-1 text-white-tech backdrop-blur-sm" aria-hidden="true">
               {category.index}
             </span>
           )}

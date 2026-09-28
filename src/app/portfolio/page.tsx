@@ -6,7 +6,7 @@ import { CtaFinal } from "@/components/sections/CtaFinal";
 export const metadata = pageMetadata({
   title: "Portfolio",
   description:
-    "Tipos de trabalho que saem da produção da Fullgraph: livros, embalagens, catálogos, tabloides e mais — composições demonstrativas.",
+    "Projetos conceituais que exploram o potencial de cada material, formato e acabamento: livros, embalagens, lookbooks, rótulos, papéis de bandeja e campanhas impressas.",
   path: "/portfolio",
 });
 
@@ -23,14 +23,15 @@ export default function PortfolioPage() {
           </Reveal>
           <Reveal kind="clip">
             <h1 className="text-h1 max-w-4xl font-semibold text-white-tech">
-              O que sai da <em className="font-serif font-normal italic text-ink">prensa</em>
+              Ideias que ganham <em className="font-serif font-normal italic text-ink">forma</em>
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lead mt-6 max-w-2xl text-steel">
-              Uma amostra dos tipos de trabalho que produzimos. As peças abaixo são
-              composições demonstrativas — cases reais entram conforme autorização
-              dos clientes.
+              Projetos conceituais que exploram o potencial de cada material,
+              formato e acabamento. Cada marca foi criada para mostrar o que o
+              papel certo, a cor calibrada e o acabamento bem resolvido fazem
+              por um produto.
             </p>
           </Reveal>
         </div>

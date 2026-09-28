@@ -43,7 +43,7 @@ const INSTITUTIONAL_PAGES = [
   {
     path: "/portfolio",
     title: "Portfolio",
-    note: "Tipos de trabalho que saem da produção, apresentados como composições demonstrativas — não são fotos de clientes.",
+    note: "Projetos conceituais com marcas fictícias criadas para mostrar o potencial de cada material, formato e acabamento — não são trabalhos de clientes.",
   },
   {
     path: "/sobre",
@@ -96,7 +96,7 @@ Observações importantes para interpretar o conteúdo corretamente:
 
 - Nenhuma página publica preços, tabelas de valores ou prazos fechados. Onde aparece "sob consulta", o valor depende do orçamento.
 - As faixas de tiragem e as especificações técnicas listadas nas páginas de produto são pontos de partida para a cotação, não um catálogo fechado de opções.
-- As imagens do portfolio e das páginas de produto são composições demonstrativas geradas para o site, não registros de trabalhos entregues a clientes identificados.
+- As imagens do portfolio, das páginas de produto e da seção de processo são fotografias conceituais geradas para o site, com marcas fictícias. Não são registros de trabalhos entregues a clientes nem fotos da fábrica ou da equipe da Fullgraph.
 - O site não divulga certificações, prêmios, número de clientes, capacidade instalada nem lista de clientes. Ausência de menção significa ausência de dado público, não negação.
 
 ## Públicos e linhas de negócio

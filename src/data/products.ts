@@ -144,8 +144,8 @@ export const products: Product[] = [
     related: ["impressao-de-revistas", "impressao-de-catalogos", "apostilas-e-espirais"],
     mockup: "book",
     image: {
-      src: "/images/products/impressao-de-livros.webp",
-      alt: "Pilha de livros brochura com capas em papel cru e laranja, lombadas quadradas alinhadas",
+      src: "/images/products/livros-editora-pequi.webp",
+      alt: "Três romances da Coleção Cerrado Adentro, da editora fictícia Editora Pequi, com capas em linogravura de plantas do cerrado; um aberto mostra o miolo em papel pólen",
     },
     featured: true,
   },
@@ -176,8 +176,8 @@ export const products: Product[] = [
     related: ["impressao-de-livros", "impressao-de-catalogos"],
     mockup: "book",
     image: {
-      src: "/images/products/apostilas-e-espirais.webp",
-      alt: "Apostilas com encadernação wire-o empilhadas, a de cima aberta mostrando o miolo pautado",
+      src: "/images/products/apostilas-instituto-vertice.webp",
+      alt: "Apostilas A4 com encadernação wire-o do curso fictício Instituto Vértice, capas azul-marinho e amarelo, uma aberta em página de exercícios de geometria",
     },
   },
 
@@ -209,8 +209,8 @@ export const products: Product[] = [
     related: ["impressao-de-revistas", "folders-e-dobrados", "impressao-de-livros"],
     mockup: "stack",
     image: {
-      src: "/images/products/impressao-de-catalogos.webp",
-      alt: "Catálogo aberto sobre pilha de exemplares, com spread de blocos gráficos laranja e grafite",
+      src: "/images/products/catalogos-taia-moveis.webp",
+      alt: "Catálogo da marca fictícia Taiá Móveis, Coleção Aurora 2027: exemplar aberto em página dupla com mesa de madeira e desenho técnico, outro fechado ao lado",
     },
     featured: true,
   },
@@ -241,8 +241,8 @@ export const products: Product[] = [
     related: ["impressao-de-catalogos", "jornais-e-tabloides"],
     mockup: "stack",
     image: {
-      src: "/images/products/impressao-de-revistas.webp",
-      alt: "Revistas grampeadas em leque, uma aberta mostrando o grampo canoa da lombada",
+      src: "/images/products/revistas-planalto.webp",
+      alt: "Quatro edições grampeadas da revista fictícia Planalto em leque, com capas coloridas de arquitetura modernista e uma aberta em matéria",
     },
   },
   {
@@ -272,8 +272,8 @@ export const products: Product[] = [
     related: ["flyers-e-panfletos", "impressao-de-revistas"],
     mockup: "sheet",
     image: {
-      src: "/images/products/jornais-e-tabloides.webp",
-      alt: "Pilha de tabloides dobrados em papel jornal com layout de blocos laranja e preto",
+      src: "/images/products/tabloides-vila-nova.webp",
+      alt: "Pilha de tabloides em papel jornal do supermercado fictício Vila Nova, capa com ofertas da semana e selos de preço amarelos",
     },
   },
 
@@ -305,9 +305,10 @@ export const products: Product[] = [
     related: ["flyers-e-panfletos", "cadernos-personalizados"],
     mockup: "sheet",
     image: {
-      src: "/images/products/papelaria-institucional.webp",
-      alt: "Kit de papelaria corporativa visto de cima: timbrado, envelopes, pasta e cartões de visita",
+      src: "/images/products/papelaria-almeida-sato.webp",
+      alt: "Kit de papelaria do escritório fictício Almeida & Sato Advocacia em verde-escuro e branco: timbrado, envelope, pasta com monograma dourado e cartões de visita",
     },
+    featured: true,
   },
 
   /* ---------- Flyers, folders e tabloides ---------- */
@@ -338,8 +339,8 @@ export const products: Product[] = [
     related: ["folders-e-dobrados", "jornais-e-tabloides"],
     mockup: "stack",
     image: {
-      src: "/images/products/flyers-e-panfletos.webp",
-      alt: "Leque de flyers em papel couché com composição geométrica laranja e creme",
+      src: "/images/products/flyers-sonora.webp",
+      alt: "Flyers do festival fictício Sonora no Parque em rosa fluorescente e azul, espalhados em leque e empilhados sobre concreto claro",
     },
     featured: true,
   },
@@ -370,8 +371,8 @@ export const products: Product[] = [
     related: ["flyers-e-panfletos", "impressao-de-catalogos"],
     mockup: "sheet",
     image: {
-      src: "/images/products/folders-e-dobrados.webp",
-      alt: "Folders de três dobras em pé, em sanfona, com vincos precisos e grafismo laranja",
+      src: "/images/products/folders-serra-do-mel.webp",
+      alt: "Folders de três dobras da pousada fictícia Serra do Mel em verde-sálvia e mel: um aberto em sanfona com fotos dos quartos, outro fechado com a capa",
     },
   },
 
@@ -408,8 +409,8 @@ export const products: Product[] = [
     related: ["papeis-de-bandeja-personalizados", "rotulos-e-etiquetas", "sacos-e-embalagens-delivery"],
     mockup: "box",
     image: {
-      src: "/images/products/embalagens-para-hamburguer.webp",
-      alt: "Caixas de hambúrguer em papel-cartão kraft com faixa impressa laranja, uma fechada e outra aberta",
+      src: "/images/products/hamburguer-brasa-bruta.webp",
+      alt: "Caixas de hambúrguer em papel-cartão kraft da hamburgueria fictícia Brasa Bruta, impressas em preto e vermelho, uma fechada e outra aberta com o lanche",
     },
     featured: true,
   },
@@ -439,8 +440,8 @@ export const products: Product[] = [
     related: ["embalagens-para-hamburguer", "papeis-de-bandeja-personalizados"],
     mockup: "box",
     image: {
-      src: "/images/products/sacos-e-embalagens-delivery.webp",
-      alt: "Sacos SOS de papel kraft com arco laranja impresso e sacola branca menor ao lado",
+      src: "/images/products/delivery-trigo-fermento.webp",
+      alt: "Sacos kraft da padaria fictícia Trigo & Fermento impressos em azul-marinho, um com pães e baguetes, outro fechado com adesivo",
     },
   },
   {
@@ -470,8 +471,8 @@ export const products: Product[] = [
     related: ["embalagens-para-hamburguer", "sacos-e-embalagens-delivery"],
     mockup: "sheet",
     image: {
-      src: "/images/products/papeis-de-bandeja-personalizados.webp",
-      alt: "Bandeja forrada com papel impresso em padrão geométrico laranja e pilha de forros ao lado",
+      src: "/images/products/bandeja-frango-dourado.webp",
+      alt: "Bandeja vermelha com papel impresso da rede fictícia Frango Dourado, ilustrado com mapa de fazenda e labirinto, lanche e fritas por cima e pilha de forros ao lado",
     },
     featured: true,
   },
@@ -502,8 +503,8 @@ export const products: Product[] = [
     related: ["embalagens-para-hamburguer", "papelaria-institucional"],
     mockup: "roll",
     image: {
-      src: "/images/products/rotulos-e-etiquetas.webp",
-      alt: "Rolo de rótulos adesivos parcialmente desenrolado com etiquetas laranja de corte arredondado",
+      src: "/images/products/rotulos-sete-serras.webp",
+      alt: "Rolo de rótulos hexagonais do apiário fictício Sete Serras com hot stamping dourado e três potes de mel com o rótulo aplicado",
     },
   },
 
@@ -535,8 +536,8 @@ export const products: Product[] = [
     related: ["papelaria-institucional", "impressao-de-catalogos"],
     mockup: "book",
     image: {
-      src: "/images/products/cadernos-personalizados.webp",
-      alt: "Cadernos personalizados: capa dura grafite com emblema laranja e wire-o aberto em miolo pontilhado",
+      src: "/images/products/cadernos-vale-verde.webp",
+      alt: "Agendas 2027 de capa dura verde-oliva com hot stamping cobre da cooperativa fictícia Vale Verde, uma aberta em página semanal, e caderno wire-o creme",
     },
   },
 
@@ -568,8 +569,8 @@ export const products: Product[] = [
     related: ["flyers-e-panfletos", "rotulos-e-etiquetas"],
     mockup: "sign",
     image: {
-      src: "/images/products/banners-e-grandes-formatos.webp",
-      alt: "Banner de lona parcialmente desenrolado com ilhoses metálicos e grafismo laranja, rolos ao fundo",
+      src: "/images/products/banners-sabores-cerrado.webp",
+      alt: "Banner roll-up e banner com ilhoses da feira fictícia Sabores do Cerrado, em terracota, mostarda e verde, montados em pavilhão de eventos",
     },
   },
 ];

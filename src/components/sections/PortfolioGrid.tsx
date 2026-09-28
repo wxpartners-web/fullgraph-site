@@ -6,6 +6,10 @@ import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { ProductMockup } from "@/components/catalog/ProductMockup";
 import { portfolioItems } from "@/data/portfolio";
 
+export const PORTFOLIO_TITLE = "Ideias que ganham forma";
+export const PORTFOLIO_INTRO =
+  "Projetos conceituais que exploram o potencial de cada material, formato e acabamento.";
+
 export function PortfolioGrid({
   compact = false,
   showHeading = true,
@@ -23,32 +27,32 @@ export function PortfolioGrid({
             <SectionHeading
               index="05"
               eyebrow="Portfolio"
-              title="Matéria que já saiu da prensa"
-              serifWord="prensa"
-              description="Composições demonstrativas — os cases reais entram aqui conforme forem autorizados pelos clientes."
+              title={PORTFOLIO_TITLE}
+              serifWord="forma"
+              description={PORTFOLIO_INTRO}
             />
             <Link
               href="/portfolio"
               className="group text-spec flex items-center gap-2 text-steel transition-colors hover:text-white-tech"
             >
-              Ver portfolio
+              Ver portfolio completo
               <ArrowUpRight aria-hidden="true" className="size-4 transition-transform duration-[var(--dur-micro)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
         ) : (
           <SectionHeading
             eyebrow="Portfolio"
-            title="Matéria que já saiu da prensa"
-            serifWord="prensa"
-            description="Composições demonstrativas de tipos de trabalho que produzimos — os cases reais entram aqui conforme forem autorizados pelos clientes."
+            title={PORTFOLIO_TITLE}
+            serifWord="forma"
+            description={PORTFOLIO_INTRO}
           />
         )}
 
         <RevealGroup
           className={
             showHeading
-              ? "mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-              : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              ? "mt-14 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"
+              : "grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"
           }
           stagger={0.06}
         >
@@ -72,14 +76,14 @@ export function PortfolioGrid({
                       <ProductMockup kind={item.mockup} accent={item.palette[0]} base={item.palette[1]} />
                     )}
                   </div>
-                  <span className="text-spec absolute left-3 top-3 text-steel">{item.segment}</span>
+                  <span className="text-spec absolute left-3 top-3 bg-carbon/70 px-2 py-1 text-white-tech backdrop-blur-sm">
+                    {item.segment}
+                  </span>
                 </div>
-                <figcaption className="mt-3">
-                  <p className="text-sm font-medium text-white-tech">{item.title}</p>
-                  <p className="text-spec mt-1 text-steel-2">
-                    {item.productType}
-                    {item.placeholder && " · exemplo ilustrativo"}
-                  </p>
+                <figcaption className="mt-4">
+                  <p className="text-base font-semibold tracking-tight text-white-tech">{item.brand}</p>
+                  <p className="mt-0.5 text-sm text-steel">{item.piece}</p>
+                  <p className="text-spec mt-2 text-steel-2">{item.caption}</p>
                 </figcaption>
               </figure>
             </RevealItem>

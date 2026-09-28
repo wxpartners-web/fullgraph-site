@@ -24,7 +24,7 @@ O frontend foi construído frontend-only, mas com costuras claras para cada inte
 - Todo o conteúdo estruturado está em `src/data/*.ts` com tipos em `src/types/index.ts` (`Product`, `Category`, `PortfolioItem`, `QuoteOption`). Esses tipos são o contrato: modele as coleções do CMS espelhando-os.
 - As páginas consomem apenas os helpers (`getProduct`, `getProductsByCategory`, `getFeaturedProducts`, etc. em `products.ts`) — troque a implementação dos helpers por fetch do CMS sem tocar em componente.
 - `generateStaticParams` em `app/produtos/[slug]/page.tsx` deriva do array de produtos; com CMS, use a listagem remota + ISR (`revalidate`).
-- Portfolio: substituir itens `placeholder: true` por cases reais (título, segmento, tipo, e futuramente imagens próprias).
+- Portfolio: hoje são projetos conceituais com marcas fictícias (`brand`, `piece`, `caption`, `segment`). Cases reais só entram com autorização do cliente — nesse caso, ajuste também o texto do cabeçalho da seção, que declara os projetos como conceituais.
 
 ## 5. E-commerce / compra online (fase futura)
 

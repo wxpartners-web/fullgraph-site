@@ -7,7 +7,7 @@ const routes: { path: string; h1: RegExp }[] = [
   { path: "/solucoes/embalagens", h1: /Sua marca chega/i },
   { path: "/produtos", h1: /gaveta de/i },
   { path: "/produtos/impressao-de-livros", h1: /Impressão de livros/i },
-  { path: "/portfolio", h1: /O que sai da/i },
+  { path: "/portfolio", h1: /Ideias que ganham/i },
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
   { path: "/contato", h1: /Vamos/i },

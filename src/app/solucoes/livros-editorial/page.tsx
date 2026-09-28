@@ -19,7 +19,7 @@ const config: SolutionConfig = {
   heroMockup: "book",
   heroImage: {
     src: "/images/solutions/solucao-livros-editorial.webp",
-    alt: "Livro brochura entreaberto em leque sobre pilha de livros com capas creme e laranja",
+    alt: "Livros de editoras fictícias na estante e sobre a mesa, com um exemplar de capa dura aberto e a prova impressa da capa de Buritizal com marcas de corte",
   },
   arguments: [
     {

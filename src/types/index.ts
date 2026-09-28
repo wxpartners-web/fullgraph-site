@@ -30,7 +30,7 @@ export type MockupKind = "book" | "box" | "sheet" | "stack" | "roll" | "sign";
 
 /** Foto de produto servida de /public — gerada por IA (conceitual) ou real */
 export interface ProductImage {
-  /** Caminho absoluto em /public, ex. "/images/products/impressao-de-livros.webp" */
+  /** Caminho absoluto em /public, ex. "/images/products/livros-editora-pequi.webp" */
   src: string;
   /** Texto alternativo objetivo, em pt-BR */
   alt: string;
@@ -71,18 +71,24 @@ export interface Product {
   accent?: string;
 }
 
+/**
+ * Projeto conceitual do portfolio: marca fictícia, peça e legenda.
+ * Não representa encomenda de cliente real — a seção declara isso
+ * uma única vez no cabeçalho ("Projetos conceituais…").
+ */
 export interface PortfolioItem {
   id: string;
-  title: string;
+  /** Marca fictícia criada para o projeto */
+  brand: string;
+  /** Peça impressa apresentada, ex.: "Caixa para hambúrguer" */
+  piece: string;
+  /** Legenda curta sobre material/acabamento visível na foto */
+  caption: string;
   segment: string;
-  productType: string;
   /** Composição procedural do card — fallback quando não há imagem */
   mockup: MockupKind;
   palette: [string, string];
-  /** Peça conceitual gerada por IA, exibida como "exemplo ilustrativo" */
   image?: ProductImage;
-  /** Dados provisórios — substituir por cases reais (BACKEND-HANDOFF) */
-  placeholder: true;
 }
 
 export interface NavItem {

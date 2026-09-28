@@ -19,7 +19,7 @@ const config: SolutionConfig = {
   heroMockup: "stack",
   heroImage: {
     src: "/images/solutions/solucao-empresas.webp",
-    alt: "Pilhas altas de catálogos e flyers recém-impressos com capas em laranja e grafite",
+    alt: "Materiais corporativos da empresa fictícia Horizonte Logística em azul-marinho e verde-água: relatório anual, catálogo de produtos, folder e cartões de visita",
   },
   arguments: [
     {
