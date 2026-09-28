@@ -107,6 +107,20 @@ test("mockup reage às escolhas", async ({ page }) => {
   await next(page);
   await pickOption(page, /Embalagem para alimentos/);
   await expect(mockup).toContainText(/caixa com encaixe/i);
+  // a foto da prévia acompanha o produto escolhido
+  await expect(mockup.locator('img[src*="hamburguer-brasa-bruta"]').first()).toBeAttached();
+});
+
+test("prévia continua visível enquanto o visitante escolhe (celular)", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "barra fixa só no layout compacto");
+  await page.goto("/orcamento");
+  await pickOption(page, /Restaurante/);
+  await next(page);
+  await pickOption(page, /Papel de bandeja/);
+  const preview = page.getByRole("complementary", { name: "Prévia do seu material" });
+  await page.getByRole("radio", { name: /Outro produto/ }).scrollIntoViewIfNeeded();
+  await expect(preview).toBeInViewport();
+  await expect(preview).toContainText(/Papel de bandeja/);
 });
 
 test("resumo permite voltar e editar etapa", async ({ page }) => {

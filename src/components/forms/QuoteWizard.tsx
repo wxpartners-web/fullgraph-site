@@ -553,33 +553,38 @@ export function QuoteWizard() {
         </form>
       </div>
 
-      {/* Coluna do mockup reativo */}
-      <aside className="order-first lg:order-none" aria-label="Prévia do seu material">
-        <div className="lg:sticky lg:top-28">
-          <div className="crop-marks relative border border-carbon/15 bg-paper-2/60 p-6 text-carbon/60">
-            <p className="text-spec text-carbon/65">Prévia · ilustrativa</p>
-            <QuoteMockup
-              produto={values.produto}
-              formato={values.formato}
-              quantidade={values.quantidade}
-              paginas={values.paginas}
-              material={values.material}
-              acabamento={values.acabamento}
-            />
-            {/* resumo corrido */}
-            <div className="mt-2 min-h-10 border-t border-carbon/10 pt-3">
-              <p className="text-spec leading-relaxed text-carbon/60" aria-live="polite">
-                {[
-                  values.produto && optionText(quoteProducts, values.produto),
-                  values.quantidade && optionText(quantities, values.quantidade),
-                  values.material && optionText(materials, values.material),
-                  values.prazo && optionText(deadlines, values.prazo),
-                ]
-                  .filter(Boolean)
-                  .join(" · ") || "Suas escolhas aparecem aqui"}
-              </p>
-            </div>
-          </div>
+      {/* Prévia ilustrativa — barra fixa no topo (mobile) / coluna fixa (desktop) */}
+      <aside
+        className="sticky top-[var(--header-h)] z-30 order-first -mx-5 self-start border-b border-carbon/15 bg-paper/95 px-5 py-3 backdrop-blur-md md:-mx-8 md:px-8 lg:top-28 lg:order-none lg:mx-0 lg:border-b-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none"
+        aria-label="Prévia do seu material"
+      >
+        <div className="lg:relative lg:border lg:border-carbon/15 lg:bg-paper-2/60 lg:p-6 lg:text-carbon/60">
+          <p className="text-spec mb-2 hidden text-carbon/65 lg:mb-4 lg:block">Prévia · ilustrativa</p>
+          <QuoteMockup
+            segmento={values.segmento}
+            produto={values.produto}
+            formato={values.formato}
+            quantidade={values.quantidade}
+            paginas={values.paginas}
+            cores={values.cores}
+            material={values.material}
+            acabamento={values.acabamento}
+            encadernacao={values.encadernacao}
+          />
+          {/* resumo corrido para leitores de tela */}
+          <p className="sr-only" aria-live="polite">
+            {[
+              values.produto && optionText(quoteProducts, values.produto),
+              values.quantidade && optionText(quantities, values.quantidade),
+              values.material && optionText(materials, values.material),
+              values.prazo && optionText(deadlines, values.prazo),
+            ]
+              .filter(Boolean)
+              .join(" · ") || "Suas escolhas aparecem aqui"}
+          </p>
+          <p className="text-spec mt-4 hidden border-t border-carbon/10 pt-3 text-carbon/50 lg:block">
+            Imagem ilustrativa de referência — o orçamento considera suas escolhas.
+          </p>
         </div>
       </aside>
     </div>
