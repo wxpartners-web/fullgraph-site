@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { getProduct, getCategory, getRelatedProducts, products } from "@/data/products";
 import { pageMetadata } from "@/lib/seo";
-import { productJsonLd, faqJsonLd } from "@/lib/seo";
+import { serviceJsonLd, faqJsonLd } from "@/lib/seo";
 import { InkButton } from "@/components/ui/InkButton";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { ProductMockup } from "@/components/catalog/ProductMockup";
@@ -17,6 +17,15 @@ interface ProdutoPageProps {
   params: Promise<{ slug: string }>;
 }
 
+const META_DESCRIPTION_MAX = 155;
+
+/** Corta no limite de caracteres sem partir palavra ao meio */
+function metaDescription(text: string): string {
+  if (text.length <= META_DESCRIPTION_MAX) return text;
+  const cut = text.slice(0, META_DESCRIPTION_MAX);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.—-]+$/, "")}…`;
+}
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -26,8 +35,8 @@ export async function generateMetadata({ params }: ProdutoPageProps): Promise<Me
   const product = getProduct(slug);
   if (!product) return {};
   return pageMetadata({
-    title: product.name,
-    description: `${product.tagline} ${product.description.slice(0, 120)}…`,
+    title: `${product.name} em Brasília-DF`,
+    description: metaDescription(`${product.tagline} ${product.description}`),
     path: `/produtos/${product.slug}`,
     image: `/og/produtos/${product.slug}.jpg`,
   });
@@ -62,7 +71,7 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(product)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd(product)) }}
       />
       {product.faq.length > 0 && (
         <script

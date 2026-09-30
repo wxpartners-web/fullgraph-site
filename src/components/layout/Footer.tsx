@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { footerNav } from "@/data/navigation";
 import { site } from "@/data/site";
 import { InkButton } from "@/components/ui/InkButton";
@@ -51,6 +51,10 @@ export function Footer() {
             <p className="text-spec mb-4 text-steel-2">Contato</p>
             <ul className="space-y-3 text-sm text-steel">
               <li className="flex gap-2.5">
+                <MapPin aria-hidden="true" className="mt-0.5 size-4 flex-none text-steel-2" />
+                <span>{site.address.full}</span>
+              </li>
+              <li className="flex gap-2.5">
                 <Phone aria-hidden="true" className="mt-0.5 size-4 flex-none text-steel-2" />
                 <a href={`tel:${site.phone.e164}`} className="hover:text-white-tech">
                   {site.phone.display}
@@ -61,6 +65,10 @@ export function Footer() {
                 <a href={`mailto:${site.email}`} className="break-all hover:text-white-tech">
                   {site.email}
                 </a>
+              </li>
+              <li className="flex gap-2.5">
+                <Clock aria-hidden="true" className="mt-0.5 size-4 flex-none text-steel-2" />
+                <span>{site.hours.display}</span>
               </li>
             </ul>
             <div className="mt-6">

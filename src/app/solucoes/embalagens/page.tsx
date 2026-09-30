@@ -2,9 +2,9 @@ import { SolutionTemplate, type SolutionConfig } from "@/components/sections/Sol
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Embalagens impressas para restaurantes e alimentação",
+  title: "Embalagens personalizadas em Brasília-DF",
   description:
-    "Caixas para hambúrguer, papéis de bandeja, sacos e rótulos personalizados — materiais aptos para contato com alimentos, em volume.",
+    "Caixas para hambúrguer, papéis de bandeja, sacos e rótulos personalizados, impressos em Brasília-DF — materiais aptos para contato com alimentos, em volume.",
   path: "/solucoes/embalagens",
 });
 

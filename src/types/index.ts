@@ -111,11 +111,25 @@ export interface SiteConfig {
     defaultMessage: string;
   };
   email: string;
-  /** Só cidade/UF — o endereço completo não é publicado no site */
   address: {
+    street: string;
+    neighborhood: string;
     city: string;
     state: string;
+    zip: string;
+    full: string;
   };
+  /** Horário presencial (retirada e visitas) — usado no rodapé, /contato e JSON-LD */
+  hours: {
+    display: string;
+    days: readonly string[];
+    opens: string;
+    closes: string;
+  };
+  /** Mensagem sobre o atendimento automático fora do horário presencial */
+  autoService: string;
+  /** Regiões atendidas, da prioritária para a mais ampla */
+  areaServed: readonly { type: "State" | "Country"; name: string }[];
 }
 
 /* ---------- Orçamento ---------- */

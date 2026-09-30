@@ -113,8 +113,11 @@ Canais diretos publicados na página de contato:
 
 - Telefone: ${site.phone.display}
 - E-mail: ${site.email}
+- Endereço: ${site.address.full}
 
-O atendimento é comercial, em horário de expediente de Brasília.
+- Horário presencial (retirada e visitas): ${site.hours.display}
+- ${site.autoService}
+- Área de atendimento: Distrito Federal e Goiás, com entrega para todo o Brasil
 
 ## Páginas institucionais
 

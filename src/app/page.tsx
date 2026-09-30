@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Hero } from "@/components/sections/Hero";
 import { SolutionPortals } from "@/components/sections/SolutionPortals";
 import { NarrativeScroll } from "@/components/sections/NarrativeScroll";
@@ -9,10 +10,15 @@ import { NationalReach } from "@/components/sections/NationalReach";
 import { CtaFinal } from "@/components/sections/CtaFinal";
 import { site } from "@/data/site";
 
+const HOME_TITLE = `Gráfica em Brasília-DF: livros, embalagens e impressão | ${site.name}`;
+const homeMeta = pageMetadata({ title: HOME_TITLE, description: site.description, path: "" });
+
+/** Título absoluto: sem o sufixo "— Fullgraph" do template, que duplicava a marca */
 export const metadata: Metadata = {
-  title: `${site.name} — Impressão, livros e embalagens para todo o Brasil`,
-  description: site.description,
-  alternates: { canonical: site.url },
+  ...homeMeta,
+  title: { absolute: HOME_TITLE },
+  openGraph: { ...homeMeta.openGraph, title: HOME_TITLE },
+  twitter: { ...homeMeta.twitter, title: HOME_TITLE },
 };
 
 export default function HomePage() {

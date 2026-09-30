@@ -47,8 +47,9 @@ export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: site.legalName,
-    alternateName: site.name,
+    "@id": `${site.url}/#empresa`,
+    name: site.name,
+    legalName: site.legalName,
     description: site.description,
     url: site.url,
     telephone: site.phone.e164,
@@ -56,27 +57,41 @@ export function localBusinessJsonLd() {
     slogan: site.tagline,
     address: {
       "@type": "PostalAddress",
+      streetAddress: `${site.address.street}, ${site.address.neighborhood}`,
       addressLocality: site.address.city,
       addressRegion: site.address.state,
+      postalCode: site.address.zip,
       addressCountry: "BR",
     },
-    areaServed: { "@type": "Country", name: "Brasil" },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: site.hours.days,
+      opens: site.hours.opens,
+      closes: site.hours.closes,
+    },
+    areaServed: site.areaServed.map((a) => ({ "@type": a.type, name: a.name })),
   };
 }
 
-export function productJsonLd(p: { name: string; description: string; slug: string }) {
+/**
+ * Cada produto é impresso sob encomenda e orçado caso a caso, então vai como
+ * Service (sem preço) em vez de Product — Product sem preço real exige price: 0,
+ * que o Google lê como "grátis".
+ */
+export function serviceJsonLd(p: { name: string; description: string; slug: string }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "Service",
     name: p.name,
     description: p.description,
     url: `${site.url}/produtos/${p.slug}`,
-    brand: { "@type": "Brand", name: site.name },
+    serviceType: p.name,
+    provider: { "@id": `${site.url}/#empresa` },
+    areaServed: site.areaServed.map((a) => ({ "@type": a.type, name: a.name })),
     offers: {
       "@type": "Offer",
-      priceSpecification: { "@type": "PriceSpecification", price: 0, priceCurrency: "BRL" },
-      availability: "https://schema.org/InStock",
-      description: "Sob consulta — orçamento personalizado",
+      description: "Orçamento personalizado conforme formato, papel, acabamento e tiragem",
+      url: `${site.url}/orcamento`,
     },
   };
 }

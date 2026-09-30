@@ -2,9 +2,9 @@ import { SolutionTemplate, type SolutionConfig } from "@/components/sections/Sol
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Impressão para empresas e grandes tiragens",
+  title: "Gráfica para empresas em Brasília-DF e grandes tiragens",
   description:
-    "Catálogos, tabloides, papelaria e campanhas em volume com padrão de cor, prazo combinado e entrega em todo o Brasil.",
+    "Catálogos, tabloides, papelaria e campanhas em volume com padrão de cor, prazo combinado. Gráfica em Brasília-DF com entrega em todo o Brasil.",
   path: "/solucoes/empresas",
 });
 

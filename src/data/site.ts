@@ -2,16 +2,16 @@ import type { SiteConfig } from "@/types";
 
 /**
  * ÚNICA fonte de dados comerciais do site.
- * Dados reais extraídos de grafica.fullgraph.com.br em 2026-08.
- * O número de WhatsApp NÃO estava público no site antigo:
- * preencha NEXT_PUBLIC_WHATSAPP_NUMBER no .env (ver README).
+ * Dados reais extraídos de grafica.fullgraph.com.br em 2026-08;
+ * razão social, horário e área de atendimento confirmados pelo cliente em 2026-09-29.
+ * O WhatsApp vem de NEXT_PUBLIC_WHATSAPP_NUMBER no .env (ver README).
  */
 export const site: SiteConfig = {
   name: "Fullgraph",
-  legalName: "Full Graph",
+  legalName: "FULLGRAPH GRAFICA E EDITORA LTDA - EPP",
   tagline: "Muito mais que impressão",
   description:
-    "Impressão, livros, embalagens e grandes tiragens entregues em todo o Brasil. Orçamento personalizado para empresas, editoras e restaurantes.",
+    "Gráfica em Brasília-DF: livros, embalagens, catálogos e grandes tiragens para o DF, Goiás e todo o Brasil. Orçamento personalizado.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fullgraph.com.br",
   phone: { display: "(61) 99619-4141", e164: "+5561996194141" },
   whatsapp: {
@@ -21,9 +21,25 @@ export const site: SiteConfig = {
   },
   email: "leonardo@fullgraph.com.br",
   address: {
+    street: "SIBS Qd. 03, conj. A lote 19/21, Térreo",
+    neighborhood: "Núcleo Bandeirante",
     city: "Brasília",
     state: "DF",
+    zip: "71736-301",
+    full: "SIBS Qd. 03, conj. A lote 19/21, Térreo — Núcleo Bandeirante, Brasília-DF, CEP 71736-301",
   },
+  hours: {
+    display: "Segunda a sexta, das 8h às 18h",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "18:00",
+  },
+  autoService: "Atendimento automático 24 horas pelo site e pelo WhatsApp.",
+  areaServed: [
+    { type: "State", name: "Distrito Federal" },
+    { type: "State", name: "Goiás" },
+    { type: "Country", name: "Brasil" },
+  ],
 };
 
 /** Destaques verdadeiros — não inventar números, prêmios ou clientes */
