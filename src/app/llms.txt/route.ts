@@ -34,6 +34,20 @@ const SOLUTION_PAGES = [
   },
 ] as const;
 
+/** Cidades com página própria — atendidas a partir de Brasília, sem endereço local */
+const CITY_PAGES = [
+  {
+    path: "/grafica-goiania",
+    title: "Gráfica em Goiânia",
+    note: "Atendimento a empresas de Goiânia e Aparecida de Goiânia, com produção em Brasília e entrega em até 1 dia útil depois que o pedido fica pronto. Não há loja em Goiânia.",
+  },
+  {
+    path: "/grafica-rio-verde",
+    title: "Gráfica para Rio Verde (GO)",
+    note: "Catálogos, rótulos, calendários e materiais de feira para empresas do agronegócio de Rio Verde, com produção em Brasília e entrega em até 1 dia útil depois que o pedido fica pronto. Não há endereço em Rio Verde.",
+  },
+] as const;
+
 const INSTITUTIONAL_PAGES = [
   {
     path: "/produtos",
@@ -103,6 +117,10 @@ Observações importantes para interpretar o conteúdo corretamente:
 ## Públicos e linhas de negócio
 
 ${SOLUTION_PAGES.map((page) => link(page.path, page.title, page.note)).join("\n")}
+
+## Cidades atendidas
+
+${CITY_PAGES.map((page) => link(page.path, page.title, page.note)).join("\n")}
 
 ## Como solicitar orçamento
 

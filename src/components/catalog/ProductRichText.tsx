@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { InkButton } from "@/components/ui/InkButton";
+import { hasWhatsApp, whatsappUrl, whatsappCtaLabel } from "@/lib/whatsapp";
 import type { ContentBlock, RichText } from "@/types";
 
 /**
@@ -82,10 +84,33 @@ function OrderedList({ items }: { items: readonly RichText[] }) {
   );
 }
 
-export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
+export function ContentBlocks({
+  blocks,
+  whatsappMessage,
+}: {
+  blocks: readonly ContentBlock[];
+  /** Mensagem pré-preenchida dos CTAs de WhatsApp no meio da copy */
+  whatsappMessage?: string;
+}) {
   return (
     <div className="space-y-6">
       {blocks.map((block, i) => {
+        if ("cta" in block) {
+          return (
+            <div key={i} className="pt-2">
+              <InkButton
+                href={whatsappUrl(whatsappMessage)}
+                external={hasWhatsApp()}
+                variant="paper"
+                size="lg"
+                withArrow
+                data-testid="content-whatsapp"
+              >
+                {whatsappCtaLabel(block.cta)}
+              </InkButton>
+            </div>
+          );
+        }
         if ("p" in block) {
           return (
             <p key={i} className="leading-relaxed text-carbon/80">

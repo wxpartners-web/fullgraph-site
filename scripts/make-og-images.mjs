@@ -5,6 +5,7 @@
  *
  * - public/og/fullgraph.jpg        → padrão do site (foto do hero + marca)
  * - public/og/produtos/<slug>.jpg  → uma por produto (foto do catálogo)
+ * - public/og/cidades/<slug>.jpg   → uma por página de cidade (src/data/cities.ts)
  *
  * Rode de novo sempre que trocar a foto de um produto ou a frase do hero.
  */
@@ -36,6 +37,21 @@ function readProducts() {
     tagline: b.match(/tagline: "([^"]+)"/)[1],
     image: b.match(/src: "([^"]+)"/)[1],
   }));
+}
+
+/** Lê slug, rótulo, frase e foto de cada página de cidade (src/data/cities.ts) */
+function readCities() {
+  const src = readFileSync(join(ROOT, "src/data/cities.ts"), "utf8").replace(/\r\n/g, "\n");
+  return src
+    .split(/\n\s*slug: /)
+    .slice(1)
+    .filter((b) => b.startsWith('"')) // ignora "slug: string;" da interface
+    .map((b) => ({
+      slug: b.match(/^"([^"]+)"/)[1],
+      name: b.match(/breadcrumbName: "([^"]+)"/)[1],
+      tagline: b.match(/ogTagline: "([^"]+)"/)[1],
+      image: b.match(/src: "([^"]+)"/)[1],
+    }));
 }
 
 /** Quebra um texto em linhas de até `max` caracteres */
@@ -82,7 +98,8 @@ async function defaultImage() {
     .toFile(join(OUT, "fullgraph.jpg"));
 }
 
-async function productImage(p) {
+/** Card com foto à direita: produtos ("SOB CONSULTA") e cidades */
+async function cardImage(p, badge, outFile) {
   const photo = await sharp(join(PUB, p.image)).resize(H, H, { fit: "cover" }).toBuffer();
   const nameLines = wrap(p.name, 20);
   const tagLines = wrap(p.tagline, 34);
@@ -98,7 +115,7 @@ async function productImage(p) {
       <rect width="${W - H}" height="${H}" fill="#0b0b0c"/>
       ${nameSvg}${tagSvg}
       <rect x="66" y="536" width="40" height="3" fill="#ff5a1f"/>
-      <text x="120" y="546" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#ff5a1f">SOB CONSULTA</text>
+      <text x="120" y="546" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#ff5a1f">${esc(badge)}</text>
       <text x="66" y="584" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="2" fill="#8a8a85">FULLGRAPH.COM.BR</text>
     </svg>`);
   await sharp({ create: { width: W, height: H, channels: 3, background: "#0b0b0c" } })
@@ -108,13 +125,21 @@ async function productImage(p) {
       { input: photo, left: W - H, top: 0 },
     ])
     .jpeg(JPEG)
-    .toFile(join(OUT, "produtos", `${p.slug}.jpg`));
+    .toFile(outFile);
 }
 
+const productImage = (p) => cardImage(p, "SOB CONSULTA", join(OUT, "produtos", `${p.slug}.jpg`));
+const cityImage = (c) => cardImage(c, "ORÇAMENTO PELO WHATSAPP", join(OUT, "cidades", `${c.slug}.jpg`));
+
 mkdirSync(join(OUT, "produtos"), { recursive: true });
+mkdirSync(join(OUT, "cidades"), { recursive: true });
 await defaultImage();
 console.log("og/fullgraph.jpg");
 for (const p of readProducts()) {
   await productImage(p);
   console.log(`og/produtos/${p.slug}.jpg`);
+}
+for (const c of readCities()) {
+  await cityImage(c);
+  console.log(`og/cidades/${c.slug}.jpg`);
 }

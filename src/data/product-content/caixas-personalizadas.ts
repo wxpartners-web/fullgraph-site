@@ -105,7 +105,7 @@ export const caixasPersonalizadasContent: ProductContent = {
       heading: "Caixas personalizadas para alimentos",
       blocks: [
         {
-          p: "Para confeitarias, cafeterias e marcas de alimentos, oferecemos cartão próprio para contato direto com alimentos. Informe esse uso antes de pedir o orçamento, porque ele muda a especificação do material.",
+          p: "Para confeitarias, cafeterias e marcas de alimentos, oferecemos caixas em matéria-prima apropriada para uso com alimentos. Informe esse uso antes de pedir o orçamento, porque ele muda a especificação do material.",
         },
       ],
     },
@@ -117,7 +117,7 @@ export const caixasPersonalizadasContent: ProductContent = {
             [{ strong: "Cosméticos e perfumaria:" }, " cartuchos, caixas rígidas e kits."],
             [{ strong: "Moda e acessórios:" }, " caixas de tampa e fundo, gavetas e luvas."],
             [{ strong: "Joalherias:" }, " caixas rígidas com berço interno."],
-            [{ strong: "Confeitarias e cafés:" }, " caixas com cartão próprio para alimentos."],
+            [{ strong: "Confeitarias e cafés:" }, " caixas com matéria-prima apropriada para uso com alimentos."],
             [{ strong: "Presentes e datas comemorativas:" }, " caixas tipo livro, gavetas e kits."],
             [{ strong: "Lojas virtuais:" }, " caixas em papelão ondulado para envio."],
             [{ strong: "Empresas:" }, " kits corporativos, de boas-vindas e de lançamento."],
@@ -196,7 +196,7 @@ export const caixasPersonalizadasContent: ProductContent = {
     {
       question: "As caixas servem para alimentos?",
       answer:
-        "Sim, com cartão próprio para contato direto com alimentos. Informe esse uso antes de pedir o orçamento.",
+        "Sim, com matéria-prima apropriada para uso com alimentos. Informe esse uso antes de pedir o orçamento.",
     },
   ],
 };

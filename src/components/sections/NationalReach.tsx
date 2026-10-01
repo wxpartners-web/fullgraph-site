@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
+import { RichTextInline } from "@/components/catalog/ProductRichText";
 import { servedRegions } from "@/data/home";
 
 /** Regiões atendidas — DF, cidades de Goiás e frete para os demais estados */
@@ -25,7 +26,9 @@ export function NationalReach() {
         </div>
 
         <Reveal delay={0.08}>
-          <p className="text-lead mt-12 max-w-4xl text-carbon/80">{servedRegions}</p>
+          <p className="text-lead mt-12 max-w-4xl text-carbon/80">
+            <RichTextInline value={servedRegions} />
+          </p>
         </Reveal>
       </div>
     </section>

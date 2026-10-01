@@ -16,6 +16,15 @@ export const mainNav: NavItem[] = [
   { label: "Contato", href: "/contato" },
 ];
 
+/** Cidades com página própria — lista curta no rodapé, abaixo de "Soluções" */
+export const footerRegions: { title: string; items: NavItem[] } = {
+  title: "Atendemos",
+  items: [
+    { label: "Gráfica em Goiânia", href: "/grafica-goiania" },
+    { label: "Gráfica para Rio Verde", href: "/grafica-rio-verde" },
+  ],
+};
+
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Soluções",

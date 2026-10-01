@@ -1,16 +1,35 @@
 import { ChevronRight } from "lucide-react";
 import type { FaqItem } from "@/types";
 
+const DEFAULT_HEADING = "Perguntas frequentes";
+const SERIF_WORD = "frequentes";
+
 /**
- * FAQ da página de produto — <details> nativo (acessível sem JS). O
- * JSON-LD FAQPage sai em page.tsx a partir dos mesmos dados.
+ * FAQ das Money Pages — <details> nativo (acessível sem JS). O JSON-LD
+ * FAQPage sai na page.tsx a partir dos mesmos dados.
  */
-export function ProductFaq({ faq }: { faq: readonly FaqItem[] }) {
+export function ProductFaq({
+  faq,
+  heading = DEFAULT_HEADING,
+}: {
+  faq: readonly FaqItem[];
+  /** H2 aprovado na copy; "frequentes" mantém a serifa itálica */
+  heading?: string;
+}) {
+  const [before, after] = heading.includes(SERIF_WORD)
+    ? heading.split(SERIF_WORD)
+    : [heading, null];
   return (
     <section className="grain relative bg-carbon py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <h2 className="text-h2 font-semibold text-white-tech">
-          Perguntas <em className="font-serif font-normal italic text-ink">frequentes</em>
+          {before}
+          {after !== null && (
+            <>
+              <em className="font-serif font-normal italic text-ink">{SERIF_WORD}</em>
+              {after}
+            </>
+          )}
         </h2>
         <div className="mt-10 divide-y divide-white-tech/10 border-y border-white-tech/10">
           {faq.map((item) => (

@@ -4,6 +4,8 @@
  * nova aprovação. Fonte única para a UI e para o JSON-LD (FAQPage).
  */
 
+import type { RichText } from "@/types";
+
 export const HOME_META = {
   title: "Gráfica em Brasília-DF: livros, embalagens e impressão | FullGraph",
   description:
@@ -104,8 +106,14 @@ export const orderSteps = [
   "Produzimos, finalizamos e entregamos — ou você retira na gráfica.",
 ] as const;
 
-export const servedRegions =
-  "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, Taguatinga, Águas Claras, Guará e demais regiões. Em Goiás, entregamos em Goiânia, Aparecida de Goiânia, Anápolis, Senador Canedo, Trindade, Rio Verde, Itumbiara, Jataí, Valparaíso de Goiás e Luziânia. Para os outros estados, enviamos por frete, pago pelo cliente.";
+/** Texto aprovado; Goiânia e Rio Verde levam link para as páginas de cidade */
+export const servedRegions: RichText = [
+  "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, Taguatinga, Águas Claras, Guará e demais regiões. Em Goiás, entregamos em ",
+  { link: "Goiânia", href: "/grafica-goiania" },
+  ", Aparecida de Goiânia, Anápolis, Senador Canedo, Trindade, ",
+  { link: "Rio Verde", href: "/grafica-rio-verde" },
+  ", Itumbiara, Jataí, Valparaíso de Goiás e Luziânia. Para os outros estados, enviamos por frete, pago pelo cliente.",
+];
 
 export const homeCta = {
   title: "Peça seu orçamento na gráfica em Brasília",

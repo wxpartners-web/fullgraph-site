@@ -77,27 +77,73 @@ export function localBusinessJsonLd() {
   };
 }
 
-/**
- * Cada produto é impresso sob encomenda e orçado caso a caso, então vai como
- * Service (sem preço) em vez de Product — Product sem preço real exige price: 0,
- * que o Google lê como "grátis".
- */
-export function serviceJsonLd(p: { name: string; description: string; slug: string }) {
+type AreaServed = Record<string, unknown>;
+
+/** Regiões do site (DF, GO, Brasil) no formato schema.org */
+function siteAreaServed(): AreaServed[] {
+  return site.areaServed.map((a) => ({ "@type": a.type, name: a.name }));
+}
+
+function buildService(s: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+  areaServed: readonly AreaServed[];
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: p.name,
-    description: p.description,
-    url: `${site.url}/produtos/${p.slug}`,
-    serviceType: p.name,
+    name: s.name,
+    description: s.description,
+    url: `${site.url}${s.path}`,
+    serviceType: s.serviceType,
     provider: { "@id": `${site.url}/#empresa` },
-    areaServed: site.areaServed.map((a) => ({ "@type": a.type, name: a.name })),
+    areaServed: s.areaServed,
     offers: {
       "@type": "Offer",
       description: "Orçamento personalizado conforme formato, papel, acabamento e tiragem",
       url: `${site.url}/orcamento`,
     },
   };
+}
+
+/**
+ * Cada produto é impresso sob encomenda e orçado caso a caso, então vai como
+ * Service (sem preço) em vez de Product — Product sem preço real exige price: 0,
+ * que o Google lê como "grátis".
+ */
+export function serviceJsonLd(p: { name: string; description: string; slug: string }) {
+  return buildService({
+    name: p.name,
+    description: p.description,
+    path: `/produtos/${p.slug}`,
+    serviceType: p.name,
+    areaServed: siteAreaServed(),
+  });
+}
+
+/** Cidade atendida a partir de Brasília — sem endereço local (o provider segue em Brasília) */
+export function cityAreaServed(city: string, state: string): AreaServed {
+  return {
+    "@type": "City",
+    name: city,
+    containedInPlace: { "@type": "State", name: state },
+  };
+}
+
+/**
+ * Service das páginas longas (soluções e cidades). `serviceType` é a KW
+ * principal; sem `areaServed`, valem as regiões do site (DF, GO, Brasil).
+ */
+export function pageServiceJsonLd(p: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+  areaServed?: readonly AreaServed[];
+}) {
+  return buildService({ ...p, areaServed: p.areaServed ?? siteAreaServed() });
 }
 
 export function faqJsonLd(faq: readonly { question: string; answer: string }[]) {

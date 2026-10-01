@@ -1,10 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { footerNav } from "@/data/navigation";
+import { footerNav, footerRegions } from "@/data/navigation";
 import { site } from "@/data/site";
 import { InkButton } from "@/components/ui/InkButton";
 import { hasWhatsApp, whatsappUrl, whatsappCtaLabel } from "@/lib/whatsapp";
+import type { NavItem } from "@/types";
+
+function FooterLinks({ group }: { group: { title: string; items: NavItem[] } }) {
+  return (
+    <nav aria-label={group.title}>
+      <p className="text-spec mb-4 text-steel-2">{group.title}</p>
+      <ul className="space-y-2.5">
+        {group.items.map((item) => (
+          <li key={item.href}>
+            <Link
+              href={item.href}
+              className="text-sm text-steel transition-colors duration-[var(--dur-micro)] hover:text-white-tech"
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
 
 export function Footer() {
   return (
@@ -28,22 +49,16 @@ export function Footer() {
             </p>
           </div>
 
-          {footerNav.map((group) => (
-            <nav key={group.title} aria-label={group.title}>
-              <p className="text-spec mb-4 text-steel-2">{group.title}</p>
-              <ul className="space-y-2.5">
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-steel transition-colors duration-[var(--dur-micro)] hover:text-white-tech"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          {footerNav.map((group, i) => (
+            <div key={group.title}>
+              <FooterLinks group={group} />
+              {/* Cidades atendidas entram na primeira coluna, sem criar coluna nova */}
+              {i === 0 && (
+                <div className="mt-8">
+                  <FooterLinks group={footerRegions} />
+                </div>
+              )}
+            </div>
           ))}
 
           {/* Contato */}

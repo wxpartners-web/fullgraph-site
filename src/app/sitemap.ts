@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 import { products } from "@/data/products";
+import { cityPages } from "@/data/cities";
 
 /**
  * Sitemap canônico servido em /sitemap.xml (convenção de metadata route
@@ -34,5 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}/produtos/${product.slug}`,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  /* Páginas de cidade — as mesmas de generateStaticParams em src/app/[cidade]/page.tsx */
+  const cityRoutes = cityPages.map((city) => ({ url: `${site.url}${city.path}` }));
+
+  return [...staticRoutes, ...cityRoutes, ...productRoutes];
 }

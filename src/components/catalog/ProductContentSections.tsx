@@ -6,7 +6,14 @@ import type { ContentSection } from "@/types";
  * Corpo da Money Page: cada seção aprovada vira um H2, na ordem da
  * copy. Superfície papel, índice técnico à esquerda e texto à direita.
  */
-export function ProductContentSections({ sections }: { sections: readonly ContentSection[] }) {
+export function ProductContentSections({
+  sections,
+  whatsappMessage,
+}: {
+  sections: readonly ContentSection[];
+  /** Mensagem dos CTAs de WhatsApp que aparecem no meio da copy */
+  whatsappMessage?: string;
+}) {
   return (
     <div className="surface-paper grain on-paper py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
@@ -20,7 +27,7 @@ export function ProductContentSections({ sections }: { sections: readonly Conten
               <h2 className="text-h3 mt-3 max-w-md font-semibold text-balance">{section.heading}</h2>
             </Reveal>
             <div className="max-w-2xl">
-              <ContentBlocks blocks={section.blocks} />
+              <ContentBlocks blocks={section.blocks} whatsappMessage={whatsappMessage} />
             </div>
           </section>
         ))}

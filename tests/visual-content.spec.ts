@@ -102,7 +102,7 @@ test("com movimento reduzido, títulos e grades aparecem (sem style oculto do SS
 
 test("todas as rotas têm prévia de link (og:image JPEG absoluta e acessível)", async ({ page, request, isMobile }) => {
   test.skip(isMobile, "metadados não dependem do viewport");
-  for (const path of ["/", "/portfolio", "/produtos", "/produtos/impressao-de-livros", "/sobre", "/contato", "/orcamento", "/solucoes/embalagens"]) {
+  for (const path of ["/", "/portfolio", "/produtos", "/produtos/impressao-de-livros", "/sobre", "/contato", "/orcamento", "/solucoes/embalagens", "/grafica-goiania", "/grafica-rio-verde"]) {
     await page.goto(path);
     const image = await page.locator('meta[property="og:image"]').getAttribute("content");
     expect(image, path).toMatch(/^https:\/\/fullgraph\.com\.br\/og\/.+\.jpg$/);

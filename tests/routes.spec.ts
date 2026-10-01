@@ -3,8 +3,10 @@ import { test, expect } from "@playwright/test";
 const routes: { path: string; h1: RegExp }[] = [
   { path: "/", h1: /Gráfica em Brasília: a sua ideia, impressa com peso e presença./ },
   { path: "/solucoes/empresas", h1: /Volume com padrão/i },
-  { path: "/solucoes/livros-editorial", h1: /Seu texto merece/i },
-  { path: "/solucoes/embalagens", h1: /Sua marca chega/i },
+  { path: "/solucoes/livros-editorial", h1: /Gráfica editorial: do original revisado/ },
+  { path: "/solucoes/embalagens", h1: /Embalagens personalizadas para marcas/ },
+  { path: "/grafica-goiania", h1: /Gráfica Goiânia: produção em Brasília/ },
+  { path: "/grafica-rio-verde", h1: /Gráfica para Rio Verde, Goiás/ },
   { path: "/produtos", h1: /gaveta de/i },
   { path: "/produtos/impressao-de-livros", h1: /Impressão de livros/i },
   { path: "/portfolio", h1: /Ideias que ganham/i },

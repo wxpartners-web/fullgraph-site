@@ -57,7 +57,9 @@ export type RichText = string | readonly InlineText[];
 export type ContentBlock =
   | { p: RichText }
   | { ul: readonly RichText[] }
-  | { ol: readonly RichText[] };
+  | { ol: readonly RichText[] }
+  /** CTA de WhatsApp no meio da copy ([CTA: …] no rascunho aprovado) */
+  | { cta: string };
 
 export interface ContentSection {
   /** Vira H2 — ordem do array = ordem da copy aprovada */
@@ -66,10 +68,10 @@ export interface ContentSection {
 }
 
 /**
- * Copy longa aprovada pelo cliente para uma página de produto.
- * Opcional: produtos sem conteúdo rico mantêm o layout padrão.
+ * Copy longa aprovada pelo cliente (Money Pages): produtos, soluções e
+ * páginas de cidade compartilham a mesma estrutura.
  */
-export interface ProductContent {
+export interface PageContent {
   /** Título absoluto (já inclui a marca) */
   metaTitle: string;
   metaDescription: string;
@@ -86,6 +88,34 @@ export interface ProductContent {
     quoteLabel: string;
   };
   faq: FaqItem[];
+  /** H2 do FAQ quando a copy aprovada traz um título próprio */
+  faqHeading?: string;
+}
+
+/** Copy longa de produto — opcional: sem ela, o layout padrão vale */
+export type ProductContent = PageContent;
+
+/**
+ * Página longa fora do catálogo (soluções e cidades): copy aprovada +
+ * dados de rota, hero e schema.
+ */
+export interface LandingPage {
+  /** Caminho a partir da raiz, ex. "/grafica-goiania" */
+  path: string;
+  /** KW principal da copy — vira serviceType no JSON-LD */
+  keyword: string;
+  /** Rótulo da página na trilha (breadcrumb) */
+  breadcrumbName: string;
+  /** Linha técnica acima do H1 */
+  eyebrow: string;
+  image: ProductImage;
+  /** Imagem de compartilhamento 1200×630; padrão do site se omitida */
+  ogImage?: string;
+  /** Mensagem pré-preenchida dos CTAs de WhatsApp da página */
+  whatsappMessage: string;
+  /** Páginas de cidade: areaServed vira City (sem endereço local) */
+  city?: { name: string; state: string };
+  content: PageContent;
 }
 
 export interface Product {
