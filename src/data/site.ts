@@ -19,7 +19,8 @@ export const site: SiteConfig = {
     defaultMessage:
       "Olá! Vim pelo site da FullGraph e gostaria de solicitar um orçamento.",
   },
-  email: "leonardo@fullgraph.com.br",
+  email: "contato@fullgraph.com.br",
+  foundingYear: "2012",
   address: {
     street: "SIBS Qd. 03, conj. A lote 19/21, Térreo",
     neighborhood: "Núcleo Bandeirante",

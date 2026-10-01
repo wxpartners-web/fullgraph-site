@@ -4,6 +4,7 @@ import { site, trueHighlights } from "@/data/site";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CtaFinal } from "@/components/sections/CtaFinal";
+import { ClientsWall } from "@/components/sections/ClientsWall";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 export const metadata = pageMetadata({
@@ -32,8 +33,8 @@ export default function SobrePage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lead mt-6 max-w-2xl text-steel">
-              A FullGraph é uma gráfica instalada no Núcleo Bandeirante, em
-              Brasília-DF, que atende clientes em todo o Brasil — de autores
+              Fundada em {site.foundingYear}, a FullGraph é uma gráfica instalada
+              no Núcleo Bandeirante, em Brasília-DF, que atende clientes em todo o Brasil — de autores
               independentes a redes de alimentação e empresas com grandes
               tiragens.
             </p>
@@ -78,8 +79,23 @@ export default function SobrePage() {
               </RevealItem>
             ))}
           </RevealGroup>
+
+          <Reveal>
+            <div
+              className="mt-14 grid grid-cols-1 gap-3 border-t-2 border-carbon/15 pt-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-10"
+              data-testid="sobre-pagamento"
+            >
+              <h2 className="font-semibold">Pagamento e nota fiscal</h2>
+              <p className="text-sm leading-relaxed text-carbon/70">
+                Pagamento por PIX e cartões de crédito e débito. Emitimos nota
+                fiscal. Atendemos órgãos públicos e licitações.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
+
+      <ClientsWall />
 
       <section className="grain relative bg-carbon py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-5 md:px-8">

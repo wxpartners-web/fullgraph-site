@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { HomeIntro } from "@/components/sections/HomeIntro";
 import { SolutionPortals } from "@/components/sections/SolutionPortals";
 import { WhyChoose } from "@/components/sections/WhyChoose";
+import { ClientsWall } from "@/components/sections/ClientsWall";
 import { NarrativeScroll } from "@/components/sections/NarrativeScroll";
 import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
 import { ProcessSection } from "@/components/sections/ProcessSection";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 /*
- * Ordem dos H2 segue a copy aprovada: imprime → por que → como funciona
+ * Ordem dos H2 segue a copy aprovada: imprime → por que → clientes → como funciona
  * → regiões → orçamento → FAQ. Destaques, narrativa e portfolio ficam
  * intercalados antes de "Regiões atendidas".
  */
@@ -39,6 +40,7 @@ export default function HomePage() {
       <HomeIntro />
       <SolutionPortals />
       <WhyChoose />
+      <ClientsWall />
       <FeaturedProducts />
       <NarrativeScroll />
       <ProcessSection />

@@ -33,6 +33,7 @@ const PRODUCT_PHOTOS: Record<string, Photo> = {
   catalogo: { src: "/images/products/catalogos-taia-moveis.webp", alt: "Catálogo aberto em página dupla sobre exemplares fechados" },
   flyer: { src: "/images/products/flyers-sonora.webp", alt: "Flyers coloridos espalhados em leque" },
   folder: { src: "/images/products/folders-serra-do-mel.webp", alt: "Folder de três dobras aberto em sanfona" },
+  caixa: { src: "/images/products/caixas-personalizadas.webp", alt: "Caixas personalizadas: rígida com tampa, tipo livro, com luva e kraft" },
   embalagem: { src: "/images/products/hamburguer-brasa-bruta.webp", alt: "Caixas de hambúrguer em papel-cartão kraft impresso" },
   bandeja: { src: "/images/products/bandeja-frango-dourado.webp", alt: "Bandeja com papel impresso ilustrado" },
   rotulo: { src: "/images/products/rotulos-sete-serras.webp", alt: "Rolo de rótulos e potes com rótulo aplicado" },
@@ -82,6 +83,7 @@ function label(options: Option[] | undefined, value?: string): string | null {
 /** Linha-legenda que descreve a peça conforme as escolhas estruturais */
 function caption({ produto, formato, paginas }: Pick<QuoteMockupProps, "produto" | "formato" | "paginas">): string {
   if (!produto) return "Seu material aparece aqui";
+  if (produto === "caixa") return label(formatsByProduct.caixa, formato) ?? "Caixa personalizada";
   if (produto === "embalagem") return formato === "wrap" ? "Envoltório" : "Caixa com encaixe";
   if (produto === "folder") return formato.includes("3dobras") ? "3 dobras" : formato ? "2 dobras" : "Folder dobrado";
   if (["livro", "catalogo", "caderno"].includes(produto) && paginas) return PAGE_ESTIMATE[paginas] ?? "";

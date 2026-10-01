@@ -1,4 +1,5 @@
 import type { ProductContent } from "@/types";
+import { caixasPersonalizadasContent } from "./caixas-personalizadas";
 import { impressaoDeLivrosContent } from "./impressao-de-livros";
 
 /**
@@ -7,6 +8,7 @@ import { impressaoDeLivrosContent } from "./impressao-de-livros";
  */
 const productContent: Readonly<Record<string, ProductContent>> = {
   "impressao-de-livros": impressaoDeLivrosContent,
+  "caixas-personalizadas": caixasPersonalizadasContent,
 };
 
 export function getProductContent(slug: string): ProductContent | undefined {

@@ -1,10 +1,12 @@
 import type { Category, Product } from "@/types";
+import { caixasPersonalizadasContent } from "@/data/product-content/caixas-personalizadas";
 import { impressaoDeLivrosContent } from "@/data/product-content/impressao-de-livros";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
- * (exceto impressao-de-livros, com especificações da copy aprovada);
+ * (exceto impressao-de-livros e caixas-personalizadas, com especificações
+ * da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -48,10 +50,10 @@ export const categories: Category[] = [
   },
   {
     slug: "embalagens-alimentos",
-    name: "Embalagens para alimentos",
+    name: "Embalagens e caixas",
     shortName: "Embalagens",
     description:
-      "Embalagens impressas para hambúrguer, delivery e food service.",
+      "Caixas personalizadas para marcas e embalagens impressas para hambúrguer, delivery e food service.",
     audiences: ["embalagens"],
     index: "05",
   },
@@ -388,14 +390,14 @@ export const products: Product[] = [
     audiences: ["embalagens"],
     tagline: "Sua marca na mão do cliente, do balcão ao delivery.",
     description:
-      "Caixas e envoltórios para hambúrguer impressos com sua identidade, em papel-cartão apto para contato com alimentos. Estrutura firme para balcão e delivery.",
+      "Caixas e envoltórios para hambúrguer impressos com sua identidade, em papel-cartão de matéria-prima apropriada para uso com alimentos. Estrutura firme para balcão e delivery.",
     applications: ["Hamburguerias", "Food trucks", "Delivery", "Redes de alimentação"],
     formats: ["Caixa 12 × 12 × 8 cm", "Caixa 14 × 14 × 8 cm", "Envoltório / wrap", "Faca sob medida"],
     materials: ["Papel-cartão 250 g/m²", "Papel-cartão 300 g/m²", "Kraft natural"],
     finishes: ["Faca especial", "Vinco e colagem", "Impressão externa 4×0"],
     runRanges: ["A partir de 500 unidades", "2.000 a 10.000", "Acima de 10.000"],
     specs: [
-      { label: "Contato alimentar", value: "Materiais aptos para alimentos" },
+      { label: "Contato alimentar", value: "Matéria-prima apropriada para uso com alimentos" },
       { label: "Montagem", value: "Enviada plana, montagem por encaixe" },
     ],
     faq: [
@@ -432,7 +434,7 @@ export const products: Product[] = [
     finishes: ["Impressão 1×0 a 4×0", "Alça opcional"],
     runRanges: ["A partir de 1.000 unidades", "5.000 a 20.000", "Acima de 20.000"],
     specs: [
-      { label: "Contato alimentar", value: "Materiais aptos para alimentos" },
+      { label: "Contato alimentar", value: "Matéria-prima apropriada para uso com alimentos" },
     ],
     faq: [
       {
@@ -446,6 +448,57 @@ export const products: Product[] = [
     image: {
       src: "/images/products/delivery-trigo-fermento.webp",
       alt: "Sacos kraft da padaria fictícia Trigo & Fermento impressos em azul-marinho, um com pães e baguetes, outro fechado com adesivo",
+    },
+  },
+  {
+    slug: "caixas-personalizadas",
+    name: "Caixas personalizadas",
+    category: "embalagens-alimentos",
+    audiences: ["embalagens"],
+    tagline: "Da faca sob medida à caixa montada.",
+    description:
+      "Caixas personalizadas para marcas que vendem pela apresentação: cosméticos, moda, joias, confeitaria, cafés, presentes e lojas virtuais. Você escolhe o tipo de caixa, o cartão e os acabamentos. A gente desenvolve a faca sob medida, envia o protótipo para aprovação e entrega a caixa montada.",
+    applications: [
+      "Cosméticos e perfumaria",
+      "Moda e acessórios",
+      "Joalherias",
+      "Confeitarias e cafés",
+      "Presentes e datas comemorativas",
+      "Lojas virtuais",
+      "Empresas",
+    ],
+    formats: [
+      "Caixa rígida",
+      "Caixa cartonada (cartucho)",
+      "Luva e cinta",
+      "Tampa e fundo",
+      "Gaveta",
+      "Tipo livro com ímã",
+      "Caixa com janela",
+      "Papelão ondulado",
+    ],
+    materials: ["Duplex", "Triplex", "Cartão supremo", "Kraft", "Papelão revestido", "Papel reciclado"],
+    finishes: [
+      "Cores Pantone e metálicas",
+      "Hot stamping",
+      "Relevo seco",
+      "Verniz localizado",
+      "Laminação e soft touch",
+      "Corte especial",
+    ],
+    runRanges: ["Sem pedido mínimo"],
+    specs: [
+      { label: "Pedido mínimo", value: "Sem pedido mínimo" },
+      { label: "Protótipo", value: "Protótipo incluso" },
+      { label: "Entrega", value: "Caixa entregue montada" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: caixasPersonalizadasContent.faq,
+    related: ["embalagens-para-hamburguer", "sacos-e-embalagens-delivery", "rotulos-e-etiquetas"],
+    mockup: "box",
+    image: {
+      src: "/images/products/caixas-personalizadas.webp",
+      alt: "Caixas da marca fictícia Atelier Pequi: caixa rígida verde com tampa, caixa tipo livro com ímã entreaberta, caixa creme com luva e caixa kraft, com logotipo em hot stamping dourado e folhas em relevo seco",
     },
   },
   {

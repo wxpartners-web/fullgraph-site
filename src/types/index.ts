@@ -153,6 +153,8 @@ export interface SiteConfig {
     defaultMessage: string;
   };
   email: string;
+  /** Ano de fundação (B1, respostas do proprietário) — JSON-LD foundingDate */
+  foundingYear: string;
   address: {
     street: string;
     neighborhood: string;

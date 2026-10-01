@@ -16,7 +16,7 @@ test("footer traz telefone e e-mail reais", async ({ page }) => {
   await page.goto("/");
   const footer = page.locator("footer");
   await expect(footer.getByRole("link", { name: "(61) 99619-4141", exact: true })).toBeVisible();
-  await expect(footer.getByRole("link", { name: "leonardo@fullgraph.com.br", exact: true })).toBeVisible();
+  await expect(footer.getByRole("link", { name: "contato@fullgraph.com.br", exact: true })).toBeVisible();
 });
 
 test("hero tem os dois CTAs principais", async ({ page }) => {

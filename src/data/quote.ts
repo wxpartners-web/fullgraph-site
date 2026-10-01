@@ -19,6 +19,7 @@ export const quoteProducts: QuoteOption[] = [
   { value: "catalogo", label: "Catálogo ou revista" },
   { value: "flyer", label: "Flyer ou panfleto" },
   { value: "folder", label: "Folder dobrado" },
+  { value: "caixa", label: "Caixas personalizadas" },
   { value: "embalagem", label: "Embalagem para alimentos" },
   { value: "bandeja", label: "Papel de bandeja" },
   { value: "rotulo", label: "Rótulos ou adesivos" },
@@ -57,6 +58,13 @@ export const formatsByProduct: Record<string, QuoteOption[]> = {
     { value: "a4-3dobras", label: "A4 aberto, 3 dobras" },
     { value: "a3", label: "A3 aberto" },
     { value: "custom", label: "Outro formato" },
+  ],
+  caixa: [
+    { value: "rigida", label: "Caixa rígida" },
+    { value: "cartonada", label: "Caixa cartonada (cartucho)" },
+    { value: "luva-cinta", label: "Luva ou cinta" },
+    { value: "ondulado", label: "Papelão ondulado" },
+    { value: "custom", label: "Outro modelo / faca sob medida" },
   ],
   embalagem: [
     { value: "caixa-12", label: "Caixa 12 × 12 × 8 cm" },

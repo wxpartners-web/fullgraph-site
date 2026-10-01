@@ -58,6 +58,7 @@ export function localBusinessJsonLd() {
     telephone: site.phone.e164,
     email: site.email,
     slogan: site.tagline,
+    foundingDate: site.foundingYear,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${site.address.street}, ${site.address.neighborhood}`,

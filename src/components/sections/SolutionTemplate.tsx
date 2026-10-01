@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Audience, ProductImage } from "@/types";
 import { getProductsByAudience } from "@/data/products";
 import { InkButton } from "@/components/ui/InkButton";
@@ -21,6 +22,8 @@ export interface SolutionConfig {
   heroImage?: ProductImage;
   accent?: string;
   arguments: { title: string; text: string }[];
+  /** Frase opcional com link interno, abaixo do título "Produtos desta solução" */
+  productsNote?: { before: string; link: string; href: string; after: string };
   ctaTitle: string;
 }
 
@@ -105,6 +108,18 @@ export function SolutionTemplate({ config }: { config: SolutionConfig }) {
             eyebrow="O que produzimos para você"
             title="Produtos desta solução"
           />
+          {config.productsNote && (
+            <p className="mt-6 max-w-2xl leading-relaxed text-steel">
+              {config.productsNote.before}
+              <Link
+                href={config.productsNote.href}
+                className="font-medium text-white-tech underline decoration-ink decoration-1 underline-offset-4 transition-colors hover:text-ink"
+              >
+                {config.productsNote.link}
+              </Link>
+              {config.productsNote.after}
+            </p>
+          )}
           <RevealGroup className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {products.map((product) => (
               <RevealItem key={product.slug}>
