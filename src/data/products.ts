@@ -1,8 +1,10 @@
 import type { Category, Product } from "@/types";
+import { impressaoDeLivrosContent } from "@/data/product-content/impressao-de-livros";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
- * em 9 famílias claras. Conteúdo técnico é provisório e revisável;
+ * em 9 famílias claras. Conteúdo técnico é provisório e revisável
+ * (exceto impressao-de-livros, com especificações da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -115,32 +117,34 @@ export const products: Product[] = [
       "Publicações independentes",
       "Edições comemorativas",
     ],
-    formats: ["14 × 21 cm", "16 × 23 cm", "A5 (14,8 × 21 cm)", "Formato fechado sob medida"],
-    materials: ["Pólen soft 80 g/m²", "Offset 75 g/m²", "Offset 90 g/m²", "Capa em cartão 250 g/m²"],
-    finishes: ["Laminação fosca", "Laminação brilho", "Verniz localizado na capa", "Orelhas na capa"],
-    runRanges: ["A partir de 50 exemplares", "300 a 1.000", "Acima de 1.000"],
+    formats: [
+      "140 × 200 mm",
+      "148 × 210 mm",
+      "160 × 230 mm",
+      "170 × 240 mm",
+      "200 × 200 mm",
+      "200 × 280 mm",
+      "210 × 297 mm",
+      "Formatos especiais sob consulta",
+    ],
+    materials: [
+      "Miolo: offset, pólen, couché, reciclato e papéis especiais",
+      "Capa: offset, couché e cartão supremo",
+    ],
+    finishes: [
+      "Laminação BOPP fosca ou brilho",
+      "Laminação soft touch",
+      "Verniz UV brilho, total ou localizado",
+      "Hot stamping",
+    ],
+    runRanges: ["A partir de 1 exemplar (sob demanda)", "Grandes tiragens"],
     specs: [
-      { label: "Miolo", value: "1×1 ou 4×4 cores" },
-      { label: "Capa", value: "4×0 cores" },
-      { label: "Encadernação", value: "Brochura (cola PUR), lombada quadrada" },
+      { label: "Tiragem", value: "A partir de 1 exemplar (sob demanda)" },
+      { label: "Encadernação", value: "Capa dura, cola PUR, hot melt, grampo, espiral e wire-o" },
+      { label: "Miolo", value: "Em cores ou em preto" },
     ],
-    faq: [
-      {
-        question: "Qual a tiragem mínima para imprimir um livro?",
-        answer:
-          "Trabalhamos tiragens a partir de pequenas quantidades para autores independentes. O valor por exemplar diminui conforme a tiragem aumenta — peça um comparativo no orçamento.",
-      },
-      {
-        question: "Como devo enviar o arquivo do livro?",
-        answer:
-          "PDF fechado com sangria de 3 mm, fontes incorporadas e imagens em 300 dpi. Miolo e capa em arquivos separados. Nossa equipe confere o arquivo antes de imprimir.",
-      },
-      {
-        question: "Vocês calculam a lombada da capa?",
-        answer:
-          "Sim. Com o número de páginas e o papel do miolo definidos, informamos a medida exata da lombada para o fechamento da capa.",
-      },
-    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: impressaoDeLivrosContent.faq,
     related: ["impressao-de-revistas", "impressao-de-catalogos", "apostilas-e-espirais"],
     mockup: "book",
     image: {

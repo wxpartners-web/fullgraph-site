@@ -46,6 +46,48 @@ export interface FaqItem {
   answer: string;
 }
 
+/* ---------- Conteúdo rico de produto (Money Pages) ---------- */
+
+/** Trecho inline: texto simples, negrito de abertura ou link interno */
+export type InlineText = string | { strong: string } | { link: string; href: string };
+
+/** Texto corrido: string simples ou sequência de trechos inline */
+export type RichText = string | readonly InlineText[];
+
+export type ContentBlock =
+  | { p: RichText }
+  | { ul: readonly RichText[] }
+  | { ol: readonly RichText[] };
+
+export interface ContentSection {
+  /** Vira H2 — ordem do array = ordem da copy aprovada */
+  heading: string;
+  blocks: readonly ContentBlock[];
+}
+
+/**
+ * Copy longa aprovada pelo cliente para uma página de produto.
+ * Opcional: produtos sem conteúdo rico mantêm o layout padrão.
+ */
+export interface ProductContent {
+  /** Título absoluto (já inclui a marca) */
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  intro: readonly string[];
+  introCta: string;
+  sections: readonly ContentSection[];
+  /** Seção de orçamento (H2) antes do FAQ */
+  closing: {
+    heading: string;
+    serifWord?: string;
+    text: string;
+    whatsappLabel: string;
+    quoteLabel: string;
+  };
+  faq: FaqItem[];
+}
+
 export interface Product {
   slug: string;
   name: string;

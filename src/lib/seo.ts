@@ -7,6 +7,8 @@ interface PageMeta {
   path: string;
   /** Imagem de compartilhamento (JPEG 1200×630 em /public/og); padrão do site se omitida */
   image?: string;
+  /** Título já contém a marca: ignora o template "%s — FullGraph" e o sufixo em og/twitter */
+  absoluteTitle?: boolean;
 }
 
 /** Prévia padrão de links (WhatsApp, redes sociais) — gerada por scripts/make-og-images.mjs */
@@ -18,15 +20,16 @@ export const DEFAULT_OG_IMAGE = {
   type: "image/jpeg",
 };
 
-export function pageMetadata({ title, description, path, image }: PageMeta): Metadata {
+export function pageMetadata({ title, description, path, image, absoluteTitle }: PageMeta): Metadata {
   const url = `${site.url}${path}`;
-  const ogImage = image ? { ...DEFAULT_OG_IMAGE, url: image, alt: `${title} — ${site.name}` } : DEFAULT_OG_IMAGE;
+  const socialTitle = absoluteTitle ? title : `${title} — ${site.name}`;
+  const ogImage = image ? { ...DEFAULT_OG_IMAGE, url: image, alt: socialTitle } : DEFAULT_OG_IMAGE;
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${title} — ${site.name}`,
+      title: socialTitle,
       description,
       url,
       siteName: site.name,
@@ -36,7 +39,7 @@ export function pageMetadata({ title, description, path, image }: PageMeta): Met
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ${site.name}`,
+      title: socialTitle,
       description,
       images: [ogImage.url],
     },
@@ -104,6 +107,20 @@ export function faqJsonLd(faq: readonly { question: string; answer: string }[]) 
       "@type": "Question",
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}
+
+/** Trilha de navegação — `path` relativo à raiz ("" = início) */
+export function breadcrumbJsonLd(items: readonly { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${site.url}${item.path}`,
     })),
   };
 }

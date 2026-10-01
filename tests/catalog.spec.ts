@@ -27,7 +27,13 @@ test("página de produto tem FAQ, relacionados e CTA de orçamento", async ({ pa
   // relacionados
   await expect(page.getByText("Quem pede este, também pede")).toBeVisible();
 
-  // CTA para orçamento
+  // CTA para orçamento — Money Page usa a seção "Solicite o orçamento" (copy aprovada)
+  await page.getByTestId("cta-final-orcamento").click();
+  await expect(page).toHaveURL(/\/orcamento$/);
+});
+
+test("produto sem copy longa mantém CTA de orçamento no hero", async ({ page }) => {
+  await page.goto("/produtos/flyers-e-panfletos");
   await page.getByTestId("product-cta-orcamento").click();
   await expect(page).toHaveURL(/\/orcamento$/);
 });

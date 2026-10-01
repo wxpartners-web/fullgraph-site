@@ -2,7 +2,7 @@ import { SolutionTemplate, type SolutionConfig } from "@/components/sections/Sol
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Impressão de livros em Brasília-DF para autores e editoras",
+  title: "Gráfica editorial em Brasília-DF: diagramação, revisão e impressão",
   description:
     "Gráfica em Brasília-DF para livros, revistas e publicações com acabamento editorial: miolo em pólen ou offset, capa laminada e encadernação à sua escolha.",
   path: "/solucoes/livros-editorial",
