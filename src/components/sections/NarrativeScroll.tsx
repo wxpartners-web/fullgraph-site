@@ -104,7 +104,7 @@ function NarrativeStatic() {
   return (
     <section className="surface-paper grain on-paper py-24" aria-label="Como produzimos" data-testid="narrative-static">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <p className="text-spec mb-4 text-carbon/60">02 — Como produzimos</p>
+        <p className="text-spec mb-4 text-carbon/60">04 — Como produzimos</p>
         <h2 className="text-h2 font-semibold">
           Da ideia à <em className="font-serif italic text-ink-2">matéria</em>
         </h2>
@@ -172,7 +172,7 @@ export function NarrativeScroll() {
             <div>
               <p className="text-spec mb-4 flex items-center gap-3 text-carbon/60">
                 <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
-                02 — Como produzimos
+                04 — Como produzimos
               </p>
               <h2 className="text-h2 font-semibold">
                 Da ideia à <em className="font-serif italic text-ink-2">matéria</em>

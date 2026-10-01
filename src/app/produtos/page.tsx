@@ -8,7 +8,7 @@ import { CtaFinal } from "@/components/sections/CtaFinal";
 export const metadata = pageMetadata({
   title: "Catálogo de produtos gráficos — gráfica em Brasília-DF",
   description:
-    "Livros, catálogos, flyers, embalagens, rótulos, cadernos e comunicação visual — o mostruário completo da Fullgraph, com orçamento sob consulta.",
+    "Livros, catálogos, flyers, embalagens, rótulos, cadernos e comunicação visual — o mostruário completo da FullGraph, com orçamento sob consulta.",
   path: "/produtos",
 });
 

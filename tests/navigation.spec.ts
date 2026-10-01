@@ -27,7 +27,7 @@ test.describe("navegação desktop", () => {
 
   test("portais da home levam às soluções", async ({ page }) => {
     await page.goto("/");
-    await page.getByTestId("portal-C").click();
+    await page.getByTestId("portal-embalagens").click();
     await expect(page).toHaveURL(/\/solucoes\/embalagens$/);
   });
 });

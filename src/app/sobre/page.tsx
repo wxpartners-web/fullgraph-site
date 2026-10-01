@@ -7,7 +7,7 @@ import { CtaFinal } from "@/components/sections/CtaFinal";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 export const metadata = pageMetadata({
-  title: "Sobre a Fullgraph, gráfica em Brasília-DF",
+  title: "Sobre a FullGraph, gráfica em Brasília-DF",
   description:
     "Gráfica em Brasília-DF com atendimento em todo o Brasil: impressão de livros, embalagens, catálogos e grandes tiragens com orçamento personalizado.",
   path: "/sobre",
@@ -32,7 +32,7 @@ export default function SobrePage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lead mt-6 max-w-2xl text-steel">
-              A Fullgraph é uma gráfica instalada no Núcleo Bandeirante, em
+              A FullGraph é uma gráfica instalada no Núcleo Bandeirante, em
               Brasília-DF, que atende clientes em todo o Brasil — de autores
               independentes a redes de alimentação e empresas com grandes
               tiragens.

@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 export const metadata = pageMetadata({
   title: "Orçamento personalizado",
   description:
-    "Monte seu pedido em etapas rápidas — produto, formato, papel, acabamento e prazo — e envie direto para a equipe da Fullgraph.",
+    "Monte seu pedido em etapas rápidas — produto, formato, papel, acabamento e prazo — e envie direto para a equipe da FullGraph.",
   path: "/orcamento",
 });
 

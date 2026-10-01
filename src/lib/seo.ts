@@ -14,7 +14,7 @@ export const DEFAULT_OG_IMAGE = {
   url: "/og/fullgraph.jpg",
   width: 1200,
   height: 630,
-  alt: "Fullgraph — A sua ideia, impressa com peso e presença",
+  alt: "FullGraph — A sua ideia, impressa com peso e presença",
   type: "image/jpeg",
 };
 
@@ -96,7 +96,7 @@ export function serviceJsonLd(p: { name: string; description: string; slug: stri
   };
 }
 
-export function faqJsonLd(faq: { question: string; answer: string }[]) {
+export function faqJsonLd(faq: readonly { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

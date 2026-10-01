@@ -15,11 +15,15 @@ export function whatsappUrl(message?: string): string {
   if (site.whatsapp.number) {
     return `https://wa.me/${site.whatsapp.number}?text=${text}`;
   }
-  // Fallback: telefone fixo real da Fullgraph
+  // Fallback: telefone fixo real da FullGraph
   return `tel:${site.phone.e164}`;
 }
 
-/** Rótulo do CTA conforme o canal disponível */
-export function whatsappCtaLabel(): string {
-  return hasWhatsApp() ? "Orçamento no WhatsApp" : `Ligar ${site.phone.display}`;
+/**
+ * Rótulo do CTA conforme o canal disponível. Um rótulo próprio só vale
+ * com WhatsApp configurado — sem número, o link vira tel: e o texto
+ * precisa dizer isso.
+ */
+export function whatsappCtaLabel(label = "Orçamento no WhatsApp"): string {
+  return hasWhatsApp() ? label : `Ligar ${site.phone.display}`;
 }

@@ -7,7 +7,7 @@ import type { SiteConfig } from "@/types";
  * O WhatsApp vem de NEXT_PUBLIC_WHATSAPP_NUMBER no .env (ver README).
  */
 export const site: SiteConfig = {
-  name: "Fullgraph",
+  name: "FullGraph",
   legalName: "FULLGRAPH GRAFICA E EDITORA LTDA - EPP",
   tagline: "Muito mais que impressão",
   description:
@@ -17,7 +17,7 @@ export const site: SiteConfig = {
   whatsapp: {
     number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? null,
     defaultMessage:
-      "Olá! Vim pelo site da Fullgraph e gostaria de solicitar um orçamento.",
+      "Olá! Vim pelo site da FullGraph e gostaria de solicitar um orçamento.",
   },
   email: "leonardo@fullgraph.com.br",
   address: {

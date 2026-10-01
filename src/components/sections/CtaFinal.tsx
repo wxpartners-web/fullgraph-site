@@ -6,10 +6,19 @@ import { hasWhatsApp, whatsappUrl, whatsappCtaLabel } from "@/lib/whatsapp";
 export function CtaFinal({
   title = "Pronto para dar matéria à sua ideia?",
   text = "Conte formato, quantidade e prazo — devolvemos um orçamento sob medida.",
+  serifWord = "matéria",
+  quoteLabel = "Solicitar orçamento",
+  whatsappLabel,
 }: {
   title?: string;
   text?: string;
+  /** Trecho do título em serifa itálica, se presente */
+  serifWord?: string;
+  quoteLabel?: string;
+  /** Rótulo do CTA de WhatsApp (degrada para telefone sem número) */
+  whatsappLabel?: string;
 }) {
+  const [before, after] = title.split(serifWord);
   return (
     <section className="grain relative overflow-hidden border-t border-white-tech/10 bg-carbon py-24 md:py-32">
       {/* respingos de registro nas bordas */}
@@ -19,11 +28,11 @@ export function CtaFinal({
       <div className="relative mx-auto max-w-4xl px-5 text-center md:px-8">
         <Reveal kind="clip" as="div">
           <h2 className="text-h1 font-semibold text-white-tech">
-            {title.split("matéria")[0]}
-            {title.includes("matéria") ? (
+            {before}
+            {title.includes(serifWord) ? (
               <>
-                <em className="font-serif font-normal italic text-ink">matéria</em>
-                {title.split("matéria")[1]}
+                <em className="font-serif font-normal italic text-ink">{serifWord}</em>
+                {after}
               </>
             ) : null}
           </h2>
@@ -34,7 +43,7 @@ export function CtaFinal({
         <Reveal delay={0.16}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <InkButton href="/orcamento" size="lg" data-testid="cta-final-orcamento">
-              Solicitar orçamento
+              {quoteLabel}
             </InkButton>
             <InkButton
               href={whatsappUrl()}
@@ -43,7 +52,7 @@ export function CtaFinal({
               size="lg"
               data-testid="cta-final-whatsapp"
             >
-              {whatsappCtaLabel()}
+              {whatsappCtaLabel(whatsappLabel)}
             </InkButton>
           </div>
         </Reveal>

@@ -63,13 +63,14 @@ export function HeroCinema() {
           className="hero-band relative z-10 mx-auto w-full max-w-7xl px-5 pb-32 pt-24 md:px-8 lg:pb-24 lg:pt-32"
           style={{ opacity: "var(--hb0-o, 1)" }}
         >
-          <p className="text-eyebrow hero-rise mb-6 flex items-center gap-3 text-steel">
-            <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
-            Gráfica · Brasília → todo o Brasil
-          </p>
-
+          {/* H1 único: "Gráfica em Brasília:" assume a voz de eyebrow
+              (mesma tipografia de antes), o display segue logo abaixo */}
           <h1 className="text-display max-w-5xl text-white-tech">
-            <span className="hero-rise hero-rise-2 block">A sua ideia, impressa</span>
+            <span className="text-eyebrow hero-rise mb-6 flex items-center gap-3 text-steel">
+              <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
+              Gráfica em Brasília:
+            </span>{" "}
+            <span className="hero-rise hero-rise-2 block">a sua ideia, impressa</span>{" "}
             <span className="hero-rise hero-rise-3 block">
               com{" "}
               <em className="font-serif font-normal italic text-ink">

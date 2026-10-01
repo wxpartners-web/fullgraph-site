@@ -65,7 +65,7 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
 
   const category = getCategory(product.category);
   const related = getRelatedProducts(product);
-  const waMessage = `Olá! Quero um orçamento de ${product.name} pela Fullgraph.`;
+  const waMessage = `Olá! Quero um orçamento de ${product.name} pela FullGraph.`;
 
   return (
     <>

@@ -9,7 +9,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 export const metadata = pageMetadata({
   title: "Contato",
   description:
-    "Fale com a Fullgraph: telefone (61) 99619-4141, e-mail e endereço no Núcleo Bandeirante, Brasília-DF. Atendimento em todo o Brasil.",
+    "Fale com a FullGraph: telefone (61) 99619-4141, e-mail e endereço no Núcleo Bandeirante, Brasília-DF. Atendimento em todo o Brasil.",
   path: "/contato",
 });
 

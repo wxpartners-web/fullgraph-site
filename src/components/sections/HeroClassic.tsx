@@ -15,16 +15,16 @@ export function HeroClassic() {
       <HeroVisual />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-32 md:px-8">
-        <p className="text-spec hero-rise mb-6 flex items-center gap-3 text-steel">
-          <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
-          Da ideia à matéria
-        </p>
-
+        {/* H1 único: "Gráfica em Brasília:" na voz de eyebrow, display abaixo */}
         <h1 className="text-display max-w-5xl font-semibold text-white-tech">
-          <span className="hero-rise hero-rise-2 block">Ideias ganham</span>
+          <span className="text-spec hero-rise mb-6 flex items-center gap-3 font-normal text-steel">
+            <span aria-hidden="true" className="inline-block h-px w-8 bg-ink" />
+            Gráfica em Brasília:
+          </span>{" "}
+          <span className="hero-rise hero-rise-2 block">a sua ideia, impressa</span>{" "}
           <span className="hero-rise hero-rise-3 block">
-            peso, textura{" "}
-            <em className="font-serif font-normal italic text-ink">e presença.</em>
+            com{" "}
+            <em className="font-serif font-normal italic text-ink">peso e presença.</em>
           </span>
         </h1>
 

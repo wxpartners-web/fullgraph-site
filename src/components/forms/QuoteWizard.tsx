@@ -240,7 +240,7 @@ export function QuoteWizard() {
   const summaryLines = showSummary ? buildQuoteSummary(getValues()) : [];
   const waMessage = showSummary ? buildWhatsAppMessage(getValues()) : "";
   const mailBody = encodeURIComponent(waMessage.replace(/\*/g, ""));
-  const mailHref = `mailto:${site.email}?subject=${encodeURIComponent("Pedido de orçamento — site Fullgraph")}&body=${mailBody}`;
+  const mailHref = `mailto:${site.email}?subject=${encodeURIComponent("Pedido de orçamento — site FullGraph")}&body=${mailBody}`;
 
   const motionProps = reduced
     ? {}

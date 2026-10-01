@@ -29,7 +29,7 @@ test("prefers-reduced-motion: conteúdo permanece utilizável", async ({ browser
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Ideias ganham/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Gráfica em Brasília: a sua ideia/);
   // narrativa vira lista estática
   await expect(page.getByRole("heading", { name: /Da ideia à/ })).toBeVisible();
   await page.goto("/orcamento");

@@ -47,7 +47,7 @@ const INSTITUTIONAL_PAGES = [
   },
   {
     path: "/sobre",
-    title: "Sobre a Fullgraph",
+    title: "Sobre a FullGraph",
     note: "Apresentação da gráfica, forma de trabalho e dados de localização.",
   },
   {
@@ -96,7 +96,7 @@ Observações importantes para interpretar o conteúdo corretamente:
 
 - Nenhuma página publica preços, tabelas de valores ou prazos fechados. Onde aparece "sob consulta", o valor depende do orçamento.
 - As faixas de tiragem e as especificações técnicas listadas nas páginas de produto são pontos de partida para a cotação, não um catálogo fechado de opções.
-- As imagens do portfolio, das páginas de produto e da seção de processo são fotografias conceituais geradas para o site, com marcas fictícias. Não são registros de trabalhos entregues a clientes nem fotos da fábrica ou da equipe da Fullgraph.
+- As imagens do portfolio, das páginas de produto e da seção de processo são fotografias conceituais geradas para o site, com marcas fictícias. Não são registros de trabalhos entregues a clientes nem fotos da fábrica ou da equipe da FullGraph.
 - O site não divulga certificações, prêmios, número de clientes, capacidade instalada nem lista de clientes. Ausência de menção significa ausência de dado público, não negação.
 
 ## Públicos e linhas de negócio

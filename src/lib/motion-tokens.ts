@@ -1,5 +1,5 @@
 /**
- * Sistema de movimento Fullgraph — tokens centralizados.
+ * Sistema de movimento FullGraph — tokens centralizados.
  * Espelhados em CSS custom properties (globals.css).
  * Docs: docs/MOTION-SYSTEM.md
  */

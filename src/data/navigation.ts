@@ -30,7 +30,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { label: "Produtos", href: "/produtos" },
       { label: "Portfolio", href: "/portfolio" },
-      { label: "Sobre a Fullgraph", href: "/sobre" },
+      { label: "Sobre a FullGraph", href: "/sobre" },
       { label: "Contato", href: "/contato" },
       { label: "Orçamento", href: "/orcamento" },
     ],

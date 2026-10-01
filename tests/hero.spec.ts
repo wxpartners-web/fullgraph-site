@@ -84,7 +84,7 @@ test.describe("flag OFF — hero clássico preservado", () => {
 
   test("hero clássico renderiza com H1, visual e CTAs", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(/Ideias ganham/i);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/Gráfica em Brasília: a sua ideia/i);
     await expect(page.getByTestId("hero-visual")).toBeVisible();
     await expect(page.getByTestId("hero-cinema")).toHaveCount(0);
     await expect(page.getByTestId("hero-cta-orcamento")).toBeVisible();
@@ -119,7 +119,7 @@ test.describe("flag ON — hero cinematográfico", () => {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
     const page = await ctx.newPage();
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(/A sua ideia/i);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/Gráfica em Brasília: a sua ideia/i);
     await expect(page.getByTestId("hero-cta-orcamento")).toBeVisible();
     await expect(page.getByTestId("hero-still")).toBeVisible();
     await ctx.close();

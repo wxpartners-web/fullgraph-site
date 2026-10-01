@@ -2,37 +2,29 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { printFronts, type PrintFront } from "@/data/home";
 
-const portals = [
-  {
-    href: "/solucoes/empresas",
-    index: "A",
-    title: "Empresas & grandes tiragens",
-    serif: "tiragens",
-    text: "Catálogos, tabloides, papelaria e campanhas em volume, com padrão de cor e prazo combinado.",
-    preview: ["Catálogos", "Tabloides", "Papelaria", "Flyers"],
-  },
-  {
-    href: "/solucoes/livros-editorial",
-    index: "B",
-    title: "Livros & editorial",
-    serif: "editorial",
-    text: "Do arquivo à brochura: livros para autores, editoras e projetos independentes, em qualquer tiragem.",
-    preview: ["Livros", "Revistas", "Apostilas", "Anuários"],
-  },
-  {
-    href: "/solucoes/embalagens",
-    index: "C",
-    title: "Embalagens & alimentação",
-    serif: "alimentação",
-    text: "Caixas, papéis de bandeja, sacos e rótulos que levam sua marca até a mesa do cliente.",
-    preview: ["Caixas", "Bandejas", "Sacos", "Rótulos"],
-  },
-] as const;
+const LETTERS = "ABCDEF";
+
+/** Título com o trecho `serif` em itálico serifado (padrão do sistema) */
+function FrontTitle({ front }: { front: PrintFront }) {
+  if (!front.serif) return <>{front.title}</>;
+  const [before, after] = front.title.split(front.serif);
+  return (
+    <>
+      {before}
+      <em className="font-serif font-normal italic text-steel transition-colors duration-[var(--dur-micro)] group-hover:text-ink">
+        {front.serif}
+      </em>
+      {after}
+    </>
+  );
+}
 
 /**
- * Três portais comerciais — entradas visuais por público, com
- * preview tipográfico no hover (inspiração: navegação Locomotive).
+ * As seis frentes de impressão — cada uma leva à rota mais próxima
+ * (solução, catálogo ou orçamento), com o destino revelado no hover
+ * (inspiração: navegação Locomotive).
  */
 export function SolutionPortals() {
   return (
@@ -40,41 +32,38 @@ export function SolutionPortals() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="01"
-          eyebrow="Para quem fazemos"
-          title="Três caminhos, uma prensa"
-          description="Cada projeto entra por uma porta diferente — e sai da mesma produção, com o mesmo rigor."
+          eyebrow="O que imprimimos"
+          title="O que a gráfica em Brasília da FullGraph imprime?"
+          serifWord="imprime?"
         />
 
         <RevealGroup className="mt-14 border-t border-white-tech/10" stagger={0.1}>
-          {portals.map((portal) => (
-            <RevealItem key={portal.href}>
+          {printFronts.map((front, i) => (
+            <RevealItem key={front.slug}>
               <Link
-                href={portal.href}
+                href={front.href}
                 className="group relative flex flex-col gap-2 border-b border-white-tech/10 py-5 pr-8 transition-colors duration-[var(--dur-comp)] hover:bg-white-tech/[0.03] md:flex-row md:items-center md:gap-8 md:py-10 md:pr-0"
-                data-testid={`portal-${portal.index}`}
+                data-testid={`portal-${front.slug}`}
               >
                 <div className="flex items-baseline gap-3 md:contents">
                   <span aria-hidden="true" className="text-spec flex-none text-steel-2 md:w-10">
-                    {portal.index}
+                    {LETTERS[i]}
                   </span>
 
                   <h3 className="text-h3 flex-1 font-semibold text-white-tech">
-                    {portal.title.split(portal.serif)[0]}
-                    <em className="font-serif font-normal italic text-steel transition-colors duration-[var(--dur-micro)] group-hover:text-ink">
-                      {portal.serif}
-                    </em>
+                    <FrontTitle front={front} />
                   </h3>
                 </div>
 
-                <p className="max-w-sm flex-1 pl-6 text-sm leading-relaxed text-steel md:pl-0">
-                  {portal.text}
+                <p className="max-w-sm flex-1 pl-6 text-sm leading-relaxed text-steel first-letter:uppercase md:pl-0">
+                  {front.text}
                 </p>
 
-                {/* preview tipográfico no hover */}
+                {/* destino revelado no hover */}
                 <div className="relative hidden h-6 w-44 overflow-hidden lg:block" aria-hidden="true">
                   <div className="hover-reveal absolute inset-0 flex translate-y-full flex-col transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:translate-y-0">
                     <p className="text-spec whitespace-nowrap text-ink">
-                      {portal.preview.join(" · ")}
+                      {front.linkLabel}
                     </p>
                   </div>
                 </div>

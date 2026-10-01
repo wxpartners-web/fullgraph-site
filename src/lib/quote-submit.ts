@@ -70,7 +70,7 @@ export function buildWhatsAppMessage(data: QuoteSchema): string {
     .filter(Boolean)
     .join("\n");
   return [
-    "*Pedido de orçamento — site Fullgraph*",
+    "*Pedido de orçamento — site FullGraph*",
     "",
     summary,
     "",
