@@ -4,9 +4,7 @@ import type { PageContent } from "@/types";
  * Copy aprovada pelo cliente — rascunhos/grafica-aguas-claras/grafica-aguas-claras.md
  * (Lote 3). Texto verbatim: não reescrever nem acrescentar afirmações sem
  * nova aprovação. A FullGraph não tem loja em Águas Claras — a produção e a
- * retirada são no SIBS. /produtos/sacolas-personalizadas e
- * /produtos/kits-corporativos ainda não existem: as frases ficam sem link
- * até as páginas serem publicadas.
+ * retirada são no SIBS.
  */
 export const graficaAguasClarasContent: PageContent = {
   metaTitle: "Gráfica Águas Claras: papelaria, folders e kits | FullGraph",
@@ -102,9 +100,8 @@ export const graficaAguasClarasContent: PageContent = {
               { link: "comunicação visual", href: "/produtos/comunicacao-visual" },
               ".",
             ],
-            // sem link até /produtos/sacolas-personalizadas ser publicada
             [
-              { strong: "Sacolas personalizadas" },
+              { link: "Sacolas personalizadas", href: "/produtos/sacolas-personalizadas" },
               " para o visitante levar o material para casa, sem quantidade mínima.",
             ],
           ],
@@ -129,8 +126,11 @@ export const graficaAguasClarasContent: PageContent = {
       heading: "Kits para clientes e equipes, entregues em cada endereço",
       blocks: [
         {
-          // sem link até /produtos/kits-corporativos ser publicada
-          p: "Kit de boas-vindas para quem entra na empresa, kit de entrega das chaves para o novo morador, kit de fim de ano para clientes. A FullGraph monta o kit com qualquer tipo de brinde e envia para o endereço de cada pessoa. Não há quantidade mínima. Os detalhes estão em kits corporativos.",
+          p: [
+            "Kit de boas-vindas para quem entra na empresa, kit de entrega das chaves para o novo morador, kit de fim de ano para clientes. A FullGraph monta o kit com qualquer tipo de brinde e envia para o endereço de cada pessoa. Não há quantidade mínima. Os detalhes estão em ",
+            { link: "kits corporativos", href: "/produtos/kits-corporativos" },
+            ".",
+          ],
         },
       ],
     },

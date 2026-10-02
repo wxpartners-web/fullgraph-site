@@ -42,14 +42,32 @@ for (const city of cities) {
   });
 }
 
-test("páginas do DF não linkam produtos ainda não publicados", async ({ page }) => {
-  for (const path of ["/grafica-taguatinga", "/grafica-aguas-claras"]) {
+test("páginas do DF linkam sacolas, kits e comunicação visual", async ({ page }) => {
+  const expected: Record<string, string[]> = {
+    "/grafica-taguatinga": ["/produtos/sacolas-personalizadas", "/produtos/comunicacao-visual"],
+    "/grafica-aguas-claras": [
+      "/produtos/sacolas-personalizadas",
+      "/produtos/kits-corporativos",
+      "/produtos/comunicacao-visual",
+    ],
+  };
+  for (const [path, hrefs] of Object.entries(expected)) {
     await page.goto(path);
-    await expect(
-      page.locator('a[href="/produtos/sacolas-personalizadas"], a[href="/produtos/kits-corporativos"]')
-    ).toHaveCount(0);
-    await expect(page.locator('main a[href="/produtos/comunicacao-visual"]').first()).toBeAttached();
+    for (const href of hrefs) {
+      await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+    }
   }
+});
+
+test("empresas e embalagens linkam kits e sacolas", async ({ page }) => {
+  await page.goto("/solucoes/empresas");
+  await expect(page.locator('main a[href="/produtos/kits-corporativos"]').first()).toBeAttached();
+  await page.goto("/solucoes/embalagens");
+  await page.getByRole("link", { name: "sacolas personalizadas", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/produtos\/sacolas-personalizadas$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    /Sacolas personalizadas para lojas e marcas/
+  );
 });
 
 test("caminho de primeiro nível desconhecido continua 404", async ({ request }) => {

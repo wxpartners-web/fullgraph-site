@@ -117,7 +117,12 @@ export const empresasContent: PageContent = {
       heading: "Kits corporativos montados e enviados",
       blocks: [
         {
-          p: "Montamos kits com qualquer tipo de brinde, para equipes, clientes e parceiros. Cada kit é montado e enviado para o endereço de cada pessoa. Não há quantidade mínima.",
+          // Texto aprovado sem alteração; "kits" leva link para a página de kits corporativos
+          p: [
+            "Montamos ",
+            { link: "kits", href: "/produtos/kits-corporativos" },
+            " com qualquer tipo de brinde, para equipes, clientes e parceiros. Cada kit é montado e enviado para o endereço de cada pessoa. Não há quantidade mínima.",
+          ],
         },
       ],
     },

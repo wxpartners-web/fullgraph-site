@@ -4,7 +4,8 @@ import type { PageContent } from "@/types";
  * Copy aprovada pelo cliente — rascunhos/embalagens/embalagens.md.
  * Texto verbatim: não reescrever nem acrescentar afirmações sem nova
  * aprovação. Fonte única para a UI e para o JSON-LD (FAQPage).
- * Sacolas ficam sem link: ainda não há página de produto.
+ * O item "Sacolas" linka /produtos/sacolas-personalizadas (âncora "sacolas
+ * personalizadas", Lote 3) e "kits corporativos" linka /produtos/kits-corporativos.
  */
 export const embalagensContent: PageContent = {
   metaTitle: "Embalagens personalizadas sem pedido mínimo | FullGraph",
@@ -51,7 +52,9 @@ export const embalagensContent: PageContent = {
             ],
             [
               { strong: "Sacolas:" },
-              " todos os tipos de alça e de papel, com tamanhos e acabamentos personalizados.",
+              " ",
+              { link: "sacolas personalizadas", href: "/produtos/sacolas-personalizadas" },
+              " com todos os tipos de alça e de papel, com tamanhos e acabamentos personalizados.",
             ],
             [
               { strong: "Rótulos e adesivos:" },
@@ -173,7 +176,12 @@ export const embalagensContent: PageContent = {
               { strong: "Lojas virtuais:" },
               " caixas em papelão ondulado para envio e adesivos de identificação.",
             ],
-            [{ strong: "Empresas:" }, " kits corporativos e de lançamento, montados na mesma caixa."],
+            [
+              { strong: "Empresas:" },
+              " ",
+              { link: "kits corporativos", href: "/produtos/kits-corporativos" },
+              " e de lançamento, montados na mesma caixa.",
+            ],
           ],
         },
         {

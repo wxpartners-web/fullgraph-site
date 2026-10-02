@@ -4,12 +4,15 @@ import { impressaoDeLivrosContent } from "@/data/product-content/impressao-de-li
 import { flyersEPanfletosContent } from "@/data/product-content/flyers-e-panfletos";
 import { crachasECredenciaisContent } from "@/data/product-content/crachas-e-credenciais";
 import { comunicacaoVisualContent } from "@/data/product-content/comunicacao-visual";
+import { sacolasPersonalizadasContent } from "@/data/product-content/sacolas-personalizadas";
+import { kitsCorporativosContent } from "@/data/product-content/kits-corporativos";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
  * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos,
- * crachas-e-credenciais e comunicacao-visual, com especificações da copy aprovada);
+ * crachas-e-credenciais, comunicacao-visual, sacolas-personalizadas e
+ * kits-corporativos, com especificações da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -38,7 +41,7 @@ export const categories: Category[] = [
     name: "Materiais corporativos",
     shortName: "Corporativo",
     description:
-      "Papelaria institucional e crachás: timbrados, envelopes, pastas, receituários, cartões e credenciais.",
+      "Papelaria institucional, crachás e kits corporativos: timbrados, envelopes, pastas, receituários, cartões, credenciais e kits montados e enviados.",
     audiences: ["empresas"],
     index: "03",
   },
@@ -56,7 +59,7 @@ export const categories: Category[] = [
     name: "Embalagens e caixas",
     shortName: "Embalagens",
     description:
-      "Caixas personalizadas para marcas e embalagens impressas para hambúrguer, delivery e food service.",
+      "Caixas e sacolas personalizadas para marcas e embalagens impressas para hambúrguer, delivery e food service.",
     audiences: ["embalagens"],
     index: "05",
   },
@@ -351,6 +354,49 @@ export const products: Product[] = [
       alt: "Crachás do evento fictício Congresso Cerrado de Inovação 2026 com nomes de participantes e faixas Participante, Palestrante e Staff em cordões verdes e amarelos, crachá de funcionário em PVC da empresa fictícia Grupo Ipê Serviços com avatar genérico e um porta-crachá transparente",
     },
   },
+  {
+    slug: "kits-corporativos",
+    name: "Kits corporativos",
+    category: "materiais-corporativos",
+    audiences: ["empresas"],
+    tagline: "Brindes, caixa e impressos, montados e enviados a cada pessoa.",
+    description:
+      "Kit corporativo personalizado com brindes de qualquer tipo, impressos com a sua marca e tudo reunido na mesma caixa. Sugerimos e compramos os brindes, personalizamos até o cartão com o nome de quem vai receber e enviamos cada kit para o endereço de cada pessoa, em todo o Brasil.",
+    applications: [
+      "Kit onboarding",
+      "Presentes para clientes",
+      "Press kit e influenciadores",
+      "Lançamentos imobiliários",
+      "Eventos e participantes",
+    ],
+    formats: ["Brindes e impressos na mesma caixa"],
+    materials: ["Cadernos", "Blocos, envelopes e cartões", "Pastas", "Crachá, cordão e porta-crachá"],
+    finishes: [
+      "Cartão com o nome de cada destinatário",
+      "Sugestão e compra dos brindes",
+      "Arte criada quando necessário",
+      "Kits em estoque para envio aos poucos",
+    ],
+    runRanges: ["Sem quantidade mínima"],
+    specs: [
+      { label: "Quantidade mínima", value: "Sem quantidade mínima" },
+      { label: "Prazo médio", value: "10 a 15 dias para montar e enviar" },
+      { label: "Envio", value: "Todo o Brasil, pelos Correios com rastreio ou por via aérea" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: kitsCorporativosContent.faq,
+    related: [
+      "caixas-personalizadas",
+      "sacolas-personalizadas",
+      "crachas-e-credenciais",
+      "cadernos-personalizados",
+    ],
+    mockup: "box",
+    image: {
+      src: "/images/products/kits-corporativos.webp",
+      alt: "Kit de boas-vindas da empresa fictícia Ondina Sistemas em azul-noite e coral: caixa rígida com logotipo prateado, caderno, crachá de Mariana Lopes com cordão, cartão de boas-vindas, garrafa térmica, caneca e caneta sobre papel de seda",
+    },
+  },
 
   /* ---------- Flyers, folders e tabloides ---------- */
   {
@@ -541,6 +587,61 @@ export const products: Product[] = [
     },
   },
   {
+    slug: "sacolas-personalizadas",
+    name: "Sacolas personalizadas",
+    category: "embalagens-alimentos",
+    audiences: ["embalagens"],
+    tagline: "Papel, alça, tamanho e acabamento sob medida, sem mínimo.",
+    description:
+      "Sacolas personalizadas com a marca da sua loja, do seu evento ou da sua empresa. Você define o tipo de sacola, o papel, a alça, o tamanho e o acabamento. Não existe quantidade mínima, e o custo de cada unidade cai à medida que a quantidade sobe.",
+    applications: [
+      "Roupas e calçados",
+      "Joalherias, óticas e cosméticos",
+      "Presentes e datas comemorativas",
+      "Eventos, feiras e congressos",
+      "Kits para clientes e equipes",
+      "Confeitarias e cafés",
+    ],
+    formats: ["Tamanho sob medida, dimensionado pelo que vai dentro"],
+    materials: [
+      "Papel conforme o projeto, normalmente acima de 180 g",
+      "Kraft",
+      "Plástico",
+      "TNT",
+      "Ecobag",
+    ],
+    finishes: [
+      "Hot stamping",
+      "Relevo seco",
+      "Verniz localizado",
+      "Laminação",
+      "Soft touch",
+      "Cores Pantone e metálicas",
+      "Reforço na boca e no fundo",
+      "Ilhós",
+    ],
+    runRanges: ["Sem quantidade mínima"],
+    specs: [
+      { label: "Quantidade mínima", value: "Sem quantidade mínima" },
+      { label: "Alça", value: "Todos os tipos" },
+      { label: "Prova", value: "Prova digital e boneca; a primeira prova está inclusa" },
+      { label: "Prazo médio", value: "15 dias de produção" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: sacolasPersonalizadasContent.faq,
+    related: [
+      "caixas-personalizadas",
+      "sacos-e-embalagens-delivery",
+      "rotulos-e-etiquetas",
+      "kits-corporativos",
+    ],
+    mockup: "box",
+    image: {
+      src: "/images/products/sacolas-personalizadas.webp",
+      alt: "Três sacolas da boutique fictícia Aroeira Ateliê sobre o balcão da loja: sacola verde-musgo com logotipo em hot stamping dourado e alça de cordão, sacola creme com logotipo em relevo seco e alça de fita, e sacola kraft com logotipo verde e alça de papel torcido, todas com ilhós",
+    },
+  },
+  {
     slug: "papeis-de-bandeja-personalizados",
     name: "Papéis de bandeja",
     category: "papeis-de-bandeja",
@@ -645,16 +746,25 @@ export const products: Product[] = [
     audiences: ["empresas"],
     tagline: "Fachadas, placas, banners e PDV, com instalação no Brasil.",
     description:
-      "Banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação no Brasil. A fachada, o material de ponto de venda e os impressos da campanha podem ser orçados juntos.",
-    applications: ["Varejo", "Franquias", "Construtoras", "Eventos", "Órgãos públicos"],
-    formats: ["Medidas definidas no orçamento, a partir das fotos do local"],
+      "Fachada, letra-caixa, luminoso, placa em ACM ou PVC, banner, lona, adesivo, totem, display e wobbler, com instalação no Brasil por instaladores parceiros credenciados. A fachada, o material de ponto de venda e os impressos da campanha podem ser orçados juntos.",
+    applications: ["Varejo", "Franquias e redes", "Construtoras", "Eventos", "Órgãos públicos", "Frotas"],
+    formats: ["Medidas definidas no orçamento, pela visita técnica ou pelas medidas que você enviar"],
     materials: ["ACM", "PVC", "Lona", "Adesivo"],
-    finishes: ["Instalação no Brasil", "Arte criada quando necessário"],
-    runRanges: ["Peças e unidades informadas no orçamento"],
+    finishes: [
+      "Instalação no Brasil, com instaladores parceiros credenciados",
+      "Visita técnica e medição (cobrada)",
+      "Envelopamento de veículos",
+      "Arte criada quando necessário",
+    ],
+    runRanges: ["Sem quantidade mínima para banner, adesivo e placa"],
     specs: [
-      { label: "Peças", value: "Fachada, placa, banner, lona, adesivo, totem, display e wobbler" },
+      {
+        label: "Peças",
+        value:
+          "Fachada, letra-caixa, luminoso, placa, banner, lona, adesivo, faixa, roll-up, wind banner, backdrop, totem, display e wobbler",
+      },
       { label: "Materiais", value: "Placa em ACM ou PVC" },
-      { label: "Instalação", value: "No Brasil, com prazo combinado no orçamento" },
+      { label: "Instalação", value: "No Brasil, com prazo definido no orçamento" },
     ],
     // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
     faq: comunicacaoVisualContent.faq,

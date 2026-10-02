@@ -30,7 +30,7 @@ const SOLUTION_PAGES = [
   {
     path: "/solucoes/embalagens",
     title: "Embalagens",
-    note: "Caixas personalizadas, caixas para hambúrguer, sacos, papéis de bandeja e rótulos para marcas, restaurantes, hamburguerias e redes de alimentação.",
+    note: "Caixas e sacolas personalizadas, caixas para hambúrguer, sacos, papéis de bandeja e rótulos para marcas, restaurantes, hamburguerias e redes de alimentação.",
   },
 ] as const;
 

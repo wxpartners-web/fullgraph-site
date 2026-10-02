@@ -75,8 +75,8 @@ export const printFronts: readonly PrintFront[] = [
     title: "Kits e lançamentos",
     serif: "lançamentos",
     text: "press kits, kits de onboarding e caixas especiais, do projeto à montagem.",
-    href: "/orcamento",
-    linkLabel: "Montar orçamento",
+    href: "/produtos/kits-corporativos",
+    linkLabel: "Ver kits corporativos",
   },
 ];
 

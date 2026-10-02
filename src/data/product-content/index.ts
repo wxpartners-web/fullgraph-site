@@ -4,6 +4,8 @@ import { impressaoDeLivrosContent } from "./impressao-de-livros";
 import { flyersEPanfletosContent } from "./flyers-e-panfletos";
 import { crachasECredenciaisContent } from "./crachas-e-credenciais";
 import { comunicacaoVisualContent } from "./comunicacao-visual";
+import { sacolasPersonalizadasContent } from "./sacolas-personalizadas";
+import { kitsCorporativosContent } from "./kits-corporativos";
 
 /**
  * Copy longa aprovada por slug de produto (Money Pages). Produtos fora
@@ -15,6 +17,8 @@ const productContent: Readonly<Record<string, ProductContent>> = {
   "flyers-e-panfletos": flyersEPanfletosContent,
   "crachas-e-credenciais": crachasECredenciaisContent,
   "comunicacao-visual": comunicacaoVisualContent,
+  "sacolas-personalizadas": sacolasPersonalizadasContent,
+  "kits-corporativos": kitsCorporativosContent,
 };
 
 export function getProductContent(slug: string): ProductContent | undefined {

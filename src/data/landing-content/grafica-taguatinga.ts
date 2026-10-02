@@ -4,8 +4,7 @@ import type { PageContent } from "@/types";
  * Copy aprovada pelo cliente — rascunhos/grafica-taguatinga/grafica-taguatinga.md
  * (Lote 3). Texto verbatim: não reescrever nem acrescentar afirmações sem
  * nova aprovação. A FullGraph não tem loja em Taguatinga — a produção e a
- * retirada são no SIBS. /produtos/sacolas-personalizadas ainda não existe:
- * a frase fica sem link até a página ser publicada.
+ * retirada são no SIBS.
  */
 export const graficaTaguatingaContent: PageContent = {
   metaTitle: "Gráfica Taguatinga (DF) para comércio e delivery | FullGraph",
@@ -85,8 +84,11 @@ export const graficaTaguatingaContent: PageContent = {
       heading: "Sacolas e caixas com a marca da loja",
       blocks: [
         {
-          // sem link até /produtos/sacolas-personalizadas ser publicada
-          p: "Na loja de roupa ou de presente, a compra sai do balcão dentro de uma sacola. Fazemos sacolas personalizadas com todos os tipos de alça e de papel, no tamanho e no acabamento que a loja escolher, sem pedido mínimo.",
+          p: [
+            "Na loja de roupa ou de presente, a compra sai do balcão dentro de uma sacola. Fazemos ",
+            { link: "sacolas personalizadas", href: "/produtos/sacolas-personalizadas" },
+            " com todos os tipos de alça e de papel, no tamanho e no acabamento que a loja escolher, sem pedido mínimo.",
+          ],
         },
         {
           p: [

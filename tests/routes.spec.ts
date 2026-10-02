@@ -16,6 +16,8 @@ const routes: { path: string; h1: RegExp }[] = [
   { path: "/produtos/flyers-e-panfletos", h1: /Impressão de panfletos personalizados/ },
   { path: "/produtos/crachas-e-credenciais", h1: /Crachás personalizados e credenciais/ },
   { path: "/produtos/comunicacao-visual", h1: /Empresa de comunicação visual em Brasília/ },
+  { path: "/produtos/sacolas-personalizadas", h1: /Sacolas personalizadas para lojas e marcas/ },
+  { path: "/produtos/kits-corporativos", h1: /Kit corporativo e kit onboarding personalizados/ },
   { path: "/portfolio", h1: /Ideias que ganham/i },
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
@@ -57,6 +59,8 @@ test("sitemap e robots respondem", async ({ request }) => {
   expect(xml).toContain("/produtos/comunicacao-visual");
   expect(xml).toContain("/grafica-taguatinga");
   expect(xml).toContain("/grafica-aguas-claras");
+  expect(xml).toContain("/produtos/sacolas-personalizadas");
+  expect(xml).toContain("/produtos/kits-corporativos");
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
 });

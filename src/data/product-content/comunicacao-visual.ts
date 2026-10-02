@@ -2,17 +2,18 @@ import type { ProductContent } from "@/types";
 
 /**
  * Copy aprovada pelo cliente — rascunhos/comunicacao-visual/comunicacao-visual.md
- * (Lote 3). Texto verbatim: não reescrever nem acrescentar afirmações sem
- * nova aprovação (sem gramaturas, espessuras ou medidas: J1–J7 pendentes).
- * Fonte única para a UI e para o JSON-LD (FAQPage).
+ * (Lote 3, versão 2 com as respostas J1–J7). Texto verbatim: não reescrever
+ * nem acrescentar afirmações sem nova aprovação (sem gramaturas, espessuras,
+ * marcas de material ou normas técnicas). Fonte única para a UI e para o
+ * JSON-LD (FAQPage).
  */
 export const comunicacaoVisualContent: ProductContent = {
   metaTitle: "Empresa de comunicação visual em Brasília | FullGraph",
   metaDescription:
-    "Empresa de comunicação visual em Brasília: fachada, placa em ACM ou PVC, banner, adesivo, totem, display e wobbler, com instalação em todo o Brasil.",
+    "Empresa de comunicação visual em Brasília: fachada, letra-caixa, placa em ACM ou PVC, banner, adesivo, totem e display, com instalação em todo o Brasil.",
   h1: "Empresa de comunicação visual em Brasília: fachadas, placas, banners e PDV",
   intro: [
-    "A FullGraph é uma empresa de comunicação visual e gráfica em Brasília desde 2012. Produzimos banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler, e fazemos a instalação no Brasil.",
+    "A FullGraph é uma empresa de comunicação visual e gráfica em Brasília desde 2012. Produzimos fachada, letra-caixa, luminoso, placa em ACM ou PVC, banner, lona, adesivo, totem, display e wobbler, e cuidamos da instalação no Brasil.",
     "Trabalhamos com impressão offset, impressão digital e grandes formatos. Para varejo, franquias, construtoras, eventos e órgãos públicos, a fachada, o material de ponto de venda e os impressos da campanha podem ser orçados juntos.",
   ],
   introCta: "Pedir orçamento de comunicação visual pelo WhatsApp",
@@ -21,7 +22,19 @@ export const comunicacaoVisualContent: ProductContent = {
       heading: "O que faz uma empresa de comunicação visual?",
       blocks: [
         {
-          p: "Uma empresa de comunicação visual produz as peças físicas que mostram a marca no ponto de venda. Elas se dividem em dois grupos. O primeiro identifica o lugar: fachada, placa e adesivo de porta ou vitrine. O segundo fica dentro da loja, perto do produto: display, totem, wobbler e banner.",
+          p: "Uma empresa de comunicação visual produz as peças físicas que mostram a marca, da rua ao interior da loja. Na FullGraph, elas se dividem assim:",
+        },
+        {
+          ul: [
+            [
+              { strong: "Identificação do local:" },
+              " fachada, letra-caixa, luminoso, placa e adesivo de porta ou vitrine.",
+            ],
+            [{ strong: "Sinalização:" }, " placa de sinalização de segurança e placas internas."],
+            [{ strong: "Divulgação:" }, " banner, lona, faixa, roll-up, wind banner e backdrop."],
+            [{ strong: "Ponto de venda:" }, " display, totem e wobbler."],
+            [{ strong: "Veículos:" }, " envelopamento de carro ou de frota."],
+          ],
         },
         {
           p: "É um trabalho diferente do de uma agência de propaganda. A agência cria a campanha e define a mensagem. A empresa de comunicação visual transforma essa mensagem em peça, no tamanho e no material adequados ao espaço, e cuida da instalação.",
@@ -32,7 +45,7 @@ export const comunicacaoVisualContent: ProductContent = {
       heading: "Fachadas e placas em ACM ou PVC",
       blocks: [
         {
-          p: "A FullGraph produz fachada e placa em ACM ou PVC. A escolha do material depende de onde a peça vai ficar.",
+          p: "Trabalhamos com os materiais disponíveis no mercado. Em fachada e placa, os mais pedidos são ACM e PVC, escolhidos conforme o local da peça.",
         },
         {
           ul: [
@@ -47,7 +60,19 @@ export const comunicacaoVisualContent: ProductContent = {
           ],
         },
         {
-          p: "Essa é uma orientação geral de mercado. Medidas, acabamento e fixação de cada peça são definidos no orçamento, a partir das fotos do local.",
+          p: "Essa é uma orientação geral de mercado. Medidas, acabamento e fixação de cada peça são definidos no orçamento.",
+        },
+        { h3: "Letra-caixa e luminoso" },
+        {
+          p: "A letra-caixa é a letra recortada com volume, fixada na fachada ou na parede da recepção. O luminoso tem iluminação interna e deixa a marca visível à noite.",
+        },
+        { h3: "Placa de sinalização de segurança" },
+        {
+          p: "Produzimos placas de saída, extintor, área de risco e uso de equipamento de proteção, com o conteúdo definido pelo responsável pela segurança do local.",
+        },
+        { h3: "Visita técnica e medição" },
+        {
+          p: "Para fachada e placa, fazemos visita e medição no local, em qualquer cidade. A visita é cobrada.",
         },
       ],
     },
@@ -56,6 +81,21 @@ export const comunicacaoVisualContent: ProductContent = {
       blocks: [
         {
           p: "Banner e lona servem para divulgar uma oferta, sinalizar uma obra ou ocupar uma área grande com pouca estrutura. O adesivo vai em vitrine, porta, parede ou balcão. Na vitrine, é a forma mais direta de mostrar a promoção para quem passa na calçada.",
+        },
+        {
+          p: "Banner, adesivo e placa não têm quantidade mínima: dá para encomendar uma peça só. A lona e o adesivo são escolhidos conforme o uso.",
+        },
+        { h3: "Faixa, roll-up, wind banner e backdrop" },
+        {
+          ul: [
+            [{ strong: "Faixa:" }, " peça longa e estreita, presa em fachada ou grade."],
+            [{ strong: "Roll-up:" }, " banner que se enrola na própria base e fica de pé."],
+            [
+              { strong: "Wind banner:" },
+              " bandeira alta com haste flexível, para calçada e área externa.",
+            ],
+            [{ strong: "Backdrop:" }, " painel de fundo para fotos e entrevistas."],
+          ],
         },
         {
           p: [
@@ -84,6 +124,7 @@ export const comunicacaoVisualContent: ProductContent = {
         {
           p: "O display apoia ou expõe o produto e pode ficar no chão, no balcão ou junto ao caixa.",
         },
+        { p: "Em campanha de rede, o PDV sai padronizado e separado por unidade." },
         {
           p: [
             "A campanha costuma pedir também material de mão. A FullGraph imprime os ",
@@ -100,7 +141,7 @@ export const comunicacaoVisualContent: ProductContent = {
       heading: "Instalação em Brasília e em outras cidades",
       blocks: [
         {
-          p: "A FullGraph faz a instalação das peças de comunicação visual no Brasil, não só em Brasília. O prazo de instalação e as condições de cada local são combinados no orçamento.",
+          p: "A instalação é feita com instaladores parceiros credenciados, em Brasília e em outras cidades do Brasil. O prazo depende do formato das peças e do tamanho da campanha e é definido no orçamento. Pedidos urgentes de loja, fachada ou evento também são atendidos.",
         },
         {
           p: "Quando a peça não precisa ser instalada, a entrega segue a regra da gráfica, contada a partir do pedido pronto:",
@@ -118,7 +159,7 @@ export const comunicacaoVisualContent: ProductContent = {
       heading: "Eventos, feiras e lançamentos",
       blocks: [
         {
-          p: "Em evento, a data não muda. Banners, lonas, totens e displays de estande, feira ou lançamento imobiliário precisam chegar antes da abertura. Para eventos, a FullGraph atende pedidos com urgência e entrega o material no local.",
+          p: "Em evento, a data não muda. Banner, roll-up, backdrop, totem e display de estande, feira ou lançamento imobiliário precisam chegar antes da abertura. Para eventos, a FullGraph atende pedidos com urgência e entrega o material no local.",
         },
         {
           p: [
@@ -136,7 +177,7 @@ export const comunicacaoVisualContent: ProductContent = {
           p: "Na maior parte dos pedidos, o cliente envia a arte pronta. Quando necessário, a FullGraph cria a arte.",
         },
         {
-          p: "Em fachada e placa, a arte só fecha com as medidas exatas do espaço. Para agilizar o orçamento, envie:",
+          p: "Em fachada e placa, a arte só fecha com as medidas exatas do espaço. Elas podem vir da nossa visita técnica ou de você. Para agilizar o orçamento, envie:",
         },
         {
           ul: [
@@ -155,6 +196,9 @@ export const comunicacaoVisualContent: ProductContent = {
       blocks: [
         {
           p: "A FullGraph emite nota fiscal, aceita PIX e cartões de crédito e débito e atende órgãos públicos e licitações. Empresas podem ser faturadas após aprovação de cadastro. Em Valparaíso de Goiás e Luziânia, prefeituras estão entre os nossos clientes.",
+        },
+        {
+          p: "Para redes e franquias, ter uma só empresa de comunicação visual facilita a campanha: padronizamos o material e organizamos a entrega por unidade, cuidando também da logística. Para empresas com frota, fazemos o envelopamento dos veículos com a identidade da marca.",
         },
         {
           p: [
@@ -199,8 +243,8 @@ export const comunicacaoVisualContent: ProductContent = {
     serifWord: "comunicação visual",
     text: "Para o orçamento sair completo, informe:",
     items: [
-      "quais peças você precisa (fachada, placa, banner, adesivo, totem, display, wobbler);",
-      "as medidas de cada uma;",
+      "quais peças você precisa (fachada, letra-caixa, placa, banner, adesivo, PDV);",
+      "as medidas de cada uma, ou se prefere a visita técnica;",
       "quantas lojas ou unidades vão receber o material;",
       "as cidades de entrega ou de instalação;",
       "se precisa de instalação;",
@@ -215,16 +259,21 @@ export const comunicacaoVisualContent: ProductContent = {
     {
       question: "O que uma empresa de comunicação visual faz?",
       answer:
-        "Produz e instala as peças que identificam e divulgam a marca. Na FullGraph: banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler.",
+        "Produz e instala as peças que identificam e divulgam a marca: fachada, letra-caixa, placas, banner, adesivo, material de PDV e envelopamento de veículo.",
+    },
+    {
+      question: "Existe quantidade mínima?",
+      answer: "Não. Banner, adesivo e placa podem ser pedidos a partir de uma unidade.",
     },
     {
       question: "Vocês instalam fora de Brasília?",
       answer:
-        "Sim. A instalação é feita no Brasil. Prazo e condições são combinados no orçamento.",
+        "Sim. A instalação é feita no Brasil, com instaladores parceiros credenciados. O prazo é informado no orçamento.",
     },
     {
-      question: "Fazem fachada em ACM?",
-      answer: "Sim. Fazemos fachada e placa em ACM ou em PVC.",
+      question: "Fazem visita técnica para medir o local?",
+      answer:
+        "Sim. Para fachada e placa, fazemos visita e medição em qualquer cidade. A visita é cobrada.",
     },
     {
       question: "Vocês criam a arte?",
@@ -232,14 +281,13 @@ export const comunicacaoVisualContent: ProductContent = {
         "Normalmente o cliente envia a arte pronta. Quando necessário, a FullGraph cria a arte.",
     },
     {
-      question: "Fazem material para eventos e entregam no local?",
-      answer:
-        "Sim. Para eventos, atendemos com urgência e entregamos o material no local do evento.",
+      question: "Atendem pedidos com urgência?",
+      answer: "Sim, para loja, fachada e evento. Em eventos, também entregamos o material no local.",
     },
     {
       question: "Atendem órgãos públicos e emitem nota fiscal?",
       answer:
-        "Sim. Atendemos órgãos públicos e licitações, emitimos nota fiscal e aceitamos PIX e cartões. Para empresas, o faturamento depende de aprovação de cadastro.",
+        "Sim. Atendemos licitações, emitimos nota fiscal e aceitamos PIX e cartões. Empresas podem ser faturadas após aprovação de cadastro.",
     },
     {
       question: "Quanto custa e qual é o prazo?",
