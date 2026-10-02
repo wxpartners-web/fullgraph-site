@@ -85,8 +85,8 @@ export const empresasContent: PageContent = {
             ],
             [
               { strong: "Comunicação visual:" },
-              " banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação em todo o Brasil. Veja ",
-              { link: "banners e grandes formatos", href: "/produtos/banners-e-grandes-formatos" },
+              " banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação em todo o Brasil. Veja a ",
+              { link: "comunicação visual", href: "/produtos/comunicacao-visual" },
               ".",
             ],
             [
@@ -141,7 +141,12 @@ export const empresasContent: PageContent = {
         { p: "Atendemos empresas em:" },
         {
           ul: [
-            "Brasília e todo o Distrito Federal",
+            [
+              "Brasília e todo o Distrito Federal, incluindo ",
+              { link: "Taguatinga", href: "/grafica-taguatinga" },
+              " e ",
+              { link: "Águas Claras", href: "/grafica-aguas-claras" },
+            ],
             [
               { link: "Valparaíso de Goiás", href: "/grafica-valparaiso-de-goias" },
               " e ",

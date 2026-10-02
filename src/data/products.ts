@@ -3,12 +3,13 @@ import { caixasPersonalizadasContent } from "@/data/product-content/caixas-perso
 import { impressaoDeLivrosContent } from "@/data/product-content/impressao-de-livros";
 import { flyersEPanfletosContent } from "@/data/product-content/flyers-e-panfletos";
 import { crachasECredenciaisContent } from "@/data/product-content/crachas-e-credenciais";
+import { comunicacaoVisualContent } from "@/data/product-content/comunicacao-visual";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
- * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos e
- * crachas-e-credenciais, com especificações da copy aprovada);
+ * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos,
+ * crachas-e-credenciais e comunicacao-visual, com especificações da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -91,7 +92,7 @@ export const categories: Category[] = [
     name: "Comunicação visual",
     shortName: "Com. visual",
     description:
-      "Banners, placas e materiais de grande formato para pontos de venda e eventos.",
+      "Fachadas, placas, banners, materiais de PDV e grandes formatos para pontos de venda e eventos.",
     audiences: ["empresas"],
     index: "09",
   },
@@ -638,6 +639,33 @@ export const products: Product[] = [
 
   /* ---------- Comunicação visual ---------- */
   {
+    slug: "comunicacao-visual",
+    name: "Comunicação visual",
+    category: "comunicacao-visual",
+    audiences: ["empresas"],
+    tagline: "Fachadas, placas, banners e PDV, com instalação no Brasil.",
+    description:
+      "Banner, lona, adesivo, fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação no Brasil. A fachada, o material de ponto de venda e os impressos da campanha podem ser orçados juntos.",
+    applications: ["Varejo", "Franquias", "Construtoras", "Eventos", "Órgãos públicos"],
+    formats: ["Medidas definidas no orçamento, a partir das fotos do local"],
+    materials: ["ACM", "PVC", "Lona", "Adesivo"],
+    finishes: ["Instalação no Brasil", "Arte criada quando necessário"],
+    runRanges: ["Peças e unidades informadas no orçamento"],
+    specs: [
+      { label: "Peças", value: "Fachada, placa, banner, lona, adesivo, totem, display e wobbler" },
+      { label: "Materiais", value: "Placa em ACM ou PVC" },
+      { label: "Instalação", value: "No Brasil, com prazo combinado no orçamento" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: comunicacaoVisualContent.faq,
+    related: ["banners-e-grandes-formatos", "flyers-e-panfletos", "folders-e-dobrados"],
+    mockup: "sign",
+    image: {
+      src: "/images/products/comunicacao-visual.webp",
+      alt: "Fachada da loja fictícia Passo Leve Calçados com letreiro em ACM terracota e grafite, adesivo de vitrine Coleção de Verão, display de chão Tênis Leveza e wobbler amarelo Lançamento preso à prateleira de tênis",
+    },
+  },
+  {
     slug: "banners-e-grandes-formatos",
     name: "Banners e grandes formatos",
     category: "comunicacao-visual",
@@ -645,6 +673,11 @@ export const products: Product[] = [
     tagline: "Sua mensagem em escala de parede.",
     description:
       "Banners, faixas e impressos de grande formato para pontos de venda, fachadas e eventos, com lona ou papel e acabamento para instalação.",
+    seeAlso: [
+      "Para fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação, fale com a nossa ",
+      { link: "empresa de comunicação visual", href: "/produtos/comunicacao-visual" },
+      ".",
+    ],
     applications: ["Pontos de venda", "Eventos e feiras", "Fachadas temporárias", "Sinalização interna"],
     formats: ["60 × 90 cm", "80 × 120 cm", "Medida sob demanda"],
     materials: ["Lona 440 g", "Papel fotográfico", "Adesivo vinílico"],
@@ -661,7 +694,7 @@ export const products: Product[] = [
           "Sim. Para redes, padronizamos o material e organizamos a entrega por unidade — informe as cidades no orçamento.",
       },
     ],
-    related: ["flyers-e-panfletos", "rotulos-e-etiquetas"],
+    related: ["comunicacao-visual", "flyers-e-panfletos", "rotulos-e-etiquetas"],
     mockup: "sign",
     image: {
       src: "/images/products/banners-sabores-cerrado.webp",

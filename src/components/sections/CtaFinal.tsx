@@ -9,9 +9,15 @@ export function CtaFinal({
   serifWord = "matéria",
   quoteLabel = "Solicitar orçamento",
   whatsappLabel,
+  items,
+  note,
 }: {
   title?: string;
   text?: string;
+  /** Lista após o texto (ex.: o que mandar para o orçamento) */
+  items?: readonly string[];
+  /** Parágrafo depois da lista */
+  note?: string;
   /** Trecho do título em serifa itálica, se presente */
   serifWord?: string;
   quoteLabel?: string;
@@ -39,6 +45,17 @@ export function CtaFinal({
         </Reveal>
         <Reveal delay={0.1}>
           <p className="text-lead mx-auto mt-6 max-w-xl text-steel">{text}</p>
+          {items && items.length > 0 && (
+            <ul className="mx-auto mt-6 max-w-xl space-y-2 text-left text-steel">
+              {items.map((item) => (
+                <li key={item} className="flex items-start gap-3 leading-relaxed">
+                  <span aria-hidden="true" className="mt-2.5 inline-block size-1.5 flex-none bg-ink" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {note && <p className="mx-auto mt-6 max-w-xl text-steel">{note}</p>}
         </Reveal>
         <Reveal delay={0.16}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

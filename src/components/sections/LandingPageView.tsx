@@ -144,6 +144,8 @@ export function LandingPageView({
         title={content.closing.heading}
         serifWord={content.closing.serifWord}
         text={content.closing.text}
+        items={content.closing.items}
+        note={content.closing.note}
         quoteLabel={content.closing.quoteLabel}
         whatsappLabel={content.closing.whatsappLabel}
       />

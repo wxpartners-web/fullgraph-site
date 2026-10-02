@@ -52,8 +52,8 @@ export const printFronts: readonly PrintFront[] = [
     title: "Promocional e PDV",
     serif: "PDV",
     text: "folders, panfletos, cartazes, displays e calendários para campanhas e pontos de venda.",
-    href: "/produtos#flyers-folders-tabloides",
-    linkLabel: "Ver catálogo",
+    href: "/produtos/comunicacao-visual",
+    linkLabel: "Ver comunicação visual",
   },
   {
     slug: "corporativo",
@@ -106,9 +106,13 @@ export const orderSteps = [
   "Produzimos, finalizamos e entregamos — ou você retira na gráfica.",
 ] as const;
 
-/** Texto aprovado; Goiânia, Rio Verde, Valparaíso de Goiás e Luziânia levam link para as páginas de cidade */
+/** Texto aprovado; Taguatinga, Águas Claras e as cidades de Goiás com página própria levam link */
 export const servedRegions: RichText = [
-  "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, Taguatinga, Águas Claras, Guará e demais regiões. Em Goiás, entregamos em ",
+  "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, ",
+  { link: "Taguatinga", href: "/grafica-taguatinga" },
+  ", ",
+  { link: "Águas Claras", href: "/grafica-aguas-claras" },
+  ", Guará e demais regiões. Em Goiás, entregamos em ",
   { link: "Goiânia", href: "/grafica-goiania" },
   ", Aparecida de Goiânia, Anápolis, Senador Canedo, Trindade, ",
   { link: "Rio Verde", href: "/grafica-rio-verde" },

@@ -12,6 +12,7 @@ import { ProductMockup } from "@/components/catalog/ProductMockup";
 import { ProductDrawerCard } from "@/components/catalog/ProductDrawerCard";
 import { ProductContentSections } from "@/components/catalog/ProductContentSections";
 import { ProductFaq } from "@/components/catalog/ProductFaq";
+import { RichTextInline } from "@/components/catalog/ProductRichText";
 import { CtaFinal } from "@/components/sections/CtaFinal";
 import { hasWhatsApp, whatsappUrl, whatsappCtaLabel } from "@/lib/whatsapp";
 import type { Product } from "@/types";
@@ -259,6 +260,8 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
             title={content.closing.heading}
             serifWord={content.closing.serifWord}
             text={content.closing.text}
+            items={content.closing.items}
+            note={content.closing.note}
             quoteLabel={content.closing.quoteLabel}
             whatsappLabel={content.closing.whatsappLabel}
           />
@@ -274,6 +277,11 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
                 <div>
                   <h2 className="text-h3 font-semibold">Sobre este produto</h2>
                   <p className="mt-4 leading-relaxed text-carbon/80">{product.description}</p>
+                  {product.seeAlso && (
+                    <p className="mt-4 leading-relaxed text-carbon/80">
+                      <RichTextInline value={product.seeAlso} />
+                    </p>
+                  )}
                   <h3 className="text-spec mt-8 text-carbon/60">Aplicações</h3>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {product.applications.map((app) => (

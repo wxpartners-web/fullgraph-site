@@ -56,6 +56,16 @@ const CITY_PAGES = [
     title: "Gráfica para Luziânia (GO)",
     note: "Apostilas, formulários numerados, certificados, calendários e materiais de evento para prefeituras, escolas e empresas de Luziânia, com nota fiscal, atendimento a licitações e entrega no mesmo dia depois que o pedido fica pronto. Não há endereço em Luziânia.",
   },
+  {
+    path: "/grafica-taguatinga",
+    title: "Gráfica para Taguatinga (DF)",
+    note: "Embalagens de delivery (caixa para hambúrguer, saco para delivery e papel de bandeja) e sacolas sem quantidade mínima, rótulos e adesivos para o comércio de Taguatinga, com retirada agendada no SIBS ou entrega no mesmo dia depois que o pedido fica pronto. Não há loja em Taguatinga.",
+  },
+  {
+    path: "/grafica-aguas-claras",
+    title: "Gráfica para Águas Claras (DF)",
+    note: "Papelaria para escritórios, clínicas e consultórios, folders e catálogos de lançamentos imobiliários, placas para condomínios e kits para clientes e equipes em Águas Claras, com entrega no mesmo dia depois que o pedido fica pronto ou retirada agendada no SIBS. Não há loja em Águas Claras.",
+  },
 ] as const;
 
 const INSTITUTIONAL_PAGES = [

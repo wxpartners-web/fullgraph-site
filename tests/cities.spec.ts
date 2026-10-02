@@ -1,13 +1,23 @@
 import { test, expect } from "@playwright/test";
 
+const GO = "Goiás";
+const DF = "Distrito Federal";
+
 const cities = [
-  { path: "/grafica-goiania", faq: "Perguntas frequentes sobre a gráfica para Goiânia" },
-  { path: "/grafica-rio-verde", faq: "Perguntas frequentes sobre a gráfica para Rio Verde" },
+  { path: "/grafica-goiania", faq: "Perguntas frequentes sobre a gráfica para Goiânia", state: GO },
+  { path: "/grafica-rio-verde", faq: "Perguntas frequentes sobre a gráfica para Rio Verde", state: GO },
   {
     path: "/grafica-valparaiso-de-goias",
     faq: "Perguntas frequentes sobre a gráfica para Valparaíso de Goiás",
+    state: GO,
   },
-  { path: "/grafica-luziania", faq: "Perguntas frequentes sobre a gráfica para Luziânia" },
+  { path: "/grafica-luziania", faq: "Perguntas frequentes sobre a gráfica para Luziânia", state: GO },
+  { path: "/grafica-taguatinga", faq: "Perguntas frequentes sobre a gráfica para Taguatinga", state: DF },
+  {
+    path: "/grafica-aguas-claras",
+    faq: "Perguntas frequentes sobre a gráfica para Águas Claras",
+    state: DF,
+  },
 ];
 
 for (const city of cities) {
@@ -27,10 +37,20 @@ for (const city of cities) {
     const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     const service = schemas.map((s) => JSON.parse(s)).find((s) => s["@type"] === "Service");
     expect(service.areaServed[0]["@type"]).toBe("City");
-    expect(service.areaServed[0].containedInPlace).toEqual({ "@type": "State", name: "Goiás" });
+    expect(service.areaServed[0].containedInPlace).toEqual({ "@type": "State", name: city.state });
     expect(service.provider["@id"]).toMatch(/#empresa$/);
   });
 }
+
+test("páginas do DF não linkam produtos ainda não publicados", async ({ page }) => {
+  for (const path of ["/grafica-taguatinga", "/grafica-aguas-claras"]) {
+    await page.goto(path);
+    await expect(
+      page.locator('a[href="/produtos/sacolas-personalizadas"], a[href="/produtos/kits-corporativos"]')
+    ).toHaveCount(0);
+    await expect(page.locator('main a[href="/produtos/comunicacao-visual"]').first()).toBeAttached();
+  }
+});
 
 test("caminho de primeiro nível desconhecido continua 404", async ({ request }) => {
   const res = await request.get("/grafica-sao-paulo");

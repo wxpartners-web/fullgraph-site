@@ -86,6 +86,10 @@ export interface PageContent {
     heading: string;
     serifWord?: string;
     text: string;
+    /** Lista após o texto (checklist do orçamento no rascunho aprovado) */
+    items?: readonly string[];
+    /** Parágrafo depois da lista */
+    note?: string;
     whatsappLabel: string;
     quoteLabel: string;
   };
@@ -128,6 +132,8 @@ export interface Product {
   /** Frase curta de catálogo */
   tagline: string;
   description: string;
+  /** Parágrafo com link interno logo abaixo da descrição (produtos sem copy longa) */
+  seeAlso?: RichText;
   applications: string[];
   formats: string[];
   materials: string[];

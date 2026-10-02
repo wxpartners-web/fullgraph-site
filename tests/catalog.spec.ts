@@ -43,3 +43,12 @@ test("nenhum preço fictício é exibido no catálogo", async ({ page }) => {
   const body = await page.textContent("body");
   expect(body).not.toMatch(/R\$\s*\d/);
 });
+
+test("banners linkam a página de comunicação visual", async ({ page }) => {
+  await page.goto("/produtos/banners-e-grandes-formatos");
+  await page.getByRole("link", { name: "empresa de comunicação visual" }).click();
+  await expect(page).toHaveURL(/\/produtos\/comunicacao-visual$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    /Empresa de comunicação visual em Brasília/
+  );
+});

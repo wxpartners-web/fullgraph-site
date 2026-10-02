@@ -24,6 +24,8 @@ export const footerRegions: { title: string; items: NavItem[] } = {
     { label: "Gráfica para Rio Verde", href: "/grafica-rio-verde" },
     { label: "Gráfica para Valparaíso", href: "/grafica-valparaiso-de-goias" },
     { label: "Gráfica para Luziânia", href: "/grafica-luziania" },
+    { label: "Gráfica para Taguatinga", href: "/grafica-taguatinga" },
+    { label: "Gráfica para Águas Claras", href: "/grafica-aguas-claras" },
   ],
 };
 

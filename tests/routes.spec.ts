@@ -9,10 +9,13 @@ const routes: { path: string; h1: RegExp }[] = [
   { path: "/grafica-rio-verde", h1: /Gráfica para Rio Verde, Goiás/ },
   { path: "/grafica-valparaiso-de-goias", h1: /Gráfica para Valparaíso de Goiás/ },
   { path: "/grafica-luziania", h1: /Gráfica para Luziânia/ },
+  { path: "/grafica-taguatinga", h1: /Gráfica para Taguatinga: embalagens, sacolas e rótulos/ },
+  { path: "/grafica-aguas-claras", h1: /Gráfica para Águas Claras: papelaria, lançamentos/ },
   { path: "/produtos", h1: /gaveta de/i },
   { path: "/produtos/impressao-de-livros", h1: /Impressão de livros/i },
   { path: "/produtos/flyers-e-panfletos", h1: /Impressão de panfletos personalizados/ },
   { path: "/produtos/crachas-e-credenciais", h1: /Crachás personalizados e credenciais/ },
+  { path: "/produtos/comunicacao-visual", h1: /Empresa de comunicação visual em Brasília/ },
   { path: "/portfolio", h1: /Ideias que ganham/i },
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
@@ -51,6 +54,9 @@ test("sitemap e robots respondem", async ({ request }) => {
   expect(xml).toContain("/produtos/crachas-e-credenciais");
   expect(xml).toContain("/grafica-valparaiso-de-goias");
   expect(xml).toContain("/grafica-luziania");
+  expect(xml).toContain("/produtos/comunicacao-visual");
+  expect(xml).toContain("/grafica-taguatinga");
+  expect(xml).toContain("/grafica-aguas-claras");
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
 });
