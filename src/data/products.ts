@@ -1,12 +1,14 @@
 import type { Category, Product } from "@/types";
 import { caixasPersonalizadasContent } from "@/data/product-content/caixas-personalizadas";
 import { impressaoDeLivrosContent } from "@/data/product-content/impressao-de-livros";
+import { flyersEPanfletosContent } from "@/data/product-content/flyers-e-panfletos";
+import { crachasECredenciaisContent } from "@/data/product-content/crachas-e-credenciais";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
- * (exceto impressao-de-livros e caixas-personalizadas, com especificações
- * da copy aprovada);
+ * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos e
+ * crachas-e-credenciais, com especificações da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -35,7 +37,7 @@ export const categories: Category[] = [
     name: "Materiais corporativos",
     shortName: "Corporativo",
     description:
-      "Papelaria institucional: timbrados, envelopes, pastas, receituários e cartões.",
+      "Papelaria institucional e crachás: timbrados, envelopes, pastas, receituários, cartões e credenciais.",
     audiences: ["empresas"],
     index: "03",
   },
@@ -200,7 +202,7 @@ export const products: Product[] = [
     formats: ["A4", "21 × 21 cm", "A5", "Formato sob medida"],
     materials: ["Couché brilho 115 g/m²", "Couché fosco 150 g/m²", "Capa em couché 250 g/m²"],
     finishes: ["Laminação na capa", "Verniz localizado", "Grampo canoa", "Lombada colada"],
-    runRanges: ["A partir de 100 unidades", "500 a 2.000", "Acima de 2.000"],
+    runRanges: ["Sob demanda, em qualquer quantidade", "500 a 2.000", "Acima de 2.000"],
     specs: [
       { label: "Cores", value: "4×4 (CMYK frente e verso)" },
       { label: "Páginas", value: "8 a 96 + capa" },
@@ -263,7 +265,7 @@ export const products: Product[] = [
     formats: ["Tabloide (28 × 35 cm)", "Standard", "Formato sob medida"],
     materials: ["Papel jornal 45 g/m²", "Offset 56 g/m²", "Offset 75 g/m²"],
     finishes: ["Dobra simples", "Alceamento"],
-    runRanges: ["A partir de 1.000 unidades", "10.000 a 50.000", "Acima de 50.000"],
+    runRanges: ["Tiragem sob consulta", "10.000 a 50.000", "Acima de 50.000"],
     specs: [
       { label: "Cores", value: "4×4 ou 1×1" },
       { label: "Páginas", value: "4 a 32" },
@@ -296,7 +298,7 @@ export const products: Product[] = [
     formats: ["A4 timbrado", "Envelope ofício e saco", "Pasta com bolsa 31 × 46 cm aberta"],
     materials: ["Offset 90 g/m²", "Offset 120 g/m²", "Cartão 300 g/m² (pastas)"],
     finishes: ["Laminação fosca (pastas)", "Verniz localizado", "Faca especial"],
-    runRanges: ["A partir de 100 unidades", "500 a 2.000", "Acima de 2.000"],
+    runRanges: ["Sem quantidade mínima", "500 a 2.000", "Acima de 2.000"],
     specs: [
       { label: "Cores", value: "4×0 ou 4×4" },
       { label: "Itens", value: "Timbrado, envelope, pasta, cartão, receituário" },
@@ -316,6 +318,38 @@ export const products: Product[] = [
     },
     featured: true,
   },
+  {
+    slug: "crachas-e-credenciais",
+    name: "Crachás e credenciais",
+    category: "materiais-corporativos",
+    audiences: ["empresas"],
+    tagline: "Com o nome de cada participante, cordão e porta-crachá.",
+    description:
+      "Crachás personalizados e credenciais com o nome de cada participante, junto com o cordão e o porta-crachá personalizados. Os crachás saem em papel cartão ou PVC, do formato padrão ao personalizado.",
+    applications: ["Congressos e convenções", "Feiras", "Treinamentos", "Equipes de empresas"],
+    formats: ["Do formato padrão ao personalizado"],
+    materials: ["Papel cartão", "PVC"],
+    finishes: [
+      "Nome de cada participante",
+      "Cordão personalizado",
+      "Porta-crachá",
+      "Crachá fixo de funcionário em PVC, com foto",
+    ],
+    runRanges: ["Quantidade informada no orçamento"],
+    specs: [
+      { label: "Materiais", value: "Papel cartão ou PVC" },
+      { label: "Personalização", value: "Nome de cada participante" },
+      { label: "Entrega", value: "No local do evento" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: crachasECredenciaisContent.faq,
+    related: ["papelaria-institucional", "banners-e-grandes-formatos", "folders-e-dobrados"],
+    mockup: "sheet",
+    image: {
+      src: "/images/products/crachas-e-credenciais.webp",
+      alt: "Crachás do evento fictício Congresso Cerrado de Inovação 2026 com nomes de participantes e faixas Participante, Palestrante e Staff em cordões verdes e amarelos, crachá de funcionário em PVC da empresa fictícia Grupo Ipê Serviços com avatar genérico e um porta-crachá transparente",
+    },
+  },
 
   /* ---------- Flyers, folders e tabloides ---------- */
   {
@@ -325,23 +359,27 @@ export const products: Product[] = [
     audiences: ["empresas"],
     tagline: "Divulgação direta, impressa em volume.",
     description:
-      "Flyers e panfletos para distribuição em massa, com impressão frente e verso em couché e cortes precisos. A forma mais rápida de colocar sua oferta na rua.",
+      "Impressão de panfletos personalizados e flyers em formatos padrão ou sob medida, sem limite de quantidade. Os papéis mais pedidos são o couché 90 g e o couché 115 g. No prazo expresso, imprimimos 5.000 panfletos em 48 horas.",
     applications: ["Promoções de varejo", "Eventos", "Delivery e cardápios simples", "Lançamentos"],
-    formats: ["10 × 15 cm", "15 × 21 cm (A5)", "21 × 29,7 cm (A4)"],
-    materials: ["Couché brilho 115 g/m²", "Couché 150 g/m²", "Offset 90 g/m²"],
-    finishes: ["Corte reto", "Cantos arredondados", "Verniz total"],
-    runRanges: ["A partir de 1.000 unidades", "5.000 a 20.000", "Acima de 20.000"],
+    formats: [
+      "Todos os formatos, inclusive personalizados",
+      "10 × 15 cm",
+      "A5 (14,8 × 21 cm)",
+      "A4 (21 × 29,7 cm)",
+    ],
+    materials: ["Couché 90 g e 115 g (mais pedidos)", "Outros papéis sob consulta"],
+    finishes: [
+      "Corte no formato final",
+      "Acabamentos especiais conforme a necessidade do projeto",
+    ],
+    runRanges: ["Sem limite de quantidade"],
     specs: [
+      { label: "Quantidade", value: "Sem limite de quantidade" },
       { label: "Cores", value: "4×4 ou 4×0" },
-      { label: "Prazo", value: "Produção em fluxo rápido" },
+      { label: "Prazo expresso", value: "5.000 panfletos em 48 horas (somente impressão)" },
     ],
-    faq: [
-      {
-        question: "Qual quantidade tem melhor custo-benefício?",
-        answer:
-          "O custo por unidade cai bastante a partir de 5.000 unidades, porque o acerto de máquina se dilui. Pedimos sempre um comparativo de faixas no orçamento.",
-      },
-    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: flyersEPanfletosContent.faq,
     related: ["folders-e-dobrados", "jornais-e-tabloides"],
     mockup: "stack",
     image: {
@@ -432,7 +470,7 @@ export const products: Product[] = [
     formats: ["Saco SOS pequeno/médio/grande", "Cinta para copo e pote", "Formato sob medida"],
     materials: ["Kraft 80–110 g/m²", "Papel branco 90 g/m²"],
     finishes: ["Impressão 1×0 a 4×0", "Alça opcional"],
-    runRanges: ["A partir de 1.000 unidades", "5.000 a 20.000", "Acima de 20.000"],
+    runRanges: ["Sem quantidade mínima", "5.000 a 20.000", "Acima de 20.000"],
     specs: [
       { label: "Contato alimentar", value: "Matéria-prima apropriada para uso com alimentos" },
     ],
@@ -513,16 +551,16 @@ export const products: Product[] = [
     formats: ["30 × 40 cm", "31,5 × 44 cm", "Formato sob medida"],
     materials: ["Offset 56 g/m²", "Offset 75 g/m²", "Papel acetinado"],
     finishes: ["Impressão 1×0 a 4×0", "Refile preciso"],
-    runRanges: ["A partir de 5.000 unidades", "20.000 a 100.000", "Acima de 100.000"],
+    runRanges: ["Sem quantidade mínima", "20.000 a 100.000", "Acima de 100.000"],
     specs: [
       { label: "Uso", value: "Forro descartável de bandeja" },
       { label: "Volume", value: "Otimizado para grandes tiragens" },
     ],
     faq: [
       {
-        question: "Por que a tiragem mínima é maior?",
+        question: "Tem quantidade mínima?",
         answer:
-          "Papel de bandeja é um item de reposição contínua — imprimir em volume derruba o custo por folha e garante estoque para a operação.",
+          "Não. Quanto maior a quantidade, menor o custo por folha — por isso o papel de bandeja costuma ser pedido em volume, como item de reposição.",
       },
     ],
     related: ["embalagens-para-hamburguer", "sacos-e-embalagens-delivery"],

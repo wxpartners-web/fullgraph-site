@@ -263,7 +263,7 @@ export default async function ProdutoPage({ params }: ProdutoPageProps) {
             whatsappLabel={content.closing.whatsappLabel}
           />
           {/* FAQ é o último H2 da Money Page */}
-          {faq.length > 0 && <ProductFaq faq={faq} />}
+          {faq.length > 0 && <ProductFaq faq={faq} heading={content.faqHeading} />}
         </>
       ) : (
         <>

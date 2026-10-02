@@ -2,13 +2,17 @@ import { test, expect } from "@playwright/test";
 
 const routes: { path: string; h1: RegExp }[] = [
   { path: "/", h1: /Gráfica em Brasília: a sua ideia, impressa com peso e presença./ },
-  { path: "/solucoes/empresas", h1: /Volume com padrão/i },
+  { path: "/solucoes/empresas", h1: /Gráfica para empresas: papelaria corporativa/ },
   { path: "/solucoes/livros-editorial", h1: /Gráfica editorial: do original revisado/ },
   { path: "/solucoes/embalagens", h1: /Embalagens personalizadas para marcas/ },
   { path: "/grafica-goiania", h1: /Gráfica Goiânia: produção em Brasília/ },
   { path: "/grafica-rio-verde", h1: /Gráfica para Rio Verde, Goiás/ },
+  { path: "/grafica-valparaiso-de-goias", h1: /Gráfica para Valparaíso de Goiás/ },
+  { path: "/grafica-luziania", h1: /Gráfica para Luziânia/ },
   { path: "/produtos", h1: /gaveta de/i },
   { path: "/produtos/impressao-de-livros", h1: /Impressão de livros/i },
+  { path: "/produtos/flyers-e-panfletos", h1: /Impressão de panfletos personalizados/ },
+  { path: "/produtos/crachas-e-credenciais", h1: /Crachás personalizados e credenciais/ },
   { path: "/portfolio", h1: /Ideias que ganham/i },
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
@@ -42,7 +46,11 @@ test("página 404 personalizada", async ({ page }) => {
 test("sitemap e robots respondem", async ({ request }) => {
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBeTruthy();
-  expect(await sitemap.text()).toContain("/produtos/impressao-de-livros");
+  const xml = await sitemap.text();
+  expect(xml).toContain("/produtos/impressao-de-livros");
+  expect(xml).toContain("/produtos/crachas-e-credenciais");
+  expect(xml).toContain("/grafica-valparaiso-de-goias");
+  expect(xml).toContain("/grafica-luziania");
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
 });

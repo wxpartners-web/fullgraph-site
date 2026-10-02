@@ -106,13 +106,17 @@ export const orderSteps = [
   "Produzimos, finalizamos e entregamos — ou você retira na gráfica.",
 ] as const;
 
-/** Texto aprovado; Goiânia e Rio Verde levam link para as páginas de cidade */
+/** Texto aprovado; Goiânia, Rio Verde, Valparaíso de Goiás e Luziânia levam link para as páginas de cidade */
 export const servedRegions: RichText = [
   "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, Taguatinga, Águas Claras, Guará e demais regiões. Em Goiás, entregamos em ",
   { link: "Goiânia", href: "/grafica-goiania" },
   ", Aparecida de Goiânia, Anápolis, Senador Canedo, Trindade, ",
   { link: "Rio Verde", href: "/grafica-rio-verde" },
-  ", Itumbiara, Jataí, Valparaíso de Goiás e Luziânia. Para os outros estados, enviamos por frete, pago pelo cliente.",
+  ", Itumbiara, Jataí, ",
+  { link: "Valparaíso de Goiás", href: "/grafica-valparaiso-de-goias" },
+  " e ",
+  { link: "Luziânia", href: "/grafica-luziania" },
+  ". Para os outros estados, enviamos por frete, pago pelo cliente.",
 ];
 
 export const homeCta = {

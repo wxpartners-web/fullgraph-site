@@ -7,7 +7,7 @@ export const mainNav: NavItem[] = [
     children: [
       { label: "Empresas e grandes tiragens", href: "/solucoes/empresas" },
       { label: "Livros e editorial", href: "/solucoes/livros-editorial" },
-      { label: "Embalagens e alimentação", href: "/solucoes/embalagens" },
+      { label: "Embalagens", href: "/solucoes/embalagens" },
     ],
   },
   { label: "Produtos", href: "/produtos" },
@@ -22,6 +22,8 @@ export const footerRegions: { title: string; items: NavItem[] } = {
   items: [
     { label: "Gráfica em Goiânia", href: "/grafica-goiania" },
     { label: "Gráfica para Rio Verde", href: "/grafica-rio-verde" },
+    { label: "Gráfica para Valparaíso", href: "/grafica-valparaiso-de-goias" },
+    { label: "Gráfica para Luziânia", href: "/grafica-luziania" },
   ],
 };
 
@@ -31,7 +33,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { label: "Empresas e grandes tiragens", href: "/solucoes/empresas" },
       { label: "Livros e editorial", href: "/solucoes/livros-editorial" },
-      { label: "Embalagens e alimentação", href: "/solucoes/embalagens" },
+      { label: "Embalagens", href: "/solucoes/embalagens" },
     ],
   },
   {

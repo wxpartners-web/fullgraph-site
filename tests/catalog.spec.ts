@@ -33,7 +33,7 @@ test("página de produto tem FAQ, relacionados e CTA de orçamento", async ({ pa
 });
 
 test("produto sem copy longa mantém CTA de orçamento no hero", async ({ page }) => {
-  await page.goto("/produtos/flyers-e-panfletos");
+  await page.goto("/produtos/folders-e-dobrados");
   await page.getByTestId("product-cta-orcamento").click();
   await expect(page).toHaveURL(/\/orcamento$/);
 });

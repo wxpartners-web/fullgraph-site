@@ -3,6 +3,11 @@ import { test, expect } from "@playwright/test";
 const cities = [
   { path: "/grafica-goiania", faq: "Perguntas frequentes sobre a gráfica para Goiânia" },
   { path: "/grafica-rio-verde", faq: "Perguntas frequentes sobre a gráfica para Rio Verde" },
+  {
+    path: "/grafica-valparaiso-de-goias",
+    faq: "Perguntas frequentes sobre a gráfica para Valparaíso de Goiás",
+  },
+  { path: "/grafica-luziania", faq: "Perguntas frequentes sobre a gráfica para Luziânia" },
 ];
 
 for (const city of cities) {
@@ -18,10 +23,11 @@ for (const city of cities) {
     const h2s = await page.locator("main h2").allTextContents();
     expect(h2s.at(-1)).toBe(city.faq);
 
-    // sem endereço local: a página não cita endereço em Goiânia/Rio Verde no schema
+    // sem endereço local: a página não cita endereço na cidade atendida no schema
     const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     const service = schemas.map((s) => JSON.parse(s)).find((s) => s["@type"] === "Service");
     expect(service.areaServed[0]["@type"]).toBe("City");
+    expect(service.areaServed[0].containedInPlace).toEqual({ "@type": "State", name: "Goiás" });
     expect(service.provider["@id"]).toMatch(/#empresa$/);
   });
 }

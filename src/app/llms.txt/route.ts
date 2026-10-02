@@ -19,8 +19,8 @@ export const dynamic = "force-static";
 const SOLUTION_PAGES = [
   {
     path: "/solucoes/empresas",
-    title: "Empresas e grandes tiragens",
-    note: "Catálogos, tabloides, papelaria institucional e campanhas em volume, com padrão de cor entre tiragens.",
+    title: "Gráfica para empresas",
+    note: "Papelaria corporativa (cartões, timbrados, envelopes, pastas, blocos e formulários), materiais de comunicação, crachás e materiais de evento e kits corporativos, com estoque para reposição e faturamento após aprovação de cadastro.",
   },
   {
     path: "/solucoes/livros-editorial",
@@ -29,7 +29,7 @@ const SOLUTION_PAGES = [
   },
   {
     path: "/solucoes/embalagens",
-    title: "Embalagens e alimentação",
+    title: "Embalagens",
     note: "Caixas personalizadas, caixas para hambúrguer, sacos, papéis de bandeja e rótulos para marcas, restaurantes, hamburguerias e redes de alimentação.",
   },
 ] as const;
@@ -45,6 +45,16 @@ const CITY_PAGES = [
     path: "/grafica-rio-verde",
     title: "Gráfica para Rio Verde (GO)",
     note: "Catálogos, rótulos, calendários e materiais de feira para empresas do agronegócio de Rio Verde, com produção em Brasília e entrega em até 1 dia útil depois que o pedido fica pronto. Não há endereço em Rio Verde.",
+  },
+  {
+    path: "/grafica-valparaiso-de-goias",
+    title: "Gráfica para Valparaíso de Goiás",
+    note: "Panfletos, papelaria, crachás e comunicação visual com instalação para empresas, comércio e prefeituras de Valparaíso de Goiás, com produção em Brasília e entrega no mesmo dia depois que o pedido fica pronto. Não há endereço em Valparaíso de Goiás.",
+  },
+  {
+    path: "/grafica-luziania",
+    title: "Gráfica para Luziânia (GO)",
+    note: "Apostilas, formulários numerados, certificados, calendários e materiais de evento para prefeituras, escolas e empresas de Luziânia, com nota fiscal, atendimento a licitações e entrega no mesmo dia depois que o pedido fica pronto. Não há endereço em Luziânia.",
   },
 ] as const;
 

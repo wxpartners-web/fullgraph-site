@@ -1,6 +1,8 @@
 import type { LandingPage } from "@/types";
 import { graficaGoianiaContent } from "@/data/landing-content/grafica-goiania";
 import { graficaRioVerdeContent } from "@/data/landing-content/grafica-rio-verde";
+import { graficaValparaisoDeGoiasContent } from "@/data/landing-content/grafica-valparaiso-de-goias";
+import { graficaLuzianiaContent } from "@/data/landing-content/grafica-luziania";
 
 /**
  * Páginas de cidade atendida a partir de Brasília (rota /[cidade]).
@@ -47,6 +49,38 @@ export const cityPages: readonly CityPage[] = [
     whatsappMessage: "Olá! Quero um orçamento da FullGraph com entrega em Rio Verde.",
     city: { name: "Rio Verde", state: "Goiás" },
     content: graficaRioVerdeContent,
+  },
+  {
+    slug: "grafica-valparaiso-de-goias",
+    path: "/grafica-valparaiso-de-goias",
+    keyword: "gráfica valparaíso",
+    breadcrumbName: "Gráfica para Valparaíso de Goiás",
+    ogTagline: "Entrega no mesmo dia após pronto",
+    eyebrow: "Valparaíso de Goiás · Goiás",
+    image: {
+      src: "/images/regions/grafica-valparaiso-de-goias.webp",
+      alt: "Materiais do supermercado fictício Mercado Bom Preço Entorno, em vermelho e amarelo: pilha de panfletos Ofertas da Semana, painel-modelo de fachada e banner roll-up Ofertas todo dia",
+    },
+    ogImage: "/og/cidades/grafica-valparaiso-de-goias.jpg",
+    whatsappMessage: "Olá! Quero um orçamento da FullGraph com entrega em Valparaíso de Goiás.",
+    city: { name: "Valparaíso de Goiás", state: "Goiás" },
+    content: graficaValparaisoDeGoiasContent,
+  },
+  {
+    slug: "grafica-luziania",
+    path: "/grafica-luziania",
+    keyword: "gráfica luziânia",
+    breadcrumbName: "Gráfica para Luziânia",
+    ogTagline: "Apostilas, formulários e certificados com nota fiscal",
+    eyebrow: "Luziânia · Goiás",
+    image: {
+      src: "/images/regions/grafica-luziania.webp",
+      alt: "Impressos da escola fictícia Escola Municipal Ipê Amarelo: blocos de requisição numerados com vias coloridas, apostilas com espiral de Matemática e Português, certificado de participação e calendário de parede 2027",
+    },
+    ogImage: "/og/cidades/grafica-luziania.jpg",
+    whatsappMessage: "Olá! Quero um orçamento da FullGraph com entrega em Luziânia.",
+    city: { name: "Luziânia", state: "Goiás" },
+    content: graficaLuzianiaContent,
   },
 ];
 

@@ -111,6 +111,13 @@ export function ContentBlocks({
             </div>
           );
         }
+        if ("h3" in block) {
+          return (
+            <h3 key={i} className="pt-2 text-lg font-semibold text-carbon text-balance">
+              {block.h3}
+            </h3>
+          );
+        }
         if ("p" in block) {
           return (
             <p key={i} className="leading-relaxed text-carbon/80">
