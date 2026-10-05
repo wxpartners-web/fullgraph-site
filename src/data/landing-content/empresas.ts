@@ -157,7 +157,7 @@ export const empresasContent: PageContent = {
               " e ",
               { link: "Luziânia", href: "/grafica-luziania" },
             ],
-            [{ link: "Goiânia", href: "/grafica-goiania" }, " e Aparecida de Goiânia"],
+            [{ link: "Goiânia", href: "/grafica-goiania" }, " e ", { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" }],
             [{ link: "Rio Verde", href: "/grafica-rio-verde" }],
             "Demais estados, por frete",
           ],

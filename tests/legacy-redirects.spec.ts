@@ -178,41 +178,44 @@ test.describe("redirects do legado grafica.fullgraph.com.br", () => {
     expect(paths.every((p) => resolve(p) !== null)).toBe(true);
   });
 
-  test("bloco das 6 cidades novas: inativo até a rota existir, ativo depois", () => {
+  test("bloco das 6 cidades novas: ativo porque as rotas existem em cities.ts", () => {
     const itumbiara =
       "/comunicacao-visual/grafica-comunicacao-visual/grafica-e-comunicacao-visual-telefone-itumbiara";
     const canedo =
       "/comunicacao-visual/agencia-de-comunicacao-visual/grafica-comunicacao-visual-telefone-senador-canedo";
     const anapolis = "/comunicacao-visual/comunicacao-visual-design/grafica-e-comunicacao-visual-anapolis";
 
-    const pending = PENDING_CITY_SLUGS.filter((s) => !CITY_SLUGS.includes(s));
-    if (pending.includes("grafica-itumbiara")) expect(resolve(itumbiara)).toBe("/produtos/comunicacao-visual");
+    // Lote 5 publicado: todas as cidades do bloco estão em cities.ts
+    expect(PENDING_CITY_SLUGS.filter((s) => !CITY_SLUGS.includes(s))).toEqual([]);
+    expect(resolve(itumbiara)).toBe("/grafica-itumbiara");
+    expect(resolve(canedo)).toBe("/grafica-senador-canedo");
+    for (const [source, route] of PENDING_CITY_REDIRECTS) expect(resolve(source)).toBe(route);
 
-    const withAll = resolver(buildLegacyRedirects([...CITY_SLUGS, ...PENDING_CITY_SLUGS]));
-    expect(withAll(itumbiara)).toBe("/grafica-itumbiara");
-    expect(withAll(canedo)).toBe("/grafica-senador-canedo");
-    expect(withAll(anapolis)).toBe("/grafica-anapolis");
+    // sem a cidade em cities.ts, a URL volta para a categoria (evita 301 → 404)
+    const withoutItumbiara = resolver(buildLegacyRedirects(CITY_SLUGS.filter((s) => s !== "grafica-itumbiara")));
+    expect(withoutItumbiara(itumbiara)).toBe("/produtos/comunicacao-visual");
+
+    expect(resolve(anapolis)).toBe("/grafica-anapolis");
     // URLs com cidade que não ranqueiam seguem a categoria
-    expect(withAll("/rotulos-personalizados/rotulo-personalizado/rotulo-personalizado-preco-anapolis")).toBe(
+    expect(resolve("/rotulos-personalizados/rotulo-personalizado/rotulo-personalizado-preco-anapolis")).toBe(
       "/produtos/rotulos-e-etiquetas",
     );
     // a revista de Anápolis ranqueia por produto: 1:1 vem antes da cidade
-    expect(withAll("/impressao-de-revista/impressao-revistas-em-goiania/impressao-de-revistas-preco-anapolis")).toBe(
+    expect(resolve("/impressao-de-revista/impressao-revistas-em-goiania/impressao-de-revistas-preco-anapolis")).toBe(
       "/produtos/impressao-de-revistas",
     );
   });
 
-  test("nenhuma regra aponta para rota inexistente (exceto o bloco das cidades novas)", () => {
+  test("nenhuma regra aponta para rota inexistente", () => {
     for (const rule of currentRules) {
       const route = rule.destination.replace(TARGET_ORIGIN, "");
       expect(EXISTING_ROUTES.has(route), `${rule.source} → ${route}`).toBe(true);
     }
-    // Com todas as cidades novas ativas, só o bloco delas pode apontar para rota ainda não criada
-    const pendingRoutes = new Set(PENDING_CITY_SLUGS.map((s) => `/${s}`));
-    for (const [, route] of PENDING_CITY_REDIRECTS) expect(pendingRoutes.has(route)).toBe(true);
-    for (const rule of buildLegacyRedirects([...CITY_SLUGS, ...PENDING_CITY_SLUGS])) {
-      const route = rule.destination.replace(TARGET_ORIGIN, "");
-      expect(EXISTING_ROUTES.has(route) || pendingRoutes.has(route), route).toBe(true);
+    // o bloco das cidades novas está todo ativo e aponta só para rotas publicadas
+    const activeSources = new Set(currentRules.map((r) => r.source));
+    for (const [source, route] of PENDING_CITY_REDIRECTS) {
+      expect(activeSources.has(source), source).toBe(true);
+      expect(EXISTING_ROUTES.has(route), route).toBe(true);
     }
   });
 });

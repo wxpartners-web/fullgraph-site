@@ -140,9 +140,9 @@ export const graficaRioVerdeContent: PageContent = {
         {
           ul: [
             "Rio Verde, em toda a cidade",
-            "Jataí",
+            [{ link: "Jataí", href: "/grafica-jatai" }],
             "Demais cidades de Goiás, em até 1 dia útil após pronto",
-            [{ link: "Goiânia", href: "/grafica-goiania" }, " e Aparecida de Goiânia"],
+            [{ link: "Goiânia", href: "/grafica-goiania" }, " e ", { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" }],
             [
               "Brasília e todo o Distrito Federal, na ",
               { link: "gráfica em Brasília", href: "/" },

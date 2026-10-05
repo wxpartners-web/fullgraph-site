@@ -159,7 +159,12 @@ export const flyersEPanfletosContent: ProductContent = {
               { link: "Luziânia", href: "/grafica-luziania" },
               ", também no mesmo dia",
             ],
-            [{ link: "Goiânia", href: "/grafica-goiania" }, " e Aparecida de Goiânia, em até 1 dia útil"],
+            [
+              { link: "Goiânia", href: "/grafica-goiania" },
+              " e ",
+              { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" },
+              ", em até 1 dia útil",
+            ],
             [
               { link: "Rio Verde", href: "/grafica-rio-verde" },
               " e demais cidades de Goiás, em até 1 dia útil",

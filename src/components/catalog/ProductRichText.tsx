@@ -84,6 +84,35 @@ function OrderedList({ items }: { items: readonly RichText[] }) {
   );
 }
 
+function SimpleTable({ head, rows }: { head: readonly string[]; rows: readonly (readonly string[])[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[32rem] border-collapse text-left text-sm leading-relaxed">
+        <thead>
+          <tr className="border-b border-carbon/20">
+            {head.map((cell, i) => (
+              <th key={i} scope="col" className="text-spec px-3 py-3 font-semibold text-carbon first:pl-0">
+                {cell}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, r) => (
+            <tr key={r} className="border-b border-carbon/10 align-top">
+              {row.map((cell, c) => (
+                <td key={c} className="px-3 py-3 text-carbon/80 first:pl-0">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function ContentBlocks({
   blocks,
   whatsappMessage,
@@ -126,6 +155,7 @@ export function ContentBlocks({
           );
         }
         if ("ol" in block) return <OrderedList key={i} items={block.ol} />;
+        if ("table" in block) return <SimpleTable key={i} head={block.table.head} rows={block.table.rows} />;
         return <BulletList key={i} items={block.ul} />;
       })}
     </div>

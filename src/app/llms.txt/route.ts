@@ -66,6 +66,36 @@ const CITY_PAGES = [
     title: "Gráfica para Águas Claras (DF)",
     note: "Papelaria para escritórios, clínicas e consultórios, folders e catálogos de lançamentos imobiliários, placas para condomínios e kits para clientes e equipes em Águas Claras, com entrega no mesmo dia depois que o pedido fica pronto ou retirada agendada no SIBS. Não há loja em Águas Claras.",
   },
+  {
+    path: "/grafica-anapolis",
+    title: "Gráfica para Anápolis (GO)",
+    note: "Rótulos e etiquetas em bobina ou folha, caixas sob medida, catálogos de produto, papel timbrado e envelopes para indústrias e centros de distribuição de Anápolis, com produção em Brasília e entrega em até 1 dia útil depois que o pedido fica pronto. Não há loja nem endereço em Anápolis.",
+  },
+  {
+    path: "/grafica-aparecida-de-goiania",
+    title: "Gráfica para Aparecida de Goiânia (GO)",
+    note: "Tabloides de ofertas, folhetos, panfletos, folders, catálogos e sacolas para atacados, distribuidoras e redes de lojas de Aparecida de Goiânia, com entrega por unidade da rede em até 1 dia útil depois que o pedido fica pronto. Não há loja em Aparecida de Goiânia.",
+  },
+  {
+    path: "/grafica-senador-canedo",
+    title: "Gráfica para Senador Canedo (GO)",
+    note: "Placas de sinalização de segurança, crachás de funcionário em PVC com foto, blocos autocopiativos numerados, papel timbrado, pastas e adesivos de frota para indústrias e transportadoras de Senador Canedo, com entrega em até 1 dia útil depois que o pedido fica pronto. Não há ponto de atendimento em Senador Canedo.",
+  },
+  {
+    path: "/grafica-trindade",
+    title: "Gráfica em Trindade (GO)",
+    note: "Banners (padrão em 24 horas), roll-up e wind banner com estrutura inclusa, programação impressa, informativo paroquial, sacolas e crachás para paróquias, eventos e comércio de Trindade, com entrega em até 1 dia útil depois que o pedido fica pronto. Não há loja em Trindade.",
+  },
+  {
+    path: "/grafica-itumbiara",
+    title: "Gráfica para Itumbiara (GO)",
+    note: "Apostilas, calendários escolares, envelopes de formatura, crachás, certificados numerados e banners para escolas, cursos e comissões de formatura de Itumbiara, com entrega em até 1 dia útil depois que o pedido fica pronto. Não há loja nem telefone fixo em Itumbiara; o atendimento é pelo WhatsApp.",
+  },
+  {
+    path: "/grafica-jatai",
+    title: "Gráfica para Jataí (GO)",
+    note: "Livros e revistas a partir de 1 exemplar, anais, crachás, pastas e banners para congressos e simpósios, com diagramação, revisão, ficha catalográfica e ISBN junto com a impressão, e entrega em Jataí em até 1 dia útil depois que o pedido fica pronto. Não há loja em Jataí.",
+  },
 ] as const;
 
 const INSTITUTIONAL_PAGES = [

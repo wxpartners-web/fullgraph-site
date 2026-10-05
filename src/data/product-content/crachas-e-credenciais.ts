@@ -157,7 +157,7 @@ export const crachasECredenciaisContent: ProductContent = {
               " e ",
               { link: "Luziânia", href: "/grafica-luziania" },
             ],
-            [{ link: "Goiânia", href: "/grafica-goiania" }, " e Aparecida de Goiânia"],
+            [{ link: "Goiânia", href: "/grafica-goiania" }, " e ", { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" }],
             [{ link: "Rio Verde", href: "/grafica-rio-verde" }, " e demais cidades de Goiás"],
             "Outros estados, por frete pago pelo cliente",
           ],

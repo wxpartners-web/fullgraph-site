@@ -252,7 +252,8 @@ export const impressaoDeCatalogosContent: ProductContent = {
             ],
             [
               { link: "Goiânia", href: "/grafica-goiania" },
-              " e Aparecida de Goiânia",
+              " e ",
+              { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" },
             ],
             [
               { link: "Rio Verde", href: "/grafica-rio-verde" },

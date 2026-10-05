@@ -26,6 +26,12 @@ export const footerRegions: { title: string; items: NavItem[] } = {
     { label: "Gráfica para Luziânia", href: "/grafica-luziania" },
     { label: "Gráfica para Taguatinga", href: "/grafica-taguatinga" },
     { label: "Gráfica para Águas Claras", href: "/grafica-aguas-claras" },
+    { label: "Gráfica para Anápolis", href: "/grafica-anapolis" },
+    { label: "Gráfica para Aparecida", href: "/grafica-aparecida-de-goiania" },
+    { label: "Gráfica para Senador Canedo", href: "/grafica-senador-canedo" },
+    { label: "Gráfica em Trindade", href: "/grafica-trindade" },
+    { label: "Gráfica para Itumbiara", href: "/grafica-itumbiara" },
+    { label: "Gráfica para Jataí", href: "/grafica-jatai" },
   ],
 };
 

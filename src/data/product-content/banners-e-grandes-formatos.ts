@@ -74,11 +74,11 @@ export const bannersEGrandesFormatosContent: ProductContent = {
         },
         { h3: "Banner roll-up" },
         {
-          p: "O banner roll-up fica guardado dentro da base e sobe na hora de montar. É simples de montar e de transportar, por isso aparece muito em estande, recepção e ponto de venda.",
+          p: "O banner roll-up fica guardado dentro da base e sobe na hora de montar. É simples de montar e de transportar, por isso aparece muito em estande, recepção e ponto de venda. A estrutura do roll-up já vem inclusa no valor.",
         },
         { h3: "Wind banner" },
         {
-          p: "O wind banner é uma bandeira vertical presa a um mastro que balança com o vento. Fica na calçada ou no estacionamento e chama a atenção pelo movimento. Também pode ser impresso dos dois lados.",
+          p: "O wind banner é uma bandeira vertical presa a um mastro que balança com o vento. Fica na calçada ou no estacionamento e chama a atenção pelo movimento. Também pode ser impresso dos dois lados, e a estrutura vem inclusa no valor.",
         },
         { h3: "Backdrop personalizado" },
         {

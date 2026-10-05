@@ -200,7 +200,9 @@ export const foldersEDobradosContent: ProductContent = {
             ],
             [
               { link: "Goiânia", href: "/grafica-goiania" },
-              " e Aparecida de Goiânia, em até 1 dia útil",
+              " e ",
+              { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" },
+              ", em até 1 dia útil",
             ],
             [
               { link: "Rio Verde", href: "/grafica-rio-verde" },

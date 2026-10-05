@@ -562,7 +562,7 @@ export const products: Product[] = [
       { label: "Modelos", value: "De mesa e especiais" },
       { label: "Quantidade mínima", value: "100 unidades" },
       { label: "Papel", value: "Base cartão 350 g, lâminas couché 150 g, wire-o" },
-      { label: "Melhor época para pedir", value: "De outubro a dezembro" },
+      { label: "Melhor época para pedir", value: "De outubro até a primeira semana de dezembro" },
       { label: "Prazo", value: "Informado no orçamento, a partir da data em que você precisa receber" },
     ],
     // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
@@ -977,8 +977,8 @@ export const products: Product[] = [
     materials: ["Lona (todos os tipos)", "Tecido", "Papel fotográfico"],
     finishes: [
       "Bastão e cordinha",
-      "Estrutura de roll-up",
-      "Estrutura de wind banner",
+      "Estrutura de roll-up inclusa no valor",
+      "Estrutura de wind banner inclusa no valor",
       "Impressão frente e verso",
     ],
     runRanges: ["Unidade", "Kits para redes de lojas"],

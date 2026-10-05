@@ -18,6 +18,32 @@ const cities = [
     faq: "Perguntas frequentes sobre a gráfica para Águas Claras",
     state: DF,
   },
+  {
+    path: "/grafica-anapolis",
+    faq: "Perguntas frequentes de indústrias que pedem impressos para Anápolis",
+    state: GO,
+  },
+  {
+    path: "/grafica-aparecida-de-goiania",
+    faq: "Perguntas frequentes de lojas e distribuidoras de Aparecida de Goiânia",
+    state: GO,
+  },
+  { path: "/grafica-senador-canedo", faq: "Perguntas frequentes de empresas de Senador Canedo", state: GO },
+  {
+    path: "/grafica-trindade",
+    faq: "Perguntas frequentes: paróquias, organizadores e lojistas de Trindade",
+    state: GO,
+  },
+  {
+    path: "/grafica-itumbiara",
+    faq: "Perguntas frequentes de escolas e comissões de formatura de Itumbiara",
+    state: GO,
+  },
+  {
+    path: "/grafica-jatai",
+    faq: "Perguntas frequentes de autores, editoras e organizadores de Jataí",
+    state: GO,
+  },
 ];
 
 for (const city of cities) {
@@ -96,6 +122,28 @@ test("páginas de entrada linkam envelopes e kits linkam pastas", async ({ page 
     for (const href of hrefs) {
       await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
     }
+  }
+});
+
+test("Anápolis mostra a tabela de reposição aprovada", async ({ page }) => {
+  await page.goto("/grafica-anapolis");
+  const table = page.locator("main table");
+  await expect(table).toHaveCount(1);
+  await expect(table.locator("th")).toHaveText(["O que a sua empresa envia", "O que recebe"]);
+  await expect(table.locator("tbody tr")).toHaveCount(4);
+});
+
+test("cidades do Lote 5 linkam umas às outras", async ({ page }) => {
+  const links: [string, string][] = [
+    ["/grafica-anapolis", "/grafica-senador-canedo"],
+    ["/grafica-anapolis", "/grafica-aparecida-de-goiania"],
+    ["/grafica-aparecida-de-goiania", "/grafica-trindade"],
+    ["/grafica-itumbiara", "/grafica-jatai"],
+    ["/grafica-jatai", "/grafica-itumbiara"],
+  ];
+  for (const [from, to] of links) {
+    await page.goto(from);
+    await expect(page.locator(`main a[href="${to}"]`).first()).toBeAttached();
   }
 });
 

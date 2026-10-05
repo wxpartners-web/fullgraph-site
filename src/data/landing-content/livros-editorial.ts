@@ -170,7 +170,7 @@ export const livrosEditorialContent: PageContent = {
         {
           ul: [
             "Brasília e todo o Distrito Federal",
-            [{ link: "Goiânia", href: "/grafica-goiania" }, " e Aparecida de Goiânia"],
+            [{ link: "Goiânia", href: "/grafica-goiania" }, " e ", { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" }],
             [{ link: "Rio Verde", href: "/grafica-rio-verde" }],
             "Valparaíso de Goiás e Luziânia",
             "Demais estados, por frete",

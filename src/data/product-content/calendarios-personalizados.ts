@@ -214,7 +214,7 @@ export const calendariosPersonalizadosContent: ProductContent = {
     {
       question: "Quando pedir os calendários de 2027?",
       answer:
-        "Entre outubro e dezembro de 2026. Pedindo nesse período, o calendário fica pronto a tempo de ser distribuído no começo do ano.",
+        "Entre outubro e a primeira semana de dezembro de 2026. Pedindo até a primeira semana de dezembro, os calendários chegam antes de janeiro.",
     },
     {
       question: "Quais modelos de calendário personalizado a FullGraph faz?",

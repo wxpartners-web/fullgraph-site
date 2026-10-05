@@ -106,7 +106,7 @@ export const orderSteps = [
   "Produzimos, finalizamos e entregamos — ou você retira na gráfica.",
 ] as const;
 
-/** Texto aprovado; Taguatinga, Águas Claras e as cidades de Goiás com página própria levam link */
+/** Texto aprovado; Taguatinga, Águas Claras e todas as cidades de Goiás citadas levam link */
 export const servedRegions: RichText = [
   "Atendemos Brasília e todo o Distrito Federal: Plano Piloto, Núcleo Bandeirante, ",
   { link: "Taguatinga", href: "/grafica-taguatinga" },
@@ -114,9 +114,21 @@ export const servedRegions: RichText = [
   { link: "Águas Claras", href: "/grafica-aguas-claras" },
   ", Guará e demais regiões. Em Goiás, entregamos em ",
   { link: "Goiânia", href: "/grafica-goiania" },
-  ", Aparecida de Goiânia, Anápolis, Senador Canedo, Trindade, ",
+  ", ",
+  { link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" },
+  ", ",
+  { link: "Anápolis", href: "/grafica-anapolis" },
+  ", ",
+  { link: "Senador Canedo", href: "/grafica-senador-canedo" },
+  ", ",
+  { link: "Trindade", href: "/grafica-trindade" },
+  ", ",
   { link: "Rio Verde", href: "/grafica-rio-verde" },
-  ", Itumbiara, Jataí, ",
+  ", ",
+  { link: "Itumbiara", href: "/grafica-itumbiara" },
+  ", ",
+  { link: "Jataí", href: "/grafica-jatai" },
+  ", ",
   { link: "Valparaíso de Goiás", href: "/grafica-valparaiso-de-goias" },
   " e ",
   { link: "Luziânia", href: "/grafica-luziania" },

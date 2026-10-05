@@ -103,8 +103,10 @@ async function cardImage(p, badge, outFile) {
   const photo = await sharp(join(PUB, p.image)).resize(H, H, { fit: "cover" }).toBuffer();
   const nameLines = wrap(p.name, 20);
   const tagLines = wrap(p.tagline, 34);
+  // Linhas de 20 caracteres (ex.: "Aparecida de Goiânia") passam da coluna em 56 px
+  const nameSize = Math.max(...nameLines.map((l) => l.length)) > 19 ? 48 : 56;
   const nameSvg = nameLines
-    .map((l, i) => `<text x="64" y="${250 + i * 64}" font-family="Georgia, 'Times New Roman', serif" font-size="56" fill="#fafaf7">${esc(l)}</text>`)
+    .map((l, i) => `<text x="64" y="${250 + i * 64}" font-family="Georgia, 'Times New Roman', serif" font-size="${nameSize}" fill="#fafaf7">${esc(l)}</text>`)
     .join("");
   const tagTop = 250 + nameLines.length * 64 + 16;
   const tagSvg = tagLines

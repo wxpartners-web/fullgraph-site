@@ -11,6 +11,12 @@ const routes: { path: string; h1: RegExp }[] = [
   { path: "/grafica-luziania", h1: /Gráfica para Luziânia/ },
   { path: "/grafica-taguatinga", h1: /Gráfica para Taguatinga: embalagens, sacolas e rótulos/ },
   { path: "/grafica-aguas-claras", h1: /Gráfica para Águas Claras: papelaria, lançamentos/ },
+  { path: "/grafica-anapolis", h1: /Gráfica para Anápolis: rótulos, catálogos e papelaria/ },
+  { path: "/grafica-aparecida-de-goiania", h1: /Gráfica para Aparecida de Goiânia: tabloides, folhetos/ },
+  { path: "/grafica-senador-canedo", h1: /Gráfica para Senador Canedo: sinalização, crachás/ },
+  { path: "/grafica-trindade", h1: /Gráfica em Trindade \(GO\): impressos para paróquias/ },
+  { path: "/grafica-itumbiara", h1: /Gráfica para Itumbiara: apostilas, formaturas/ },
+  { path: "/grafica-jatai", h1: /Gráfica para Jataí: livros, revistas e materiais/ },
   { path: "/produtos", h1: /gaveta de/i },
   { path: "/produtos/impressao-de-livros", h1: /Impressão de livros/i },
   { path: "/produtos/flyers-e-panfletos", h1: /Impressão de panfletos personalizados/ },
@@ -85,6 +91,12 @@ test("sitemap e robots respondem", async ({ request }) => {
   expect(xml).toContain("/produtos/comunicacao-visual");
   expect(xml).toContain("/grafica-taguatinga");
   expect(xml).toContain("/grafica-aguas-claras");
+  expect(xml).toContain("/grafica-anapolis");
+  expect(xml).toContain("/grafica-aparecida-de-goiania");
+  expect(xml).toContain("/grafica-senador-canedo");
+  expect(xml).toContain("/grafica-trindade");
+  expect(xml).toContain("/grafica-itumbiara");
+  expect(xml).toContain("/grafica-jatai");
   expect(xml).toContain("/produtos/sacolas-personalizadas");
   expect(xml).toContain("/produtos/kits-corporativos");
   expect(xml).toContain("/produtos/calendarios-personalizados");

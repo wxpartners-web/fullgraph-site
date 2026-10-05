@@ -157,8 +157,12 @@ export const graficaGoianiaContent: PageContent = {
             "Setor Oeste e Centro",
             "Campinas e Jardim América",
             "Setor Universitário",
-            "Aparecida de Goiânia",
-            "Senador Canedo e Trindade",
+            [{ link: "Aparecida de Goiânia", href: "/grafica-aparecida-de-goiania" }],
+            [
+              { link: "Senador Canedo", href: "/grafica-senador-canedo" },
+              " e ",
+              { link: "Trindade", href: "/grafica-trindade" },
+            ],
           ],
         },
         {

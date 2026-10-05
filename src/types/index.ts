@@ -61,7 +61,9 @@ export type ContentBlock =
   /** CTA de WhatsApp no meio da copy ([CTA: …] no rascunho aprovado) */
   | { cta: string }
   /** Subtítulo (### no rascunho aprovado) — vira H3 dentro da seção */
-  | { h3: string };
+  | { h3: string }
+  /** Tabela simples do rascunho aprovado (cabeçalho + linhas de texto) */
+  | { table: { head: readonly string[]; rows: readonly (readonly string[])[] } };
 
 export interface ContentSection {
   /** Vira H2 — ordem do array = ordem da copy aprovada */
