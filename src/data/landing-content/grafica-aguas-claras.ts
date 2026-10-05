@@ -62,8 +62,8 @@ export const graficaAguasClarasContent: PageContent = {
               " Carta, ofício, saco A4 e saco A3, com ou sem janela.",
             ],
             [
-              { strong: "Pastas sem quantidade mínima." },
-              " Com bolsa, orelha, porta-cartão ou lombada, em geral no cartão 250 g ou 300 g.",
+              { link: "Pastas sem quantidade mínima", href: "/produtos/pastas-personalizadas" },
+              ". Com bolsa, orelha, porta-cartão ou lombada, em geral no cartão 250 g ou 300 g.",
             ],
           ],
         },

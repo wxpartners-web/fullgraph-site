@@ -31,8 +31,8 @@ export const empresasContent: PageContent = {
               ".",
             ],
             [
-              { strong: "Pastas:" },
-              " com bolsa, orelha, porta-cartão ou lombada, normalmente em cartão 250 g ou 300 g. Sem quantidade mínima.",
+              { link: "Pastas", href: "/produtos/pastas-personalizadas" },
+              ": com bolsa, orelha, porta-cartão ou lombada, normalmente em cartão 250 g ou 300 g. Sem quantidade mínima.",
             ],
             [
               { strong: "Envelopes:" },
@@ -90,8 +90,8 @@ export const empresasContent: PageContent = {
               ".",
             ],
             [
-              { strong: "Calendários:" },
-              " todos os modelos, inclusive especiais. A melhor época para pedir é de outubro a dezembro.",
+              { link: "Calendários", href: "/produtos/calendarios-personalizados" },
+              ": todos os modelos, inclusive especiais. A melhor época para pedir é de outubro a dezembro.",
             ],
           ],
         },

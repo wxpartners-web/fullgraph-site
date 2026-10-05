@@ -6,6 +6,8 @@ import { crachasECredenciaisContent } from "./crachas-e-credenciais";
 import { comunicacaoVisualContent } from "./comunicacao-visual";
 import { sacolasPersonalizadasContent } from "./sacolas-personalizadas";
 import { kitsCorporativosContent } from "./kits-corporativos";
+import { calendariosPersonalizadosContent } from "./calendarios-personalizados";
+import { pastasPersonalizadasContent } from "./pastas-personalizadas";
 
 /**
  * Copy longa aprovada por slug de produto (Money Pages). Produtos fora
@@ -19,6 +21,8 @@ const productContent: Readonly<Record<string, ProductContent>> = {
   "comunicacao-visual": comunicacaoVisualContent,
   "sacolas-personalizadas": sacolasPersonalizadasContent,
   "kits-corporativos": kitsCorporativosContent,
+  "calendarios-personalizados": calendariosPersonalizadosContent,
+  "pastas-personalizadas": pastasPersonalizadasContent,
 };
 
 export function getProductContent(slug: string): ProductContent | undefined {

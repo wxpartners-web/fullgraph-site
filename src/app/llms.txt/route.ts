@@ -20,7 +20,7 @@ const SOLUTION_PAGES = [
   {
     path: "/solucoes/empresas",
     title: "Gráfica para empresas",
-    note: "Papelaria corporativa (cartões, timbrados, envelopes, pastas, blocos e formulários), materiais de comunicação, crachás e materiais de evento e kits corporativos, com estoque para reposição e faturamento após aprovação de cadastro.",
+    note: "Papelaria corporativa (cartões, timbrados, envelopes, pastas, blocos e formulários), materiais de comunicação, calendários, crachás e materiais de evento e kits corporativos, com estoque para reposição e faturamento após aprovação de cadastro.",
   },
   {
     path: "/solucoes/livros-editorial",

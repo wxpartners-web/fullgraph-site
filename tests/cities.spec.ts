@@ -70,6 +70,21 @@ test("empresas e embalagens linkam kits e sacolas", async ({ page }) => {
   );
 });
 
+test("páginas de entrada linkam pastas e calendários personalizados", async ({ page }) => {
+  const expected: Record<string, string[]> = {
+    "/solucoes/empresas": ["/produtos/pastas-personalizadas", "/produtos/calendarios-personalizados"],
+    "/grafica-aguas-claras": ["/produtos/pastas-personalizadas"],
+    "/grafica-rio-verde": ["/produtos/calendarios-personalizados"],
+    "/grafica-luziania": ["/produtos/calendarios-personalizados"],
+  };
+  for (const [path, hrefs] of Object.entries(expected)) {
+    await page.goto(path);
+    for (const href of hrefs) {
+      await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+    }
+  }
+});
+
 test("caminho de primeiro nível desconhecido continua 404", async ({ request }) => {
   const res = await request.get("/grafica-sao-paulo");
   expect(res.status()).toBe(404);

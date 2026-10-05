@@ -6,13 +6,16 @@ import { crachasECredenciaisContent } from "@/data/product-content/crachas-e-cre
 import { comunicacaoVisualContent } from "@/data/product-content/comunicacao-visual";
 import { sacolasPersonalizadasContent } from "@/data/product-content/sacolas-personalizadas";
 import { kitsCorporativosContent } from "@/data/product-content/kits-corporativos";
+import { calendariosPersonalizadosContent } from "@/data/product-content/calendarios-personalizados";
+import { pastasPersonalizadasContent } from "@/data/product-content/pastas-personalizadas";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
  * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos,
- * crachas-e-credenciais, comunicacao-visual, sacolas-personalizadas e
- * kits-corporativos, com especificações da copy aprovada);
+ * crachas-e-credenciais, comunicacao-visual, sacolas-personalizadas,
+ * kits-corporativos, calendarios-personalizados e pastas-personalizadas,
+ * com especificações da copy aprovada);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -41,7 +44,7 @@ export const categories: Category[] = [
     name: "Materiais corporativos",
     shortName: "Corporativo",
     description:
-      "Papelaria institucional, crachás e kits corporativos: timbrados, envelopes, pastas, receituários, cartões, credenciais e kits montados e enviados.",
+      "Papelaria institucional, pastas, crachás, calendários e kits corporativos: timbrados, envelopes, receituários, cartões, credenciais e kits montados e enviados.",
     audiences: ["empresas"],
     index: "03",
   },
@@ -298,10 +301,17 @@ export const products: Product[] = [
     tagline: "Timbrados, envelopes e pastas com a cara da sua marca.",
     description:
       "O conjunto completo de papelaria da empresa: papel timbrado, envelopes, pastas com bolsa, cartões e receituários — produzidos com consistência de cor e papel.",
+    // Pastas têm página própria (/produtos/pastas-personalizadas); especificações
+    // de pasta não confirmadas (medida aberta, laminação, faca) foram retiradas
+    seeAlso: [
+      "As pastas com bolsa, orelha, porta-cartão ou lombada estão na página de ",
+      { link: "pastas personalizadas", href: "/produtos/pastas-personalizadas" },
+      ".",
+    ],
     applications: ["Kits corporativos", "Departamentos administrativos", "Clínicas e consultórios", "Escritórios"],
-    formats: ["A4 timbrado", "Envelope ofício e saco", "Pasta com bolsa 31 × 46 cm aberta"],
-    materials: ["Offset 90 g/m²", "Offset 120 g/m²", "Cartão 300 g/m² (pastas)"],
-    finishes: ["Laminação fosca (pastas)", "Verniz localizado", "Faca especial"],
+    formats: ["A4 timbrado", "Envelope ofício e saco"],
+    materials: ["Offset 90 g/m²", "Offset 120 g/m²"],
+    finishes: ["Verniz localizado"],
     runRanges: ["Sem quantidade mínima", "500 a 2.000", "Acima de 2.000"],
     specs: [
       { label: "Cores", value: "4×0 ou 4×4" },
@@ -314,7 +324,7 @@ export const products: Product[] = [
           "Sim — e é o mais vantajoso. Cotamos timbrado, envelope, pasta e cartão juntos, com a mesma referência de cor.",
       },
     ],
-    related: ["flyers-e-panfletos", "cadernos-personalizados"],
+    related: ["pastas-personalizadas", "flyers-e-panfletos", "cadernos-personalizados"],
     mockup: "sheet",
     image: {
       src: "/images/products/papelaria-almeida-sato.webp",
@@ -395,6 +405,81 @@ export const products: Product[] = [
     image: {
       src: "/images/products/kits-corporativos.webp",
       alt: "Kit de boas-vindas da empresa fictícia Ondina Sistemas em azul-noite e coral: caixa rígida com logotipo prateado, caderno, crachá de Mariana Lopes com cordão, cartão de boas-vindas, garrafa térmica, caneca e caneta sobre papel de seda",
+    },
+  },
+  {
+    slug: "pastas-personalizadas",
+    name: "Pastas personalizadas",
+    category: "materiais-corporativos",
+    audiences: ["empresas"],
+    tagline: "Com bolsa, orelha, porta-cartão ou lombada, sem mínimo.",
+    description:
+      "Pastas personalizadas em papel cartão, com a marca da empresa ou do evento, para guardar propostas, contratos, documentos e o material de cada participante. São quatro modelos: com bolsa, com orelha, com porta-cartão e com lombada.",
+    applications: [
+      "Propostas comerciais e contratos",
+      "Escritórios, clínicas e laboratórios",
+      "Construtoras",
+      "Congressos, convenções e treinamentos",
+      "Órgãos públicos",
+    ],
+    formats: ["Com bolsa", "Com orelha", "Com porta-cartão", "Com lombada"],
+    materials: ["Cartão 250 g", "Cartão 300 g", "Outros papéis conforme o projeto"],
+    finishes: [
+      "Impressão offset e digital",
+      "Arte criada quando necessário",
+      "Estoque para atendimento e reposição",
+      "Entrega no local do evento",
+    ],
+    runRanges: ["Sem quantidade mínima"],
+    specs: [
+      { label: "Modelos", value: "Com bolsa, com orelha, com porta-cartão ou com lombada" },
+      { label: "Papel", value: "Normalmente cartão 250 g ou 300 g" },
+      { label: "Quantidade mínima", value: "Sem quantidade mínima" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: pastasPersonalizadasContent.faq,
+    related: ["crachas-e-credenciais", "kits-corporativos", "papelaria-institucional"],
+    mockup: "sheet",
+    image: {
+      src: "/images/products/pastas-personalizadas.webp",
+      alt: "Pastas em cartão roxo do evento fictício Simpósio Sucupira de Saúde 2027: pasta fechada com a capa Material do participante, pasta aberta com bolsa, porta-cartão, programação e bloco de anotações, pasta com orelhas segurando documentos e pasta com lombada, ao lado de um crachá de participante com cordão e uma caneta",
+    },
+  },
+  {
+    slug: "calendarios-personalizados",
+    name: "Calendários personalizados",
+    category: "materiais-corporativos",
+    audiences: ["empresas"],
+    tagline: "Calendários 2027 com a marca, para o ano inteiro à vista.",
+    description:
+      "Calendário personalizado com a marca da sua empresa para entregar a clientes, parceiros e equipe ao longo de 2027. Produzimos qualquer modelo de calendário, inclusive os especiais, em impressão offset e digital.",
+    applications: [
+      "Clientes e parceiros",
+      "Equipes",
+      "Kits de fim de ano",
+      "Redes e empresas com várias unidades",
+      "Órgãos públicos",
+    ],
+    formats: ["Todos os modelos, inclusive especiais"],
+    materials: ["Definidos no orçamento, conforme o modelo"],
+    finishes: [
+      "Impressão offset e digital",
+      "Arte criada quando necessário",
+      "Calendário sozinho ou dentro de um kit",
+    ],
+    runRanges: ["Quantidade informada no orçamento"],
+    specs: [
+      { label: "Modelos", value: "Todos, inclusive especiais" },
+      { label: "Melhor época para pedir", value: "De outubro a dezembro" },
+      { label: "Prazo", value: "Informado no orçamento, a partir da data em que você precisa receber" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: calendariosPersonalizadosContent.faq,
+    related: ["kits-corporativos", "cadernos-personalizados", "papelaria-institucional"],
+    mockup: "sheet",
+    image: {
+      src: "/images/products/calendarios-personalizados.webp",
+      alt: "Calendários 2027 do escritório fictício Carnaúba Contabilidade em verde-petróleo: calendário de mesa aberto em janeiro de 2027, calendário de parede em fevereiro de 2027 com foto de um ipê-amarelo no cerrado, calendários de mesa empilhados e um calendário de bolso sobre a mesa",
     },
   },
 

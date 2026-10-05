@@ -89,7 +89,11 @@ export const graficaLuzianiaContent: PageContent = {
       heading: "Calendários e materiais de fim de ano",
       blocks: [
         {
-          p: "O calendário de mesa ou de parede é um impresso que instituições e comércios costumam distribuir no fim do ano. Fazemos todos os modelos, inclusive especiais. A melhor época para pedir é de outubro a dezembro: assim sobra tempo para conferir as datas, aprovar a prova e receber antes de janeiro.",
+          p: [
+            "O ",
+            { link: "calendário de mesa ou de parede", href: "/produtos/calendarios-personalizados" },
+            " é um impresso que instituições e comércios costumam distribuir no fim do ano. Fazemos todos os modelos, inclusive especiais. A melhor época para pedir é de outubro a dezembro: assim sobra tempo para conferir as datas, aprovar a prova e receber antes de janeiro.",
+          ],
         },
       ],
     },

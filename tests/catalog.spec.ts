@@ -52,3 +52,34 @@ test("banners linkam a página de comunicação visual", async ({ page }) => {
     /Empresa de comunicação visual em Brasília/
   );
 });
+
+test("papelaria institucional não publica medidas de pasta e aponta para a página de pastas", async ({ page }) => {
+  await page.goto("/produtos/papelaria-institucional");
+  const body = (await page.textContent("main")) ?? "";
+  expect(body).not.toContain("31 × 46");
+  expect(body).not.toMatch(/Laminação fosca \(pastas\)|Cartão 300 g\/m² \(pastas\)|Faca especial/);
+  await expect(page.locator('main a[href="/produtos/pastas-personalizadas"]').first()).toBeAttached();
+});
+
+test("pastas e calendários publicam meta aprovada e não linkam envelopes", async ({ page }) => {
+  const pages = [
+    {
+      path: "/produtos/pastas-personalizadas",
+      title: "Pastas personalizadas para empresas e eventos | FullGraph",
+      related: ["/produtos/crachas-e-credenciais", "/produtos/kits-corporativos", "/produtos/papelaria-institucional"],
+    },
+    {
+      path: "/produtos/calendarios-personalizados",
+      title: "Calendário personalizado 2027 para empresas | FullGraph",
+      related: ["/produtos/kits-corporativos", "/produtos/cadernos-personalizados", "/produtos/papelaria-institucional"],
+    },
+  ];
+  for (const item of pages) {
+    await page.goto(item.path);
+    await expect(page).toHaveTitle(item.title);
+    await expect(page.locator('a[href="/produtos/envelopes-personalizados"]')).toHaveCount(0);
+    for (const href of item.related) {
+      await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+    }
+  }
+});

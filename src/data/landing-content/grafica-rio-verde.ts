@@ -100,7 +100,11 @@ export const graficaRioVerdeContent: PageContent = {
       heading: "Calendários e materiais de fim de ano",
       blocks: [
         {
-          p: "A melhor época para pedir calendários é de outubro a dezembro. Fazemos todos os modelos, inclusive especiais, para revendas, cooperativas e empresas que distribuem o calendário a clientes e parceiros. Pedir com antecedência deixa tempo para aprovar a prova e receber tudo antes da virada do ano.",
+          p: [
+            "A melhor época para pedir ",
+            { link: "calendários", href: "/produtos/calendarios-personalizados" },
+            " é de outubro a dezembro. Fazemos todos os modelos, inclusive especiais, para revendas, cooperativas e empresas que distribuem o calendário a clientes e parceiros. Pedir com antecedência deixa tempo para aprovar a prova e receber tudo antes da virada do ano.",
+          ],
         },
       ],
     },
