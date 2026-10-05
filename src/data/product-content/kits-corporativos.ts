@@ -34,7 +34,10 @@ export const kitsCorporativosContent: ProductContent = {
               { link: "papelaria institucional", href: "/produtos/papelaria-institucional" },
               ";",
             ],
-            "pasta com bolsa, orelha ou porta-cartão;",
+            [
+              { link: "pasta com bolsa, orelha ou porta-cartão", href: "/produtos/pastas-personalizadas" },
+              ";",
+            ],
             [
               "crachá com o nome da pessoa, cordão e porta-crachá, como nos ",
               { link: "crachás e credenciais", href: "/produtos/crachas-e-credenciais" },

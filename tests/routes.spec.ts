@@ -23,6 +23,27 @@ const routes: { path: string; h1: RegExp }[] = [
     h1: /Calendário personalizado 2027 para empresas e instituições/,
   },
   { path: "/produtos/pastas-personalizadas", h1: /Pastas personalizadas para empresas e eventos/ },
+  {
+    path: "/produtos/envelopes-personalizados",
+    h1: /Envelope personalizado para empresas: carta, ofício e saco A4 e A3/,
+  },
+  {
+    path: "/produtos/papelaria-institucional",
+    h1: /Papel timbrado personalizado, blocos e formulários para a sua empresa/,
+  },
+  {
+    path: "/produtos/banners-e-grandes-formatos",
+    h1: /Banner personalizado em lona, faixas e roll-up para lojas e eventos/,
+  },
+  { path: "/produtos/folders-e-dobrados", h1: /Impressão de folders personalizados com todos os tipos de dobra/ },
+  {
+    path: "/produtos/impressao-de-catalogos",
+    h1: /Impressão de catálogos de produtos, sob demanda e em qualquer quantidade/,
+  },
+  {
+    path: "/produtos/impressao-de-revistas",
+    h1: /Impressão de revistas institucionais, de entidades e editoras/,
+  },
   { path: "/portfolio", h1: /Ideias que ganham/i },
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
@@ -68,6 +89,7 @@ test("sitemap e robots respondem", async ({ request }) => {
   expect(xml).toContain("/produtos/kits-corporativos");
   expect(xml).toContain("/produtos/calendarios-personalizados");
   expect(xml).toContain("/produtos/pastas-personalizadas");
+  expect(xml).toContain("/produtos/envelopes-personalizados");
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
 });

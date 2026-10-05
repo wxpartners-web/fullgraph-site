@@ -58,8 +58,8 @@ export const graficaAguasClarasContent: PageContent = {
         {
           ul: [
             [
-              { strong: "Envelopes sem quantidade mínima." },
-              " Carta, ofício, saco A4 e saco A3, com ou sem janela.",
+              { link: "Envelopes sem quantidade mínima", href: "/produtos/envelopes-personalizados" },
+              ". Carta, ofício, saco A4 e saco A3, com ou sem janela.",
             ],
             [
               { link: "Pastas sem quantidade mínima", href: "/produtos/pastas-personalizadas" },

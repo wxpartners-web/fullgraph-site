@@ -8,14 +8,22 @@ import { sacolasPersonalizadasContent } from "@/data/product-content/sacolas-per
 import { kitsCorporativosContent } from "@/data/product-content/kits-corporativos";
 import { calendariosPersonalizadosContent } from "@/data/product-content/calendarios-personalizados";
 import { pastasPersonalizadasContent } from "@/data/product-content/pastas-personalizadas";
+import { papelariaInstitucionalContent } from "@/data/product-content/papelaria-institucional";
+import { envelopesPersonalizadosContent } from "@/data/product-content/envelopes-personalizados";
+import { bannersEGrandesFormatosContent } from "@/data/product-content/banners-e-grandes-formatos";
+import { foldersEDobradosContent } from "@/data/product-content/folders-e-dobrados";
+import { impressaoDeCatalogosContent } from "@/data/product-content/impressao-de-catalogos";
+import { impressaoDeRevistasContent } from "@/data/product-content/impressao-de-revistas";
 
 /**
  * Catálogo mockado tipado — reagrupa as ~24 categorias do site antigo
  * em 9 famílias claras. Conteúdo técnico é provisório e revisável
  * (exceto impressao-de-livros, caixas-personalizadas, flyers-e-panfletos,
  * crachas-e-credenciais, comunicacao-visual, sacolas-personalizadas,
- * kits-corporativos, calendarios-personalizados e pastas-personalizadas,
- * com especificações da copy aprovada);
+ * kits-corporativos, calendarios-personalizados, pastas-personalizadas,
+ * papelaria-institucional, envelopes-personalizados, banners-e-grandes-formatos,
+ * folders-e-dobrados, impressao-de-catalogos e impressao-de-revistas, com
+ * especificações só da copy aprovada e das respostas do proprietário);
  * substituir/administrar via CMS no futuro (docs/BACKEND-HANDOFF.md).
  * Preços nunca aparecem: tudo é "sob consulta".
  */
@@ -35,7 +43,7 @@ export const categories: Category[] = [
     name: "Catálogos e revistas",
     shortName: "Catálogos",
     description:
-      "Catálogos de produto, revistas e jornais corporativos em tiragens médias e altas.",
+      "Catálogos de produto, revistas e jornais corporativos, sob demanda ou em tiragem.",
     audiences: ["empresas", "livros"],
     index: "02",
   },
@@ -44,7 +52,7 @@ export const categories: Category[] = [
     name: "Materiais corporativos",
     shortName: "Corporativo",
     description:
-      "Papelaria institucional, pastas, crachás, calendários e kits corporativos: timbrados, envelopes, receituários, cartões, credenciais e kits montados e enviados.",
+      "Papelaria institucional, envelopes, pastas, crachás, calendários e kits corporativos: timbrados, blocos, formulários, cartões, credenciais e kits montados e enviados.",
     audiences: ["empresas"],
     index: "03",
   },
@@ -202,25 +210,41 @@ export const products: Product[] = [
     name: "Impressão de catálogos",
     category: "catalogos-e-revistas",
     audiences: ["empresas"],
-    tagline: "Seu portfólio de produtos com cor fiel e acabamento consistente.",
+    tagline: "Catálogos de produtos sob demanda, em qualquer quantidade.",
     description:
-      "Catálogos de produtos e serviços com reprodução de cor controlada, papel couché e acabamento grampeado ou colado. Padronização entre tiragens para campanhas recorrentes.",
-    applications: ["Catálogos de produto", "Lookbooks", "Tabelas técnicas", "Kits comerciais"],
-    formats: ["A4", "21 × 21 cm", "A5", "Formato sob medida"],
-    materials: ["Couché brilho 115 g/m²", "Couché fosco 150 g/m²", "Capa em couché 250 g/m²"],
-    finishes: ["Laminação na capa", "Verniz localizado", "Grampo canoa", "Lombada colada"],
-    runRanges: ["Sob demanda, em qualquer quantidade", "500 a 2.000", "Acima de 2.000"],
+      "Catálogos de produtos e serviços em offset, reciclato, couché ou papéis especiais, impressos em offset ou digital, com encadernação e acabamentos da linha editorial.",
+    applications: [
+      "Catálogos de produtos",
+      "Catálogos para distribuidoras e redes",
+      "Catálogos para feiras e representantes",
+    ],
+    formats: ["200 × 280 mm (mais pedido)", "Formato sob medida"],
+    materials: [
+      "Offset",
+      "Reciclato",
+      "Couché",
+      "Papéis especiais",
+      "Miolo também em 150 g e 170 g",
+      "Capa 300 g",
+    ],
+    finishes: [
+      "Grampo",
+      "Hot melt",
+      "Cola PUR",
+      "Espiral e wire-o",
+      "Capa dura",
+      "Laminação BOPP fosca ou brilho",
+      "Soft touch",
+      "Verniz UV brilho ou localizado",
+      "Hot stamping",
+    ],
+    runRanges: ["Sob demanda, em qualquer quantidade"],
     specs: [
-      { label: "Cores", value: "4×4 (CMYK frente e verso)" },
-      { label: "Páginas", value: "8 a 96 + capa" },
+      { label: "Prazo médio", value: "5 dias úteis" },
+      { label: "Arquivo", value: "PDF/X-1a" },
     ],
-    faq: [
-      {
-        question: "Grampo ou lombada colada?",
-        answer:
-          "Até cerca de 64 páginas o grampo canoa é econômico e eficiente. Acima disso, ou para um acabamento mais premium, recomendamos lombada colada.",
-      },
-    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: impressaoDeCatalogosContent.faq,
     related: ["impressao-de-revistas", "folders-e-dobrados", "impressao-de-livros"],
     mockup: "stack",
     image: {
@@ -234,26 +258,36 @@ export const products: Product[] = [
     name: "Impressão de revistas",
     category: "catalogos-e-revistas",
     audiences: ["empresas", "livros"],
-    tagline: "Publicações periódicas com padrão editorial.",
+    tagline: "Revistas a partir de 1 exemplar, com acabamento editorial.",
     description:
-      "Revistas institucionais, publicações de associações e periódicos com impressão em couché e fechamento grampeado ou colado, em tiragens médias e altas.",
-    applications: ["Revistas institucionais", "Publicações de entidades", "Anuários", "Revistas de bairro"],
-    formats: ["20,2 × 26,6 cm", "A4", "Formato sob medida"],
-    materials: ["Couché brilho 90 g/m²", "Couché 115 g/m²", "Capa 150–250 g/m²"],
-    finishes: ["Grampo canoa", "Lombada colada", "Laminação na capa"],
-    runRanges: ["A partir de 300 unidades", "1.000 a 5.000", "Acima de 5.000"],
+      "Revistas institucionais, de entidades, escolas e editoras, com os acabamentos da linha de livros, impressas em offset ou digital a partir de 1 exemplar. Papel e formato são definidos no orçamento.",
+    applications: [
+      "Revistas institucionais de empresa",
+      "Associações, sindicatos e entidades",
+      "Escolas e faculdades",
+      "Editoras",
+    ],
+    formats: ["Definido no orçamento"],
+    materials: ["Papel definido no orçamento"],
+    finishes: [
+      "Grampo",
+      "Lombada colada (PUR ou hot melt)",
+      "Capa dura",
+      "Espiral e wire-o",
+      "Laminação BOPP fosca ou brilho",
+      "Soft touch",
+      "Verniz UV total ou localizado",
+      "Hot stamping",
+    ],
+    runRanges: ["A partir de 1 exemplar", "Edição única ou periódica"],
     specs: [
-      { label: "Cores", value: "4×4" },
-      { label: "Periodicidade", value: "Reimpressão com padrão de cor" },
+      { label: "Tiragem", value: "A partir de 1 exemplar" },
+      { label: "Prazo médio", value: "5 dias úteis" },
+      { label: "Periódicas", value: "Arquivo guardado para a próxima edição" },
     ],
-    faq: [
-      {
-        question: "Vocês mantêm o padrão de cor entre edições?",
-        answer:
-          "Sim. Guardamos o perfil do trabalho para que edições futuras saiam com a mesma aparência de cor e papel.",
-      },
-    ],
-    related: ["impressao-de-catalogos", "jornais-e-tabloides"],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: impressaoDeRevistasContent.faq,
+    related: ["impressao-de-catalogos", "jornais-e-tabloides", "impressao-de-livros"],
     mockup: "stack",
     image: {
       src: "/images/products/revistas-planalto.webp",
@@ -298,39 +332,79 @@ export const products: Product[] = [
     name: "Papelaria institucional",
     category: "materiais-corporativos",
     audiences: ["empresas"],
-    tagline: "Timbrados, envelopes e pastas com a cara da sua marca.",
+    tagline: "Timbrado, blocos e formulários numerados com a sua marca.",
     description:
-      "O conjunto completo de papelaria da empresa: papel timbrado, envelopes, pastas com bolsa, cartões e receituários — produzidos com consistência de cor e papel.",
-    // Pastas têm página própria (/produtos/pastas-personalizadas); especificações
-    // de pasta não confirmadas (medida aberta, laminação, faca) foram retiradas
-    seeAlso: [
-      "As pastas com bolsa, orelha, porta-cartão ou lombada estão na página de ",
-      { link: "pastas personalizadas", href: "/produtos/pastas-personalizadas" },
-      ".",
+      "Papel timbrado em offset 90 g 4x0, sem quantidade mínima, e blocos e formulários com numeração sequencial, picote e várias vias em papel autocopiativo.",
+    applications: [
+      "Escritórios",
+      "Departamentos e setores internos",
+      "Equipes comerciais",
+      "Órgãos públicos e licitações",
+      "Certificados de cursos, treinamentos e eventos",
     ],
-    applications: ["Kits corporativos", "Departamentos administrativos", "Clínicas e consultórios", "Escritórios"],
-    formats: ["A4 timbrado", "Envelope ofício e saco"],
-    materials: ["Offset 90 g/m²", "Offset 120 g/m²"],
-    finishes: ["Verniz localizado"],
-    runRanges: ["Sem quantidade mínima", "500 a 2.000", "Acima de 2.000"],
+    formats: [
+      "Formato definido no orçamento",
+      "Blocos simples, de requisição e de orçamento",
+      "Blocos com várias vias",
+    ],
+    materials: ["Offset 90 g/m²", "Papel autocopiativo (blocos com vias)", "Outros papéis sob orçamento"],
+    finishes: ["Numeração sequencial", "Picote", "Várias vias"],
+    runRanges: ["Sem quantidade mínima; custo unitário menor em quantidade maior"],
     specs: [
-      { label: "Cores", value: "4×0 ou 4×4" },
-      { label: "Itens", value: "Timbrado, envelope, pasta, cartão, receituário" },
+      { label: "Cores", value: "4x0 (frente colorida, verso em branco)" },
+      { label: "Itens", value: "Timbrado, blocos, formulários e certificados numerados" },
+      { label: "Prazo médio", value: "5 dias úteis" },
     ],
-    faq: [
-      {
-        question: "Posso pedir o kit completo em um orçamento só?",
-        answer:
-          "Sim — e é o mais vantajoso. Cotamos timbrado, envelope, pasta e cartão juntos, com a mesma referência de cor.",
-      },
-    ],
-    related: ["pastas-personalizadas", "flyers-e-panfletos", "cadernos-personalizados"],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: papelariaInstitucionalContent.faq,
+    related: ["envelopes-personalizados", "pastas-personalizadas", "cadernos-personalizados"],
     mockup: "sheet",
     image: {
       src: "/images/products/papelaria-almeida-sato.webp",
       alt: "Kit de papelaria do escritório fictício Almeida & Sato Advocacia em verde-escuro e branco: timbrado, envelope, pasta com monograma dourado e cartões de visita",
     },
     featured: true,
+  },
+  {
+    slug: "envelopes-personalizados",
+    name: "Envelopes personalizados",
+    category: "materiais-corporativos",
+    audiences: ["empresas"],
+    tagline: "Carta, ofício e saco A4 e A3, com ou sem janela, sem mínimo.",
+    description:
+      "Envelope personalizado com o logotipo, os dados e as cores da sua empresa, para correspondência, contratos, laudos e propostas. Modelos carta, ofício e saco A4 e A3, com ou sem janela, em offset 150 g ou couché 150 g, com impressão 1x0 ou 4x0.",
+    applications: [
+      "Correspondência e comunicados",
+      "Contratos, laudos e propostas",
+      "Escritórios de advocacia e contabilidade",
+      "Clínicas, laboratórios e escolas",
+      "Órgãos públicos",
+    ],
+    formats: ["Carta", "Ofício", "Saco A4", "Saco A3", "Com ou sem janela", "Medidas personalizadas"],
+    materials: ["Offset 150 g", "Couché 150 g"],
+    finishes: [
+      "Impressão 1x0 ou 4x0",
+      "Fechamento com cola comum",
+      "Fita dupla-face (opcional)",
+      "Arte criada quando necessário",
+      "Primeira prova inclusa",
+      "Estoque para atendimento e reposição",
+    ],
+    runRanges: ["Sem quantidade mínima; custo unitário menor em quantidade maior"],
+    specs: [
+      { label: "Modelos", value: "Carta, ofício, saco A4 e A3, com ou sem janela" },
+      { label: "Papel", value: "Offset 150 g ou couché 150 g" },
+      { label: "Quantidade mínima", value: "Sem quantidade mínima" },
+      { label: "Prazo médio", value: "5 dias úteis" },
+    ],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: envelopesPersonalizadosContent.faq,
+    related: ["papelaria-institucional", "pastas-personalizadas", "kits-corporativos"],
+    mockup: "sheet",
+    image: {
+      src: "/images/products/envelopes-personalizados.webp",
+      alt: "Envelopes do escritório fictício Murici Engenharia com logotipo azul-cobalto: um envelope carta sem janela, dois envelopes carta com janela e um envelope saco A4 cor areia com faixa azul e aba aberta, ao lado de uma folha de papel timbrado com o mesmo logotipo e uma caneta",
+    },
   },
   {
     slug: "crachas-e-credenciais",
@@ -412,7 +486,7 @@ export const products: Product[] = [
     name: "Pastas personalizadas",
     category: "materiais-corporativos",
     audiences: ["empresas"],
-    tagline: "Com bolsa, orelha, porta-cartão ou lombada, sem mínimo.",
+    tagline: "Com bolsa, orelha, porta-cartão ou lombada, para folhas A4, sem mínimo.",
     description:
       "Pastas personalizadas em papel cartão, com a marca da empresa ou do evento, para guardar propostas, contratos, documentos e o material de cada participante. São quatro modelos: com bolsa, com orelha, com porta-cartão e com lombada.",
     applications: [
@@ -426,19 +500,26 @@ export const products: Product[] = [
     materials: ["Cartão 250 g", "Cartão 300 g", "Outros papéis conforme o projeto"],
     finishes: [
       "Impressão offset e digital",
+      "Laminação",
+      "Verniz localizado",
+      "Hot stamping",
       "Arte criada quando necessário",
+      "Primeira prova inclusa",
       "Estoque para atendimento e reposição",
       "Entrega no local do evento",
     ],
-    runRanges: ["Sem quantidade mínima"],
+    runRanges: ["Sem quantidade mínima; custo unitário menor em quantidade maior"],
     specs: [
       { label: "Modelos", value: "Com bolsa, com orelha, com porta-cartão ou com lombada" },
+      { label: "Tamanho padrão", value: "220 × 310 mm fechada; 440 × 310 mm aberta (cabe A4)" },
       { label: "Papel", value: "Normalmente cartão 250 g ou 300 g" },
+      { label: "Acabamentos", value: "Laminação, verniz localizado, hot stamping" },
       { label: "Quantidade mínima", value: "Sem quantidade mínima" },
+      { label: "Prazo médio", value: "5 dias úteis" },
     ],
     // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
     faq: pastasPersonalizadasContent.faq,
-    related: ["crachas-e-credenciais", "kits-corporativos", "papelaria-institucional"],
+    related: ["envelopes-personalizados", "papelaria-institucional", "crachas-e-credenciais"],
     mockup: "sheet",
     image: {
       src: "/images/products/pastas-personalizadas.webp",
@@ -460,16 +541,27 @@ export const products: Product[] = [
       "Redes e empresas com várias unidades",
       "Órgãos públicos",
     ],
-    formats: ["Todos os modelos, inclusive especiais"],
-    materials: ["Definidos no orçamento, conforme o modelo"],
+    formats: [
+      "De mesa",
+      "Com acabamento especial (capa dura, laminação, verniz)",
+      "Outros modelos sob orçamento",
+    ],
+    materials: ["Base em cartão 350 g", "Lâminas em couché 150 g"],
     finishes: [
       "Impressão offset e digital",
-      "Arte criada quando necessário",
+      "Wire-o",
+      "Laminação e verniz",
+      "Base tipo capa dura",
+      "Arte completa feita pela gráfica",
+      "Primeira prova inclusa",
       "Calendário sozinho ou dentro de um kit",
+      "Envio direto a cada cliente",
     ],
-    runRanges: ["Quantidade informada no orçamento"],
+    runRanges: ["A partir de 100 unidades"],
     specs: [
-      { label: "Modelos", value: "Todos, inclusive especiais" },
+      { label: "Modelos", value: "De mesa e especiais" },
+      { label: "Quantidade mínima", value: "100 unidades" },
+      { label: "Papel", value: "Base cartão 350 g, lâminas couché 150 g, wire-o" },
       { label: "Melhor época para pedir", value: "De outubro a dezembro" },
       { label: "Prazo", value: "Informado no orçamento, a partir da data em que você precisa receber" },
     ],
@@ -527,24 +619,26 @@ export const products: Product[] = [
     audiences: ["empresas"],
     tagline: "Sua apresentação organizada em dobras.",
     description:
-      "Folders com uma, duas ou três dobras para apresentar produtos e serviços com hierarquia. Papel firme, vinco preciso e dobra sem craquelar a tinta.",
-    applications: ["Apresentações comerciais", "Cardápios", "Programas de eventos", "Mapas e guias"],
+      "Folders com todos os tipos de dobra, de 1, 2 ou 3 dobras a sanfona, carteira, janela e cruz, para apresentar produtos, serviços e empreendimentos em painéis. Vinco antes da dobra, laminação e verniz localizado.",
+    applications: [
+      "Lançamentos imobiliários",
+      "Apresentações comerciais",
+      "Programação de eventos e feiras",
+      "Cardápios",
+      "Escolas e clínicas",
+      "Campanhas de órgãos públicos",
+    ],
     formats: ["A4 aberto (2 ou 3 dobras)", "A3 aberto", "Formato sob medida"],
-    materials: ["Couché fosco 150 g/m²", "Couché 170 g/m²", "Cartão 250 g/m² com vinco"],
-    finishes: ["Vinco", "Dobra carta ou sanfona", "Laminação fosca"],
-    runRanges: ["A partir de 500 unidades", "2.000 a 10.000", "Acima de 10.000"],
+    materials: ["Couché 90 g/m²", "Couché 115 g/m²"],
+    finishes: ["Vinco antes da dobra", "Todos os tipos de dobra", "Laminação", "Verniz localizado"],
+    runRanges: ["A partir de 30 unidades (digital)", "Acima de 500 unidades (offset)", "Sem limite máximo"],
     specs: [
-      { label: "Cores", value: "4×4" },
-      { label: "Dobras", value: "Meia dobra, carta, sanfona, janela" },
+      { label: "Dobras", value: "Todos os tipos" },
+      { label: "Prazo expresso", value: "5.000 em 48 horas" },
     ],
-    faq: [
-      {
-        question: "O que evita a tinta craquelar na dobra?",
-        answer:
-          "Em papéis a partir de 170 g/m² aplicamos vinco antes da dobra — isso preserva a impressão e deixa o fechamento alinhado.",
-      },
-    ],
-    related: ["flyers-e-panfletos", "impressao-de-catalogos"],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: foldersEDobradosContent.faq,
+    related: ["flyers-e-panfletos", "impressao-de-catalogos", "comunicacao-visual"],
     mockup: "sheet",
     image: {
       src: "/images/products/folders-serra-do-mel.webp",
@@ -867,33 +961,39 @@ export const products: Product[] = [
     audiences: ["empresas"],
     tagline: "Sua mensagem em escala de parede.",
     description:
-      "Banners, faixas e impressos de grande formato para pontos de venda, fachadas e eventos, com lona ou papel e acabamento para instalação.",
+      "Banner personalizado sob medida em lona, tecido ou papel fotográfico, faixa, roll-up, wind banner e backdrop, para pontos de venda, redes e eventos.",
     seeAlso: [
       "Para fachada, placa em ACM ou PVC, totem, display e wobbler, com instalação, fale com a nossa ",
       { link: "empresa de comunicação visual", href: "/produtos/comunicacao-visual" },
       ".",
     ],
-    applications: ["Pontos de venda", "Eventos e feiras", "Fachadas temporárias", "Sinalização interna"],
-    formats: ["60 × 90 cm", "80 × 120 cm", "Medida sob demanda"],
-    materials: ["Lona 440 g", "Papel fotográfico", "Adesivo vinílico"],
-    finishes: ["Bastão e corda", "Ilhós", "Refile"],
+    applications: [
+      "Pontos de venda e vitrines",
+      "Redes e franquias",
+      "Eventos, feiras e lançamentos",
+      "Fachadas temporárias e obras",
+    ],
+    formats: ["Sob medida"],
+    materials: ["Lona (todos os tipos)", "Tecido", "Papel fotográfico"],
+    finishes: [
+      "Bastão e cordinha",
+      "Estrutura de roll-up",
+      "Estrutura de wind banner",
+      "Impressão frente e verso",
+    ],
     runRanges: ["Unidade", "Kits para redes de lojas"],
     specs: [
-      { label: "Impressão", value: "Alta resolução para leitura próxima" },
+      { label: "Prazo expresso", value: "24 horas para banners padrão" },
+      { label: "Quantidade mínima", value: "Sem quantidade mínima" },
       { label: "Uso", value: "Interno e externo" },
     ],
-    faq: [
-      {
-        question: "Vocês produzem kits para várias lojas?",
-        answer:
-          "Sim. Para redes, padronizamos o material e organizamos a entrega por unidade — informe as cidades no orçamento.",
-      },
-    ],
-    related: ["comunicacao-visual", "flyers-e-panfletos", "rotulos-e-etiquetas"],
+    // Copy aprovada (Money Page) — mesma fonte do FAQ da página e do JSON-LD
+    faq: bannersEGrandesFormatosContent.faq,
+    related: ["comunicacao-visual", "flyers-e-panfletos", "crachas-e-credenciais"],
     mockup: "sign",
     image: {
       src: "/images/products/banners-sabores-cerrado.webp",
-      alt: "Banner roll-up e banner com ilhoses da feira fictícia Sabores do Cerrado, em terracota, mostarda e verde, montados em pavilhão de eventos",
+      alt: "Banner roll-up e banner suspenso por cordinha da feira fictícia Sabores do Cerrado, em terracota, mostarda e verde, montados em pavilhão de eventos",
     },
   },
 ];

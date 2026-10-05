@@ -85,6 +85,20 @@ test("páginas de entrada linkam pastas e calendários personalizados", async ({
   }
 });
 
+test("páginas de entrada linkam envelopes e kits linkam pastas", async ({ page }) => {
+  const expected: Record<string, string[]> = {
+    "/solucoes/empresas": ["/produtos/envelopes-personalizados"],
+    "/grafica-aguas-claras": ["/produtos/envelopes-personalizados"],
+    "/produtos/kits-corporativos": ["/produtos/pastas-personalizadas"],
+  };
+  for (const [path, hrefs] of Object.entries(expected)) {
+    await page.goto(path);
+    for (const href of hrefs) {
+      await expect(page.locator(`main a[href="${href}"]`).first()).toBeAttached();
+    }
+  }
+});
+
 test("caminho de primeiro nível desconhecido continua 404", async ({ request }) => {
   const res = await request.get("/grafica-sao-paulo");
   expect(res.status()).toBe(404);

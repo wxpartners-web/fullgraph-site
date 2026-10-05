@@ -35,8 +35,8 @@ export const empresasContent: PageContent = {
               ": com bolsa, orelha, porta-cartão ou lombada, normalmente em cartão 250 g ou 300 g. Sem quantidade mínima.",
             ],
             [
-              { strong: "Envelopes:" },
-              " carta, ofício, saco A4 e saco A3, com e sem janela. Sem quantidade mínima.",
+              { link: "Envelopes", href: "/produtos/envelopes-personalizados" },
+              ": carta, ofício, saco A4 e saco A3, com e sem janela. Sem quantidade mínima.",
             ],
             [
               { strong: "Formulários e certificados:" },

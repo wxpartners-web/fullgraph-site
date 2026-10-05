@@ -2,15 +2,15 @@ import type { ProductContent } from "@/types";
 
 /**
  * Copy aprovada pelo cliente — rascunhos/calendarios-personalizados/calendarios-personalizados.md
- * (Lote 4, onda 1 — Gate Humano 2, 04/10/2026). Texto verbatim: não reescrever
- * nem acrescentar afirmações sem nova aprovação. Modelos nomeados, quantidade
- * mínima, prazo em dias, feriados e papéis ainda dependem do briefing 3 (bloco U).
- * Fonte única para a UI e para o JSON-LD (FAQPage).
+ * (v2 do Lote 4 com o briefing 3, bloco U e R3 — Gate Humano 2, 05/10/2026). Texto verbatim:
+ * não reescrever nem acrescentar afirmações sem nova aprovação. Prazo segue
+ * "informado no orçamento" (U3 sem resposta). Os dois parágrafos do H2 de orçamento
+ * entram juntos em closing.text. Fonte única para a UI e para o JSON-LD (FAQPage).
  */
 export const calendariosPersonalizadosContent: ProductContent = {
   metaTitle: "Calendário personalizado 2027 para empresas | FullGraph",
   metaDescription:
-    "Calendário personalizado 2027 com a marca da sua empresa, em todos os modelos, inclusive especiais. Peça de outubro a dezembro e receba no DF e em Goiás.",
+    "Calendário personalizado 2027 com a marca da sua empresa: de mesa, com wire-o ou acabamento especial, a partir de 100 unidades. Entrega no DF e em Goiás.",
   h1: "Calendário personalizado 2027 para empresas e instituições",
   intro: [
     "A FullGraph imprime calendário personalizado com a marca da sua empresa para entregar a clientes, parceiros e equipe ao longo de 2027. Produzimos qualquer modelo de calendário, inclusive os especiais, em impressão offset e digital.",
@@ -24,25 +24,30 @@ export const calendariosPersonalizadosContent: ProductContent = {
         {
           p: "Um calendário com a marca só cumpre o papel se estiver na mesa ou na parede do cliente quando o ano começa. Se chega em fevereiro, outro calendário já ocupou aquele lugar.",
         },
-        { p: "Encomendar entre outubro e dezembro dá folga para cada etapa do pedido:" },
+        {
+          p: "Encomendar entre outubro e dezembro dá folga para cada etapa do pedido:",
+        },
         {
           ol: [
             [
               { strong: "Definir modelo e quantidade." },
-              " Quantas unidades vão para clientes, quantas para parceiros e quantas ficam com a equipe.",
+              " Quantas unidades vão para clientes, quantas para parceiros e quantas ficam com a equipe. O pedido começa em 100 calendários.",
             ],
             [
               { strong: "Preparar a arte." },
-              " A empresa envia o arquivo pronto ou pede a criação à gráfica.",
+              " A empresa envia o arquivo pronto ou deixa a arte completa por conta da gráfica.",
             ],
-            [{ strong: "Aprovar antes de imprimir." }, " Nada entra em produção sem o seu de acordo."],
+            [
+              { strong: "Aprovar a prova." },
+              " A primeira prova não é cobrada à parte, e nada entra em produção sem o seu de acordo.",
+            ],
             [
               { strong: "Produzir e entregar." },
               " O prazo é informado no orçamento, a partir da data em que você precisa receber.",
             ],
             [
               { strong: "Distribuir." },
-              " Em mãos, em visitas comerciais ou dentro de um kit enviado a cada pessoa.",
+              " Em mãos, em visitas comerciais, dentro de um kit ou com envio direto para o endereço de cada cliente.",
             ],
           ],
         },
@@ -55,10 +60,37 @@ export const calendariosPersonalizadosContent: ProductContent = {
       heading: "Modelos de calendário personalizado",
       blocks: [
         {
-          p: "A FullGraph faz todos os modelos de calendário, inclusive os especiais. Como referência, os formatos mais comuns no mercado são o de mesa, que fica à vista na estação de trabalho, o de parede, para recepções, salas e áreas comuns, e os de menor porte, como os de bolso e os de ímã, pensados para acompanhar o cliente no dia a dia.",
+          p: "A FullGraph faz todos os modelos de calendário, inclusive os especiais. O mais pedido pelas empresas é o de mesa, e é por ele que a maior parte dos orçamentos começa.",
+        },
+        { h3: "Calendário de mesa personalizado" },
+        {
+          p: "O calendário de mesa fica na estação de trabalho, ao lado do computador e do telefone, e é consultado várias vezes por dia. Para a marca, é um dos lugares mais vistos do escritório do cliente.",
         },
         {
-          p: "A escolha depende de onde a marca precisa aparecer e de quem vai receber o calendário. Conte qual modelo você tem em mente, ou o uso que pretende dar a ele, e a equipe confirma no orçamento como produzir.",
+          p: "A FullGraph monta o calendário de mesa com base em cartão 350 g, lâminas em couché 150 g e acabamento com wire-o. A base firme mantém o calendário em pé sobre a mesa, e o wire-o deixa as folhas virarem sem soltar ao longo dos doze meses.",
+        },
+        { h3: "Calendário com acabamento especial" },
+        {
+          p: "Os \"especiais\" são os calendários com acabamento diferenciado. Entram aqui:",
+        },
+        {
+          ul: [
+            [
+              { strong: "Base tipo capa dura" },
+              ", mais rígida e com cara de peça de presente;",
+            ],
+            [
+              { strong: "Laminações" },
+              ", que protegem a superfície e mudam o toque do papel;",
+            ],
+            [
+              { strong: "Vernizes" },
+              ", que dão destaque ao logotipo ou a uma parte da arte.",
+            ],
+          ],
+        },
+        {
+          p: "Esses acabamentos combinam bem com calendários para diretoria, clientes estratégicos e kits de fim de ano. Os demais formatos, como o de parede, também entram no orçamento: conte onde o calendário vai ficar e a equipe confirma como produzir.",
         },
       ],
     },
@@ -66,13 +98,13 @@ export const calendariosPersonalizadosContent: ProductContent = {
       heading: "Arte, datas e identidade da empresa",
       blocks: [
         {
-          p: "Na maior parte dos pedidos, a empresa envia a arte pronta. Quando isso não acontece, a FullGraph cria a arte do calendário para a empresa.",
+          p: "Se a empresa já tem a arte, basta enviar o arquivo. Se não tiver, a FullGraph faz a arte completa do calendário a partir do logotipo, das cores e dos dados de contato da marca.",
         },
         {
           p: "Em um calendário personalizado para empresa, a identidade visual aparece o ano inteiro. Por isso vale manter o mesmo padrão em todas as folhas: logotipo na mesma posição, cores da marca e contatos atualizados, como telefone, site e redes sociais.",
         },
         {
-          p: "Antes de aprovar, confira mês a mês os dias da semana, os números e os dados de contato. Um erro no arquivo se repete em todas as unidades da tiragem.",
+          p: "A primeira prova vem inclusa. Antes de aprovar, confira mês a mês os dias da semana, os números e os dados de contato. Um erro no arquivo se repete em todas as unidades da tiragem.",
         },
         { cta: "Enviar o logotipo e a quantidade pelo WhatsApp" },
       ],
@@ -84,11 +116,14 @@ export const calendariosPersonalizadosContent: ProductContent = {
           p: [
             "O calendário pode seguir sozinho ou dentro de um ",
             { link: "kit corporativo", href: "/produtos/kits-corporativos" },
-            " de fim de ano. Nos kits, entra qualquer tipo de brinde: a FullGraph compra e sugere os itens e personaliza o conjunto inteiro, inclusive com um cartão com o nome de cada pessoa.",
+            " de fim de ano.",
           ],
         },
         {
-          p: "Os kits são montados e enviados ao endereço de cada destinatário, em todo o Brasil, pelos Correios com código de rastreio ou por via aérea. Não há quantidade mínima de kits, e a empresa pode manter kits em estoque para envios aos poucos.",
+          p: "Sozinho, ele pode ser enviado direto ao endereço de cada cliente da sua empresa. Você passa a lista de destinatários, e a equipe da sua empresa não precisa embalar nem despachar nada.",
+        },
+        {
+          p: "Nos kits, entra qualquer tipo de brinde: a FullGraph compra e sugere os itens e personaliza o conjunto inteiro, inclusive com um cartão com o nome de cada pessoa. Os kits são montados e enviados ao endereço de cada destinatário, em todo o Brasil, pelos Correios com código de rastreio ou por via aérea. Não há quantidade mínima de kits, e a empresa pode manter kits em estoque para envios aos poucos.",
         },
         {
           p: [
@@ -122,7 +157,9 @@ export const calendariosPersonalizadosContent: ProductContent = {
     {
       heading: "Regiões que atendemos e entrega",
       blocks: [
-        { p: "Atendemos empresas e instituições em:" },
+        {
+          p: "Atendemos empresas e instituições em:",
+        },
         {
           ul: [
             [
@@ -158,15 +195,15 @@ export const calendariosPersonalizadosContent: ProductContent = {
   closing: {
     heading: "Como pedir o orçamento do calendário personalizado para 2027",
     serifWord: "calendário personalizado",
-    text: "Para orçar calendários personalizados, envie:",
+    text: "A quantidade mínima é de 100 calendários. A partir daí, cada calendário sai mais barato conforme a quantidade sobe, o que costuma valer a pena para quem distribui a clientes, parceiros e equipe ao mesmo tempo. Para orçar calendários personalizados, envie:",
     items: [
-      "o modelo que você procura ou onde o calendário vai ficar;",
-      "a quantidade;",
+      "o modelo que você procura (de mesa, com acabamento especial ou outro);",
+      "a quantidade, a partir de 100 unidades;",
       "se a arte já está pronta ou se precisa ser criada;",
       "o logotipo e as cores da marca;",
       "a data em que precisa receber;",
       "a cidade de entrega;",
-      "se o calendário vai dentro de um kit.",
+      "se o calendário vai dentro de um kit ou direto para cada cliente.",
     ],
     note: "Se algum item ainda não estiver definido, peça o orçamento mesmo assim. A equipe ajuda a fechar as especificações.",
     whatsappLabel: "Falar com a gráfica pelo WhatsApp",
@@ -182,17 +219,22 @@ export const calendariosPersonalizadosContent: ProductContent = {
     {
       question: "Quais modelos de calendário personalizado a FullGraph faz?",
       answer:
-        "Todos os modelos, inclusive os especiais. Informe o modelo ou o uso que você pretende dar ao calendário e a equipe confirma no orçamento.",
+        "Todos os modelos, inclusive os especiais. O mais pedido é o calendário de mesa, com base em cartão 350 g, lâminas em couché 150 g e wire-o. Os especiais levam base tipo capa dura, laminação ou verniz.",
+    },
+    {
+      question: "Qual a quantidade mínima de calendários?",
+      answer:
+        "100 unidades. Quanto maior a quantidade, menor o custo por calendário.",
     },
     {
       question: "Vocês criam a arte do calendário?",
       answer:
-        "Sim, quando necessário. Normalmente a empresa envia a arte pronta. Quando isso não acontece, a FullGraph cria a arte.",
+        "Sim. Se a empresa não tiver a arte, a FullGraph faz a arte completa do calendário. A primeira prova está inclusa no pedido.",
     },
     {
-      question: "O calendário pode ir dentro de um kit de fim de ano?",
+      question: "Vocês enviam o calendário para cada cliente da empresa?",
       answer:
-        "Sim. Montamos kits com qualquer tipo de brinde e enviamos para o endereço de cada pessoa, em todo o Brasil.",
+        "Sim. O calendário pode ser enviado direto ao endereço de cada cliente, sozinho ou dentro de um kit de fim de ano com outros brindes.",
     },
     {
       question: "Qual o prazo de produção?",
