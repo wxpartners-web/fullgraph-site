@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://grafica.fullgraph.com.br/sitemap.xml
