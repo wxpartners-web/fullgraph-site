@@ -92,6 +92,28 @@ export default function SobrePage() {
               </p>
             </div>
           </Reveal>
+
+          <Reveal>
+            <div
+              className="mt-8 grid grid-cols-1 gap-3 border-t-2 border-carbon/15 pt-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-10"
+              data-testid="sobre-intermedia"
+            >
+              <h2 className="font-semibold">Intermédia Business</h2>
+              <p className="text-sm leading-relaxed text-carbon/70">
+                O sócio-fundador da FullGraph também é head comercial da{" "}
+                <a
+                  href="https://intermediabusiness.com.br/"
+                  target="_blank"
+                  rel="noopener"
+                  className="font-medium text-carbon underline underline-offset-4 hover:text-carbon/80"
+                >
+                  Intermédia Business
+                </a>
+                , empresa de Goiânia-GO que assessora empresas em licitações públicas, representa a POMA no
+                Brasil em transporte por cabo e assessora a compra e venda de grandes fazendas.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
