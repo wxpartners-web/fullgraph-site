@@ -54,6 +54,7 @@ const routes: { path: string; h1: RegExp }[] = [
   { path: "/sobre", h1: /Muito mais que/i },
   { path: "/orcamento", h1: /Monte seu pedido/i },
   { path: "/contato", h1: /Vamos/i },
+  { path: "/politica-de-privacidade", h1: /Política de privacidade/ },
 ];
 
 for (const route of routes) {

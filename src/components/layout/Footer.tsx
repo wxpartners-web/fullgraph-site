@@ -104,6 +104,12 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {site.legalName} — {site.tagline}.
           </p>
+          <Link
+            href="/politica-de-privacidade"
+            className="inline-block py-2 underline underline-offset-4 transition-colors duration-[var(--dur-micro)] hover:text-white-tech hover:underline"
+          >
+            Política de privacidade
+          </Link>
           <p className="text-spec">CMYK · Offset · Digital · Grande formato</p>
         </div>
       </div>

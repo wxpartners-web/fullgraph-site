@@ -24,6 +24,7 @@ const staticPaths = [
   "/sobre",
   "/orcamento",
   "/contato",
+  "/politica-de-privacidade",
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

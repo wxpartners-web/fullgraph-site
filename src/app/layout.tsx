@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { WhatsAppOrigin } from "@/components/layout/WhatsAppOrigin";
+import { Analytics } from "@/components/layout/Analytics";
 import { BrandIntro } from "@/components/motion/BrandIntro";
 import { LenisProvider } from "@/components/motion/LenisProvider";
 import { DEFAULT_OG_IMAGE, localBusinessJsonLd } from "@/lib/seo";
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </LenisProvider>
         <MobileCtaBar />
         <WhatsAppOrigin />
+        <Analytics />
       </body>
     </html>
   );

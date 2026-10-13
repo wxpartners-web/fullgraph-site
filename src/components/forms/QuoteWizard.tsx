@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, MessageCircle, Mail, Paperclip, Pencil } from "lucide-react";
 import { quoteSchema, quoteDefaults, type QuoteSchema } from "@/lib/quote-schema";
 import { buildQuoteSummary, buildWhatsAppMessage, submitQuote } from "@/lib/quote-submit";
+import { EVENTO_ORCAMENTO } from "@/lib/analytics";
 import {
   segments,
   quoteProducts,
@@ -481,6 +482,7 @@ export function QuoteWizard() {
                         onClick={() => void submitQuote(getValues())}
                         className="ink-register-hover flex h-13 w-full items-center justify-center gap-2 bg-ink px-6 text-base font-medium text-carbon transition-colors duration-[var(--dur-micro)] hover:bg-carbon hover:text-white-tech"
                         data-testid="quote-send-whatsapp"
+                        data-evento={EVENTO_ORCAMENTO}
                       >
                         <MessageCircle aria-hidden="true" className="size-5" />
                         <span className="ink-register-target">Enviar pelo WhatsApp</span>
@@ -491,6 +493,7 @@ export function QuoteWizard() {
                         onClick={() => void submitQuote(getValues())}
                         className="ink-register-hover flex h-13 w-full items-center justify-center gap-2 bg-ink px-6 text-base font-medium text-carbon transition-colors duration-[var(--dur-micro)] hover:bg-carbon hover:text-white-tech"
                         data-testid="quote-send-email"
+                        data-evento={EVENTO_ORCAMENTO}
                       >
                         <Mail aria-hidden="true" className="size-5" />
                         <span className="ink-register-target">Enviar por e-mail</span>
@@ -498,6 +501,7 @@ export function QuoteWizard() {
                     )}
                     <a
                       href={mailHref}
+                      data-evento={EVENTO_ORCAMENTO}
                       className="flex h-12 w-full items-center justify-center gap-2 border border-carbon/25 px-6 text-sm font-medium transition-colors duration-[var(--dur-micro)] hover:border-carbon"
                     >
                       <Mail aria-hidden="true" className="size-4" />
