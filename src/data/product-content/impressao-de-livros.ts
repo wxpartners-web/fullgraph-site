@@ -6,12 +6,12 @@ import type { ProductContent } from "@/types";
  * aprovação. Fonte única para a UI e para o JSON-LD (FAQPage).
  */
 export const impressaoDeLivrosContent: ProductContent = {
-  metaTitle: "Impressão de livros a partir de 1 exemplar, capa dura e brochura | FullGraph",
+  metaTitle: "Impressão de livros a partir de 50 unidades, capa dura e brochura | FullGraph",
   metaDescription:
     "Impressão de livros sob demanda ou em grandes tiragens: formatos livres, papel pólen, offset ou couché, capa dura, cola PUR e acabamentos especiais. Envio para todo o Brasil.",
-  h1: "Impressão de livros com acabamento editorial, a partir de 1 exemplar",
+  h1: "Impressão de livros com acabamento editorial, a partir de 50 unidades",
   intro: [
-    "A FullGraph faz impressão de livros sob demanda ou em grandes tiragens, com produção própria em Brasília e envio para todo o Brasil. Do exemplar único para o lançamento do autor independente à edição completa de uma editora, cada livro passa pela mesma linha: pré-impressão, impressão, encadernação e acabamento sob o mesmo controle.",
+    "A FullGraph faz impressão de livros sob demanda, a partir de 50 unidades, ou em grandes tiragens, com produção própria em Brasília e envio para todo o Brasil. Do lançamento do autor independente à edição completa de uma editora, cada livro passa pela mesma linha: pré-impressão, impressão, encadernação e acabamento sob o mesmo controle.",
     "Você escolhe formato, papel, encadernação e acabamento de capa. A gente confere o arquivo, envia a prova para aprovação e só então imprime.",
   ],
   introCta: "Pedir orçamento pelo WhatsApp",
@@ -113,7 +113,7 @@ export const impressaoDeLivrosContent: ProductContent = {
       heading: "Sob demanda e grandes tiragens",
       blocks: [
         {
-          p: "Na impressão de livros sob demanda, você imprime a partir de 1 exemplar: serve para prova de autor, lançamento, presente ou reposição de estoque sem encalhe. Em grandes tiragens, a produção mantém o mesmo padrão de cor do primeiro ao último exemplar, no prazo combinado.",
+          p: "Na impressão de livros sob demanda, o pedido mínimo é de 50 unidades: serve para lançamento, edição para um evento ou reposição de estoque. Em grandes tiragens, a produção mantém o mesmo padrão de cor do primeiro ao último exemplar, no prazo combinado.",
         },
       ],
     },
@@ -204,8 +204,8 @@ export const impressaoDeLivrosContent: ProductContent = {
         "Depende do formato, do número de páginas, do papel, das cores, da encadernação, do acabamento e da quantidade. Por isso cada livro recebe orçamento próprio. Solicite pelo WhatsApp ou pelo formulário.",
     },
     {
-      question: "Vocês imprimem só 1 exemplar?",
-      answer: "Sim. A impressão de livros sob demanda começa em 1 exemplar.",
+      question: "Qual é a quantidade mínima para impressão de livros?",
+      answer: "O pedido mínimo para impressão de livros é de 50 unidades.",
     },
     {
       question: "Vocês fazem livro de capa dura?",

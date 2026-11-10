@@ -110,6 +110,14 @@ export const quantities: QuoteOption[] = [
   { value: "20000+", label: "Acima de 20.000" },
 ];
 
+/** A primeira faixa de livros começa no pedido mínimo de 50 unidades. */
+export function quantitiesForProduct(produto: string): QuoteOption[] {
+  if (produto !== "livro") return quantities;
+  return quantities.map((option) =>
+    option.value === "ate-100" ? { ...option, label: "50 a 100" } : option
+  );
+}
+
 export const pageCounts: QuoteOption[] = [
   { value: "ate-48", label: "Até 48 páginas" },
   { value: "48-96", label: "48 a 96" },

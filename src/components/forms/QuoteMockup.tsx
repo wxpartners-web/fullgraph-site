@@ -9,7 +9,7 @@ import {
   formatsByProduct,
   materials,
   pageCounts,
-  quantities,
+  quantitiesForProduct,
   quoteProducts,
   segments,
 } from "@/data/quote";
@@ -99,7 +99,7 @@ export function QuoteMockup(props: QuoteMockupProps) {
   const title = label(quoteProducts, produto) ?? label(segments, segmento) ?? "Monte seu pedido";
   const chips = [
     label(formatsByProduct[produto], formato),
-    label(quantities, quantidade) && `${label(quantities, quantidade)} un.`,
+    label(quantitiesForProduct(produto), quantidade) && `${label(quantitiesForProduct(produto), quantidade)} un.`,
     label(pageCounts, paginas),
     label(colorOptions, cores),
     label(materials, material),

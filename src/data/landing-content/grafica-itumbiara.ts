@@ -72,7 +72,7 @@ export const graficaItumbiaraContent: PageContent = {
         },
         {
           p: [
-            "Para a foto da turma, o banner é feito sob medida, e um backdrop com o nome do curso fecha o cenário. Se a turma quiser registrar o percurso numa revista ou num livro, a impressão começa em 1 exemplar. Publicações de faculdades e grupos de pesquisa estão na página da ",
+            "Para a foto da turma, o banner é feito sob medida, e um backdrop com o nome do curso fecha o cenário. Se a turma quiser registrar o percurso num livro, a impressão começa em 50 unidades; para revistas, começa em 1 exemplar. Publicações de faculdades e grupos de pesquisa estão na página da ",
             { link: "gráfica em Jataí", href: "/grafica-jatai" },
             ".",
           ],

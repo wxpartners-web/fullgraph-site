@@ -207,7 +207,7 @@ export const cityPages: readonly CityPage[] = [
     path: "/grafica-jatai",
     keyword: "gráfica jataí",
     breadcrumbName: "Gráfica para Jataí",
-    ogTagline: "Livros e revistas a partir de 1 exemplar",
+    ogTagline: "Livros a partir de 50 unidades e revistas sob demanda",
     eyebrow: "Jataí · Goiás",
     image: {
       src: "/images/regions/grafica-jatai.webp",

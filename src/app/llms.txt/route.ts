@@ -94,7 +94,7 @@ const CITY_PAGES = [
   {
     path: "/grafica-jatai",
     title: "Gráfica para Jataí (GO)",
-    note: "Livros e revistas a partir de 1 exemplar, anais, crachás, pastas e banners para congressos e simpósios, com diagramação, revisão, ficha catalográfica e ISBN junto com a impressão, e entrega em Jataí em até 1 dia útil depois que o pedido fica pronto. Não há loja em Jataí.",
+    note: "Livros a partir de 50 unidades e revistas a partir de 1 exemplar, anais, crachás, pastas e banners para congressos e simpósios, com diagramação, revisão, ficha catalográfica e ISBN junto com a impressão, e entrega em Jataí em até 1 dia útil depois que o pedido fica pronto. Não há loja em Jataí.",
   },
 ] as const;
 

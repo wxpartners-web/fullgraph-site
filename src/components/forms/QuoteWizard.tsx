@@ -12,7 +12,7 @@ import {
   segments,
   quoteProducts,
   formatsByProduct,
-  quantities,
+  quantitiesForProduct,
   pageCounts,
   colorOptions,
   materials,
@@ -46,7 +46,12 @@ function buildSteps(produto: string): StepDef[] {
       hint: "Se ainda não sabe, escolha o mais próximo — ajustamos no orçamento.",
       fields: ["formato", "formatoCustom"],
     },
-    { id: "quantidade", title: "Quantas unidades?", fields: ["quantidade"] },
+    {
+      id: "quantidade",
+      title: "Quantas unidades?",
+      hint: produto === "livro" ? "O pedido mínimo para livros é de 50 unidades." : undefined,
+      fields: ["quantidade"],
+    },
   ];
   if (PAGED_PRODUCTS.has(produto))
     steps.push({ id: "paginas", title: "Quantas páginas?", fields: ["paginas"] });
@@ -324,7 +329,7 @@ export function QuoteWizard() {
                       </>
                     )}
                     {step.id === "quantidade" && (
-                      <OptionCards name="quantidade" options={quantities} register={register} error={err("quantidade")} columns={3} />
+                      <OptionCards name="quantidade" options={quantitiesForProduct(values.produto)} register={register} error={err("quantidade")} columns={3} />
                     )}
                     {step.id === "paginas" && (
                       <OptionCards name="paginas" options={pageCounts} register={register} error={err("paginas")} />
@@ -579,7 +584,7 @@ export function QuoteWizard() {
           <p className="sr-only" aria-live="polite">
             {[
               values.produto && optionText(quoteProducts, values.produto),
-              values.quantidade && optionText(quantities, values.quantidade),
+              values.quantidade && optionText(quantitiesForProduct(values.produto), values.quantidade),
               values.material && optionText(materials, values.material),
               values.prazo && optionText(deadlines, values.prazo),
             ]

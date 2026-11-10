@@ -127,7 +127,7 @@ export const products: Product[] = [
     name: "Impressão de livros",
     category: "livros-e-publicacoes",
     audiences: ["livros"],
-    tagline: "Do arquivo fechado ao livro encadernado, em qualquer tiragem.",
+    tagline: "Do arquivo fechado ao livro encadernado, a partir de 50 unidades.",
     description:
       "Impressão de livros para autores, editoras e projetos independentes: miolo em papel offset ou pólen, capa com laminação e encadernação à sua escolha. Acompanhamos o arquivo desde a pré-impressão até o acabamento.",
     applications: [
@@ -156,9 +156,9 @@ export const products: Product[] = [
       "Verniz UV brilho, total ou localizado",
       "Hot stamping",
     ],
-    runRanges: ["A partir de 1 exemplar (sob demanda)", "Grandes tiragens"],
+    runRanges: ["A partir de 50 unidades (sob demanda)", "Grandes tiragens"],
     specs: [
-      { label: "Tiragem", value: "A partir de 1 exemplar (sob demanda)" },
+      { label: "Tiragem", value: "A partir de 50 unidades (sob demanda)" },
       { label: "Encadernação", value: "Capa dura, cola PUR, hot melt, grampo, espiral e wire-o" },
       { label: "Miolo", value: "Em cores ou em preto" },
     ],

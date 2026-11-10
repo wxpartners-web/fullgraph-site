@@ -125,7 +125,7 @@ export const livrosEditorialContent: PageContent = {
             [{ strong: "Editoras:" }, " lançamentos, reimpressões e reposição de estoque."],
             [
               { strong: "Autores independentes:" },
-              " o livro com acabamento de editora, a partir de 1 exemplar.",
+              " o livro com acabamento de editora, a partir de 50 unidades.",
             ],
             [
               { strong: "Escolas e faculdades:" },
@@ -148,10 +148,10 @@ export const livrosEditorialContent: PageContent = {
       ],
     },
     {
-      heading: "Tiragem: do exemplar único à edição completa",
+      heading: "Tiragem de livros: de 50 unidades à edição completa",
       blocks: [
         {
-          p: "Livros podem ser impressos sob demanda a partir de 1 exemplar. Serve para prova de autor, lançamento, reposição sem encalhe ou edição para um evento. Catálogos também saem em qualquer quantidade.",
+          p: "Livros podem ser impressos sob demanda a partir de 50 unidades. Serve para lançamento, reposição de estoque ou edição para um evento. Catálogos também saem em qualquer quantidade.",
         },
         {
           p: "Nas tiragens maiores, a produção mantém o mesmo padrão de cor do primeiro ao último exemplar. O processo de impressão, offset ou digital, é definido no orçamento, junto com o prazo.",

@@ -28,7 +28,9 @@ test("fluxo completo do orçamento até o envio", async ({ page }) => {
   await next(page);
 
   // 4. Quantidade
-  await pickOption(page, /500 a 1\.000/);
+  await expect(page.getByRole("radio", { name: "Até 100", exact: true })).toHaveCount(0);
+  await pickOption(page, "50 a 100");
+  await expect(page.getByTestId("quote-mockup")).toContainText("50 a 100 un.");
   await next(page);
 
   // 5. Páginas (aparece porque é livro)
@@ -77,6 +79,7 @@ test("fluxo completo do orçamento até o envio", async ({ page }) => {
   const summary = page.getByTestId("quote-summary");
   await expect(summary).toContainText("Livro ou publicação");
   await expect(summary).toContainText("14 × 21 cm");
+  await expect(summary).toContainText("50 a 100");
   await expect(summary).toContainText("Pólen");
   await expect(summary).toContainText("São Paulo - SP");
 
@@ -88,6 +91,7 @@ test("fluxo completo do orçamento até o envio", async ({ page }) => {
   expect(href!).toMatch(/^(https:\/\/wa\.me\/|mailto:)/);
   // a mensagem carrega o resumo
   expect(decodeURIComponent(href!)).toContain("Pedido de orçamento");
+  expect(decodeURIComponent(href!)).toContain("Quantidade: 50 a 100");
 });
 
 test("validação impede avançar sem escolher", async ({ page }) => {

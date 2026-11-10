@@ -9,7 +9,7 @@ import type { PageContent } from "@/types";
 export const graficaJataiContent: PageContent = {
   metaTitle: "Gráfica Jataí (GO): livros, revistas e anais | FullGraph",
   metaDescription:
-    "Gráfica que atende Jataí (GO): livros a partir de 1 exemplar, revistas, anais e materiais de congresso. Entrega em até 1 dia útil após pronto.",
+    "Gráfica que atende Jataí (GO): livros a partir de 50 unidades, revistas, anais e materiais de congresso. Entrega em até 1 dia útil após pronto.",
   h1: "Gráfica para Jataí: livros, revistas e materiais para congressos",
   intro: [
     "Um livro de autor, a próxima edição de uma revista, o material de um simpósio. Para quem pesquisa gráfica Jataí com um desses trabalhos na mão, a FullGraph imprime em Brasília e a encomenda chega à cidade até 1 dia útil depois de pronta.",
@@ -18,7 +18,7 @@ export const graficaJataiContent: PageContent = {
   introCta: "Pedir orçamento para Jataí pelo WhatsApp",
   sections: [
     {
-      heading: "Uma gráfica em Jataí que imprime a partir de 1 exemplar: como funciona?",
+      heading: "Uma gráfica para Jataí com livros a partir de 50 unidades: como funciona?",
       blocks: [
         {
           p: "Ninguém precisa fechar tiragem grande para começar. Quatro regras valem para todo pedido:",
@@ -26,8 +26,8 @@ export const graficaJataiContent: PageContent = {
         {
           ul: [
             [
-              { strong: "Tiragem a partir de 1 exemplar." },
-              " Vale para livros e para revistas.",
+              { strong: "Livros a partir de 50 unidades." },
+              " Revistas a partir de 1 exemplar.",
             ],
             [
               { strong: "Um só lugar de produção." },
@@ -46,7 +46,7 @@ export const graficaJataiContent: PageContent = {
       ],
     },
     {
-      heading: "Livros e revistas a partir de 1 exemplar",
+      heading: "Livros a partir de 50 unidades e revistas a partir de 1 exemplar",
       blocks: [
         {
           p: [
@@ -156,9 +156,9 @@ export const graficaJataiContent: PageContent = {
         "Cada material tem seu prazo de produção, que vem no orçamento; uma revista costuma levar 5 dias úteis. Depois, a entrega em Jataí leva no máximo 1 dia útil.",
     },
     {
-      question: "Dá para imprimir um livro só?",
+      question: "Qual é a quantidade mínima para imprimir livros e revistas?",
       answer:
-        "Sim. Livros e revistas saem a partir de 1 exemplar.",
+        "Livros saem a partir de 50 unidades. Revistas saem a partir de 1 exemplar.",
     },
     {
       question: "Como fica a próxima edição da revista?",

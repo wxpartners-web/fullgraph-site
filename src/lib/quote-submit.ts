@@ -3,7 +3,7 @@ import {
   segments,
   quoteProducts,
   formatsByProduct,
-  quantities,
+  quantitiesForProduct,
   pageCounts,
   colorOptions,
   materials,
@@ -36,7 +36,7 @@ export function buildQuoteSummary(data: QuoteSchema): QuoteSummaryLine[] {
           ? data.formatoCustom
           : optionLabel(formatsByProduct[data.produto] ?? [], data.formato),
     },
-    { label: "Quantidade", value: optionLabel(quantities, data.quantidade) },
+    { label: "Quantidade", value: optionLabel(quantitiesForProduct(data.produto), data.quantidade) },
   ];
   if (data.paginas) lines.push({ label: "Páginas", value: optionLabel(pageCounts, data.paginas) });
   lines.push(
