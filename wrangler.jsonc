@@ -1,0 +1,15 @@
+{
+  // Site principal na Cloudflare: só arquivos estáticos (out/), sem Worker,
+  // então as requisições não têm custo nem limite no plano gratuito.
+  // Build + deploy: npm run build:cloudflare && npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fullgraph-site",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "routes": [{ "pattern": "fullgraph.com.br", "custom_domain": true }]
+}

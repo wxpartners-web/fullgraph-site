@@ -16,12 +16,15 @@ function readCitySlugs(): string[] {
   return [...source.matchAll(/slug:\s*"(grafica-[a-z0-9-]+)"/g)].map((m) => m[1]);
 }
 
-const nextConfig: NextConfig = {
-  /* Dev-only: permite testar no celular via IP da rede local
-     (o Next 16 bloqueia origens fora de localhost no `next dev`).
-     Ignorado em produção. */
-  allowedDevOrigins: ["192.168.1.10"],
+/* Hospedagem na Cloudflare (desde 10/11/2026): `STATIC_EXPORT=1 next build`
+   gera o site inteiro como arquivos estáticos em out/. Nesse modo o Next não
+   aplica redirects/rewrites/headers: os do host antigo ficam no Worker
+   cloudflare/legacy (regras geradas por scripts/build-cloudflare-rules.mjs)
+   e o noindex da cópia do sitemap antigo fica em public/_headers.
+   Sem a variável, o build continua igual ao da Vercel. */
+const isStaticExport = process.env.STATIC_EXPORT === "1";
 
+const vercelRoutes: Pick<NextConfig, "redirects" | "rewrites" | "headers"> = {
   /* 301/308 do site antigo grafica.fullgraph.com.br (só valem nesse host). */
   async redirects() {
     return buildLegacyRedirects(readCitySlugs());
@@ -41,6 +44,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+};
+
+const nextConfig: NextConfig = {
+  /* Dev-only: permite testar no celular via IP da rede local
+     (o Next 16 bloqueia origens fora de localhost no `next dev`).
+     Ignorado em produção. */
+  allowedDevOrigins: ["192.168.1.10"],
+
+  ...(isStaticExport
+    ? { output: "export" as const, images: { unoptimized: true } }
+    : vercelRoutes),
 };
 
 export default nextConfig;

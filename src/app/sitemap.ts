@@ -27,6 +27,8 @@ const staticPaths = [
   "/politica-de-privacidade",
 ] as const;
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = staticPaths.map((path) => ({ url: `${site.url}${path}` }));
 

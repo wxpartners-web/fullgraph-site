@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "logo:variant": "node scripts/make-logo-variant.mjs",
-    "og:images": "node scripts/make-og-images.mjs"
+    "og:images": "node scripts/make-og-images.mjs",
+    "build:cloudflare": "node --no-warnings scripts/build-cloudflare-rules.mjs && node -e \"require('child_process').execSync('next build',{stdio:'inherit',env:{...process.env,STATIC_EXPORT:'1'}})\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
@@ -37,6 +38,7 @@
     "eslint-config-next": "16.3.2",
     "sharp": "^0.35.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.160.0"
   }
 }

@@ -8,6 +8,8 @@ import { site } from "@/data/site";
  * Nenhum Disallow é declarado porque não existe rota administrativa,
  * de preview ou de API neste projeto.
  */
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },

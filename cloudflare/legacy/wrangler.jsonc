@@ -1,0 +1,13 @@
+{
+  // Worker dos hosts www. e grafica. (redirects). Deploy:
+  //   npx wrangler deploy -c cloudflare/legacy/wrangler.jsonc
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "fullgraph-legacy-redirects",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "www.fullgraph.com.br", "custom_domain": true },
+    { "pattern": "grafica.fullgraph.com.br", "custom_domain": true }
+  ]
+}

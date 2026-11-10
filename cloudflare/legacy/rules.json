@@ -1,0 +1,469 @@
+{
+ "redirects": [
+  {
+   "regex": "^(?!/_next)/papelaria-para-escritorios/papelaria-de-escritorio/papelaria-de-escritorio-sudoeste(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papelaria-para-escritorios/papelaria-para-escritorio/papelaria-de-escritorio-sudoeste(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-de-livros-em-brasilia/grafica-impressao-de-livros-telefone-taguatinga-sul(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-taguatinga",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-revista-online/onde-faz-impressao-grafica-revista-sobradinho-ii(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-de-livros/impressao-de-livros-asa-norte(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-livros",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papelaria-para-escritorios/papelaria-de-escritorio/atacado-de-papelaria-e-material-de-escritorio-sia(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/empresa-de-comunicacao-visual-em-brasilia/contato-de-grafica-e-comunicacao-visual-recanto-das-emas(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-revistas-em-brasilia(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/servico-de-comunicacao-visual-design-luziania(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-luziania",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/servico-de-comunicacao-visual-fachada-luziania(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-luziania",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-placas/grafica-comunicacao-visual-sobradinho(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-revista-online/impressao-grafica-revista-nucleo-bandeirante(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/contato-de-grafica-comunicacao-visual-riacho-fundo-ii(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-de-livros-em-brasilia/impressao-de-livros-e-apostilas-aguas-claras(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-aguas-claras",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-interna/contato-de-grafica-e-comunicacao-visual-aguas-claras(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-aguas-claras",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/grafica-comunicacao-visual-riacho-fundo-i(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/contato-de-grafica-e-comunicacao-visual-caldas-novas(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/grafica-impressao-catalogos(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-catalogos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papelaria-para-escritorios/papelaria-material-de-escritorio/papelaria-e-material-de-escritorio-cidade-ocidental(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/banner-personalizado-em-goiania(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/banners-e-grandes-formatos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/grafica-para-impressao-de-livros/impressao-de-livros-e-apostilas-valor-asa-norte(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/apostilas-e-espirais",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-de-livros/impressao-de-livros-e-apostilas-valor-asa-norte(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/apostilas-e-espirais",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/empresa-de-comunicacao-visual-em-brasilia/grafica-e-comunicacao-visual-nucleo-bandeirante(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-de-livros/grafica-para-impressao-de-livros-rio-verde(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-rio-verde",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/grafica-comunicacao-visual/grafica-comunicacao-visual-valparaiso-de-goias(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-valparaiso-de-goias",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livro/impressao-livros-sob-demanda/impressao-e-encadernacao-de-livros-posse(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-livros",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-livros(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-livros",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-revistas-em-goiania/impressao-grafica-revista-sudoeste(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-de-catalogos-e-revistas/impressao-grafica-revista-preco-guara(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-revistas-em-brasilia/impressao-de-revistas-papel-lado-norte(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revista/impressao-revistas-em-goiania/impressao-de-revistas-preco-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-de-revistas-pequenas-tiragens(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papel-bandeja(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papeis-de-bandeja-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papel-para-bandeja-personalizado(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papeis-de-bandeja-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-em-papel-jornal(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/jornais-e-tabloides",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/impressao-digital-de-jornal-tabloide(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/jornais-e-tabloides",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/pasta-l-personalizada(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/pastas-personalizadas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/empresa-de-comunicacao-visual-em-brasilia(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual-adesivos(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual-para-supermercados(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papel-timbrado-em-brasilia(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/papeis-timbrados/papel-timbrado-personalizado/atacado-de-papel-timbrado-grafica-brasilia(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/envelope-personalizado-a4(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/envelopes-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/rotulo-vinho-personalizado(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/rotulos-e-etiquetas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/grafica-comunicacao-visual/grafica-e-comunicacao-visual-telefone-itumbiara(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-itumbiara",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-design/grafica-e-comunicacao-visual-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/grafica-e-comunicacao-visual-telefone-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-design/comunicacao-visual-interna-preco-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-para-supermercados/comunicacao-visual-para-supermercados-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-para-supermercados/comunicacao-visual-adesivos-preco-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/comunicacao-visual-para-supermercados/contato-de-agencia-de-comunicacao-visual-anapolis(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-anapolis",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/comunicacao-visual/agencia-de-comunicacao-visual/grafica-comunicacao-visual-telefone-senador-canedo(?:/)?$",
+   "destination": "https://fullgraph.com.br/grafica-senador-canedo",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-livro))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-livros",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-revista|revistas-personalizadas))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-catalogos))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-catalogos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-jornais|impressao-de-tabloides|jornais-personalizados))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/jornais-e-tabloides",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-flyers))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/flyers-e-panfletos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(impressao-de-folders))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/folders-e-dobrados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(papeis-timbrados|receituarios-personalizados|papelaria-para-escritorios))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(envelopes-personalizados))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/envelopes-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(pastas-personalizadas))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/pastas-personalizadas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(papeis-de-bandeja))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papeis-de-bandeja-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(embalagens-para-hamburguer))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/embalagens-para-hamburguer",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(rotulos-personalizados))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/rotulos-e-etiquetas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(cadernos-personalizados|cadernos-de-anotacoes-personalizados|agendas-personalizadas|agenda-de-anotacoes-personalizado))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/cadernos-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(calendarios-personalizados))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/calendarios-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(banners-personalizados))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/banners-e-grandes-formatos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(comunicacao-visual))(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*comunicacao-visual[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/comunicacao-visual",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(banners?-[^/]*|painel-banner[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/banners-e-grandes-formatos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/((?:mini-)?calendarios?-[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/calendarios-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*hamburguer[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/embalagens-para-hamburguer",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*bandeja[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papeis-de-bandeja-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(pastas?-[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/pastas-personalizadas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(envelopes?-[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/envelopes-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*timbrado[^/]*|(?:bloco-de-)?receituarios?[^/]*|papelaria[^/]*|material[^/]*escritorio[^/]*|artigos-de-escritorio[^/]*|kit-papelaria[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/papelaria-institucional",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(rotulos?-[^/]*|adesivo-rotulo[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/rotulos-e-etiquetas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/(cadernos?-[^/]*|agendas?-[^/]*|mini-agenda[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/cadernos-personalizados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*catalogo[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-catalogos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*livros?(?:-[^/]*)?))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-livros",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*revistas?(?:-[^/]*)?))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/impressao-de-revistas",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*(?:jornal|jornais|tabloides?)[^/]*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/jornais-e-tabloides",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*flyers?(?:-[^/]*)?))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/flyers-e-panfletos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/([^/]*folders?(?:-[^/]*)?))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos/folders-e-dobrados",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/(?:/)?$",
+   "destination": "https://fullgraph.com.br/",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/home(?:/)?$",
+   "destination": "https://fullgraph.com.br/",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/empresa(?:/)?$",
+   "destination": "https://fullgraph.com.br/sobre",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/missao(?:/)?$",
+   "destination": "https://fullgraph.com.br/sobre",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/servicos(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/mapa-do-site(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/contato(?:/)?$",
+   "destination": "https://fullgraph.com.br/contato",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)/orcamento(?:/)?$",
+   "destination": "https://fullgraph.com.br/orcamento",
+   "status": 308
+  },
+  {
+   "regex": "^(?!/_next)(?:/((?!robots\\.txt$|sitemap(?:-\\d+)?\\.xml$).*))(?:/)?$",
+   "destination": "https://fullgraph.com.br/produtos",
+   "status": 308
+  }
+ ]
+}
