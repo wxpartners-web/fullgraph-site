@@ -2,14 +2,18 @@
   // Site principal na Cloudflare: só arquivos estáticos (out/), sem Worker,
   // então as requisições não têm custo nem limite no plano gratuito.
   // Build + deploy: npm run build:cloudflare && npx wrangler deploy
+  // O build precisa das NEXT_PUBLIC_* de produção em .env.production.local
+  // (WHATSAPP_NUMBER, HERO_SCRUB, UMAMI_WEBSITE_ID, SITE_URL): sem
+  // WHATSAPP_NUMBER os botões de WhatsApp viram "Ligar".
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "fullgraph-site",
+  "account_id": "fe2472bf0113e7dacac78ba539272407", // conta leonardo@fullgraph.com.br (dona da zona)
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./out",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
-  "workers_dev": true,
+  "workers_dev": false,
   "routes": [{ "pattern": "fullgraph.com.br", "custom_domain": true }]
 }

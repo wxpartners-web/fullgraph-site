@@ -4,6 +4,7 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "fullgraph-legacy-redirects",
   "main": "worker.js",
+  "account_id": "fe2472bf0113e7dacac78ba539272407", // conta leonardo@fullgraph.com.br (dona da zona)
   "compatibility_date": "2026-11-01",
   "workers_dev": false,
   "routes": [
