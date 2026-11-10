@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProgressiveImage } from "@/components/ui/ProgressiveImage";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Product } from "@/types";
@@ -15,9 +15,11 @@ import { cn } from "@/lib/utils";
 export function ProductDrawerCard({
   product,
   large = false,
+  warmNearby = false,
 }: {
   product: Product;
   large?: boolean;
+  warmNearby?: boolean;
 }) {
   const category = getCategory(product.category);
   const spec = product.specs[0];
@@ -40,10 +42,11 @@ export function ProductDrawerCard({
           {product.image ? (
             <>
               {/* foto do produto — decorativa aqui: o nome está na ficha logo abaixo */}
-              <Image
+              <ProgressiveImage
                 src={product.image.src}
                 alt=""
                 fill
+                warmNearby={warmNearby}
                 sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
               />

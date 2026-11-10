@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProgressiveImage } from "@/components/ui/ProgressiveImage";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/layout/SectionHeading";
@@ -65,10 +65,11 @@ export function PortfolioGrid({
                 >
                   <div className="absolute inset-0 transition-transform duration-[var(--dur-comp)] ease-[var(--ease-out-expo)] group-hover:scale-[1.03]">
                     {item.image ? (
-                      <Image
+                      <ProgressiveImage
                         src={item.image.src}
                         alt={item.image.alt}
                         fill
+                        warmNearby={compact}
                         sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
                         className="object-cover"
                       />

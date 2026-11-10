@@ -5,7 +5,8 @@ import type { Band } from "./scrub";
  *
  * ESTADO ATUAL: final — vídeo aprovado no Gate 4-R (Seedance 2.0, job
  * ba030d0d-fd82-4523-95cd-053ac22f2116, start frame job b34bb8a6),
- * re-encodado no Gate 5 para scrub: H.264 High, CRF 16, GOP 8 exato
+ * re-encodado no Gate 5 para scrub; otimizado em 15/10/2026:
+ * H.264 High, CRF 18, preset veryslow, GOP 8 exato
  * (todo o vídeo seeka limpo), faststart, sem áudio. Poster = frame 000
  * do próprio encode (zero salto na troca poster→vídeo); ending e still
  * mobile = frame 096, a composição em que a página descansa.
@@ -42,7 +43,7 @@ export interface HeroMediaManifest {
 
 export const heroMedia: HeroMediaManifest = {
   videoSrc: "/media/hero/hero-scrub.mp4",
-  videoBytes: 7_765_279,
+  videoBytes: 6_167_052,
   videoDurationSeconds: 4.041667,
   videoFrames: 97,
   videoFps: 24,

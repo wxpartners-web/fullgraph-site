@@ -25,7 +25,7 @@ export function FeaturedProducts() {
         <RevealGroup className="mt-14 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
           {featured.map((product, i) => (
             <RevealItem key={product.slug} className={i % 3 === 1 ? "lg:translate-y-10" : undefined}>
-              <ProductDrawerCard product={product} />
+              <ProductDrawerCard product={product} warmNearby />
             </RevealItem>
           ))}
         </RevealGroup>

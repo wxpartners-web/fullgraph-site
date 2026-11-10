@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ProgressiveImage } from "@/components/ui/ProgressiveImage";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { useRef, useState } from "react";
 import { easeOutExpo } from "@/lib/motion-tokens";
@@ -77,12 +77,13 @@ function StagePhotos({ step }: { step: number }) {
     <figure className="relative">
       <div className="crop-marks relative aspect-[4/3] w-full overflow-hidden bg-carbon/10 text-carbon/40 shadow-2xl shadow-black/20">
         {steps.map((s, i) => (
-          <Image
+          <ProgressiveImage
             key={s.id}
             src={s.image.src}
             alt={i === step ? s.image.alt : ""}
             aria-hidden={i === step ? undefined : true}
             fill
+            warmNearby
             sizes="(min-width: 1280px) 680px, 55vw"
             className={cn(
               "object-cover transition-[opacity,transform] duration-700 ease-[var(--ease-out-expo)]",
@@ -112,10 +113,11 @@ function NarrativeStatic() {
           {steps.map((s, i) => (
             <li key={s.id} data-testid={`narrative-step-${s.id}`}>
               <div className="relative aspect-[3/2] overflow-hidden bg-carbon/10">
-                <Image
+                <ProgressiveImage
                   src={s.image.src}
                   alt={s.image.alt}
                   fill
+                  warmNearby
                   sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
                   className="object-cover"
                 />
